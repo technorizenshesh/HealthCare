@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerHomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+    <fragment
+        android:id="@+id/documentFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.DocumentFragment"
+        android:label="DocumentFragment" />
+    <fragment
+        android:id="@+id/workerProfileFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerProfileFragment"
+        android:label="WorkerProfileFragment" >
+        <action
+            android:id="@+id/action_workerProfileFragment_to_workerEditProfileFragment"
+            app:destination="@id/workerEditProfileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addNewReferenceFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.AddNewReferenceFragment"
+        android:label="AddNewReferenceFragment" />
+    <fragment
+        android:id="@+id/referenceFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.ReferenceFragment"
+        android:label="ReferenceFragment" >
+        <action
+            android:id="@+id/action_referenceFragment_to_addNewReferenceFragment"
+            app:destination="@id/addNewReferenceFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workerShiftsHistoryFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsHistoryFragment"
+        android:label="fragment_worker_shifts_history"
+        tools:layout="@layout/fragment_worker_shifts_history" />
+    <fragment
+        android:id="@+id/workerShiftsInProgressFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsInProgressFragment"
+        android:label="fragment_worker_shifts_in_progress"
+        tools:layout="@layout/fragment_worker_shifts_in_progress" />
+    <fragment
+        android:id="@+id/workerAvailableJobsFragmentFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerAvailableJobsFragmentFragment"
+        android:label="fragment_worker_available_jobs_fragment"
+        tools:layout="@layout/fragment_worker_available_jobs_fragment" />
+    <fragment
+        android:id="@+id/workerCurrentScheduleFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerCurrentScheduleFragment"
+        android:label="fragment_worker_current_schedule"
+        tools:layout="@layout/fragment_worker_current_schedule" />
+    <fragment
+        android:id="@+id/workerShiftsFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsFragment"
+        android:label="WorkerShiftsFragment" >
+        <action
+            android:id="@+id/action_workerShiftsFragment_to_workerAvailableJobsFragmentFragment"
+            app:destination="@id/workerAvailableJobsFragmentFragment" />
+        <action
+            android:id="@+id/action_workerShiftsFragment_to_workerCurrentScheduleFragment"
+            app:destination="@id/workerCurrentScheduleFragment" />
+        <action
+            android:id="@+id/action_workerShiftsFragment_to_workerShiftsHistoryFragment"
+            app:destination="@id/workerShiftsHistoryFragment" />
+        <action
+            android:id="@+id/action_workerShiftsFragment_to_workerShiftsInProgressFragment"
+            app:destination="@id/workerShiftsInProgressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/workerBillingFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerBillingFragment"
+        android:label="WorkerBillingFragment" >
+        <action
+            android:id="@+id/action_workerBillingFragment_to_workerInstantPayFragment"
+            app:destination="@id/workerInstantPayFragment" />
+        <action
+            android:id="@+id/action_workerBillingFragment_to_reportFragment"
+            app:destination="@id/reportFragment" />
+        <action
+            android:id="@+id/action_workerBillingFragment_to_workerInvoicesFragment"
+            app:destination="@id/workerInvoicesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/reportFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.ReportFragment"
+        android:label="ReportFragment" />
+    <fragment
+        android:id="@+id/workerInstantPayFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerInstantPayFragment"
+        android:label="WorkerInstantPayFragment" />
+    <fragment
+        android:id="@+id/workerInvoicesFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerInvoicesFragment"
+        android:label="WorkerInvoicesFragment" />
+    <fragment
+        android:id="@+id/workerContactUsFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerContactUsFragment"
+        android:label="WorkerContactUsFragment" />
+    <fragment
+        android:id="@+id/workerSettingsFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerSettingsFragment"
+        android:label="WorkerSettingsFragment" >
+        <action
+            android:id="@+id/action_workerSettingsFragment_to_setAvailabilityFragment"
+            app:destination="@id/setAvailabilityFragment" />
+        <action
+            android:id="@+id/action_workerSettingsFragment_to_distanceFilterFragment"
+            app:destination="@id/distanceFilterFragment" />
+        <action
+            android:id="@+id/action_workerSettingsFragment_to_setRateFragment"
+            app:destination="@id/setRateFragment" />
+        <action
+            android:id="@+id/action_workerSettingsFragment_to_workerChangePasswordFragment"
+            app:destination="@id/workerChangePasswordFragment" />
+        <action
+            android:id="@+id/action_workerSettingsFragment_to_workerNotificationFragment"
+            app:destination="@id/workerNotificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/setAvailabilityFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.SetAvailabilityFragment"
+        android:label="SetAvailabilityFragment" />
+    <fragment
+        android:id="@+id/distanceFilterFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.DistanceFilterFragment"
+        android:label="DistanceFilterFragment" />
+    <fragment
+        android:id="@+id/workerFaqFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerFaqFragment"
+        android:label="WorkerFaqFragment" />
+    <fragment
+        android:id="@+id/workerPrivacyAndLegalFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerPrivacyAndLegalFragment"
+        android:label="WorkerPrivacyAndLegalFragment" />
+    <fragment
+        android:id="@+id/setRateFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.SetRateFragment"
+        android:label="SetRateFragment" />
+    <fragment
+        android:id="@+id/workerChangePasswordFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerChangePasswordFragment"
+        android:label="WorkerChangePasswordFragment" />
+    <fragment
+        android:id="@+id/workerNotificationFragment"
+        android:name="com.technorizen.healthcare.fragments.WorkerNotificationFragment"
+        android:label="WorkerNotificationFragment" />
+    <fragment
+        android:id="@+id/workerEditProfileFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerEditProfileFragment"
+        android:label="WorkerEditProfileFragment" />
+
+
+</navigation>

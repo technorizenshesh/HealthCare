@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".activities.SignupAct"
+        android:background="@color/white"
+        >
+
+        <include android:id="@+id/header" layout="@layout/layou_header"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            app:cardElevation="@dimen/_25sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardMaxElevation="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/_1sdp"
+            android:layout_centerInParent="true"
+            android:outlineSpotShadowColor="@color/black"
+            android:outlineAmbientShadowColor="@color/black"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_12sdp"
+                android:orientation="vertical"
+                >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSignupPost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up_to_post_shifts"
+                    android:background="@drawable/button_bg"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    android:textAllCaps="false"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSignupWork"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/sign_up_to_work_shifts"
+                    android:background="@drawable/button_bg"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    />
+
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+
+        <RelativeLayout
+            android:id="@+id/rlbottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            >
+            <TextView
+                android:id="@+id/privacy_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="bottom"
+                android:text="@string/already_have_an_account"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="@dimen/_12sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:gravity="bottom"
+                android:text="@string/login"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:layout_toRightOf="@id/privacy_policy"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="@dimen/_12sdp" />
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+</layout>

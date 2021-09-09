@@ -1,0 +1,576 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragments.PostShiftsFragment">
+
+        <com.technorizen.healthcare.util.CustomScrollView
+            android:id="@+id/nestedScrollView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="POST SHIFTS"
+                    android:textAllCaps="true"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:textSize="@dimen/_16sdp" />
+                <com.google.android.material.card.MaterialCardView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginHorizontal="@dimen/_14sdp"
+                    app:cardElevation="@dimen/_25sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardMaxElevation="@dimen/_25sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    app:strokeColor="@color/black"
+                    app:strokeWidth="@dimen/_1sdp"
+                    android:outlineSpotShadowColor="@color/black"
+                    android:outlineAmbientShadowColor="@color/black"
+                    >
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="JOB POSITION"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginVertical="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerJobPosition"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="No. of VACANCIES"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginVertical="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerVaccine"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="Hourly Rate"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginVertical="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerRate"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="Duty of worker"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginVertical="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerDuty"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="Covid-19 status"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginVertical="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerStatus"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="Unpaid Break"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginVertical="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerUnpaidBreak"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="Transit allowance"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginVertical="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerTransit"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="Select Shift Location"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginTop="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerAddressEvent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+                        <TextView
+                            android:id="@+id/tvAddAddress"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:drawableLeft="@drawable/ic_add_24"
+                            android:text="Add new address"
+                            android:textAllCaps="true"
+                            android:layout_marginVertical="@dimen/_10sdp"
+                            android:gravity="center_vertical"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_semibold"
+                            />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="Enter Day Type"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <RelativeLayout
+                            android:layout_height="wrap_content"
+                            android:layout_width="match_parent"
+                            android:layout_marginHorizontal="@dimen/_20sdp"
+                            android:layout_marginVertical="@dimen/_20sdp"
+                            android:background="@drawable/et_bg"
+                            >
+                            <Spinner
+                                android:id="@+id/spinnerEnter"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_width="match_parent"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_marginVertical="@dimen/_5sdp"
+                                />
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:orientation="vertical"
+                            >
+                            <!--   <CalendarView
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:id="@+id/cal"/>-->
+
+
+                            <com.wisnu.datetimerangepickerandroid.CalendarPickerView
+                                android:id="@+id/calendar_single_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:choiceMode="none"
+                                android:scrollbarTrackHorizontal="@color/black"
+                                android:fastScrollAlwaysVisible="true"
+                                android:scrollbarAlwaysDrawVerticalTrack="true"
+                                android:screenReaderFocusable="true"
+                                android:scrollIndicators="end"
+                                android:scrollbarFadeDuration="@integer/material_motion_duration_long_1"
+                                />
+                            <com.wisnu.datetimerangepickerandroid.CalendarPickerView
+                                android:id="@+id/calendar_multiple_date"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:visibility="gone"
+                                android:fastScrollAlwaysVisible="true"
+                                />
+
+                            <!--   <TextView
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:text="Select Date"
+                                   android:layout_marginHorizontal="@dimen/_20sdp"
+                                   android:textColor="@color/blue"
+                                   android:layout_gravity="end"
+                                   android:gravity="end"
+                                   android:fontFamily="@font/montserrat_semibold"
+                                   android:textSize="@dimen/_15sdp"
+                                   android:id="@+id/btnSelectDate"
+                                   />
+       -->
+
+                            <com.google.android.material.checkbox.MaterialCheckBox
+                                android:id="@+id/checkboxMultipledateSelect"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:text="Select Different time for each day"
+                                android:paddingHorizontal="@dimen/_15sdp"
+                                />
+
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical"
+                                android:id="@+id/llSingleDate"
+                                android:layout_marginVertical="@dimen/_10sdp"
+                                >
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_35sdp"
+                                    android:background="@color/light_gray"
+                                    >
+
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_35sdp"
+                                        android:layout_weight=".5"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:textColor="@color/black"
+                                        android:text="Date"
+                                        android:gravity="center_vertical"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/montserrat_semibold"
+                                        android:layout_marginLeft="@dimen/_10sdp"
+                                        />
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_35sdp"
+                                        android:layout_weight=".5"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:textColor="@color/black"
+                                        android:text="@string/start_time"
+                                        android:gravity="center_vertical"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/montserrat_semibold"
+                                        />
+                                    <TextView
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_35sdp"
+                                        android:layout_weight=".5"
+                                        android:textSize="@dimen/_11sdp"
+                                        android:textColor="@color/black"
+                                        android:text="@string/end_time"
+                                        android:gravity="center_vertical"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/montserrat_semibold"
+                                        />
+                                </LinearLayout>
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="@dimen/_35sdp"
+                                    >
+
+                                    <TextView
+                                        android:id="@+id/tvSingleDate"
+                                        android:layout_width="0dp"
+                                        android:layout_height="@dimen/_35sdp"
+                                        android:layout_weight=".5"
+                                        android:textSize="@dimen/_14sdp"
+                                        android:textColor="@color/black"
+                                        android:gravity="center_vertical"
+                                        android:layout_gravity="center_vertical"
+                                        android:fontFamily="@font/montserrat_semibold"
+                                        android:layout_marginLeft="@dimen/_10sdp"
+                                        />
+                                    <Spinner
+                                        android:id="@+id/spinnerStartTime"
+                                        android:layout_height="match_parent"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".5"
+                                        />
+                                    <Spinner
+                                        android:id="@+id/spinnerEndTime"
+                                        android:layout_height="match_parent"
+                                        android:layout_width="0dp"
+                                        android:layout_weight=".5"
+                                        />
+
+                                </LinearLayout>
+                            </LinearLayout>
+
+                            <androidx.recyclerview.widget.RecyclerView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginVertical="@dimen/_15sdp"
+                                android:id="@+id/rvDate"/>
+                        </LinearLayout>
+
+                        <!--    <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:textColor="@color/black"
+                                android:textAllCaps="true"
+                                android:text="Start Time"
+                                android:padding="@dimen/_10sdp"
+                                android:background="@color/light_gray"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <RelativeLayout
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_marginHorizontal="@dimen/_20sdp"
+                                android:layout_marginVertical="@dimen/_20sdp"
+                                android:background="@drawable/et_bg"
+                                >
+                                <Spinner
+                                    android:id="@+id/spinnerstart"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginVertical="@dimen/_5sdp"
+                                    />
+                            </RelativeLayout>
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:textColor="@color/black"
+                                android:textAllCaps="true"
+                                android:text="End Time"
+                                android:padding="@dimen/_10sdp"
+                                android:background="@color/light_gray"
+                                android:textSize="@dimen/_12sdp" />
+
+                            <RelativeLayout
+                                android:layout_height="wrap_content"
+                                android:layout_width="match_parent"
+                                android:layout_marginHorizontal="@dimen/_20sdp"
+                                android:layout_marginVertical="@dimen/_20sdp"
+                                android:background="@drawable/et_bg"
+                                >
+                                <Spinner
+                                    android:id="@+id/spinnerEnd"
+                                    android:layout_height="@dimen/_30sdp"
+                                    android:layout_width="match_parent"
+                                    android:layout_marginLeft="@dimen/_5sdp"
+                                    android:layout_marginVertical="@dimen/_5sdp"
+                                    />
+                            </RelativeLayout>
+                -->
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_semibold"
+                            android:textColor="@color/black"
+                            android:textAllCaps="true"
+                            android:text="Add shift notes"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@color/light_gray"
+                            android:textSize="@dimen/_12sdp" />
+
+                        <EditText
+                            android:id="@+id/etShiftsNote"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_80sdp"
+                            android:padding="@dimen/_10sdp"
+                            android:background="@drawable/et_bg"
+                            android:gravity="top"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:textColorHint="@color/hint_color"
+                            android:textColor="@color/black"
+                            android:imeOptions="actionDone"
+                            android:layout_margin="@dimen/_20sdp"
+                            android:textSize="@dimen/_12sdp"
+                            />
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPost"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Post direct shifts"
+                    android:background="@drawable/button_bg"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRecruitment"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Post recruitment shifts"
+                    android:background="@drawable/bright_button_bg"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/black"
+                    android:text="Please note that 15% admin fee will be added to the rate."
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp" />
+
+            </LinearLayout>
+        </com.technorizen.healthcare.util.CustomScrollView>
+
+
+    </LinearLayout>
+</layout>

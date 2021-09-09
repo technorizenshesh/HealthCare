@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.technorizen.healthcare.fragments.HomeFragment"
+        android:label="@string/menu_home"
+        tools:layout="@layout/fragment_home" />
+
+    <fragment
+        android:id="@+id/nav_profile"
+        android:name="com.technorizen.healthcare.fragments.ProfileFragment"
+        android:label="Profile"
+        tools:layout="@layout/fragment_gallery" >
+        <action
+            android:id="@+id/action_nav_profile_to_nav_edit_profile"
+            app:destination="@id/nav_edit_profile" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_edit_profile"
+        android:name="com.technorizen.healthcare.fragments.EditProfileFragment"
+        android:label="@string/menu_slideshow"
+        tools:layout="@layout/fragment_slideshow" />
+    <fragment
+        android:id="@+id/billingFragment"
+        android:name="com.technorizen.healthcare.fragments.BillingFragment"
+        android:label="BillingFragment" >
+        <action
+            android:id="@+id/action_billingFragment_to_accountStatementFragment"
+            app:destination="@id/accountStatementFragment" />
+        <action
+            android:id="@+id/action_billingFragment_to_addCreditCardFragment"
+            app:destination="@id/addCreditCardFragment" />
+        <action
+            android:id="@+id/action_billingFragment_to_invoicesFragment"
+            app:destination="@id/invoicesFragment" />
+        <action
+            android:id="@+id/action_billingFragment_to_paymentHistoryFragment"
+            app:destination="@id/paymentHistoryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/postShiftsFragment"
+        android:name="com.technorizen.healthcare.fragments.PostShiftsFragment"
+        android:label="PostShiftsFragment" >
+        <action
+            android:id="@+id/action_postShiftsFragment_to_confirmPostShiftsFragment"
+            app:destination="@id/confirmPostShiftsFragment" />
+        <action
+            android:id="@+id/action_postShiftsFragment_to_confirmPostRequitmentShiftsFragment"
+            app:destination="@id/confirmPostRequitmentShiftsFragment" />
+        <action
+            android:id="@+id/action_postShiftsFragment_to_currentLocationFragment"
+            app:destination="@id/currentLocationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/shiftsFragment"
+        android:name="com.technorizen.healthcare.fragments.ShiftsFragment"
+        android:label="ShiftsFragment" >
+        <action
+            android:id="@+id/action_shiftsFragment_to_currentScheduleFragment"
+            app:destination="@id/currentScheduleFragment" />
+        <action
+            android:id="@+id/action_shiftsFragment_to_postedShiftFragment"
+            app:destination="@id/postedShiftFragment" />
+        <action
+            android:id="@+id/action_shiftsFragment_to_shiftHistoryFragment"
+            app:destination="@id/shiftHistoryFragment" />
+        <action
+            android:id="@+id/action_shiftsFragment_to_shiftInProgressFragment"
+            app:destination="@id/shiftInProgressFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/currentScheduleFragment"
+        android:name="com.technorizen.healthcare.fragments.CurrentScheduleFragment"
+        android:label="CurrentScheduleFragment" />
+    <fragment
+        android:id="@+id/postedShiftFragment"
+        android:name="com.technorizen.healthcare.fragments.PostedShiftFragment"
+        android:label="PostedShiftFragment" />
+    <fragment
+        android:id="@+id/shiftHistoryFragment"
+        android:name="com.technorizen.healthcare.fragments.ShiftHistoryFragment"
+        android:label="ShiftHistoryFragment" />
+    <fragment
+        android:id="@+id/shiftInProgressFragment"
+        android:name="com.technorizen.healthcare.fragments.ShiftInProgressFragment"
+        android:label="ShiftInProgressFragment" />
+    <fragment
+        android:id="@+id/accountStatementFragment"
+        android:name="com.technorizen.healthcare.fragments.AccountStatementFragment"
+        android:label="AccountStatementFragment" />
+    <fragment
+        android:id="@+id/addCreditCardFragment"
+        android:name="com.technorizen.healthcare.fragments.AddCreditCardFragment"
+        android:label="AddCreditCardFragment" />
+    <fragment
+        android:id="@+id/invoicesFragment"
+        android:name="com.technorizen.healthcare.fragments.InvoicesFragment"
+        android:label="InvoicesFragment" />
+    <fragment
+        android:id="@+id/paymentHistoryFragment"
+        android:name="com.technorizen.healthcare.fragments.PaymentHistoryFragment"
+        android:label="PaymentHistoryFragment" />
+    <fragment
+        android:id="@+id/walletFragment"
+        android:name="com.technorizen.healthcare.fragments.WalletFragment"
+        android:label="WalletFragment" />
+    <fragment
+        android:id="@+id/hiresWorkerFragment"
+        android:name="com.technorizen.healthcare.fragments.HiresWorkerFragment"
+        android:label="fragment_hires_worker"
+        tools:layout="@layout/fragment_hires_worker" />
+    <fragment
+        android:id="@+id/FAQSFragment"
+        android:name="com.technorizen.healthcare.fragments.FAQSFragment"
+        android:label="fragment_f_a_q_s"
+        tools:layout="@layout/fragment_f_a_q_s" />
+    <fragment
+        android:id="@+id/contactUsFragment"
+        android:name="com.technorizen.healthcare.fragments.ContactUsFragment"
+        android:label="fragment_contact_us"
+        tools:layout="@layout/fragment_contact_us" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.technorizen.healthcare.fragments.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_notificationFragment"
+            app:destination="@id/notificationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/changePasswordFragment"
+        android:name="com.technorizen.healthcare.fragments.ChangePasswordFragment"
+        android:label="ChangePasswordFragment" />
+    <fragment
+        android:id="@+id/notificationFragment"
+        android:name="com.technorizen.healthcare.fragments.NotificationFragment"
+        android:label="NotificationFragment" />
+    <fragment
+        android:id="@+id/privacyAndLegacyFragment"
+        android:name="com.technorizen.healthcare.fragments.PrivacyAndLegacyFragment"
+        android:label="PrivacyAndLegacyFragment" />
+    <fragment
+        android:id="@+id/confirmPostRequitmentShiftsFragment"
+        android:name="com.technorizen.healthcare.fragments.ConfirmPostRequitmentShiftsFragment"
+        android:label="ConfirmPostRequitmentShiftsFragment" />
+    <fragment
+        android:id="@+id/confirmPostShiftsFragment"
+        android:name="com.technorizen.healthcare.fragments.ConfirmPostShiftsFragment"
+        android:label="ConfirmPostShiftsFragment" />
+    <fragment
+        android:id="@+id/currentLocationFragment"
+        android:name="com.technorizen.healthcare.fragments.CurrentLocationFragment"
+        android:label="CurrentLocationFragment" />
+</navigation>

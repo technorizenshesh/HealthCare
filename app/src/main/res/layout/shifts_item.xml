@@ -1,0 +1,297 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp"
+        app:cardElevation="@dimen/_25sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardMaxElevation="@dimen/_25sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp"
+        android:outlineSpotShadowColor="@color/black"
+        android:outlineAmbientShadowColor="@color/black"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                >
+                <ImageView
+                    android:id="@+id/ivProfile"
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:src="@drawable/ic_company"
+                    android:background="@drawable/gray_bg_5"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="@dimen/_8sdp"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvCompanyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:text="CAREPEOPLE INC"
+                        android:textSize="@dimen/_13sdp" />
+
+                    <TextView
+                        android:id="@+id/jobPosition"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textAllCaps="false"
+                        android:text="Personal Support Worker"
+                        android:textSize="@dimen/_12sdp" />
+                    <TextView
+                        android:id="@+id/tvDuty"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textAllCaps="false"
+                        android:text="(Floor Duty)"
+                        android:textSize="@dimen/_12sdp" />
+
+                    <TextView
+                        android:id="@+id/tvNumOfShifts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:drawableLeft="@drawable/ic_hired"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:gravity="center_vertical"
+                        android:text="@string/number_of_shifts_col"
+                        android:visibility="gone"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_10sdp" />
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/date_col"
+                        android:drawableLeft="@drawable/ic_cal"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/black"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvSignleTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/time_col"
+                        android:drawableLeft="@drawable/ic_time"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/black"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        />
+                    <TextView
+                        android:id="@+id/tvMutlipleTime"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/view_shift_timing"
+                        android:drawableLeft="@drawable/ic_time"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:textColor="@color/blue"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:visibility="gone"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvBreak"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/unpaid_break"
+                        android:drawableLeft="@drawable/ic_unpaid"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/black"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/hrRate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pay_col"
+                        android:drawableLeft="@drawable/ic_pay"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/black"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/instant_pay_available"
+                        android:drawableLeft="@drawable/ic_instant_pay"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/black"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvCovid"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/covid_19_negative"
+                        android:drawableLeft="@drawable/ic_covid"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/black"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvDistance"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/distance"
+                        android:drawableLeft="@drawable/ic_locat"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/black"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:visibility="gone"
+                        />
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/light_gray"
+                >
+                <TextView
+                    android:id="@+id/tvLocation"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="12 Park Toronto ON M5E 1B8 Canada"
+                    android:drawableLeft="@drawable/ic_location_on_24"
+                    android:gravity="center"
+                    android:padding="@dimen/_8sdp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center_horizontal"
+                    android:textColor="@color/black"
+                    android:drawablePadding="@dimen/_5sdp"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:layout_centerInParent="true"
+                    />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/rlShiftsNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="@dimen/_8sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/black"
+                    android:text="Shift Notes"
+                    android:layout_centerVertical="true"
+                    android:layout_gravity="center_horizontal"
+                    android:textSize="@dimen/_14sdp" />
+
+                <ImageView
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_add"
+                    />
+            </RelativeLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDeleted"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:background="@drawable/gray_button_bg"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDelete"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/delete"
+                android:background="@drawable/button_bg"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAccept"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/accept"
+                android:background="@drawable/button_bg"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

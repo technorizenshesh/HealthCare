@@ -1,0 +1,729 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        tools:context=".activites.SignupWithPostShiftsActivity"
+        >
+
+        <include android:id="@+id/header" layout="@layout/layou_header"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/header"
+            android:fillViewport="true"
+            android:layout_above="@id/rlbottom"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
+                <!--
+
+                                <FrameLayout
+                                    android:layout_width="@dimen/_90sdp"
+                                    android:layout_height="wrap_content"
+                                    android:layout_gravity="center"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    >
+
+                                    <de.hdodenhof.circleimageview.CircleImageView
+                                        android:id="@+id/img_profile_pic"
+                                        android:layout_width="@dimen/_75sdp"
+                                        android:layout_height="@dimen/_75sdp"
+                                        android:layout_centerInParent="true"
+                                        android:src="@drawable/myprofile"
+                                        app:civ_border_color="@color/blue"
+                                        app:civ_border_width="@dimen/_2sdp" />
+
+                                    <ImageView
+                                        android:id="@+id/img_edi_pic"
+                                        android:layout_width="@dimen/_40sdp"
+                                        android:layout_height="@dimen/_40sdp"
+                                        android:layout_gravity="top|end"
+                                        android:background="@drawable/plus_red_bg"
+                                        />
+                                </FrameLayout>
+                -->
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelFirst"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="@color/black"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etFirstName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="First Name"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelLast"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="@color/black"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etLast"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Last Name"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelEmail"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    app:errorEnabled="false"
+                    android:textColorHint="@color/black"
+                    app:hintAnimationEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etEmail"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Email"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelStreetNum"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    android:textColorHint="@color/black"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etStreetNum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Street Number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelStreetName"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    android:textColorHint="@color/black"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etStreetName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Street Name"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelAppartNum"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    android:textColorHint="@color/black"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etAppart"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Appartment Number"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlCountry"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/et_bg"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    >
+                    <Spinner
+                        android:id="@+id/spinnerCountry"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rlState"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/et_bg"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    >
+                    <Spinner
+                        android:id="@+id/spinnerState"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        />
+                </RelativeLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelCity"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    android:textColorHint="@color/black"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etCity"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="City"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelZipCode"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    app:errorEnabled="false"
+                    android:textColorHint="@color/black"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="false">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etZipCode"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Zip Code"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="text" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <!-- <com.google.android.material.textfield.TextInputLayout
+                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                     android:layout_width="match_parent"
+                     android:layout_height="wrap_content"
+                     android:layout_marginTop="@dimen/_10sdp"
+                     app:boxCornerRadiusBottomEnd="5dp"
+                     app:boxCornerRadiusBottomStart="5dp"
+                     app:boxCornerRadiusTopEnd="5dp"
+                     app:boxCornerRadiusTopStart="5dp"
+                     app:boxStrokeColor="@color/colorGray"
+                     app:errorEnabled="false"
+                     app:hintAnimationEnabled="true"
+                     app:hintEnabled="true"
+                     app:hintTextColor="@color/colorGray"
+                     app:passwordToggleEnabled="false">
+
+                     <com.google.android.material.textfield.TextInputEditText
+                         android:layout_width="match_parent"
+                         android:layout_height="wrap_content"
+                         android:hint="Mobile Number"
+                         android:inputType="number" />
+                 </com.google.android.material.textfield.TextInputLayout>-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    >
+                    <LinearLayout
+                        android:id="@+id/llPhone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center_vertical"
+                        android:background="@drawable/et_bg"
+                        android:orientation="horizontal"
+                        >
+                        <LinearLayout
+                            android:id="@+id/ccp"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.3"
+                            android:gravity="center"
+                            app:ccp_textSize="12dp"
+                            app:ccp_countryPreference="CA,US"
+                            app:ccp_defaultNameCode="CA"
+                            android:layout_marginRight="5dp"
+                            android:orientation="horizontal"
+                            android:layout_height="@dimen/_40sdp">
+                            <ImageView
+                                android:id="@+id/ivCanada"
+                                android:layout_width="@dimen/_17sdp"
+                                android:layout_height="@dimen/_17sdp"
+                                android:layout_gravity="center_vertical"
+                                android:src="@drawable/flag_canada"/>
+                            <TextView
+                                android:id="@+id/tvCanada"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="CA +1"
+                                android:textColor="@color/colorGray"
+                                android:fontFamily="@font/montserrat_regular"
+                                android:layout_toRightOf="@id/ivCanada"
+                                android:gravity="center_vertical"
+                                android:layout_marginLeft="@dimen/_5sdp"
+                                android:layout_gravity="center_vertical"
+                                android:drawableRight="@drawable/ic_drop_down_24"
+                                android:textSize="@dimen/_10sdp"/>
+                        </LinearLayout>
+
+                        <EditText
+                            android:id="@+id/etPhone"
+                            android:layout_width="0dp"
+                            android:layout_weight="0.7"
+                            android:layout_height="wrap_content"
+                            android:padding="@dimen/_10sdp"
+                            android:hint="@string/your_phone_number"
+                            android:textColor="@color/black"
+                            android:inputType="number"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/_12sdp"
+                            android:imeOptions="actionNext"
+                            android:backgroundTint="@color/white"
+                            />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <TextView
+                    android:id="@+id/tvPhoneError"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/enter_phone"
+                    android:textColor="@android:color/holo_red_dark"
+                    android:layout_marginLeft="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_3sdp"
+                    android:textSize="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:visibility="gone"
+                    />
+
+                <RelativeLayout
+                    android:id="@+id/rlSpinnerJob"
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/et_bg"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    >
+                    <Spinner
+                        android:id="@+id/spinnerJobPosition"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_width="match_parent"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:layout_marginVertical="@dimen/_5sdp"
+                        />
+                </RelativeLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelPass"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    android:textColorHint="@color/black"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    app:boxStrokeColor="@color/colorGray"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Password"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/labelConfirmPass"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:boxCornerRadiusBottomEnd="5dp"
+                    app:boxCornerRadiusBottomStart="5dp"
+                    app:boxCornerRadiusTopEnd="5dp"
+                    app:boxCornerRadiusTopStart="5dp"
+                    android:textColorHint="@color/black"
+                    app:boxStrokeColor="@color/colorGray"
+                    app:errorEnabled="false"
+                    app:hintAnimationEnabled="true"
+                    app:hintEnabled="true"
+                    app:hintTextColor="@color/colorGray"
+                    app:passwordToggleEnabled="true">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/etConfirmPass"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="Confirm Password"
+                        android:textColor="@color/black"
+                        android:textColorHint="@color/black"
+                        android:inputType="textPassword" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    >
+                    <com.google.android.material.radiobutton.MaterialRadioButton
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:text="By clicking Signup, you agree to CareShift's terms of Service and Privacy Policy. "
+                        android:textSize="@dimen/_12sdp"
+                        android:textColor="@color/colorGray"
+                        android:paddingStart="@dimen/_5sdp"
+                        android:fontFamily="@font/montserrat_medium"
+                        />
+
+                </LinearLayout>
+
+                <!--
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:layout_marginTop="@dimen/_20sdp"
+                                    >
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".5"
+                                        android:orientation="vertical"
+                                        android:layout_marginRight="@dimen/_5sdp">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/montserrat_regular"
+                                            android:textColor="@color/hint_color"
+                                            android:textStyle="bold"
+                                            android:text="@string/first_name"
+                                            android:textSize="@dimen/_12sdp" />
+
+                                        <EditText
+                                            android:id="@+id/etFirstName"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/_10sdp"
+                                            android:layout_marginTop="@dimen/_5sdp"
+                                            android:background="@drawable/et_bg"
+                                            android:hint="@string/your_first_name"
+                                            android:fontFamily="@font/montserrat_regular"
+                                            android:textColorHint="@color/hint_color"
+                                            android:textColor="@color/black"
+                                            android:inputType="textEmailAddress"
+                                            android:textSize="@dimen/_12sdp"
+                                            android:imeOptions="actionNext"
+                                            />
+
+                                    </LinearLayout>
+
+
+                                    <LinearLayout
+                                        android:layout_width="0dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight=".5"
+                                        android:orientation="vertical"
+                                        android:layout_marginLeft="@dimen/_5sdp">
+                                        <TextView
+                                            android:layout_width="wrap_content"
+                                            android:layout_height="wrap_content"
+                                            android:fontFamily="@font/montserrat_regular"
+                                            android:textColor="@color/hint_color"
+                                            android:textStyle="bold"
+                                            android:text="@string/last_name"
+                                            android:textSize="@dimen/_12sdp"
+                                            />
+
+                                        <EditText
+                                            android:id="@+id/etLastName"
+                                            android:layout_width="match_parent"
+                                            android:layout_height="wrap_content"
+                                            android:padding="@dimen/_10sdp"
+                                            android:layout_marginTop="@dimen/_5sdp"
+                                            android:background="@drawable/et_bg"
+                                            android:hint="@string/your_last_name"
+                                            android:fontFamily="@font/montserrat_regular"
+                                            android:textColorHint="@color/hint_color"
+                                            android:textColor="@color/black"
+                                            android:inputType="textEmailAddress"
+                                            android:textSize="@dimen/_12sdp"
+                                            android:imeOptions="actionNext"
+                                            />
+
+                                    </LinearLayout>
+
+                                </LinearLayout>
+                                <TextView
+                                    android:id="@+id/tv_header"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:textColor="@color/hint_color"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:textStyle="bold"
+                                    android:text="@string/email"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                                <EditText
+                                    android:id="@+id/etEmail"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:background="@drawable/et_bg"
+                                    android:hint="@string/your_email_address"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:textColorHint="@color/hint_color"
+                                    android:textColor="@color/black"
+                                    android:inputType="textEmailAddress"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:imeOptions="actionNext"
+                                    />
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:textColor="@color/hint_color"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:textStyle="bold"
+                                    android:text="@string/phone"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:textColor="@color/hint_color"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:textStyle="bold"
+                                    android:text="@string/password"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                                <EditText
+                                    android:id="@+id/etPassword"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:background="@drawable/et_bg"
+                                    android:hint="@string/your_password"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:textColorHint="@color/hint_color"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:textColor="@color/black"
+                                    android:inputType="textPassword"
+                                    android:imeOptions="actionNext"
+                                    />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:textColor="@color/hint_color"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    android:textStyle="bold"
+                                    android:text="@string/confirm_password"
+                                    android:textSize="@dimen/_12sdp"
+                                    />
+
+                                <EditText
+                                    android:id="@+id/etConfPass"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:padding="@dimen/_10sdp"
+                                    android:layout_marginTop="@dimen/_5sdp"
+                                    android:background="@drawable/et_bg"
+                                    android:hint="@string/your_confirm_password"
+                                    android:fontFamily="@font/montserrat_regular"
+                                    android:textColorHint="@color/hint_color"
+                                    android:textSize="@dimen/_12sdp"
+                                    android:textColor="@color/black"
+                                    android:inputType="textPassword"
+                                    android:imeOptions="actionDone"
+                                    />-->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnSignup"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/signup"
+                    android:background="@drawable/button_bg"
+                    android:layout_marginTop="@dimen/_30sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    android:textAllCaps="false"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    />
+
+
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+        <RelativeLayout
+            android:id="@+id/rlbottom"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            >
+            <TextView
+                android:id="@+id/privacy_policy"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:gravity="bottom"
+                android:text="@string/already_have_an_account"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="@dimen/_12sdp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:gravity="bottom"
+                android:text="@string/login"
+                android:layout_marginLeft="@dimen/_3sdp"
+                android:layout_toRightOf="@id/privacy_policy"
+                android:textColor="@color/black"
+                android:textStyle="normal"
+                android:textSize="@dimen/_12sdp" />
+        </RelativeLayout>
+
+
+
+    </RelativeLayout>
+</layout>

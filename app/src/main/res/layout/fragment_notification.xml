@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.ProfileFragment"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/notifications"
+            android:textAllCaps="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textSize="@dimen/_16sdp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_14sdp"
+            app:cardElevation="@dimen/_25sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardMaxElevation="@dimen/_25sdp"
+            android:layout_marginTop="@dimen/_20sdp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/_1sdp"
+            android:outlineSpotShadowColor="@color/black"
+            android:outlineAmbientShadowColor="@color/black"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:orientation="vertical"
+                >
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="PUSH NOTIFICATION"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:theme="@style/SwitchCompatStyle"
+                    android:checked="false"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    />
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="SMS"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/black"
+                    android:theme="@style/SwitchCompatStyle"
+                    android:textSize="@dimen/_12sdp"
+                    android:checked="false"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    />
+
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="EMAIL"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/black"
+                    android:textSize="@dimen/_12sdp"
+                    android:checked="false"
+                    android:theme="@style/SwitchCompatStyle"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+    </LinearLayout>
+</layout>

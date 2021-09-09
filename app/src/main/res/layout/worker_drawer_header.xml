@@ -1,0 +1,772 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_60sdp"
+                    android:textSize="@dimen/_25sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="CareShifts"
+                    android:textStyle="bold"
+                    android:layout_marginTop="@dimen/_25sdp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    />
+                <View
+                    android:id="@+id/navigationheaderUnderLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/black"
+                    />
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/_15sdp">
+
+                    <RelativeLayout
+                        android:id="@+id/rlHome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivHome"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_home"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvEsta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Home"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivHome"
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_15sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_profile1"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Profile"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivProfile"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlDocument"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivPostShifts"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_doc"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/documents1"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivPostShifts"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlRerence"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivShifts"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_refer"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Reference"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivShifts"
+                            />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlShifts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivBilling"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_shifts"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Shifts"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivBilling"
+                            />
+
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlBilling"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivWallet"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_billing"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Billing"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivWallet"
+                            />
+
+
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlFaq"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivHiredWorkers"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_faq"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FAQ"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivHiredWorkers"
+                            />
+
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlContactUs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivContactUs"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_contact"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contact Us"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivContactUs"
+                            />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivSettings"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_settings"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Settings"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_14sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivSettings"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlPrivacy"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivPrivacy"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_privacy"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Privacy and Legal"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_14sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_centerVertical="true"
+                            android:layout_toRightOf="@+id/ivPrivacy"
+                            />
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:id="@+id/btnLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/logout"
+                        android:background="@drawable/button_bg"
+                        android:layout_marginTop="@dimen/_40sdp"
+                        android:textColor="@color/white"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:textSize="@dimen/_12sdp"
+                        android:textAllCaps="false"
+                        android:layout_alignParentBottom="true"
+                        android:layout_margin="@dimen/_5sdp"
+                        />
+
+
+                </RelativeLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</layout>
+<!--
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        >
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_60sdp"
+                    android:textSize="@dimen/_25sdp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:text="Careshifts"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_centerInParent="true"
+                    android:gravity="center"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    />
+                <View
+                    android:id="@+id/navigationheaderUnderLine"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:background="@color/black"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:paddingHorizontal="@dimen/_15sdp">
+
+                    <RelativeLayout
+                        android:id="@+id/rlHome"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_20sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivHome"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:id="@+id/tvEsta"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Home"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivHome"
+                            />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlProfile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivProfile"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Profile"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivProfile"
+                            />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlPostShifts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivPostShifts"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Posted Shifts"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivPostShifts"
+                            />
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlShifts"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivShifts"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Shifts"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivShifts"
+                            />
+
+
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlBilling"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivBilling"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Billings"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivBilling"
+                            />
+
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlWallet"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivWallet"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Wallet"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivWallet"
+                            />
+
+
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlHiredWorkers"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivHiredWorkers"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Hired Workers"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivHiredWorkers"
+                            />
+
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlFaq"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivFaq"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="FAQ"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivFaq"
+                            />
+
+
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/rlContactUs"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivContactUs"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Contact Us"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivContactUs"
+                            />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlSettings"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivSettings"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Settings"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_14sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivSettings"
+                            />
+
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
+                        android:id="@+id/rlLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivLogout"
+                            android:layout_width="@dimen/_17sdp"
+                            android:layout_height="@dimen/_17sdp"
+                            android:background="@drawable/circle_bg"/>
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Logout"
+                            android:textColor="@color/black"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textSize="@dimen/_13sdp"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivLogout"
+                            />
+
+
+
+                    </RelativeLayout>
+
+
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+</layout>-->

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.ProfileFragment"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/black"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:text="@string/profile"
+            android:textAllCaps="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textSize="@dimen/_16sdp" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_15sdp"
+            app:cardElevation="@dimen/_25sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardMaxElevation="@dimen/_25sdp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/_1sdp"
+            android:outlineSpotShadowColor="@color/black"
+            android:outlineAmbientShadowColor="@color/black"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp"
+                    >
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        >
+                    <ImageView
+                        android:id="@+id/ivProfile"
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_90sdp"
+                        android:background="@drawable/gray_bg_5"/>
+
+                    </RelativeLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="@dimen/_8sdp"
+                        android:orientation="vertical"
+                        >
+
+                        <TextView
+                            android:id="@+id/tvCompany"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:text="CAREPEOPLE INC"
+                            android:textSize="@dimen/_16sdp" />
+
+                        <TextView
+                            android:id="@+id/tvLocation"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_locat"
+                            android:gravity="center_vertical"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:textColor="@color/black"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            />
+
+                        <TextView
+                            android:id="@+id/tvEmail"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_mail"
+                            android:gravity="center_vertical"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:textColor="@color/black"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            />
+                        <TextView
+                            android:id="@+id/tvPhone"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:drawableLeft="@drawable/ic_call"
+                            android:gravity="center_vertical"
+                            android:fontFamily="@font/montserrat_regular"
+                            android:textColor="@color/black"
+                            android:drawablePadding="@dimen/_5sdp"
+                            android:textSize="@dimen/_10sdp"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/tvClientDesc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textColor="@color/black"
+                    android:text="@string/client_descriptionCol"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:textSize="@dimen/_13sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    />
+
+            </LinearLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnEdit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/edit"
+            android:background="@drawable/button_bg"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            />
+
+    </LinearLayout>
+</layout>

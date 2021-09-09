@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+
+  <!--  <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarNormal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_60sdp"
+        android:background="@drawable/bottom_cornor_40"
+        android:visibility="gone"
+        >
+
+        <ImageView
+            android:id="@+id/iv_hamburgur_normal"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_centerInParent="true"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/side_menu"
+            />
+        <TextView
+            android:id="@+id/tvtitle_normal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:text="@string/careshifts"
+            android:textSize="@dimen/_16sdp"
+            android:layout_gravity="center"
+            android:fontFamily="@font/montserrat_bold"/>
+
+    </androidx.appcompat.widget.Toolbar>
+-->
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:background="@drawable/bottom_cornor_40"
+            android:visibility="visible"
+            >
+
+            <ImageView
+                android:id="@+id/iv_hamburgur"
+                android:layout_width="@dimen/_25sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerInParent="true"
+                android:padding="@dimen/_2sdp"
+                android:src="@drawable/side_menu"
+                />
+            <ImageView
+                android:id="@+id/img_header"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_back"
+                android:padding="@dimen/_2sdp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:visibility="gone"
+                app:tint="@color/white" />
+            <TextView
+                android:id="@+id/tvtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/careshifts"
+                android:textSize="@dimen/_16sdp"
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat_bold"/>
+
+           <ImageView
+               android:layout_width="@dimen/_33sdp"
+               android:layout_height="@dimen/_25sdp"
+               android:src="@drawable/chat"
+               android:layout_gravity="end"
+               android:layout_marginRight="@dimen/_15sdp"
+               android:scaleType="fitXY"
+               />
+
+        </androidx.appcompat.widget.Toolbar>
+
+    <include layout="@layout/worker_content_main" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:title="Home" />
+
+    <item
+        android:id="@+id/navigation_codes"
+        android:title="Codes" />
+
+    <item
+        android:id="@+id/navigation_green_footprint"
+        android:title="Green Footpint" />
+
+    <item
+        android:id="@+id/navigation_products"
+        android:title="Products" />
+
+
+ <item
+        android:id="@+id/navigation_maquinas"
+        android:title="Maquinas" />
+
+</menu>

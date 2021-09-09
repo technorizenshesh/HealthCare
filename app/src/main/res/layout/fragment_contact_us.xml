@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".fragments.Con">
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textColor="@color/black"
+            android:text="@string/contactus"
+            android:textAllCaps="true"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:textSize="@dimen/_15sdp" />
+
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginHorizontal="@dimen/_13sdp"
+            app:cardElevation="@dimen/_25sdp"
+            app:cardCornerRadius="@dimen/_10sdp"
+            app:cardMaxElevation="@dimen/_25sdp"
+            app:strokeColor="@color/black"
+            app:strokeWidth="@dimen/_1sdp"
+            android:outlineSpotShadowColor="@color/black"
+            android:outlineAmbientShadowColor="@color/black"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="@dimen/_15sdp"
+                >
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/blue_bg_5"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_chat1"
+                        android:scaleType="centerInside"
+                        android:padding="@dimen/_5sdp"
+                        android:background="@drawable/circle_blue_bg"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/black"
+                        android:text="Chat With Us"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp" />
+
+
+
+
+
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/blue_bg_5"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_22sdp"
+                        android:layout_height="@dimen/_22sdp"
+                        android:src="@drawable/ic_mail"
+                        android:padding="@dimen/_5sdp"
+                        android:background="@drawable/circle_blue_bg"/>
+
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/black"
+                        android:text="Email us: support@careshifts.net"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </LinearLayout>
+
+
+<!--
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="@dimen/_10sdp"
+                    android:background="@drawable/blue_bg_5"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    >
+
+                    <ImageView
+                        android:layout_width="@dimen/_20sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:background="@drawable/circle_blue_bg"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/black"
+                        android:text="Call us: +1 647 803 91391"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="@dimen/_10sdp"
+                        android:textSize="@dimen/_12sdp" />
+
+
+                </LinearLayout>
+-->
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnLogin"
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_height="wrap_content"
+            android:text="Follow us on twitter"
+            android:background="@drawable/bright_button_bg"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginHorizontal="@dimen/_25sdp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnINsta"
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_height="wrap_content"
+            android:text="Follow us on instagram"
+            android:background="@drawable/purple_button_bg"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_25sdp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnfb"
+            android:layout_width="match_parent"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:layout_height="wrap_content"
+            android:text="Follow us on facebook"
+            android:background="@drawable/fb_button_bg"
+            android:textColor="@color/white"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:textAllCaps="false"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:layout_marginHorizontal="@dimen/_25sdp"
+            />
+
+    </LinearLayout>
+</layout>

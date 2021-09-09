@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="#ffffffff">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="Select Country Code"
+            android:textColor="@color/black"
+            android:textSize="15dp"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/colorGray" />
+
+        <RelativeLayout
+            android:id="@+id/rlCA"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            >
+            <ImageView
+                android:id="@+id/ivCanada"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/flag_canada"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Canada"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:layout_toRightOf="@id/ivCanada"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/_11sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+1"
+                android:textColor="@color/colorGray"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layout_gravity="end"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/_12sdp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rlUS"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_20sdp"
+            android:paddingVertical="@dimen/_10sdp"
+            android:layout_marginBottom="@dimen/_20sdp"
+            >
+            <ImageView
+                android:id="@+id/ivUS"
+                android:layout_width="@dimen/_17sdp"
+                android:layout_height="@dimen/_17sdp"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/flag_united_states_of_america"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="United States"
+                android:textColor="@color/black"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:fontFamily="@font/montserrat_semibold"
+                android:layout_toRightOf="@id/ivUS"
+                android:layout_gravity="center_vertical"
+                android:textSize="@dimen/_11sdp"/>
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="+1"
+                android:textColor="@color/colorGray"
+                android:layout_marginLeft="@dimen/_5sdp"
+                android:fontFamily="@font/montserrat_regular"
+                android:layout_gravity="end"
+                android:layout_alignParentRight="true"
+                android:textSize="@dimen/_12sdp"/>
+        </RelativeLayout>
+
+    </LinearLayout>
+
+
+</LinearLayout>

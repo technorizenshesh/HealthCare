@@ -1,0 +1,248 @@
+<resources>
+    <string name="app_name">HealthCare</string>
+    <string name="api_key">AIzaSyBduv61ywGy3e9mU6NJ_a7GHCf5oSbxT2w</string>
+    <string name="places_api_key">AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk</string>
+    <string name="your_email_address">Your email address</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="your_password">Your password</string>
+    <string name="login">Login</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="don_t_have_an_account">Don\'t have an account?</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="your_first_name">Your first name</string>
+    <string name="your_last_name">Your last name</string>
+    <string name="confirm_password">Confirm Password</string>
+    <string name="your_confirm_password">Your confirm password</string>
+    <string name="your_phone_number">Your phone number</string>
+    <string name="phone">Phone Number</string>
+    <string name="we_sent_you_a_code">We sent you a code</string>
+    <string name="verify">Verify</string>
+    <string name="signup">Signup</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Android Studio</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Settings</string>
+    <string name="permisson_denied">Permission denied</string>
+
+    <string name="menu_home">Home</string>
+    <string name="menu_gallery">Gallery</string>
+    <string name="menu_slideshow">Slideshow</string>
+    <string name="title_activity_main2">MainActivity</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="careshifts">CareShifts</string>
+    <string name="billing">Billings</string>
+    <string name="shifts">Shifts</string>
+    <string name="billings">Billing</string>
+    <string name="profile">Profile</string>
+    <string name="wallet">Wallet</string>
+    <string name="hired">Hires Workers</string>
+    <string name="hired_work">Hired Workers</string>
+    <string name="faq">FAQ</string>
+    <string name="contactus">Contact Us</string>
+    <string name="setings">Settings</string>
+    <string name="logout">Logout</string>
+    <string name="change_password">CHANGE PASSWORD</string>
+    <string name="save_changes">Save Changes</string>
+    <string name="notifications">NOTIFICATIONS</string>
+    <string name="change_password_lower">Change Password</string>
+    <string name="notifications_loser">Notifications</string>
+    <string name="delete">Delete</string>
+    <string name="sign_up_to_post_shifts">Sign Up To Post Shifts</string>
+    <string name="sign_up_to_work_shifts">Sign Up To Work Shifts</string>
+    <string name="faqs">FAQS</string>
+    <string name="sort_by_distance">Sort By Distance</string>
+    <string name="sort_by_dates">Sort By Dates</string>
+    <string name="approved">APPROVED</string>
+    <string name="upload">Upload</string>
+    <string name="not_uploaded">Not Uploaded</string>
+    <string name="please_click_here_for_check">Please click <u>here</u> for check</string>
+    <string name="vulnerable_sector_check">Vulnerable Sector Check</string>
+    <string name="current_flu_vaccination">Current Flu Vaccination</string>
+    <string name="other_vaccinations">Other Vaccinations</string>
+    <string name="n95_mask_fit">N95 Mask Fit</string>
+    <string name="cpi">CPI</string>
+    <string name="additional_documents">Additional Documents</string>
+
+    <string name="government_photo_id">Government Photo ID</string>
+    <string name="documents">DOCUMENTS</string>
+    <string name="degree_diploma_certificate">Degree / Diploma / Certificate</string>
+    <string name="tb_screening">TB Screening</string>
+    <string name="immunization_record">Immunization Record</string>
+    <string name="covid_19_vaccination">COVID-19 Vaccination</string>
+    <string name="professional_licences">Professional Licences</string>
+    <string name="first_aid_cpr">First Aid / CPR</string>
+    <string name="resume">Resume</string>
+    <string name="current_covid_19_result">"Current COVID-19 Result "</string>
+    <string name="your_references">Your References</string>
+    <string name="add_reference">Add Reference</string>
+    <string name="add_new_reference">Add New Reference</string>
+    <string name="end_date">End Date</string>
+    <string name="start_date">Start Date</string>
+    <string name="your_job_function">Your Job Function</string>
+    <string name="company_email_address">Company Email Address</string>
+    <string name="contact_person">Contact Person</string>
+    <string name="add">Add</string>
+    <string name="available_jobs">Available Shifts</string>
+    <string name="invoices">Invoices</string>
+    <string name="instant_pay">Instant Pay</string>
+    <string name="report">Report</string>
+    <string name="download">Download</string>
+    <string name="set_availability">Set Availability</string>
+    <string name="set_distance_filtert">Set Distance Filter</string>
+    <string name="set_rates">Set Rates</string>
+    <string name="set_your_availability">SET YOUR AVAILABILITY</string>
+    <string name="select_the_days_and_timing_of_your_availability">SELECT THE DAYS AND TIMING OF YOUR AVAILABILITY</string>
+    <string name="recurring_weekly_schedule">RECURRING WEEKLY SCHEDULE</string>
+    <string name="monday">MONDAY</string>
+    <string name="end_time">End Time</string>
+    <string name="start_time">Start Time</string>
+    <string name="tuesday">TUESDAY</string>
+    <string name="wednesday">WEDNESDAY</string>
+    <string name="thursday">THURSDAY</string>
+    <string name="saturday">SATURDAY</string>
+    <string name="sunday">SUNDAY</string>
+    <string name="edit">Edit</string>
+    <string name="show_shifts_within_100_kms_of_your_postal_code_m8w1h8">Show shifts within 100 kms of your\n postal code M8W1H8</string>
+    <string name="cancel">Cancel</string>
+    <string name="instant_pay_available">Instant Pay: Available</string>
+    <string name="shift_in_progress">SHIFTS IN PROGRESS</string>
+    <string name="shifts_in_progress_1">Shifts in Progress</string>
+    <string name="documents1">Documents</string>
+    <string name="accept">Accept</string>
+    <string name="available_shifts">AVAILABLE SHIFTS</string>
+    <string name="covid_19_negative">Covid-19:</string>
+    <string name="client_description">Client Description</string>
+    <string name="payment_history">Payment history</string>
+    <string name="company_name">Company Name</string>
+    <string name="company_website">Company Website</string>
+    <string name="street_name">Street Name</string>
+    <string name="street_number">Street Number</string>
+    <string name="city">City</string>
+    <string name="zip_code">Zip Code</string>
+    <string name="enter_first">Enter First Name</string>
+    <string name="enter_last">Enter Last Name</string>
+    <string name="enter_company_name">Enter Company Name</string>
+    <string name="enter_website">Enter Company Website</string>
+    <string name="enter_street_num">Enter Street Number</string>
+    <string name="enter_street_name">Enter Street Name</string>
+    <string name="enter_shiftsNotes">Enter Enter Notes</string>
+    <string name="enter_appartment_num">Enter Apartment Number</string>
+    <string name="select_country">Select Country</string>
+    <string name="select_state">Select Province / State</string>
+    <string name="enter_City">Enter City</string>
+    <string name="enter_zip">Enter Zip Code</string>
+    <string name="enter_email">Enter Email</string>
+    <string name="enter_phone">Enter Phone Number</string>
+    <string name="enter_pass">Enter Password</string>
+    <string name="enter_confirm_pass">Enter Confirm Password</string>
+    <string name="enter_desc">Enter Client Description</string>
+    <string name="pass_and_confirm_pass_not_macthed">Password and confirm password is not matched.</string>
+    <string name="enter_valid_email">Please enter valid email.</string>
+    <string name="msg_noInternet">Internet Connection Not Available</string>
+    <string name="on_error">On error</string>
+    <string name="please_wait">Please wait...</string>
+    <string name="emailCol">Email:</string>
+    <string name="phoneCol">Phone:</string>
+    <string name="client_descriptionCol">Client Description:</string>
+    <string name="permission_denied_boo">Permission Denied</string>
+    <string name="confirm_new_password">Confirm New Password</string>
+    <string name="current_password">Current Password</string>
+    <string name="new_password">New Password</string>
+
+    <string name="please_enter_old_pass">Please enter old password.</string>
+    <string name="please_enter_confirm_password">Please enter confirm password.</string>
+    <string name="password_mismatched">Please make sure your password match.</string>
+    <string name="enter_new_password">Please enter new password.</string>
+    <string name="your_new_password">Your New Password</string>
+    <string name="check_your_email_and_click_on_the_n_confirmation_link_to_continue">Check your email and click on the\n confirmation link to continue</string>
+    <string name="select_job_position">Select Job Position</string>
+    <string name="select_shifts_location">Select Location</string>
+    <string name="apartment_name">Apartment Name</string>
+    <string name="date_col">Date :</string>
+    <string name="time_col">Time :</string>
+    <string name="unpaid_break">Unpaid Break:</string>
+    <string name="pay_col">Pay :</string>
+    <string name="distance">Distance:</string>
+    <string name="save">Save</string>
+    <string name="view_shift_timing">View Timings</string>
+    <string name="number_of_shifts_col">Number Of Shifts:</string>
+    <string-array name="states_canada">
+        <item>Province / State</item>
+        <item>  Alberta</item>
+        <item>British Columbia</item>
+        <item> Manitoba</item>
+        <item> New Brunswick</item>
+        <item>Newfoundland and Labrador</item>
+        <item>Northwest Territories</item>
+        <item> Nova Scotia</item>
+        <item> Nunavut</item>
+        <item>Ontario</item>
+        <item>Prince Edward Island</item>
+        <item>Quebec</item>
+        <item>Saskatchewan</item>
+        <item> Yukon </item>
+    </string-array>
+
+    <string-array name="states_us">
+        <item>Province / State</item>
+        <item> Alabama </item>
+        <item>  Alaska</item>
+        <item>Arizona</item>
+        <item> Arkansas</item>
+        <item> California</item>
+        <item>Colorado</item>
+        <item> Connecticut</item>
+        <item> Delaware</item>
+        <item>Florida</item>
+        <item>Georgia</item>
+        <item>Hawaii</item>
+        <item>Idaho</item>
+        <item>Illinois</item>
+        <item>Indiana</item>
+        <item>Iowa</item>
+        <item>Kansas</item>
+        <item>Kentucky</item>
+        <item>Louisiana</item>
+        <item>Maine</item>
+        <item>Maryland</item>
+        <item>Massachusetts</item>
+        <item>Michigan</item>
+        <item>Minnesota</item>
+        <item>Mississippi</item>
+        <item>Missouri</item>
+        <item>Montana</item>
+        <item>Nebraska</item>
+        <item>Nevada</item>
+        <item>New Hampshire</item>
+        <item>New Jersey</item>
+        <item>New Mexico</item>
+        <item>New York</item>
+        <item>North Carolina</item>
+        <item>North Dakota</item>
+        <item>Ohio</item>
+        <item>Oklahoma</item>
+        <item>Oregon</item>
+        <item> Pennsylvania</item>
+        <item>Rhode Island</item>
+        <item>South Carolina</item>
+        <item>South Dakota</item>
+        <item>Tennessee</item>
+        <item>Texas</item>
+        <item>Utah</item>
+        <item>Vermont</item>
+        <item>Virginia</item>
+        <item>Washington</item>
+        <item>West Virginia</item>
+        <item>Wisconsin</item>
+        <item>Wyoming</item>
+
+    </string-array>
+
+</resources>
