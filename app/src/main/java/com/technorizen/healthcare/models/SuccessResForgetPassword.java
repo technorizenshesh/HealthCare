@@ -7,7 +7,6 @@ import java.io.Serializable;
 
 public class SuccessResForgetPassword implements Serializable {
 
-
     @SerializedName("result")
     @Expose
     public String result;

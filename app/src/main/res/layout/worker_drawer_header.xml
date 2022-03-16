@@ -53,7 +53,6 @@
                         android:layout_marginTop="@dimen/_15sdp"
                         android:padding="@dimen/_5sdp"
                         >
-
                         <ImageView
                             android:id="@+id/ivHome"
                             android:layout_width="@dimen/_18sdp"
@@ -61,7 +60,6 @@
                             android:layout_centerVertical="true"
                             android:src="@drawable/ic_home"
                             />
-
                         <TextView
                             android:id="@+id/tvEsta"
                             android:layout_width="wrap_content"
@@ -78,7 +76,7 @@
                     </RelativeLayout>
 
                     <RelativeLayout
-                        android:id="@+id/rlProfile"
+                        android:id="@+id/rl_user"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="horizontal"

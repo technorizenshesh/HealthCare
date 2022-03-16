@@ -1,0 +1,567 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_35sdp"
+        app:cardElevation="@dimen/_25sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardMaxElevation="@dimen/_25sdp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp"
+        android:outlineSpotShadowColor="@color/black"
+        android:outlineAmbientShadowColor="@color/black"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="@dimen/_10sdp"
+                android:paddingHorizontal="@dimen/_10sdp"
+                android:paddingBottom="@dimen/_5sdp"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    >
+
+                    <TextView
+                        android:id="@+id/tvCompanyName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:layout_gravity="center_horizontal"
+                        android:text="@string/careshifts"
+                        android:textSize="@dimen/_12sdp" />
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+                        <TextView
+                            android:id="@+id/tvInvoiceNumber"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:textAllCaps="false"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:text="Invoice No : 150923"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginLeft="@dimen/_30sdp"
+                            android:textSize="@dimen/_11sdp" />
+                    </RelativeLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Description:"
+                            android:textSize="@dimen/_11sdp" />
+
+                        <TextView
+                            android:id="@+id/tvDesc"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="For a shift done by David Ibe as a Personal Support Worker ( Floor Duty)  @ Carepeople Inc - Etobicoke -  ON, on Friday August 06, 2021(02:30 PM -10:30 PM)"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Time Worked:"
+                            android:textSize="@dimen/_11sdp" />
+
+
+                        <TextView
+                            android:id="@+id/tvTimedWorked"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="7:30 Hours"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="@string/transit_allowance_invoice"
+                            android:textSize="@dimen/_11sdp" />
+
+                        <TextView
+                            android:id="@+id/tvTransit"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$30/Hour"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="@string/total_hours"
+                            android:textSize="@dimen/_11sdp" />
+
+                        <TextView
+                            android:id="@+id/tvTotalHours"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$30/Hour"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Rate:"
+                            android:textSize="@dimen/_11sdp" />
+
+
+                        <TextView
+                            android:id="@+id/tvRate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$30/Hour"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Shift Amount:"
+                            android:textSize="@dimen/_11sdp" />
+
+                        <TextView
+                            android:id="@+id/tvShiftAmount"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$225"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="@string/admin_fee_19"
+                            android:textSize="@dimen/_11sdp" />
+                        <TextView
+                            android:id="@+id/tvAdminFees"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$33.75"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="HST @ 13%:"
+                            android:textSize="@dimen/_11sdp" />
+                        <TextView
+                            android:id="@+id/tvHst"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$33.64"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:visibility="gone"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Sub-total:"
+                            android:textSize="@dimen/_11sdp" />
+                        <TextView
+                            android:id="@+id/tvSubTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$225"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Invoice Total:"
+                            android:textSize="@dimen/_11sdp" />
+                        <TextView
+                            android:id="@+id/tvTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$225"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:visibility="gone"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Late Cancellation Charges:"
+                            android:textSize="@dimen/_11sdp" />
+                        <TextView
+                            android:id="@+id/tvLateCancelationFees"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="($0)"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:visibility="gone"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Late Cancellation Charges:"
+                            android:textSize="@dimen/_11sdp" />
+
+
+                        <TextView
+                            android:id="@+id/tvLateCancelationCharge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="($0)"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:visibility="gone"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Invoice Total:"
+                            android:textSize="@dimen/_11sdp" />
+
+
+                        <TextView
+                            android:id="@+id/tvInvoiceTotal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="$225"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:visibility="gone"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Scheduled Pay Date:"
+                            android:textSize="@dimen/_11sdp" />
+
+
+                        <TextView
+                            android:id="@+id/tvDate"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="Mon. Aug 08,2021"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        >
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_bold"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textStyle="bold"
+                            android:textAllCaps="false"
+                            android:text="Pay Status:"
+                            android:textSize="@dimen/_11sdp" />
+
+                        <TextView
+                            android:id="@+id/tvPayStatus"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/black"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:text="Unpaid"
+                            android:textSize="@dimen/_11sdp" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDownload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/download"
+                android:background="@drawable/button_bg"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/_12sdp"
+                />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnPay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/pay"
+                android:background="@drawable/button_bg"
+                android:textColor="@color/white"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/_12sdp"
+                android:visibility="gone"
+                />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
+

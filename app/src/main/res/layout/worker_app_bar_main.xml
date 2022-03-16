@@ -44,7 +44,7 @@
             >
 
             <ImageView
-                android:id="@+id/iv_hamburgur"
+                android:id="@+id/iv_hamburgur1"
                 android:layout_width="@dimen/_25sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:layout_centerInParent="true"
@@ -52,7 +52,7 @@
                 android:src="@drawable/side_menu"
                 />
             <ImageView
-                android:id="@+id/img_header"
+                android:id="@+id/img_header1"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_20sdp"
                 android:src="@drawable/ic_back"
@@ -72,6 +72,7 @@
                 android:fontFamily="@font/montserrat_bold"/>
 
            <ImageView
+               android:id="@+id/ivConversation"
                android:layout_width="@dimen/_33sdp"
                android:layout_height="@dimen/_25sdp"
                android:src="@drawable/chat"

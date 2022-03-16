@@ -8,7 +8,6 @@
     android:orientation="vertical"
     tools:context=".fragments.WalletFragment">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -44,27 +43,29 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_medium"
                 android:textColor="@color/black"
-                android:text="Available Balance"
+                android:text="@string/available_balance"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_20sdp"
                 android:textSize="@dimen/_12sdp" />
             <TextView
+                android:id="@+id/tvAmount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/montserrat_bold"
                 android:textColor="@color/black"
-                android:text="CA$ 0.00"
+                android:text="@string/_0_00"
                 android:textAllCaps="true"
                 android:textStyle="bold"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="@dimen/_5sdp"
                 android:textSize="@dimen/_16sdp" />
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addMoney"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Add Money"
+                android:text="@string/add_money"
                 android:background="@drawable/button_bg"
                 android:textColor="@color/white"
                 android:fontFamily="@font/montserrat_semibold"

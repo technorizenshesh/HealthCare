@@ -83,14 +83,12 @@ public class ShiftsFragment extends Fragment {
                 }
         );
 
-
         binding.tvPost.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_shiftsFragment_to_postedShiftFragment);
 
                 }
         );
-
 
         binding.tvShiftHistory.setOnClickListener(v ->
                 {
@@ -99,6 +97,19 @@ public class ShiftsFragment extends Fragment {
                 }
         );
 
+        binding.tvRecruit.setOnClickListener(v ->
+                {
+                    Navigation.findNavController(v).navigate(R.id.action_shiftsFragment_to_confirmRecruitmentFragment);
+
+                }
+        );
+
+        binding.tvCancelRehire.setOnClickListener(v ->
+                {
+                    Navigation.findNavController(v).navigate(R.id.action_shiftsFragment_to_cancelledRehireShiftsFragment);
+
+                }
+        );
 
         return binding.getRoot();
     }

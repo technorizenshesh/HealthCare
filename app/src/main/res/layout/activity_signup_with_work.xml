@@ -76,7 +76,7 @@
                         android:id="@+id/etFirstName"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:hint="First Name"
+                        android:hint="@string/first_name"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
                         android:inputType="text" />
@@ -137,6 +137,26 @@
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
 
+                <RelativeLayout
+                    android:layout_height="wrap_content"
+                    android:layout_width="match_parent"
+                    android:background="@drawable/et_bg"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    >
+                    <EditText
+                        android:id="@+id/etAddress"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:editable="false"
+                        android:hint="Add Address"
+                        android:textColor="@color/black"
+                        android:padding="@dimen/_15sdp"
+                        android:textColorHint="@color/black"
+                        android:textSize="@dimen/_13sdp"
+                        android:background="@android:color/transparent"
+                        />
+                </RelativeLayout>
+
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/labelStreetNum"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -150,6 +170,7 @@
                     app:boxStrokeColor="@color/colorGray"
                     android:textColorHint="@color/black"
                     app:errorEnabled="false"
+                    android:visibility="gone"
                     app:hintAnimationEnabled="true"
                     app:hintEnabled="true"
                     app:hintTextColor="@color/colorGray"
@@ -179,6 +200,7 @@
                     app:boxStrokeColor="@color/colorGray"
                     android:textColorHint="@color/black"
                     app:errorEnabled="false"
+                    android:visibility="gone"
                     app:hintAnimationEnabled="true"
                     app:hintEnabled="true"
                     app:hintTextColor="@color/colorGray"
@@ -207,6 +229,7 @@
                     app:boxStrokeColor="@color/colorGray"
                     android:textColorHint="@color/black"
                     app:errorEnabled="false"
+                    android:visibility="gone"
                     app:hintAnimationEnabled="true"
                     app:hintEnabled="true"
                     app:hintTextColor="@color/colorGray"
@@ -228,6 +251,7 @@
                     android:layout_width="match_parent"
                     android:background="@drawable/et_bg"
                     android:layout_marginTop="@dimen/_15sdp"
+                    android:visibility="gone"
                     >
                     <Spinner
                         android:id="@+id/spinnerCountry"
@@ -243,6 +267,7 @@
                     android:layout_height="wrap_content"
                     android:layout_width="match_parent"
                     android:background="@drawable/et_bg"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_15sdp"
                     >
                     <Spinner
@@ -270,6 +295,7 @@
                     app:errorEnabled="false"
                     app:hintAnimationEnabled="true"
                     android:textColorHint="@color/black"
+                    android:visibility="gone"
                     app:hintEnabled="true"
                     app:hintTextColor="@color/colorGray"
                     app:passwordToggleEnabled="false">
@@ -299,6 +325,7 @@
                     app:boxStrokeColor="@color/colorGray"
                     app:errorEnabled="false"
                     android:textColorHint="@color/black"
+                    android:visibility="gone"
                     app:hintAnimationEnabled="true"
                     app:hintEnabled="true"
                     app:hintTextColor="@color/colorGray"
@@ -497,7 +524,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="By clicking Signup, you agree to CareShift's terms of Service and Privacy Policy. "
+                        android:text="@string/by_clicking_signup_you_agree_to_careshifts_terms_of_service_and_privacy_policy"
                         android:textSize="@dimen/_12sdp"
                         android:textColor="@color/colorGray"
                         android:paddingStart="@dimen/_5sdp"
@@ -619,7 +646,6 @@
                                     android:text="@string/phone"
                                     android:textSize="@dimen/_12sdp"
                                     />
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -630,7 +656,6 @@
                                     android:text="@string/password"
                                     android:textSize="@dimen/_12sdp"
                                     />
-
                                 <EditText
                                     android:id="@+id/etPassword"
                                     android:layout_width="match_parent"
@@ -646,7 +671,6 @@
                                     android:inputType="textPassword"
                                     android:imeOptions="actionNext"
                                     />
-
                                 <TextView
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
@@ -657,7 +681,6 @@
                                     android:text="@string/confirm_password"
                                     android:textSize="@dimen/_12sdp"
                                     />
-
                                 <EditText
                                     android:id="@+id/etConfPass"
                                     android:layout_width="match_parent"
@@ -686,7 +709,6 @@
                     android:textAllCaps="false"
                     android:layout_marginBottom="@dimen/_15sdp"
                     />
-
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

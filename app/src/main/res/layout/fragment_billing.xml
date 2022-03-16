@@ -35,7 +35,6 @@
             app:strokeWidth="@dimen/_1sdp"
             android:outlineSpotShadowColor="@color/black"
             android:outlineAmbientShadowColor="@color/black"
-
             >
 
             <LinearLayout
@@ -56,17 +55,15 @@
                     android:text="Payment History"
                     android:textSize="@dimen/_13sdp" />
 
-
                 <TextView
                     android:id="@+id/tvInvoices"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/black"
-                    android:text="Invoices"
+                    android:text="@string/invoices"
                     android:padding="@dimen/_10sdp"
                     android:textSize="@dimen/_13sdp" />
-
 
                 <TextView
                     android:id="@+id/tvAddCard"
@@ -74,10 +71,9 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/black"
-                    android:text="Add Credit Card"
+                    android:text="@string/add_credit_card"
                     android:padding="@dimen/_10sdp"
                     android:textSize="@dimen/_13sdp" />
-
 
                 <TextView
                     android:id="@+id/tvAccount"
@@ -85,13 +81,12 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/black"
-                    android:text="Account Statement"
+                    android:text="@string/invoice_summary"
                     android:padding="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_5sdp"
                     android:textSize="@dimen/_13sdp" />
 
             </LinearLayout>
-
 
         </com.google.android.material.card.MaterialCardView>
 

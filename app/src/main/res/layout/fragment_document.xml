@@ -70,6 +70,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvGovPhoto"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -82,14 +83,30 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvGovPhotoNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvGovPhotoUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
@@ -122,6 +139,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvDegree"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -134,14 +152,30 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvDegreeNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvDegreeUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
@@ -173,6 +207,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvProfessionalLicences"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -185,17 +220,34 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvProfessionalLicencesNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
+
+                    <TextView
+                        android:id="@+id/tvProfessionalLicencesUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+
 
                 </LinearLayout>
 
@@ -223,6 +275,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvResume"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -235,14 +288,29 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvResumeNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <TextView
+                        android:id="@+id/tvResumeUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
@@ -273,6 +341,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvFirstAid"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -285,17 +354,34 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvFirstAidNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
+
+                    <TextView
+                        android:id="@+id/tvFirstAidUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+
 
                 </LinearLayout>
 
@@ -323,6 +409,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvCurrentCovid"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -335,18 +422,32 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvCurrentCovidNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
-
+                    <TextView
+                        android:id="@+id/tvCurrentCovidUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
                 </LinearLayout>
 
                 <View
@@ -373,6 +474,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvCovidVaccine"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -385,18 +487,32 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvCovidVaccineNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
-
+                    <TextView
+                        android:id="@+id/tvCovidVaccineUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
                 </LinearLayout>
 
                 <View
@@ -423,6 +539,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvImmune"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -435,14 +552,29 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvImmuneNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <TextView
+                        android:id="@+id/tvImmuneUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
@@ -476,6 +608,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvTB"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -488,14 +621,29 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvTBNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+                    <TextView
+                        android:id="@+id/tvTBUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
@@ -526,6 +674,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvVulnerable"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -538,18 +687,32 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvVulnerableNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
-
+                    <TextView
+                        android:id="@+id/tvVulnerableUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
                 </LinearLayout>
 
                 <TextView
@@ -585,6 +748,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvCurrentFlue"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -597,14 +761,30 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvCurrentFlueNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
+
+                    <TextView
+                        android:id="@+id/tvCurrentFlueUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
@@ -635,6 +815,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvOtherVaccination"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -647,18 +828,32 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvOtherVaccinationNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
-
+                    <TextView
+                        android:id="@+id/tvOtherVaccinationUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
                 </LinearLayout>
 
                 <View
@@ -684,6 +879,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvN95Mask"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -696,18 +892,32 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvN95MaskNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
-
+                    <TextView
+                        android:id="@+id/tvN95MaskUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
                 </LinearLayout>
 
                 <View
@@ -734,6 +944,7 @@
                     android:layout_marginTop="@dimen/_8sdp"
                     >
                     <TextView
+                        android:id="@+id/tvCpi"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -746,18 +957,32 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvCpiNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
-
+                    <TextView
+                        android:id="@+id/tvCpiUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
                 </LinearLayout>
 
                 <View
@@ -785,6 +1010,7 @@
                     android:layout_marginBottom="@dimen/_15sdp"
                     >
                     <TextView
+                        android:id="@+id/tvAdditionalDoc"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
@@ -797,24 +1023,39 @@
                         android:layout_marginRight="@dimen/_5sdp"
                         />
                     <TextView
+                        android:id="@+id/tvAdditionalDocNotUploaded"
                         android:layout_width="0dp"
                         android:layout_weight=".5"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/gray_button_bg"
+                        android:background="@drawable/blue_stroke_white_bg"
                         android:text="@string/not_uploaded"
-                        android:textColor="@color/white"
+                        android:textColor="@color/blue"
                         android:gravity="center"
                         android:textSize="@dimen/_12sdp"
                         android:padding="@dimen/_10sdp"
                         android:layout_marginLeft="@dimen/_5sdp"
                         />
-
+                    <TextView
+                        android:id="@+id/tvAdditionalDocUploaded"
+                        android:layout_width="0dp"
+                        android:layout_weight=".5"
+                        android:layout_height="wrap_content"
+                        android:text="@string/uploaded_1"
+                        android:textColor="@color/blue"
+                        android:gravity="center"
+                        android:textSize="@dimen/_12sdp"
+                        android:visibility="gone"
+                        android:background="@drawable/blue_stroke_white_bg"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        />
                 </LinearLayout>
 
 
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
 
             </LinearLayout>
 

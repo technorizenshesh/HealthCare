@@ -1,22 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/_10sdp"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_35sdp"
         app:cardElevation="@dimen/_25sdp"
         app:cardCornerRadius="@dimen/_10sdp"
         app:cardMaxElevation="@dimen/_25sdp"
-        android:layout_marginTop="@dimen/_15sdp"
         app:strokeColor="@color/black"
         app:strokeWidth="@dimen/_1sdp"
         android:outlineSpotShadowColor="@color/black"
         android:outlineAmbientShadowColor="@color/black"
         >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -30,34 +31,54 @@
                 android:paddingTop="@dimen/_10sdp"
                 android:paddingBottom="@dimen/_5sdp"
                 >
+                <RelativeLayout
+                    android:layout_width="@dimen/_70sdp"
+                    android:layout_height="@dimen/_80sdp"
+                    android:background="@drawable/gray_bg_5"
+                    android:padding="@dimen/_1sdp"
+                    android:layout_marginRight="@dimen/_8sdp"
+                    >
                 <ImageView
                     android:id="@+id/ivProfile"
                     android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    android:src="@drawable/ic_company"
-                    android:background="@drawable/gray_bg_5"/>
-
+                    android:layout_height="@dimen/_80sdp"/>
+                </RelativeLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="@dimen/_8sdp"
                     android:orientation="vertical"
                     >
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
 
-                    <TextView
-                        android:id="@+id/tvCompanyName"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:textColor="@color/black"
-                        android:layout_centerVertical="true"
-                        android:layout_centerHorizontal="true"
-                        android:textStyle="bold"
-                        android:textAllCaps="false"
-                        android:text="CAREPEOPLE INC"
-                        android:textSize="@dimen/_13sdp" />
+    <TextView
+        android:id="@+id/tvCompanyName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/montserrat_bold"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        android:textAllCaps="false"
+        android:text="CAREPEOPLE INC"
+        android:layout_toLeftOf="@id/tvID"
+        android:textSize="@dimen/_13sdp" />
 
-                    <TextView
+<TextView
+    android:id="@+id/tvID"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/_11sdp"
+    android:fontFamily="@font/montserrat_regular"
+    android:textColor="@color/black"
+    android:layout_alignParentRight="true"
+    android:drawableLeft="@drawable/ic_person"
+    android:text="12"
+    />
+</RelativeLayout>
+                         <TextView
                         android:id="@+id/jobPosition"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -68,6 +89,10 @@
                         android:textAllCaps="false"
                         android:text="Personal Support Worker"
                         android:textSize="@dimen/_12sdp" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
                     <TextView
                         android:id="@+id/tvDuty"
                         android:layout_width="wrap_content"
@@ -79,7 +104,20 @@
                         android:textAllCaps="false"
                         android:text="(Floor Duty)"
                         android:textSize="@dimen/_12sdp" />
-
+                        <TextView
+                            android:id="@+id/tvShiftType"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:textColor="@color/bright_blue"
+                            android:layout_centerVertical="true"
+                            android:layout_centerHorizontal="true"
+                            android:textAllCaps="false"
+                            android:text="(Floor Duty)"
+                            android:layout_marginLeft="@dimen/_5sdp"
+                            android:visibility="gone"
+                            android:textSize="@dimen/_12sdp" />
+                    </LinearLayout>
                     <TextView
                         android:id="@+id/tvNumOfShifts"
                         android:layout_width="match_parent"
@@ -93,7 +131,6 @@
                         android:visibility="gone"
                         android:textColor="@color/black"
                         android:textSize="@dimen/_10sdp" />
-
                     <TextView
                         android:id="@+id/tvDate"
                         android:layout_width="match_parent"
@@ -151,6 +188,20 @@
                         />
 
                     <TextView
+                        android:id="@+id/tvTransit"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/transit_allowance"
+                        android:drawableLeft="@drawable/ic_transit_allowance"
+                        android:gravity="center_vertical"
+                        android:fontFamily="@font/montserrat_regular"
+                        android:textColor="@color/black"
+                        android:drawablePadding="@dimen/_5sdp"
+                        android:textSize="@dimen/_10sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        />
+
+                    <TextView
                         android:id="@+id/hrRate"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -161,6 +212,7 @@
                         android:textColor="@color/black"
                         android:drawablePadding="@dimen/_5sdp"
                         android:textSize="@dimen/_10sdp"
+                        android:layout_gravity="center_vertical"
                         android:layout_marginTop="@dimen/_3sdp"
                         />
 
@@ -176,20 +228,38 @@
                         android:textSize="@dimen/_10sdp"
                         android:layout_marginTop="@dimen/_3sdp"
                         />
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
 
-                    <TextView
-                        android:id="@+id/tvCovid"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="@string/covid_19_negative"
-                        android:drawableLeft="@drawable/ic_covid"
-                        android:gravity="center_vertical"
-                        android:fontFamily="@font/montserrat_regular"
-                        android:textColor="@color/black"
-                        android:drawablePadding="@dimen/_5sdp"
-                        android:textSize="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_3sdp"
-                        />
+    <TextView
+        android:id="@+id/tvCovid"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/covid_19_negative"
+        android:drawableLeft="@drawable/ic_covid"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/black"
+        android:drawablePadding="@dimen/_5sdp"
+        android:textSize="@dimen/_10sdp"
+        android:layout_marginTop="@dimen/_3sdp"
+        />
+    <TextView
+        android:id="@+id/tvShiftNumber"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="#1234"
+        android:gravity="center_vertical"
+        android:fontFamily="@font/montserrat_regular"
+        android:textColor="@color/black"
+        android:drawablePadding="@dimen/_5sdp"
+        android:textSize="@dimen/_10sdp"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="@dimen/_3sdp"
+        />
+</RelativeLayout>
 
                     <TextView
                         android:id="@+id/tvDistance"
@@ -202,11 +272,12 @@
                         android:textColor="@color/black"
                         android:drawablePadding="@dimen/_5sdp"
                         android:textSize="@dimen/_10sdp"
-                        android:layout_marginTop="@dimen/_3sdp"
                         android:visibility="gone"
+                        android:layout_marginTop="@dimen/_3sdp"
                         />
 
                 </LinearLayout>
+
             </LinearLayout>
 
             <RelativeLayout
@@ -251,20 +322,77 @@
                     android:textSize="@dimen/_14sdp" />
 
                 <ImageView
+                    android:id="@+id/plus"
                     android:layout_width="@dimen/_15sdp"
                     android:layout_height="@dimen/_15sdp"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
                     android:src="@drawable/ic_add"
                     />
+
+                <ImageView
+                    android:id="@+id/minus"
+                    android:layout_width="@dimen/_15sdp"
+                    android:layout_height="@dimen/_15sdp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:src="@drawable/ic_minus"
+                    android:visibility="gone"
+                    />
+
             </RelativeLayout>
+            <TextView
+                android:id="@+id/tvShiftsNotes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="@dimen/_14sdp"
+                android:textColor="@color/black"
+                android:layout_margin="@dimen/_14sdp"
+                android:fontFamily="@font/montserrat_medium"
+                android:visibility="gone"
+                android:text="Hello THis is for the TestingPurpose "
+                />
+
+            <LinearLayout
+                android:id="@+id/llRecruitment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                >
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRecruit"
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/recruit"
+                    android:background="@drawable/gray_button_bg"
+                    android:textColor="@color/white"
+                    android:layout_marginRight="@dimen/_5sdp"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCancel"
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/cancel"
+                    android:background="@drawable/gray_button_bg"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    />
+            </LinearLayout>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnDeleted"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/delete"
                 android:background="@drawable/gray_button_bg"
-                android:textColor="@color/white"
+                android:textColor="@color/black"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/_12sdp"
                 android:visibility="gone"
@@ -280,6 +408,7 @@
                 android:textSize="@dimen/_12sdp"
                 android:visibility="gone"
                 />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAccept"
                 android:layout_width="match_parent"
@@ -291,7 +420,68 @@
                 android:textSize="@dimen/_12sdp"
                 android:visibility="gone"
                 />
+
+            <LinearLayout
+                android:id="@+id/llRehire"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                >
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnShiftAccepted"
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/accept"
+                    android:background="@drawable/button_bg_top_left"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnReject"
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/decline"
+                    android:background="@drawable/gray_button_top_right"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/llRehiredShift"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                >
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnCancelRehiredShift"
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/delete"
+                    android:background="@drawable/button_bg_top_left"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnPost"
+                    android:layout_width="0dp"
+                    android:layout_weight=".5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/post_direct_shift"
+                    android:background="@drawable/gray_button_top_right"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    />
+            </LinearLayout>
+
+
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
-
-</RelativeLayout>
+</LinearLayout>

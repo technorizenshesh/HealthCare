@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/white"
+    android:orientation="vertical"
+    app:cardCornerRadius="10dp"
+    >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:gravity="center"
+            android:padding="5dp"
+            android:fontFamily="@font/montserrat_bold"
+            android:layout_gravity="center_horizontal"
+            android:text="CareShift"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:textSize="@dimen/_14sdp"
+           />
+
+        <ImageView
+            android:id="@+id/cancel"
+            android:layout_width="@dimen/_20sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="@dimen/_15sdp"
+            android:padding="@dimen/_2sdp"
+            android:src="@drawable/ic_baseline_cancel_24"/>
+</RelativeLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="3dp"
+            android:background="@color/light_gray" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:orientation="vertical"
+            >
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/loginEnterEmail"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_10sdp"
+                app:boxCornerRadiusBottomEnd="5dp"
+                app:boxCornerRadiusBottomStart="5dp"
+                app:boxCornerRadiusTopEnd="5dp"
+                app:boxCornerRadiusTopStart="5dp"
+                app:boxStrokeColor="@color/colorGray"
+                app:errorEnabled="false"
+                app:hintAnimationEnabled="true"
+                app:hintEnabled="true"
+                app:hintTextColor="@color/colorGray">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/etAmount"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:hint="@string/enter_amount"
+                    android:inputType="number" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnAdd"
+                android:layout_width="@dimen/_120sdp"
+                android:layout_height="wrap_content"
+                android:text="@string/add"
+                android:background="@drawable/button_bg"
+                android:layout_marginVertical="@dimen/_20sdp"
+                android:textColor="@color/white"
+                android:layout_gravity="center_horizontal"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textSize="@dimen/_12sdp"
+                android:textAllCaps="false"
+                />
+
+        </LinearLayout>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

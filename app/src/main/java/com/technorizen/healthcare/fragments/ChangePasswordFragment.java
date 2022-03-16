@@ -91,7 +91,6 @@ public class ChangePasswordFragment extends Fragment {
 
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
 
-
         binding.btnSave.setOnClickListener(v ->
                 {
 
@@ -115,8 +114,8 @@ public class ChangePasswordFragment extends Fragment {
                 }
         );
 
-        return binding.getRoot();    }
-
+        return binding.getRoot();
+    }
 
     private boolean isValid() {
         if (oldPass.equalsIgnoreCase("")) {
@@ -163,9 +162,6 @@ public class ChangePasswordFragment extends Fragment {
                         binding.etPass.setText("");
                         binding.etNewConPass.setText("");
 
-
-//                        SessionManager.writeString(RegisterAct.this, Constant.driver_id,data.result.id);
-//                        App.showToast(RegisterAct.this, data.message, Toast.LENGTH_SHORT);
                     } else if (data.status.equals("0")) {
                         showToast(getActivity(), data.message);
                     }
@@ -181,7 +177,6 @@ public class ChangePasswordFragment extends Fragment {
                 DataManager.getInstance().hideProgressMessage();
             }
         });
-
 
     }
 

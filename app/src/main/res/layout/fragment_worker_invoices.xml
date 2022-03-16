@@ -7,8 +7,6 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         tools:context=".fragments.PaymentHistoryFragment">
-
-
         <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -29,494 +27,75 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_20sdp"
             android:textSize="@dimen/_16sdp" />
-
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="@dimen/_10sdp"
-            android:background="#C4C4C4"
-            android:layout_margin="@dimen/_15sdp"
-            android:textColorHint="@color/black"
-            android:textColor="@color/black"
-            android:hint="Search by company name"
-            android:fontFamily="@font/montserrat_semibold"
-            android:textSize="@dimen/_12sdp"
-            />
-
+                <EditText
+                    android:id="@+id/etSearch"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:inputType="text"
+                    android:hint="@string/search_by_company_name"
+                    android:imeOptions="actionSearch"
+                    android:drawableRight="@drawable/ic_search_24"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_toRightOf="@+id/img_header"
+                    android:backgroundTint="@android:color/transparent"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp" />
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_1sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:background="#C4C4C4"/>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_15sdp"
             >
-
             <TextView
+                android:id="@+id/tvAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_20sdp"
-                android:text="All"
+                android:text="@string/all"
                 android:textSize="@dimen/_12sdp"
                 android:textColor="@color/white"
                 android:background="@drawable/button_bg"
                 android:layout_marginRight="@dimen/_10sdp"
                 />
             <TextView
+                android:id="@+id/tvUnpaid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_20sdp"
-                android:text="Unpaid"
-                android:textColor="@color/white"
-                android:background="@drawable/dark_gray_bg_5"
+                android:text="@string/unpaid"
+                android:textColor="@color/black"
+                android:background="@drawable/light_grey_button_bg"
                 android:textSize="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 />
             <TextView
+                android:id="@+id/tvPaid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_20sdp"
-                android:text="Paid"
-                android:textColor="@color/white"
-                android:background="@drawable/dark_gray_bg_5"
+                android:text="@string/paid"
+                android:textColor="@color/black"
+                android:background="@drawable/light_grey_button_bg"
                 android:textSize="@dimen/_12sdp"
                 />
 
         </LinearLayout>
-
-        <com.google.android.material.card.MaterialCardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/_10sdp"
-            app:cardElevation="@dimen/_25sdp"
-            app:cardCornerRadius="@dimen/_10sdp"
-            app:cardMaxElevation="@dimen/_25sdp"
-            app:strokeColor="@color/black"
-            android:layout_marginTop="@dimen/_15sdp"
-            app:strokeWidth="@dimen/_1sdp"
-            android:outlineSpotShadowColor="@color/black"
-            android:outlineAmbientShadowColor="@color/black"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                >
-                <LinearLayout
+                <androidx.recyclerview.widget.RecyclerView
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:paddingTop="@dimen/_10sdp"
-                    android:paddingHorizontal="@dimen/_10sdp"
-                    android:paddingBottom="@dimen/_5sdp"
-                    >
-
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        >
-
-                        <TextView
-                            android:id="@+id/tvCompanyName"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:textColor="@color/black"
-                            android:textStyle="bold"
-                            android:textAllCaps="false"
-                            android:layout_gravity="center_horizontal"
-                            android:text="CAREPEOPLE INCLUDE"
-                            android:textSize="@dimen/_12sdp" />
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:textColor="@color/black"
-                             android:textAllCaps="false"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            android:text="Invoice No : 150923"
-                           android:layout_alignParentRight="true"
-                            android:layout_marginLeft="@dimen/_30sdp"
-                            android:textSize="@dimen/_11sdp" />
-</RelativeLayout>
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:textColor="@color/black"
-                            android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true"
-                            android:textStyle="bold"
-                            android:textAllCaps="false"
-                            android:text="Description:"
-                            android:textSize="@dimen/_11sdp" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:textColor="@color/black"
-                            android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true"
-                            android:textAllCaps="false"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:text="For a shift done by David Ibe as a Personal Support Worker ( Floor Duty)  @ Carepeople Inc - Etobicoke -  ON, on Friday August 06, 2021(02:30 PM -10:30 PM)"
-                            android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_bold"
-                            android:textColor="@color/black"
-                            android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true"
-                            android:textStyle="bold"
-                            android:textAllCaps="false"
-                            android:text="Time Worked:"
-                            android:textSize="@dimen/_11sdp" />
-
-
-                        <TextView
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:fontFamily="@font/montserrat_medium"
-                            android:textColor="@color/black"
-                            android:layout_centerVertical="true"
-                            android:layout_centerHorizontal="true"
-                            android:textAllCaps="false"
-                            android:layout_marginLeft="@dimen/_5sdp"
-                            android:text="7:30 Hours"
-                            android:textSize="@dimen/_11sdp" />
- </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="Rate:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="$30/Hour"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="Shift Amount:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="$225"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="Sub-total:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="$225"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="Total:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="$225"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="Late Cancellation Charges:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="($0)"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="No Show Charges:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="($0)"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="Invoice Total:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="$225"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="Scheduled Pay Date:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="Mon. Aug 08,2021"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-                        <LinearLayout
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="@dimen/_5sdp"
-                            >
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_bold"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textStyle="bold"
-                                android:textAllCaps="false"
-                                android:text="Pay Status:"
-                                android:textSize="@dimen/_11sdp" />
-
-
-                            <TextView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:fontFamily="@font/montserrat_medium"
-                                android:textColor="@color/black"
-                                android:layout_centerVertical="true"
-                                android:layout_centerHorizontal="true"
-                                android:textAllCaps="false"
-                                android:layout_marginLeft="@dimen/_5sdp"
-                                android:text="Unpaid"
-                                android:textSize="@dimen/_11sdp" />
-                        </LinearLayout>
-
-
-                    </LinearLayout>
-
-                </LinearLayout>
-
-                <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLogin"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="@string/download"
-                    android:background="@drawable/button_bg"
-                    android:textColor="@color/white"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:textSize="@dimen/_12sdp"
-                    />
+                    android:layout_height="match_parent"
+                    android:id="@+id/rvInvoices"/>
             </LinearLayout>
-        </com.google.android.material.card.MaterialCardView>
-
-
-            </LinearLayout>
-
         </androidx.core.widget.NestedScrollView>
-
     </LinearLayout>
 </layout>

@@ -20,13 +20,14 @@
                 android:orientation="vertical"
                 >
                 <TextView
+                    android:id="@+id/tvShift"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/black"
                     android:layout_centerVertical="true"
                     android:layout_centerHorizontal="true"
-                    android:text="POST SHIFTS"
+                    android:text="@string/post_shifts"
                     android:textAllCaps="true"
                     android:layout_gravity="center_horizontal"
                     android:layout_marginTop="@dimen/_20sdp"
@@ -333,8 +334,8 @@
                                 android:id="@+id/calendar_multiple_date"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
-                                android:visibility="gone"
                                 android:fastScrollAlwaysVisible="true"
+                                android:visibility="gone"
                                 />
 
                             <!--   <TextView
@@ -532,6 +533,21 @@
                 </com.google.android.material.card.MaterialCardView>
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnConfirm"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/confirm"
+                    android:background="@drawable/button_bg"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    android:visibility="gone"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnPost"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -546,10 +562,25 @@
                     />
 
                 <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnRehireWorker"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/post_shift_to"
+                    android:background="@drawable/button_bg"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textColor="@color/white"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_12sdp"
+                    android:visibility="gone"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_10sdp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btnRecruitment"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Post recruitment shifts"
+                    android:text="@string/post_recruitment_shifts"
                     android:background="@drawable/bright_button_bg"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:textColor="@color/white"
@@ -563,7 +594,7 @@
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/black"
-                    android:text="Please note that 15% admin fee will be added to the rate."
+                    android:text="@string/please_note_that_19_admin_fee_will_be_added_to_the_rate"
                     android:padding="@dimen/_10sdp"
                     android:layout_marginBottom="@dimen/_10sdp"
                     android:textSize="@dimen/_12sdp" />

@@ -47,6 +47,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.TimeZone;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -117,18 +118,15 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                 {
                     // return after the user has made a selection.
                     List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.ADDRESS,Place.Field.LAT_LNG);
-
                     // Start the autocomplete intent.
                     Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
                             .build(SignupWithPostShiftsActivity.this);
                     startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
-
                 }
                 );
 
         binding.rlbottom.setOnClickListener(v ->
                 {
-
                     startActivity(new Intent(SignupWithPostShiftsActivity.this, LoginAct.class));
                 }
         );
@@ -147,12 +145,10 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                     rlUs = dialog.findViewById(R.id.rlUS);
                     rlUs.setOnClickListener(v1 ->
                             {
-
                                 binding.ivCanada.setImageResource(R.drawable.flag_united_states_of_america);
                                 binding.tvCanada.setText("US +1");
                                 strCountryCode = "US";
                                 dialog.dismiss();
-
                             }
                     );
                     rlCA = dialog.findViewById(R.id.rlCA);
@@ -164,11 +160,9 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                                 dialog.dismiss();
                             }
                     );
-
                     dialog.show();
                 }
         );
-
 
         binding.checkboxCompany.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -184,10 +178,8 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                     binding.checkboxIndividual.setChecked(true);
                     strRegisterType = "Individual";
                 }
-
             }
         });
-
 
         binding.checkboxIndividual.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -205,7 +197,6 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                 }
             }
         });
-
 
         binding.btnSignup.setOnClickListener(v ->
                 {
@@ -253,9 +244,7 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                         }
                     } else {
                         Toast.makeText(this, getResources().getString(R.string.on_error), Toast.LENGTH_SHORT).show();
-
                     }
-
                 }
         );
 
@@ -271,7 +260,6 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
     @Override
@@ -280,6 +268,18 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
     }
 
     public void signup() {
+
+//        if(strLat.contains("-"))
+//        {
+//            strLat = strLat.replace("-","");
+//        }
+//        if(strLong.contains("-"))
+//        {
+//            strLong = strLong.replace("-","");
+//        }
+
+        TimeZone tz = TimeZone.getDefault();
+        String id = tz.getID();
         DataManager.getInstance().showProgressMessage(SignupWithPostShiftsActivity.this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("account_type",strRegisterType);
@@ -306,6 +306,7 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
         map.put("city_new",strCity);
         map.put("state_new",strState);
         map.put("country_new",strCountry);
+        map.put("time_zone",id);
 
         Call<SuccessResSignup> signupCall = apiInterface.signup(map);
         signupCall.enqueue(new Callback<SuccessResSignup>() {
@@ -319,15 +320,9 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                         String dataResponse = new Gson().toJson(response.body());
                         Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
                         fullScreenDialog();
-                        //   mobileVerify();
-//                        SessionManager.writeString(RegisterAct.this, Constant.driver_id,data.result.id);
-//                        App.showToast(RegisterAct.this, data.message, Toast.LENGTH_SHORT);
-//                        startActivity(new Intent(SignupWithPostShiftsActivity.this, LoginAct.class));
-//                        finish();
                     } else if (data.status.equals("0")) {
                         showToast(SignupWithPostShiftsActivity.this, data.message);
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -338,21 +333,14 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
             }
-
         });
-
-
     }
-
 
     private void initializeUI() {
         countries = new ArrayList<>();
         states = new ArrayList<>();
         cities = new ArrayList<>();
-
         ArrayList<String> spinnerListCountry = new ArrayList<>();
-
-//        createLists();
         spinnerListCountry.add("Select Country");
         for (SuccessResGetCountries.Result country : myCountriesList) {
             spinnerListCountry.add(country.getName());
@@ -362,7 +350,6 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
         countryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerCountry.setAdapter(countryArrayAdapter);
         binding.spinnerCountry.setOnItemSelectedListener(country_listener);
-
 
         states.add("Province / States");
 
@@ -676,7 +663,6 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
         binding.labelZipCode.setError(getString(R.string.enter_zip));
         return false;
     }
-
 */
     public void getCountries() {
         DataManager.getInstance().showProgressMessage(SignupWithPostShiftsActivity.this, getString(R.string.please_wait));

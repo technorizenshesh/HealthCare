@@ -1,5 +1,6 @@
 <resources>
-    <string name="app_name">HealthCare</string>
+    <string name="app_name">CareShifts</string>
+    <string name="default_notification_channel_id">1</string>
     <string name="api_key">AIzaSyBduv61ywGy3e9mU6NJ_a7GHCf5oSbxT2w</string>
     <string name="places_api_key">AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk</string>
     <string name="your_email_address">Your email address</string>
@@ -9,7 +10,6 @@
     <string name="login">Login</string>
     <string name="forgot_password">Forgot Password?</string>
     <string name="don_t_have_an_account">Don\'t have an account?</string>
-    <string name="first_name">First Name</string>
     <string name="last_name">Last Name</string>
     <string name="your_first_name">Your first name</string>
     <string name="your_last_name">Your last name</string>
@@ -19,7 +19,7 @@
     <string name="phone">Phone Number</string>
     <string name="we_sent_you_a_code">We sent you a code</string>
     <string name="verify">Verify</string>
-    <string name="signup">Signup</string>
+    <string name="signup">Sign Up</string>
     <string name="already_have_an_account">Already have an account?</string>
     <string name="title_activity_main">MainActivity</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
@@ -29,7 +29,6 @@
     <string name="nav_header_desc">Navigation header</string>
     <string name="action_settings">Settings</string>
     <string name="permisson_denied">Permission denied</string>
-
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
     <string name="menu_slideshow">Slideshow</string>
@@ -61,6 +60,7 @@
     <string name="sort_by_dates">Sort By Dates</string>
     <string name="approved">APPROVED</string>
     <string name="upload">Upload</string>
+    <string name="uploaded">Uploaded</string>
     <string name="not_uploaded">Not Uploaded</string>
     <string name="please_click_here_for_check">Please click <u>here</u> for check</string>
     <string name="vulnerable_sector_check">Vulnerable Sector Check</string>
@@ -69,7 +69,6 @@
     <string name="n95_mask_fit">N95 Mask Fit</string>
     <string name="cpi">CPI</string>
     <string name="additional_documents">Additional Documents</string>
-
     <string name="government_photo_id">Government Photo ID</string>
     <string name="documents">DOCUMENTS</string>
     <string name="degree_diploma_certificate">Degree / Diploma / Certificate</string>
@@ -113,11 +112,13 @@
     <string name="cancel">Cancel</string>
     <string name="instant_pay_available">Instant Pay: Available</string>
     <string name="shift_in_progress">SHIFTS IN PROGRESS</string>
-    <string name="shifts_in_progress_1">Shifts in Progress</string>
+    <string name="shifts_in_progress_1">Shift in Progress</string>
+    <string name="shifts_in_progress_2">Shifts in Progress</string>
+    <string name="shift_in_progress3">SHIFT IN PROGRESS</string>
     <string name="documents1">Documents</string>
     <string name="accept">Accept</string>
     <string name="available_shifts">AVAILABLE SHIFTS</string>
-    <string name="covid_19_negative">Covid-19:</string>
+    <string name="covid_19_negative">Covid-19:\u0020</string>
     <string name="client_description">Client Description</string>
     <string name="payment_history">Payment history</string>
     <string name="company_name">Company Name</string>
@@ -155,7 +156,6 @@
     <string name="confirm_new_password">Confirm New Password</string>
     <string name="current_password">Current Password</string>
     <string name="new_password">New Password</string>
-
     <string name="please_enter_old_pass">Please enter old password.</string>
     <string name="please_enter_confirm_password">Please enter confirm password.</string>
     <string name="password_mismatched">Please make sure your password match.</string>
@@ -165,14 +165,98 @@
     <string name="select_job_position">Select Job Position</string>
     <string name="select_shifts_location">Select Location</string>
     <string name="apartment_name">Apartment Name</string>
-    <string name="date_col">Date :</string>
-    <string name="time_col">Time :</string>
-    <string name="unpaid_break">Unpaid Break:</string>
-    <string name="pay_col">Pay :</string>
-    <string name="distance">Distance:</string>
+    <string name="date_col">Date:\u0020</string>
+    <string name="time_col">Time:</string>
+    <string name="unpaid_break">Unpaid Break:\u0020</string>
+    <string name="pay_col">Pay:</string>
+    <string name="distance">Distance:\u0020</string>
     <string name="save">Save</string>
     <string name="view_shift_timing">View Timings</string>
-    <string name="number_of_shifts_col">Number Of Shifts:</string>
+    <string name="number_of_shifts_col">Number Of Shifts:\u0020</string>
+    <string name="first_name">First Name</string>
+    <string name="shift_accepted_by">Shift Accepted By:\u0020</string>
+    <string name="hired_counts_0">Hired Counts:\u0020</string>
+    <string name="current_schedule">Current Schedule</string>
+    <string name="load_more">Show More</string>
+    <string name="load_less">Show Less</string>
+    <string name="clock_in">Clock In</string>
+    <string name="shifts_history">Shifts History</string>
+    <string name="search_by_company_name">Search By Company Name</string>
+    <string name="invoice_no">Invoice No:\u0020</string>
+    <string name="uploaded_1">Uploaded</string>
+    <string name="add_a_new_credit_card">ADD A NEW CREDIT CARD</string>
+    <string name="hours_purchased">Hours Purchased:\u0020</string>
+    <string name="add_rating">Add Rating</string>
+    <string name="pay_unpaid_invoices">Pay Unpaid Invoices</string>
+    <string name="pay">Pay</string>
+    <string name="add_card">Add Card</string>
+    <string name="enter_contact_person">Enter Contact Person.</string>
+    <string name="enter_job">Enter Job Function</string>
+    <string name="search_by_date_of_payment">Search By Date of Payment</string>
+    <string name="email_us">Email us:</string>
+    <string name="chat_with_us">Chat With Us</string>
+    <string name="title_activity_drawer">DrawerAct</string>
+    <string name="post_recruitment_shifts">Post recruitment shifts</string>
+    <string name="confirm_direct_post">Confirm Direct POST</string>
+    <string name="confirm_recruitment_post">Confirm RECRUITMENT POST</string>
+    <string name="confirm_rehire_post">Confirm REHIRE POST</string>
+    <string name="recruitment">Recruitment</string>
+    <string name="recruit">Recruit</string>
+    <string name="recruitment_shifts">Pending Recruitment Shifts</string>
+    <string name="pending_recruitment_shifts">Pending Recruitment SHIFTS</string>
+    <string name="post_shift_to">Post Shift to</string>
+    <string name="reject">Reject</string>
+    <string name="transit_allowance">Transit Allowance:\u0020</string>
+    <string name="transit_allowance_invoice">Transit Allowance:</string>
+    <string name="decline">Decline</string>
+    <string name="your_shifts">Your Shifts</string>
+    <string name="hired_shift">Hired Shift</string>
+    <string name="block">Block</string>
+    <string name="unblock">Unblock</string>
+    <string name="cancelledrehiredshifts">Cancelled Rehire Shifts</string>
+    <string name="post_direct_shift">Post Direct Shift</string>
+    <string name="confirm">Confirm</string>
+    <string name="miles"> miles</string>
+    <string name="enable_instant_pay">Enable Instant Pay</string>
+    <string name="instant_pay1">INSTANT PAY</string>
+    <string name="all">All</string>
+    <string name="unpaid">Unpaid</string>
+    <string name="paid">Paid</string>
+    <string name="total_hours">Total Hours:</string>
+    <string name="total_shift_amount">Total Shift Amount:</string>
+    <string name="clock_out">Clock out</string>
+    <string name="admin_fee_19">Admin Fee @ 19%:</string>
+    <string name="_0_miles">0 miles</string>
+    <string name="_100_miles">100 miles</string>
+    <string name="please_note_that_19_admin_fee_will_be_added_to_the_rate">Please note that 19% admin fee will be added to the rate.</string>
+    <string name="nil">Nil</string>
+    <string name="generate_report">Generate Report</string>
+    <string name="invoice_summay_no">Invoice Summay No.:</string>
+    <string name="date_of_payment">Date of Payment:</string>
+    <string name="add_money">Add Money</string>
+    <string name="available_balance">Available Balance</string>
+    <string name="_0_00">$ 0.00</string>
+    <string name="enter_amount">Enter amount</string>
+    <string name="please_enter_amount">Please Enter amount.</string>
+    <string name="keep_me_signed_in_on_this_device">Keep me signed in on this device</string>
+    <string name="pay_before">Pay Before:</string>
+    <string name="pay_status">Pay Status:</string>
+    <string name="invoice_summary">Invoice Summary</string>
+    <string name="add_credit_card">Add Credit Card</string>
+    <string name="invoice_amount">Invoice Amount</string>
+    <string name="schedule_pay_date">Schedule Pay Date:</string>
+    <string name="pay_string"> Please, include Summary Invoice number that starts with "IS.... " in the comment section during payment. </string>
+    <string name="post_shifts">POST SHIFTS</string>
+    <string name="post_rehire_shifts">POST REHIRE SHIFTS</string>
+    <string name="by_clicking_signup_you_agree_to_careshifts_terms_of_service_and_privacy_policy">By clicking Signup, you agree to CareShifts\' Terms of Service and Privacy Policy.</string>
+    <string name="total_invoice_amount">Total Invoice Amount:</string>
+    <string name="no_show_charge">No Show Charge:\u0020 Null</string>
+    <string name="shift_cancellation_charge">Cancellation Charge:\u0020 Null</string>
+    <string name="subtotal">Subtotal:</string>
+    <string name="cancellation_charges">Cancellation Charges:</string>
+    <string name="cancellation_charges_no">No Show/Cancellation Charges:</string>
+    <string name="no_show_charges">No Show Charges:</string>
+    <string name="transit_number">Transit Number:</string>
     <string-array name="states_canada">
         <item>Province / State</item>
         <item>  Alberta</item>
@@ -189,7 +273,6 @@
         <item>Saskatchewan</item>
         <item> Yukon </item>
     </string-array>
-
     <string-array name="states_us">
         <item>Province / State</item>
         <item> Alabama </item>
@@ -242,7 +325,5 @@
         <item>West Virginia</item>
         <item>Wisconsin</item>
         <item>Wyoming</item>
-
     </string-array>
-
 </resources>

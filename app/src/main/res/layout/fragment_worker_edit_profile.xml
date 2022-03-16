@@ -170,6 +170,28 @@
                             android:textColorHint="@color/black"
                             android:inputType="textEmailAddress" />
                     </com.google.android.material.textfield.TextInputLayout>
+
+
+                    <RelativeLayout
+                        android:layout_height="wrap_content"
+                        android:layout_width="match_parent"
+                        android:background="@drawable/et_bg"
+                        android:layout_marginTop="@dimen/_15sdp"
+                        >
+                        <EditText
+                            android:id="@+id/etAddress"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:editable="false"
+                            android:hint="Add Address"
+                            android:textColor="@color/black"
+                            android:padding="@dimen/_15sdp"
+                            android:textColorHint="@color/black"
+                            android:textSize="@dimen/_13sdp"
+                            android:background="@android:color/transparent"
+                            />
+                    </RelativeLayout>
+
                     <com.google.android.material.textfield.TextInputLayout
                         android:id="@+id/labelStreetNum"
                         style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -185,6 +207,7 @@
                         app:errorEnabled="false"
                         app:hintAnimationEnabled="true"
                         app:hintEnabled="true"
+                        android:visibility="gone"
                         app:hintTextColor="@color/colorGray"
                         app:passwordToggleEnabled="false">
 
@@ -212,6 +235,7 @@
                         app:boxStrokeColor="@color/colorGray"
                         android:textColorHint="@color/black"
                         app:errorEnabled="false"
+                        android:visibility="gone"
                         app:hintAnimationEnabled="true"
                         app:hintEnabled="true"
                         app:hintTextColor="@color/colorGray"
@@ -240,6 +264,7 @@
                         app:boxStrokeColor="@color/colorGray"
                         android:textColorHint="@color/black"
                         app:errorEnabled="false"
+                        android:visibility="gone"
                         app:hintAnimationEnabled="true"
                         app:hintEnabled="true"
                         app:hintTextColor="@color/colorGray"
@@ -261,6 +286,7 @@
                         android:layout_width="match_parent"
                         android:background="@drawable/et_bg"
                         android:layout_marginTop="@dimen/_15sdp"
+                        android:visibility="gone"
                         >
                         <Spinner
                             android:id="@+id/spinnerCountry"
@@ -276,6 +302,7 @@
                         android:layout_height="wrap_content"
                         android:layout_width="match_parent"
                         android:background="@drawable/et_bg"
+                        android:visibility="gone"
                         android:layout_marginTop="@dimen/_15sdp"
                         >
                         <Spinner
@@ -303,6 +330,7 @@
                         app:errorEnabled="false"
                         app:hintAnimationEnabled="true"
                         android:textColorHint="@color/black"
+                        android:visibility="gone"
                         app:hintEnabled="true"
                         app:hintTextColor="@color/colorGray"
                         app:passwordToggleEnabled="false">
@@ -334,6 +362,7 @@
                         android:textColorHint="@color/black"
                         app:hintAnimationEnabled="true"
                         app:hintEnabled="true"
+                        android:visibility="gone"
                         app:hintTextColor="@color/colorGray"
                         app:passwordToggleEnabled="false">
 

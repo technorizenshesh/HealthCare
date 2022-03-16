@@ -68,7 +68,6 @@ public class ForgotPassActivity extends AppCompatActivity {
     }
 
 
-
     private void forgotPass() {
 
         DataManager.getInstance().showProgressMessage(ForgotPassActivity.this, getString(R.string.please_wait));
@@ -106,7 +105,6 @@ public class ForgotPassActivity extends AppCompatActivity {
         });
 
     }
-
 
     private boolean isValid() {
         if (strEmail.equalsIgnoreCase("")) {

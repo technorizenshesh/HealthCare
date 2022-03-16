@@ -10,6 +10,18 @@
         android:orientation="vertical"
         android:padding="@dimen/_15sdp"
         >
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
+
+            >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -22,8 +34,6 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_10sdp"
             android:textSize="@dimen/_16sdp" />
-
-
 
         <com.google.android.material.textfield.TextInputLayout
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -43,9 +53,10 @@
             app:passwordToggleEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etCompanyName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Company Name"
+                android:hint="@string/company_name"
                 android:textColor="@color/black"
                 android:textColorHint="@color/black"
                 android:inputType="text" />
@@ -70,6 +81,7 @@
             app:passwordToggleEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etContactPerson"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/contact_person"
@@ -97,6 +109,7 @@
             app:passwordToggleEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etEmail"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/company_email_address"
@@ -124,6 +137,7 @@
             app:passwordToggleEnabled="false">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/etJobFunction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="@string/your_job_function"
@@ -144,7 +158,7 @@
              android:layout_width="0dp"
              android:layout_height="wrap_content"
              android:layout_weight=".5"
-             android:text="Start Date"
+             android:text="@string/start_date"
              android:textSize="@dimen/_12sdp"
              android:background="@drawable/et_bg"
              android:textColor="@color/black"
@@ -158,7 +172,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight=".5"
-                android:text="End Date"
+                android:text="@string/end_date"
                 android:textSize="@dimen/_12sdp"
                 android:background="@drawable/et_bg"
                 android:textColor="@color/black"
@@ -179,5 +193,9 @@
             android:fontFamily="@font/montserrat_semibold"
             android:textSize="@dimen/_12sdp"
             />
+
+        </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+
     </LinearLayout>
 </layout>

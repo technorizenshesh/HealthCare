@@ -25,13 +25,15 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="@dimen/_10sdp"
         android:layout_marginTop="@dimen/_5sdp"
-        android:hint="Search By Date of Payment"
+        android:hint="@string/search_by_date_of_payment"
         android:textColor="@color/black"
         android:textColorHint="@color/black"
         android:textSize="@dimen/_11sdp"
         android:fontFamily="@font/montserrat_semibold"
         android:background="@drawable/background_transparent"
         android:padding="@dimen/_10sdp"
+        android:id="@+id/etSelectDate"
+        android:editable="false"
         />
     <View
         android:layout_width="match_parent"
@@ -65,6 +67,13 @@
         android:textSize="@dimen/_12sdp" />
     </LinearLayout>
 
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/rvPayment"
+        />
+
+<!--
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -248,6 +257,7 @@
 
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
+-->
 
 
 </LinearLayout>

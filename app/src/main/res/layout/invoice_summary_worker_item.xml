@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_10sdp"
+        android:layout_marginBottom="@dimen/_35sdp"
+        app:cardElevation="@dimen/_25sdp"
+        app:cardCornerRadius="@dimen/_10sdp"
+        app:cardMaxElevation="@dimen/_25sdp"
+        app:strokeColor="@color/black"
+        app:strokeWidth="@dimen/_1sdp"
+        android:outlineSpotShadowColor="@color/black"
+        android:outlineAmbientShadowColor="@color/black"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            >
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="@dimen/_10sdp"
+                android:orientation="vertical"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:textAllCaps="false"
+                    android:text="@string/careshifts"
+                    android:textSize="@dimen/_13sdp" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:gravity="end"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:text="Invoice No. :"
+                        android:textSize="@dimen/_11sdp" />
+                    <TextView
+                        android:id="@+id/tvInvoiceNumber"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Nil"
+                        android:textSize="@dimen/_11sdp" />
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:text="Description :"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:id="@+id/sumaryCycleDate"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Jan 9 - Jan 22"
+                        android:textSize="@dimen/_11sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/llInvoiceLayout"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:text="Invoice No."
+                        android:padding="@dimen/_8sdp"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:gravity="center"
+                        android:textColor="@color/black"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight=".5"
+                        android:gravity="center"
+                        android:padding="@dimen/_8sdp"
+                        android:fontFamily="@font/montserrat_semibold"
+                        android:text="@string/invoice_amount"
+                        android:textColor="@color/black"
+                        />
+                </LinearLayout>
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rvInvoiceTable"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:text="@string/subtotal"
+                        android:textSize="@dimen/_11sdp" />
+                    <TextView
+                        android:id="@+id/tvInvoiceAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Nil"
+                        android:textSize="@dimen/_11sdp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:visibility="gone"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:text="@string/no_show_charges"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:id="@+id/tvNoShowCharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Nil"
+                        android:textSize="@dimen/_11sdp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:text="@string/cancellation_charges_no"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:id="@+id/tvCancellationCharge"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Nil"
+                        android:textSize="@dimen/_11sdp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    >
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textStyle="bold"
+                        android:textAllCaps="false"
+                        android:text="@string/total_invoice_amount"
+                        android:textSize="@dimen/_11sdp" />
+
+                    <TextView
+                        android:id="@+id/tvFinalAmount"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/montserrat_medium"
+                        android:textColor="@color/black"
+                        android:layout_centerVertical="true"
+                        android:layout_centerHorizontal="true"
+                        android:textAllCaps="false"
+                        android:layout_marginLeft="@dimen/_5sdp"
+                        android:text="Nil"
+                        android:textSize="@dimen/_11sdp" />
+                </LinearLayout>
+
+
+                <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:text="@string/schedule_pay_date"
+                    android:textSize="@dimen/_11sdp" />
+
+                <TextView
+                    android:id="@+id/tvPayDate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="Nil"
+                    android:textSize="@dimen/_11sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:text="@string/pay_status"
+                    android:textSize="@dimen/_11sdp" />
+
+                <TextView
+                    android:id="@+id/tvPayStatus"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="Nil"
+                    android:textSize="@dimen/_11sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:layout_marginTop="@dimen/_5sdp"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:text="Amount Paid:"
+                    android:textSize="@dimen/_11sdp" />
+
+                <TextView
+                    android:id="@+id/tvAmountPaid"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="$20"
+                    android:textSize="@dimen/_11sdp" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:visibility="gone"
+                >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_bold"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textStyle="bold"
+                    android:textAllCaps="false"
+                    android:text=" Time of Payment:"
+                    android:textSize="@dimen/_11sdp" />
+                <TextView
+                    android:id="@+id/tvTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:textColor="@color/black"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:textAllCaps="false"
+                    android:layout_marginLeft="@dimen/_5sdp"
+                    android:text="11:00 AM"
+                    android:textSize="@dimen/_11sdp" />
+            </LinearLayout>
+            </LinearLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnDownload"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/download"
+                android:background="@color/blue"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_12sdp"
+                android:fontFamily="@font/montserrat_semibold"
+                />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</LinearLayout>

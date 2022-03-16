@@ -31,10 +31,10 @@
             android:textSize="@dimen/_16sdp" />
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnPayUnpaidInvoice"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Pay unpaid invoices"
+            android:text="@string/pay_unpaid_invoices"
             android:background="@drawable/button_bg"
             android:layout_marginTop="@dimen/_20sdp"
             android:textColor="@color/white"
@@ -42,6 +42,7 @@
             android:textSize="@dimen/_12sdp"
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginBottom="@dimen/_15sdp"
+            android:visibility="gone"
             />
 
         <LinearLayout
@@ -49,9 +50,11 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_horizontal"
+            android:layout_marginTop="@dimen/_15sdp"
             >
 
             <TextView
+                android:id="@+id/tvAll"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_10sdp"
@@ -63,24 +66,26 @@
                 android:layout_marginRight="@dimen/_10sdp"
                 />
             <TextView
+                android:id="@+id/tvUnpaid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_20sdp"
                 android:text="Unpaid"
-                android:textColor="@color/white"
-                android:background="@drawable/dark_gray_bg_5"
+                android:textColor="@color/black"
+                android:background="@drawable/light_grey_button_bg"
                 android:textSize="@dimen/_12sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 />
             <TextView
+                android:id="@+id/tvPaid"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:paddingVertical="@dimen/_10sdp"
                 android:paddingHorizontal="@dimen/_20sdp"
                 android:text="Paid"
-                android:textColor="@color/white"
-                android:background="@drawable/dark_gray_bg_5"
+                android:textColor="@color/black"
+                android:background="@drawable/light_grey_button_bg"
                 android:textSize="@dimen/_12sdp"
                 />
 
@@ -109,7 +114,13 @@
             android:textSize="@dimen/_12sdp" />
 </LinearLayout>
 
-        <com.google.android.material.card.MaterialCardView
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rvInvoices"/>
+
+                <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_10sdp"
@@ -119,6 +130,7 @@
             app:strokeColor="@color/black"
             android:layout_marginTop="@dimen/_15sdp"
             app:strokeWidth="@dimen/_1sdp"
+            android:visibility="gone"
             android:outlineSpotShadowColor="@color/black"
             android:outlineAmbientShadowColor="@color/black"
             >

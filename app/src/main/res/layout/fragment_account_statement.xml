@@ -23,13 +23,14 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/montserrat_bold"
             android:textColor="@color/black"
-            android:text="ACCOUNT STATEMENT"
+            android:text="@string/invoice_summary"
             android:textAllCaps="true"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_20sdp"
             android:textSize="@dimen/_14sdp" />
 
+<!--
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -40,6 +41,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             app:strokeColor="@color/black"
             app:strokeWidth="@dimen/_1sdp"
+            android:visibility="gone"
             android:outlineSpotShadowColor="@color/black"
             android:outlineAmbientShadowColor="@color/black"
             >
@@ -55,6 +57,7 @@
                 android:padding="@dimen/_10sdp"
                 >
                 <ImageView
+                    android:id="@+id/ivProfile"
                     android:layout_width="@dimen/_70sdp"
                     android:layout_height="@dimen/_70sdp"
                     android:src="@drawable/ic_company"
@@ -68,7 +71,7 @@
                     >
 
                     <TextView
-                        android:id="@+id/tv_header"
+                        android:id="@+id/tvCompany"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_bold"
@@ -81,6 +84,7 @@
 
 
                     <TextView
+                        android:id="@+id/tvLocation"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:text="23 Etobicoke Creek Trail, Mississauga, ON L4W 5N3, Canada"
@@ -100,10 +104,10 @@
 
             </LinearLayout>
                 <androidx.appcompat.widget.AppCompatButton
-                    android:id="@+id/btnLogin"
+                    android:id="@+id/btnPayUnpaidInvoice"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Pay Unpaid Invoices"
+                    android:text="@string/pay_unpaid_invoices"
                     android:background="@drawable/button_bg"
                     android:textColor="@color/white"
                     android:textAllCaps="false"
@@ -114,7 +118,9 @@
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+-->
 
+<!--
 
 
         <TextView
@@ -128,7 +134,9 @@
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_5sdp"
             android:textSize="@dimen/_14sdp" />
+-->
 
+<!--
 
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -423,12 +431,19 @@
                             android:layout_centerHorizontal="true"
                             android:text="0.00 CAD"
                             android:textSize="@dimen/_11sdp" />
-
                     </LinearLayout>
                 </LinearLayout>
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
+-->
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/rvPayment"
+                    />
+
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>
 

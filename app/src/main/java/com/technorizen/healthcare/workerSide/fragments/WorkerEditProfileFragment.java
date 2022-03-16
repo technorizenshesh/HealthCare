@@ -9,6 +9,7 @@ import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.core.content.FileProvider;
@@ -25,14 +26,24 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.common.api.Status;
+import com.google.android.gms.maps.model.LatLng;
+import com.google.android.libraries.places.api.Places;
+import com.google.android.libraries.places.api.model.Place;
+import com.google.android.libraries.places.api.net.PlacesClient;
+import com.google.android.libraries.places.widget.Autocomplete;
+import com.google.android.libraries.places.widget.AutocompleteActivity;
+import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.gson.Gson;
 import com.technorizen.healthcare.BuildConfig;
 import com.technorizen.healthcare.R;
+import com.technorizen.healthcare.activites.LoginAct;
 import com.technorizen.healthcare.activites.SignupWithWorkActivity;
 import com.technorizen.healthcare.databinding.FragmentWorkerEditProfileBinding;
 import com.technorizen.healthcare.models.SuccessResGetCountries;
@@ -49,6 +60,7 @@ import com.technorizen.healthcare.util.SharedPreferenceUtility;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -62,6 +74,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static android.app.Activity.RESULT_CANCELED;
 import static android.app.Activity.RESULT_OK;
 import static android.content.ContentValues.TAG;
 import static com.technorizen.healthcare.retrofit.Constant.USER_ID;
@@ -82,8 +95,11 @@ public class WorkerEditProfileFragment extends Fragment {
 
     FragmentWorkerEditProfileBinding binding;
     private String  strfirstName = "", strlastName = "",
-            strStreetNumber = "", strStreetName = "", strAppartNumber = "", strCountry = "", strState = "", strCity = "", strZip = "", strEmail = "", strCountryCode = "",
-            strPhone = "",  strClientDesc = "",strWorkerDesignation = "";
+            strStreetNumber = "", strStreetName = "", strAppartNumber = "",  strCity = "", strZip = "", strEmail = "", strCountryCode = "",
+            strPhone = "",  strClientDesc = "",strWorkerDesignation = "",strLat = "",strLong ="";
+
+    private String strAddress= "";
+
     String str_image_path="";
     private static final int REQUEST_CAMERA = 1;
     private static final int SELECT_FILE = 2;
@@ -95,6 +111,9 @@ public class WorkerEditProfileFragment extends Fragment {
     private List<SuccessResGetStates.Result> myStateList = new LinkedList<>();
     private List<SuccessResGetCountries.Result> myCountriesList = new LinkedList<>();
     ArrayList<SuccessResGetProfile.Result> transactionList = new ArrayList<>();
+
+    private static int AUTOCOMPLETE_REQUEST_CODE = 9;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -145,6 +164,10 @@ public class WorkerEditProfileFragment extends Fragment {
 
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
 
+        Places.initialize(getActivity().getApplicationContext(), "AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk");
+
+        // Create a new PlacesClient instance
+        PlacesClient placesClient = Places.createClient(getActivity());
 
         getProfile();
 
@@ -199,8 +222,8 @@ public class WorkerEditProfileFragment extends Fragment {
                     strStreetNumber = binding.etStreetNum.getText().toString();
                     strStreetName = binding.etStreetName.getText().toString();;
                     strAppartNumber = binding.etAppart.getText().toString().trim();
-                    strCountry = getCountryCode(binding.spinnerCountry.getSelectedItem().toString());
-                    strState = getStateID(binding.spinnerState.getSelectedItem().toString());
+//                    strCountry = getCountryCode(binding.spinnerCountry.getSelectedItem().toString());
+//                    strState = getStateID(binding.spinnerState.getSelectedItem().toString());
                     strCity = binding.etCity.getText().toString().trim();
                     strZip = binding.etZipCode.getText().toString().trim();
                     strPhone = binding.etPhone.getText().toString().trim();
@@ -239,12 +262,65 @@ public class WorkerEditProfileFragment extends Fragment {
                 }
         );
 
+        binding.etAddress.setOnClickListener(v ->
+                {
+                    // return after the user has made a selection.
+                    List<Place.Field> fields = Arrays.asList(Place.Field.ID, Place.Field.NAME,Place.Field.ADDRESS,Place.Field.LAT_LNG);
+
+                    // Start the autocomplete intent.
+                    Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
+                            .build(getActivity());
+                    startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
+
+                }
+        );
+
 
         return binding.getRoot();
     }
 
+
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        if (requestCode == AUTOCOMPLETE_REQUEST_CODE) {
+            if (resultCode == RESULT_OK) {
+                Place place = Autocomplete.getPlaceFromIntent(data);
+                Log.i(LoginAct.TAG, "Place: " + place.getName() + ", " + place.getId());
+
+                strAddress = place.getAddress();
+                LatLng latLng = place.getLatLng();
+
+                Double latitude = latLng.latitude;
+                Double longitude = latLng.longitude;
+
+                strLat = Double.toString(latitude);
+                strLong = Double.toString(longitude);
+
+                String address = place.getAddress();
+
+                strAddress = address;
+
+                binding.etAddress.setText(address);
+
+                binding.etAddress.post(new Runnable(){
+                    @Override
+                    public void run() {
+                        binding.etAddress.setText(address);
+                    }
+                });
+
+            } else if (resultCode == AutocompleteActivity.RESULT_ERROR) {
+                // TODO: Handle the error.
+                Status status = Autocomplete.getStatusFromIntent(data);
+                Log.i(LoginAct.TAG, status.getStatusMessage());
+
+
+            } else if (resultCode == RESULT_CANCELED) {
+                // The user canceled the operation.
+            }
+            return;
+        }
+
         if (resultCode == RESULT_OK) {
             Log.e("Result_code", requestCode + "");
             if (requestCode == SELECT_FILE) {
@@ -262,9 +338,9 @@ public class WorkerEditProfileFragment extends Fragment {
 
             }
         }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
-
-
 
 
     private void getPhotoFromGallary() {
@@ -329,9 +405,7 @@ public class WorkerEditProfileFragment extends Fragment {
                     ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                             Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-
             ) {
-
 
                 requestPermissions(
                         new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -347,7 +421,6 @@ public class WorkerEditProfileFragment extends Fragment {
             }
             return false;
         } else {
-
             //  explain("Please Allow Location Permission");
             return true;
         }
@@ -387,7 +460,6 @@ public class WorkerEditProfileFragment extends Fragment {
 //
 //                        strLat = Double.toString(gpsTracker.getLatitude()) ;
 //                        strLng = Double.toString(gpsTracker.getLongitude()) ;
-//
 //                    }
                 } else {
                     Toast.makeText(getActivity(), "Permission denied", Toast.LENGTH_SHORT).show();
@@ -422,6 +494,7 @@ public class WorkerEditProfileFragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
         dialog.setContentView(R.layout.dialog_show_image_selection);
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+
         Window window = dialog.getWindow();
         lp.copyFrom(window.getAttributes());
         //This makes the dialog take up the full width
@@ -430,6 +503,15 @@ public class WorkerEditProfileFragment extends Fragment {
         window.setAttributes(lp);
         LinearLayout layoutCamera = (LinearLayout) dialog.findViewById(R.id.layoutCemera);
         LinearLayout layoutGallary = (LinearLayout) dialog.findViewById(R.id.layoutGallary);
+
+        ImageView ivCancel = dialog.findViewById(R.id.cancel);
+
+        ivCancel.setOnClickListener(v ->
+                {
+                    dialog.dismiss();
+                }
+                );
+
         layoutCamera.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -477,18 +559,15 @@ public class WorkerEditProfileFragment extends Fragment {
 
     public int getSpinnerCountryPosition(String code)
     {
-
         int i=1;
         for (SuccessResGetCountries.Result country : myCountriesList) {
             if (country.getId().equalsIgnoreCase(code)) {
                 return i;
             }
-
             i++;
         }
         return 0;
     }
-
 
     public int getSpinnerStatePosition(String code)
     {
@@ -499,14 +578,10 @@ public class WorkerEditProfileFragment extends Fragment {
             {
                 return i;
             }
-
             i++;
         }
-
         return 0;
     }
-
-
     public int getSpinnerJobPositionPosition(String code)
     {
         int i=1;
@@ -516,33 +591,22 @@ public class WorkerEditProfileFragment extends Fragment {
             {
                 return i;
             }
-
             i++;
         }
-
         return 0;
     }
-
-
     private AdapterView.OnItemSelectedListener country_listener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             if (position > 0) {
-
                 String countryCode = getCountryCode(binding.spinnerCountry.getSelectedItem().toString());
-
                 getState(countryCode);
-
             }
-
         }
-
         @Override
         public void onNothingSelected(AdapterView<?> parent) {
-
         }
     };
-
 
     public void setStatesSpinner()
     {
@@ -559,33 +623,24 @@ public class WorkerEditProfileFragment extends Fragment {
         stateArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, tempStates);
         stateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerState.setAdapter(stateArrayAdapter);
-
         int position = getSpinnerStatePosition(selectedStateCode);
-
         binding.spinnerState.setSelection(position);
-
     }
 
     private void setCountrySpinner()
     {
-
         ArrayList<String> spinnerListCountry = new ArrayList<>();
-
 //        createLists();
         spinnerListCountry.add("Select Country");
         for (SuccessResGetCountries.Result country : myCountriesList) {
             spinnerListCountry.add(country.getName());
         }
-
         countryArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, spinnerListCountry);
         countryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerCountry.setAdapter(countryArrayAdapter);
         binding.spinnerCountry.setOnItemSelectedListener(country_listener);
-
         binding.spinnerCountry.setSelection(getSpinnerCountryPosition(selectedCountryCode));
-
     }
-
 
     public void getCountries() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
@@ -602,12 +657,9 @@ public class WorkerEditProfileFragment extends Fragment {
 
                     SuccessResGetCountries data = response.body();
                     if (data.status.equals("1")) {
-
                         myCountriesList.clear();
                         myCountriesList.addAll(data.getResult());
-
                         setCountrySpinner();
-
                     } else {
                         showToast(getActivity(), data.message);
                     }
@@ -615,7 +667,6 @@ public class WorkerEditProfileFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -646,78 +697,56 @@ public class WorkerEditProfileFragment extends Fragment {
 
                     SuccessResGetStates data = response.body();
                     if (data.status.equals("1")) {
-
                         myStateList.clear();
                         myStateList.addAll(data.getResult());
-
                         setStatesSpinner();
-
                     } else {
                         showToast(getActivity(), data.message);
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
             public void onFailure(Call<SuccessResGetStates> call, Throwable t) {
-
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
-
             }
         });
-
     }
-
 
     public void getJobPositions() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
-
         Call<SuccessResGetJobPositions> call = apiInterface.getJobPositions(map);
         call.enqueue(new Callback<SuccessResGetJobPositions>() {
             @Override
             public void onResponse(Call<SuccessResGetJobPositions> call, Response<SuccessResGetJobPositions> response) {
-
                 DataManager.getInstance().hideProgressMessage();
-
                 try {
-
                     SuccessResGetJobPositions data = response.body();
                     if (data.status.equals("1")) {
-
                         jobPositionsList.clear();
-
                         jobPositionsList.addAll(data.getResult());
                         setJobPositionSpinner();
-
                     } else {
                         showToast(getActivity(), data.message);
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
-
             @Override
             public void onFailure(Call<SuccessResGetJobPositions> call, Throwable t) {
-
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
-
             }
         });
     }
 
     private void setJobPositionSpinner()
     {
-
         List<String> tempStates = new LinkedList<>();
         tempStates.add(getString(R.string.select_job_position));
         for (SuccessResGetJobPositions.Result state:jobPositionsList)
@@ -728,12 +757,10 @@ public class WorkerEditProfileFragment extends Fragment {
         stateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerJobPosition.setAdapter(stateArrayAdapter);
         binding.spinnerJobPosition.setSelection(getSpinnerJobPositionPosition(selectedJobPosition));
-
     }
 
     private void updateProfile()
     {
-
         String strUserId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         MultipartBody.Part filePart;
@@ -747,7 +774,6 @@ public class WorkerEditProfileFragment extends Fragment {
             {
                 filePart = null;
             }
-
         } else {
             RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
             filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
@@ -759,17 +785,20 @@ public class WorkerEditProfileFragment extends Fragment {
         RequestBody streetName = RequestBody.create(MediaType.parse("text/plain"), strStreetName);
         RequestBody appartNum = RequestBody.create(MediaType.parse("text/plain"), strAppartNumber);
         RequestBody countryCode = RequestBody.create(MediaType.parse("text/plain"), strCountryCode);
-        RequestBody country = RequestBody.create(MediaType.parse("text/plain"), strCountry);
-        RequestBody state = RequestBody.create(MediaType.parse("text/plain"), strState);
+        RequestBody country = RequestBody.create(MediaType.parse("text/plain"), "");
+        RequestBody state = RequestBody.create(MediaType.parse("text/plain"), "");
         RequestBody city = RequestBody.create(MediaType.parse("text/plain"), strCity);
         RequestBody zipCode = RequestBody.create(MediaType.parse("text/plain"), strZip);
         RequestBody email = RequestBody.create(MediaType.parse("text/plain"), strEmail);
         RequestBody phone = RequestBody.create(MediaType.parse("text/plain"), strPhone);
         RequestBody designation = RequestBody.create(MediaType.parse("text/plain"), strWorkerDesignation);
-
+        RequestBody address = RequestBody.create(MediaType.parse("text/plain"), strAddress);
+        RequestBody lat = RequestBody.create(MediaType.parse("text/plain"), strLat);
+        RequestBody lon = RequestBody.create(MediaType.parse("text/plain"), strLong);
         Call<SuccessResUpdateProfile> loginCall = apiInterface.updateWorkerProfile(workerId,firstName,lastName,streetNo,
-                streetName,appartNum,countryCode,country,state,city,zipCode,email,phone,designation,filePart
-
+                streetName,appartNum,countryCode,country,state,city,zipCode,email,phone,designation,
+                address,lat,lon
+                ,filePart
         );
         loginCall.enqueue(new Callback<SuccessResUpdateProfile>() {
             @Override
@@ -808,30 +837,12 @@ public class WorkerEditProfileFragment extends Fragment {
         } else if (!isValidEmail(strEmail)) {
             binding.labelEmail.setError(getString(R.string.enter_valid_email));
             return false;
-        }  else if (strStreetNumber.equalsIgnoreCase("")) {
-            binding.labelStreetNum.setError(getString(R.string.enter_street_num));
+        } else if(strAddress.equalsIgnoreCase(""))
+        {
+            Toast.makeText(getActivity(), "Please add address.", Toast.LENGTH_SHORT).show();
             return false;
-        } else if (strStreetName.equalsIgnoreCase("")) {
-            binding.labelStreetName.setError(getString(R.string.enter_street_name));
-            return false;
-        } else if (strAppartNumber.equalsIgnoreCase("")) {
-            binding.labelAppartNum.setError(getString(R.string.enter_appartment_num));
-            return false;
-        } else if (strCountry.equalsIgnoreCase("")) {
-            binding.rlCountry.setBackgroundResource(R.drawable.red_et_bg);
-            Toast.makeText(getActivity(), "" + getString(R.string.select_country), Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (strState.equalsIgnoreCase("")) {
-            binding.rlState.setBackgroundResource(R.drawable.red_et_bg);
-            Toast.makeText(getActivity(), "" + getString(R.string.select_state), Toast.LENGTH_SHORT).show();
-            return false;
-        } else if (strCity.equalsIgnoreCase("")) {
-            binding.labelCity.setError(getString(R.string.enter_City));
-            return false;
-        } else if (strZip.equalsIgnoreCase("")) {
-            binding.labelZipCode.setError(getString(R.string.enter_zip));
-            return false;
-        } else if (strPhone.equalsIgnoreCase("")) {
+        }
+            else if (strPhone.equalsIgnoreCase("")) {
             binding.tvPhoneError.setVisibility(View.VISIBLE);
             binding.llPhone.setBackgroundResource(R.drawable.red_et_bg);
             return false;
@@ -847,7 +858,6 @@ public class WorkerEditProfileFragment extends Fragment {
     {
 
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
-
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("worker_id",userId);
@@ -910,6 +920,12 @@ public class WorkerEditProfileFragment extends Fragment {
         selectedStateCode = user.getState();
         selectedCountryCode = user.getCountry();
         selectedJobPosition = user.getWorkerDesignation();
+
+        binding.etAddress.setText(user.getAddress());
+
+        strAddress = user.getAddress();
+        strLat = user.getLat();
+        strLong = user.getLon();
 
         Glide.with(getActivity())
                 .load(user.getImage())

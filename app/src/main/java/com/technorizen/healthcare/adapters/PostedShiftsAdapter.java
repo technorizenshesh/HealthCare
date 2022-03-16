@@ -24,11 +24,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.models.SuccessResGetPost;
 import com.technorizen.healthcare.util.DeleteShifts;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
@@ -38,20 +45,17 @@ import java.util.Locale;
  */
 public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapter.SelectTimeViewHolder> {
     ArrayAdapter ad;
-
     private Context context;
-
     private ArrayList<SuccessResGetPost.Result> postedList ;
-
+    private boolean showNotes = false;
     private DeleteShifts shifts;
-
+    List<String> monthsList = new LinkedList<>();
     public PostedShiftsAdapter(Context context, ArrayList<SuccessResGetPost.Result> postedList, DeleteShifts shifts)
     {
         this.context = context;
         this.postedList = postedList;
         this.shifts =shifts;
     }
-
     @NonNull
     @Override
     public SelectTimeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -63,6 +67,7 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
 
     @Override
     public void onBindViewHolder(@NonNull SelectTimeViewHolder holder, int position) {
+        showNotes = false;
 
         List<String> dates = new LinkedList<>();
         List<String> listStartTime = new LinkedList<>();
@@ -83,6 +88,18 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
         TextView tvTime = holder.itemView.findViewById(R.id.tvSignleTime);
         TextView tvMultipleTime = holder.itemView.findViewById(R.id.tvMutlipleTime);
         TextView tvNumOfShifts = holder.itemView.findViewById(R.id.tvNumOfShifts);
+        TextView tvID = holder.itemView.findViewById(R.id.tvID);
+        TextView tvShiftNumber = holder.itemView.findViewById(R.id.tvShiftNumber);
+        TextView tvShiftNotes = holder.itemView.findViewById(R.id.tvShiftsNotes);
+
+        tvShiftNotes.setText(postedList.get(position).getShiftNotes());
+
+        ImageView ivAdd = holder.itemView.findViewById(R.id.plus);
+        ImageView ivMinus = holder.itemView.findViewById(R.id.minus);
+
+        tvID.setText(postedList.get(position).getNoVacancies());
+
+        tvShiftNumber.setText(postedList.get(position).getShiftNo());
 
         AppCompatButton btnDelete = holder.itemView.findViewById(R.id.btnDelete);
         AppCompatButton btnAccept = holder.itemView.findViewById(R.id.btnAccept);
@@ -93,6 +110,7 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
         RelativeLayout rlShiftsNote = holder.itemView.findViewById(R.id.rlShiftsNotes);
 
         btnAccept.setVisibility(View.GONE);
+
 
         if(postedList.get(position).getStatus().equalsIgnoreCase("Pending"))
         {
@@ -106,22 +124,6 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
             btnDeleted.setVisibility(View.VISIBLE);
         }
 
-
-        String date ="";
-        String time ="";
-
-        for (SuccessResGetPost.PostshiftTime dateTime:postshiftTimeList)
-        {
-            date = date+ dateTime.getShiftDate()+",";
-            dates.add(dateTime.getShiftDate());
-            listStartTime.add(dateTime.getStartTime());
-            listEndTime.add(dateTime.getEndTime());
-        }
-
-        if (date.endsWith(","))
-        {
-            date = date.substring(0, date.length() - 1);
-        }
 
         if(postedList.get(position).getTimeType().equalsIgnoreCase("Single"))
         {
@@ -147,14 +149,141 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
                 }
                 );
 
-        tvDate.setText(context.getString(R.string.date_col)+date);
+        String date ="";
+        String time ="";
+
+        for (SuccessResGetPost.PostshiftTime dateTime:postshiftTimeList)
+        {
+            date = date+ dateTime.getNewDate()+",";
+            dates.add(dateTime.getNewDate());
+            listStartTime.add(dateTime.getStartTime());
+            listEndTime.add(dateTime.getEndTime());
+        }
+
+        if (date.endsWith(","))
+        {
+            date = date.substring(0, date.length() - 1);
+        }
+
+        if(postedList.get(position).getTimeType().equalsIgnoreCase("Single"))
+        {
+
+            tvTime.setVisibility(View.VISIBLE);
+            tvMultipleTime.setVisibility(View.GONE);
+            String startTime = postshiftTimeList.get(0).getStartTime();
+            String endTime = postshiftTimeList.get(0).getEndTime();
+
+            String text = context.getString(R.string.time_col)+" "+startTime+" - "+endTime+"("+postshiftTimeList.get(0).getTotalHours()+" hrs)";
+
+
+            tvTime.setText(text);
+
+        }
+        else
+
+        {
+            tvTime.setVisibility(View.GONE);
+            tvMultipleTime.setVisibility(View.VISIBLE);
+        }
+
+        tvMultipleTime.setOnClickListener(v ->
+                {
+                    showImageSelection(dates,listStartTime,listEndTime);
+                }
+        );
+
+        if(postshiftTimeList.size()==1)
+        {
+
+
+            String dtStart = null;
+            SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+
+            try {
+
+
+                dtStart = postshiftTimeList.get(0).getShiftDate()+" 8:20";
+
+                Date myDate = format.parse(dtStart);
+
+                String pattern = "EEE,MMM d, yyyy";
+
+// Create an instance of SimpleDateFormat used for formatting
+// the string representation of date according to the chosen pattern
+                DateFormat df = new SimpleDateFormat(pattern);
+
+// Get the today date using Calendar object.
+// Using DateFormat format method we can create a string
+// representation of a date with the defined format.
+                String todayAsString = df.format(myDate);
+
+                tvDate.setText(context.getString(R.string.date_col)+todayAsString);
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+        } else
+
+        {
+
+
+            for (SuccessResGetPost.PostshiftTime dateTime:postshiftTimeList)
+
+            {
+
+                String month = dateTime.getNewMonth();
+
+                if(!isExistMonth(month))
+                {
+                    monthsList.add(month);
+                }
+
+            }
+
+            String myMultipleDate = "";
+
+            for (String monthItem:monthsList)
+            {
+                myMultipleDate = myMultipleDate + monthItem+" ";
+
+                for(SuccessResGetPost.PostshiftTime dateTime:postshiftTimeList)
+                {
+                    if(monthItem.equalsIgnoreCase(dateTime.getNewMonth()))
+                    {
+                        myMultipleDate = myMultipleDate + dateTime.getNewDateSingle()+",";
+
+                    }
+                }
+
+                if (myMultipleDate.endsWith(","))
+                {
+                    myMultipleDate = myMultipleDate.substring(0, myMultipleDate.length() - 1);
+                }
+
+                myMultipleDate = myMultipleDate +" | ";
+
+            }
+
+            if (myMultipleDate.endsWith(" | "))
+            {
+                myMultipleDate = myMultipleDate.substring(0, myMultipleDate.length() - 3);
+            }
+
+            tvDate.setText(context.getString(R.string.date_col)+myMultipleDate);
+
+        }
+
 
         tvDuty.setText("("+postedList.get(position).getDutyOfWorker()+")");
         tvBreak.setText(context.getString(R.string.unpaid_break)+postedList.get(position).getUnpaidBreak());
-        hrRate.setText(context.getString(R.string.pay_col)+postedList.get(position).getHourlyRate());
+
+        String pay = " $" + postshiftTimeList.get(0).getPayamount() +" @ $"+postedList.get(position).getHourlyRate()+"/hr";
+
+
+        hrRate.setText(context.getString(R.string.pay_col)+pay);
         tvCovid.setText(context.getString(R.string.covid_19_negative)+postedList.get(position).getCovidStatus());
         tvLocation.setText(postedList.get(position).getShiftLocation());
-        tvNumOfShifts.setText(context.getString(R.string.number_of_shifts_col)+postedList.get(position).getTotalShift());
+   //     tvNumOfShifts.setText(context.getString(R.string.number_of_shifts_col)+postedList.get(position).getTotalShift());
 
         tvJobPosition.setText(postedList.get(position).getJobPosition());
 
@@ -166,17 +295,40 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
             tvCompanyName.setText(postedList.get(position).getUserName());
         }
 
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
+
         Glide.with(context)
                 .load(postedList.get(position).getUserImage())
                  .centerCrop()
+                .apply(requestOptions)
                 .into(ivProfile);
 
         rlShiftsNote.setOnClickListener(v ->
                 {
-                    showShiftsNotes(postedList.get(position).getShiftNotes());
-                }
-                );
+                    // showShiftsNotes(postedList.get(position).getShiftNotes());
 
+                    showNotes = !showNotes;
+
+                    if(showNotes)
+                    {
+
+                        tvShiftNotes.setVisibility(View.VISIBLE);
+                        ivAdd.setVisibility(View.GONE);
+                        ivMinus.setVisibility(View.VISIBLE);
+
+                    }
+                    else
+                    {
+
+                        tvShiftNotes.setVisibility(View.GONE);
+                        ivAdd.setVisibility(View.VISIBLE);
+                        ivMinus.setVisibility(View.GONE);
+
+                    }
+
+                }
+        );
         btnDelete.setOnClickListener(v ->
 
                 {
@@ -192,41 +344,22 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
                                 public void onClick(DialogInterface dialog, int which) {
                                     // Continue with delete operation
 
-                                    shifts.onClick(postedList.get(position).getId());
+                                    try {
+                                        shifts.onClick(postedList.get(position).getId(),"",null,"");
+                                    } catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
 
                                 }
                             })
                             // A null listener allows the button to dismiss the dialog and take no further action.
                             .setNegativeButton(android.R.string.no, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
+                            .setIcon(R.drawable.ic_noti)
                             .show();
 
 
                 }
         );
-        btnAccept.setOnClickListener(v ->
-                {
-                    new AlertDialog.Builder(context)
-                            .setTitle("Accept Shift")
-                            .setMessage("Are you sure you want to accept shift?")
-
-                            // Specifying a listener allows you to take an action before dismissing the dialog.
-                            // The dialog is automatically dismissed when a dialog button is clicked.
-
-                            .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
-                                public void onClick(DialogInterface dialog, int which) {
-                                    // Continue with delete operation
-
-                                    shifts.onClick(postedList.get(position).getId());
-
-                                }
-                            })
-                            // A null listener allows the button to dismiss the dialog and take no further action.
-                            .setNegativeButton(android.R.string.no, null)
-                            .setIcon(android.R.drawable.ic_dialog_alert)
-                            .show();
-                }
-                );
 
 
       /*  Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
@@ -250,7 +383,6 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
 
                     String uri = "http://maps.google.com/maps?q=loc:"+lat+","+lon;
 
-
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
                     context.startActivity(intent);
 
@@ -258,6 +390,22 @@ public class PostedShiftsAdapter extends RecyclerView.Adapter<PostedShiftsAdapte
                 );
 
 
+    }
+
+    public boolean isExistMonth(String month)
+    {
+
+        for (String myMonth:monthsList)
+        {
+
+            if(month.equalsIgnoreCase(myMonth))
+            {
+                return true;
+            }
+
+        }
+
+        return false;
     }
 
     public void showImageSelection(List<String> dates,List<String> startTimeList,List<String> endTimeList) {

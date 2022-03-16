@@ -60,13 +60,14 @@
             android:orientation="vertical"
             >
     <TextView
+        android:id="@+id/tvHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/montserrat_semibold"
         android:textColor="@color/black"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
-        android:text="Confirm Direct POST"
+        android:text="@string/confirm_direct_post"
         android:textAllCaps="true"
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="@dimen/_20sdp"

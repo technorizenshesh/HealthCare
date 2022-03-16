@@ -8,11 +8,49 @@
     tools:context=".activites.MainActivity"
     android:orientation="vertical"
     >
-
-    <com.wisnu.datetimerangepickerandroid.CalendarPickerView
-        android:id="@+id/calendar_view"
+<!--
+    <com.google.android.material.slider.RangeSlider
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/slider"
+        android:valueFrom="0"
+        android:valueTo="100"
+        android:layout_gravity="center_vertical"
+        android:layout_marginTop="@dimen/_60sdp"
+        />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:layout_alignParentRight="true"
+            />
+
+    </RelativeLayout>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnSubmit"
+        android:text="Submit"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="@dimen/_40sdp"
+        />-->
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/btnTIme"
+        android:layout_gravity="center"
+        android:layout_marginTop="@dimen/_100sdp"
         />
 
 

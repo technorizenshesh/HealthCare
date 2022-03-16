@@ -7,6 +7,7 @@ import java.io.Serializable;
 import java.util.List;
 
 public class SuccessResGetProfile implements Serializable {
+
     @SerializedName("result")
     @Expose
     public List<Result> result = null;
@@ -40,7 +41,6 @@ public class SuccessResGetProfile implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-
 
     public class PostshiftTime {
 
@@ -190,6 +190,15 @@ public class SuccessResGetProfile implements Serializable {
         @SerializedName("worker_designation")
         @Expose
         public String workerDesignation;
+        @SerializedName("address")
+        @Expose
+        public String address;
+        @SerializedName("lat")
+        @Expose
+        public String lat;
+        @SerializedName("lon")
+        @Expose
+        public String lon;
         @SerializedName("city")
         @Expose
         public String city;
@@ -211,24 +220,78 @@ public class SuccessResGetProfile implements Serializable {
         @SerializedName("type")
         @Expose
         public String type;
+        @SerializedName("rate")
+        @Expose
+        public String rate;
+        @SerializedName("no_shows_charge")
+        @Expose
+        public String noShowsCharge;
+        @SerializedName("cancel_charge")
+        @Expose
+        public String cancelCharge;
+        @SerializedName("no_show_cancel_charge")
+        @Expose
+        public String noShowCancelCharge;
+        @SerializedName("sms_notification")
+        @Expose
+        public String smsNotification;
+        @SerializedName("psus_notification")
+        @Expose
+        public String psusNotification;
+        @SerializedName("email_notification")
+        @Expose
+        public String emailNotification;
+        @SerializedName("distance")
+        @Expose
+        public String distance;
         @SerializedName("register_id")
         @Expose
         public String registerId;
         @SerializedName("admin_approval")
         @Expose
         public String adminApproval;
+        @SerializedName("approval_date")
+        @Expose
+        public String approvalDate;
         @SerializedName("status")
         @Expose
         public String status;
+        @SerializedName("time_zone")
+        @Expose
+        public String timeZone;
+        @SerializedName("instant_pay")
+        @Expose
+        public String instantPay;
+        @SerializedName("worker_availability")
+        @Expose
+        public String workerAvailability;
+        @SerializedName("wallet_amount")
+        @Expose
+        public String walletAmount;
         @SerializedName("email_code")
         @Expose
         public String emailCode;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
+        @SerializedName("hired_count")
+        @Expose
+        public String hiredCount;
+        @SerializedName("purchased_hour")
+        @Expose
+        public Double purchasedHour;
+        @SerializedName("purchased_amount")
+        @Expose
+        public String purchasedAmount;
         @SerializedName("designation")
         @Expose
         public Object designation;
+        @SerializedName("country_name")
+        @Expose
+        public Object countryName;
+        @SerializedName("state_name")
+        @Expose
+        public Object stateName;
         @SerializedName("postshift_time")
         @Expose
         public List<PostshiftTime> postshiftTime = null;
@@ -345,6 +408,30 @@ public class SuccessResGetProfile implements Serializable {
             this.workerDesignation = workerDesignation;
         }
 
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getLat() {
+            return lat;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
+        }
+
+        public String getLon() {
+            return lon;
+        }
+
+        public void setLon(String lon) {
+            this.lon = lon;
+        }
+
         public String getCity() {
             return city;
         }
@@ -401,6 +488,70 @@ public class SuccessResGetProfile implements Serializable {
             this.type = type;
         }
 
+        public String getRate() {
+            return rate;
+        }
+
+        public void setRate(String rate) {
+            this.rate = rate;
+        }
+
+        public String getNoShowsCharge() {
+            return noShowsCharge;
+        }
+
+        public void setNoShowsCharge(String noShowsCharge) {
+            this.noShowsCharge = noShowsCharge;
+        }
+
+        public String getCancelCharge() {
+            return cancelCharge;
+        }
+
+        public void setCancelCharge(String cancelCharge) {
+            this.cancelCharge = cancelCharge;
+        }
+
+        public String getNoShowCancelCharge() {
+            return noShowCancelCharge;
+        }
+
+        public void setNoShowCancelCharge(String noShowCancelCharge) {
+            this.noShowCancelCharge = noShowCancelCharge;
+        }
+
+        public String getSmsNotification() {
+            return smsNotification;
+        }
+
+        public void setSmsNotification(String smsNotification) {
+            this.smsNotification = smsNotification;
+        }
+
+        public String getPsusNotification() {
+            return psusNotification;
+        }
+
+        public void setPsusNotification(String psusNotification) {
+            this.psusNotification = psusNotification;
+        }
+
+        public String getEmailNotification() {
+            return emailNotification;
+        }
+
+        public void setEmailNotification(String emailNotification) {
+            this.emailNotification = emailNotification;
+        }
+
+        public String getDistance() {
+            return distance;
+        }
+
+        public void setDistance(String distance) {
+            this.distance = distance;
+        }
+
         public String getRegisterId() {
             return registerId;
         }
@@ -417,12 +568,52 @@ public class SuccessResGetProfile implements Serializable {
             this.adminApproval = adminApproval;
         }
 
+        public String getApprovalDate() {
+            return approvalDate;
+        }
+
+        public void setApprovalDate(String approvalDate) {
+            this.approvalDate = approvalDate;
+        }
+
         public String getStatus() {
             return status;
         }
 
         public void setStatus(String status) {
             this.status = status;
+        }
+
+        public String getTimeZone() {
+            return timeZone;
+        }
+
+        public void setTimeZone(String timeZone) {
+            this.timeZone = timeZone;
+        }
+
+        public String getInstantPay() {
+            return instantPay;
+        }
+
+        public void setInstantPay(String instantPay) {
+            this.instantPay = instantPay;
+        }
+
+        public String getWorkerAvailability() {
+            return workerAvailability;
+        }
+
+        public void setWorkerAvailability(String workerAvailability) {
+            this.workerAvailability = workerAvailability;
+        }
+
+        public String getWalletAmount() {
+            return walletAmount;
+        }
+
+        public void setWalletAmount(String walletAmount) {
+            this.walletAmount = walletAmount;
         }
 
         public String getEmailCode() {
@@ -441,12 +632,52 @@ public class SuccessResGetProfile implements Serializable {
             this.dateTime = dateTime;
         }
 
+        public String getHiredCount() {
+            return hiredCount;
+        }
+
+        public void setHiredCount(String hiredCount) {
+            this.hiredCount = hiredCount;
+        }
+
+        public Double getPurchasedHour() {
+            return purchasedHour;
+        }
+
+        public void setPurchasedHour(Double purchasedHour) {
+            this.purchasedHour = purchasedHour;
+        }
+
+        public String getPurchasedAmount() {
+            return purchasedAmount;
+        }
+
+        public void setPurchasedAmount(String purchasedAmount) {
+            this.purchasedAmount = purchasedAmount;
+        }
+
         public Object getDesignation() {
             return designation;
         }
 
         public void setDesignation(Object designation) {
             this.designation = designation;
+        }
+
+        public Object getCountryName() {
+            return countryName;
+        }
+
+        public void setCountryName(Object countryName) {
+            this.countryName = countryName;
+        }
+
+        public Object getStateName() {
+            return stateName;
+        }
+
+        public void setStateName(Object stateName) {
+            this.stateName = stateName;
         }
 
         public List<PostshiftTime> getPostshiftTime() {

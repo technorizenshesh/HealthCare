@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    >
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".workerSide.fragments.SearchShiftFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/_15sdp"
+        >
+        <ImageView
+            android:id="@+id/img_header"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_20sdp"
+            android:src="@drawable/ic_back1"
+            android:padding="@dimen/_2sdp"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside"
+            android:layout_marginLeft="@dimen/_5sdp"
+            />
+
+        <EditText
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/montserrat_medium"
+            android:inputType="text"
+            android:hint="@string/search_by_company_name"
+            android:imeOptions="actionSearch"
+            android:drawableRight="@drawable/ic_search_24"
+            android:padding="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/img_header"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp" />
+
+    </RelativeLayout>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:id="@+id/rvShifts"/>
+
+
+</LinearLayout>
+</layout>

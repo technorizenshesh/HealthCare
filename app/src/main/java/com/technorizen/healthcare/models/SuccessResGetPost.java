@@ -66,6 +66,21 @@ public class SuccessResGetPost implements Serializable {
         @SerializedName("date_time")
         @Expose
         public String dateTime;
+        @SerializedName("time_status")
+        @Expose
+        public String timeStatus;
+        @SerializedName("shift_date_new")
+        @Expose
+        public String shiftDateNew;
+        @SerializedName("start_time_new")
+        @Expose
+        public String startTimeNew;
+        @SerializedName("end_time_new")
+        @Expose
+        public String endTimeNew;
+        @SerializedName("shiftareaccepted")
+        @Expose
+        public String shiftareaccepted;
         @SerializedName("new_date")
         @Expose
         public String newDate;
@@ -75,6 +90,12 @@ public class SuccessResGetPost implements Serializable {
         @SerializedName("new_date_single")
         @Expose
         public String newDateSingle;
+        @SerializedName("total_hours")
+        @Expose
+        public String totalHours;
+        @SerializedName("payamount")
+        @Expose
+        public Double payamount;
 
         public String getId() {
             return id;
@@ -132,6 +153,46 @@ public class SuccessResGetPost implements Serializable {
             this.dateTime = dateTime;
         }
 
+        public String getTimeStatus() {
+            return timeStatus;
+        }
+
+        public void setTimeStatus(String timeStatus) {
+            this.timeStatus = timeStatus;
+        }
+
+        public String getShiftDateNew() {
+            return shiftDateNew;
+        }
+
+        public void setShiftDateNew(String shiftDateNew) {
+            this.shiftDateNew = shiftDateNew;
+        }
+
+        public String getStartTimeNew() {
+            return startTimeNew;
+        }
+
+        public void setStartTimeNew(String startTimeNew) {
+            this.startTimeNew = startTimeNew;
+        }
+
+        public String getEndTimeNew() {
+            return endTimeNew;
+        }
+
+        public void setEndTimeNew(String endTimeNew) {
+            this.endTimeNew = endTimeNew;
+        }
+
+        public String getShiftareaccepted() {
+            return shiftareaccepted;
+        }
+
+        public void setShiftareaccepted(String shiftareaccepted) {
+            this.shiftareaccepted = shiftareaccepted;
+        }
+
         public String getNewDate() {
             return newDate;
         }
@@ -156,6 +217,22 @@ public class SuccessResGetPost implements Serializable {
             this.newDateSingle = newDateSingle;
         }
 
+        public String getTotalHours() {
+            return totalHours;
+        }
+
+        public void setTotalHours(String totalHours) {
+            this.totalHours = totalHours;
+        }
+
+        public Double getPayamount() {
+            return payamount;
+        }
+
+        public void setPayamount(Double payamount) {
+            this.payamount = payamount;
+        }
+
     }
 
     public class Result {
@@ -163,9 +240,18 @@ public class SuccessResGetPost implements Serializable {
         @SerializedName("id")
         @Expose
         public String id;
+        @SerializedName("shift_no")
+        @Expose
+        public String shiftNo;
+        @SerializedName("shift_no_new")
+        @Expose
+        public String shiftNoNew;
         @SerializedName("user_id")
         @Expose
         public String userId;
+        @SerializedName("worker_id")
+        @Expose
+        public String workerId;
         @SerializedName("job_position")
         @Expose
         public String jobPosition;
@@ -193,6 +279,12 @@ public class SuccessResGetPost implements Serializable {
         @SerializedName("shift_location")
         @Expose
         public String shiftLocation;
+        @SerializedName("lat")
+        @Expose
+        public String lat;
+        @SerializedName("lon")
+        @Expose
+        public String lon;
         @SerializedName("day_type")
         @Expose
         public String dayType;
@@ -205,9 +297,42 @@ public class SuccessResGetPost implements Serializable {
         @SerializedName("status")
         @Expose
         public String status;
+        @SerializedName("status_new")
+        @Expose
+        public String statusNew;
+        @SerializedName("type")
+        @Expose
+        public String type;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
+        @SerializedName("shift_id")
+        @Expose
+        public String shiftId;
+        @SerializedName("shift_date")
+        @Expose
+        public String shiftDate;
+        @SerializedName("start_time")
+        @Expose
+        public String startTime;
+        @SerializedName("end_time")
+        @Expose
+        public String endTime;
+        @SerializedName("time_status")
+        @Expose
+        public String timeStatus;
+        @SerializedName("shift_date_new")
+        @Expose
+        public String shiftDateNew;
+        @SerializedName("start_time_new")
+        @Expose
+        public String startTimeNew;
+        @SerializedName("end_time_new")
+        @Expose
+        public String endTimeNew;
+        @SerializedName("sid")
+        @Expose
+        public String sid;
         @SerializedName("user_image")
         @Expose
         public String userImage;
@@ -226,6 +351,9 @@ public class SuccessResGetPost implements Serializable {
         @SerializedName("location_lon")
         @Expose
         public String locationLon;
+        @SerializedName("distance")
+        @Expose
+        public String distance;
         @SerializedName("total_shift")
         @Expose
         public String totalShift;
@@ -241,12 +369,36 @@ public class SuccessResGetPost implements Serializable {
             this.id = id;
         }
 
+        public String getShiftNo() {
+            return shiftNo;
+        }
+
+        public void setShiftNo(String shiftNo) {
+            this.shiftNo = shiftNo;
+        }
+
+        public String getShiftNoNew() {
+            return shiftNoNew;
+        }
+
+        public void setShiftNoNew(String shiftNoNew) {
+            this.shiftNoNew = shiftNoNew;
+        }
+
         public String getUserId() {
             return userId;
         }
 
         public void setUserId(String userId) {
             this.userId = userId;
+        }
+
+        public String getWorkerId() {
+            return workerId;
+        }
+
+        public void setWorkerId(String workerId) {
+            this.workerId = workerId;
         }
 
         public String getJobPosition() {
@@ -321,6 +473,22 @@ public class SuccessResGetPost implements Serializable {
             this.shiftLocation = shiftLocation;
         }
 
+        public String getLat() {
+            return lat;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
+        }
+
+        public String getLon() {
+            return lon;
+        }
+
+        public void setLon(String lon) {
+            this.lon = lon;
+        }
+
         public String getDayType() {
             return dayType;
         }
@@ -353,12 +521,100 @@ public class SuccessResGetPost implements Serializable {
             this.status = status;
         }
 
+        public String getStatusNew() {
+            return statusNew;
+        }
+
+        public void setStatusNew(String statusNew) {
+            this.statusNew = statusNew;
+        }
+
+        public String getType() {
+            return type;
+        }
+
+        public void setType(String type) {
+            this.type = type;
+        }
+
         public String getDateTime() {
             return dateTime;
         }
 
         public void setDateTime(String dateTime) {
             this.dateTime = dateTime;
+        }
+
+        public String getShiftId() {
+            return shiftId;
+        }
+
+        public void setShiftId(String shiftId) {
+            this.shiftId = shiftId;
+        }
+
+        public String getShiftDate() {
+            return shiftDate;
+        }
+
+        public void setShiftDate(String shiftDate) {
+            this.shiftDate = shiftDate;
+        }
+
+        public String getStartTime() {
+            return startTime;
+        }
+
+        public void setStartTime(String startTime) {
+            this.startTime = startTime;
+        }
+
+        public String getEndTime() {
+            return endTime;
+        }
+
+        public void setEndTime(String endTime) {
+            this.endTime = endTime;
+        }
+
+        public String getTimeStatus() {
+            return timeStatus;
+        }
+
+        public void setTimeStatus(String timeStatus) {
+            this.timeStatus = timeStatus;
+        }
+
+        public String getShiftDateNew() {
+            return shiftDateNew;
+        }
+
+        public void setShiftDateNew(String shiftDateNew) {
+            this.shiftDateNew = shiftDateNew;
+        }
+
+        public String getStartTimeNew() {
+            return startTimeNew;
+        }
+
+        public void setStartTimeNew(String startTimeNew) {
+            this.startTimeNew = startTimeNew;
+        }
+
+        public String getEndTimeNew() {
+            return endTimeNew;
+        }
+
+        public void setEndTimeNew(String endTimeNew) {
+            this.endTimeNew = endTimeNew;
+        }
+
+        public String getSid() {
+            return sid;
+        }
+
+        public void setSid(String sid) {
+            this.sid = sid;
         }
 
         public String getUserImage() {
@@ -407,6 +663,14 @@ public class SuccessResGetPost implements Serializable {
 
         public void setLocationLon(String locationLon) {
             this.locationLon = locationLon;
+        }
+
+        public String getDistance() {
+            return distance;
+        }
+
+        public void setDistance(String distance) {
+            this.distance = distance;
         }
 
         public String getTotalShift() {

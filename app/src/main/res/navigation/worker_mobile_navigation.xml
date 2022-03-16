@@ -3,13 +3,14 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/nav_home">
+    app:startDestination="@+id/nav_worker_home">
 
     <fragment
-        android:id="@+id/nav_home"
+        android:id="@+id/nav_worker_home"
         android:name="com.technorizen.healthcare.workerSide.fragments.WorkerHomeFragment"
         android:label="@string/menu_home"
-        tools:layout="@layout/fragment_home" />
+        tools:layout="@layout/fragment_home" >
+    </fragment>
     <fragment
         android:id="@+id/documentFragment"
         android:name="com.technorizen.healthcare.workerSide.fragments.DocumentFragment"
@@ -38,7 +39,11 @@
         android:id="@+id/workerShiftsHistoryFragment"
         android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsHistoryFragment"
         android:label="fragment_worker_shifts_history"
-        tools:layout="@layout/fragment_worker_shifts_history" />
+        tools:layout="@layout/fragment_worker_shifts_history" >
+        <action
+            android:id="@+id/action_workerShiftsHistoryFragment_to_one2OneChatFragment2"
+            app:destination="@id/one2OneChatFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/workerShiftsInProgressFragment"
         android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsInProgressFragment"
@@ -53,7 +58,11 @@
         android:id="@+id/workerCurrentScheduleFragment"
         android:name="com.technorizen.healthcare.workerSide.fragments.WorkerCurrentScheduleFragment"
         android:label="fragment_worker_current_schedule"
-        tools:layout="@layout/fragment_worker_current_schedule" />
+        tools:layout="@layout/fragment_worker_current_schedule" >
+        <action
+            android:id="@+id/action_workerCurrentScheduleFragment_to_one2OneChatFragment2"
+            app:destination="@id/one2OneChatFragment2" />
+    </fragment>
     <fragment
         android:id="@+id/workerShiftsFragment"
         android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsFragment"
@@ -70,6 +79,12 @@
         <action
             android:id="@+id/action_workerShiftsFragment_to_workerShiftsInProgressFragment"
             app:destination="@id/workerShiftsInProgressFragment" />
+        <action
+            android:id="@+id/action_workerShiftsFragment_to_rehiredShiftsFragment"
+            app:destination="@id/rehiredShiftsFragment" />
+        <action
+            android:id="@+id/action_workerShiftsFragment_to_workerPendingRecruitmentShiftFragment"
+            app:destination="@id/workerPendingRecruitmentShiftFragment" />
     </fragment>
     <fragment
         android:id="@+id/workerBillingFragment"
@@ -84,6 +99,9 @@
         <action
             android:id="@+id/action_workerBillingFragment_to_workerInvoicesFragment"
             app:destination="@id/workerInvoicesFragment" />
+        <action
+            android:id="@+id/action_workerBillingFragment_to_workerInvoiceSummaryFragment"
+            app:destination="@id/workerInvoiceSummaryFragment" />
     </fragment>
     <fragment
         android:id="@+id/reportFragment"
@@ -153,6 +171,33 @@
         android:id="@+id/workerEditProfileFragment"
         android:name="com.technorizen.healthcare.workerSide.fragments.WorkerEditProfileFragment"
         android:label="WorkerEditProfileFragment" />
-
+    <fragment
+        android:id="@+id/searchShiftFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.SearchShiftFragment"
+        android:label="SearchShiftFragment" />
+    <fragment
+        android:id="@+id/userConversationFragment2"
+        android:name="com.technorizen.healthcare.fragments.UserConversationFragment"
+        android:label="UserConversationFragment" >
+        <action
+            android:id="@+id/action_userConversationFragment2_to_one2OneChatFragment2"
+            app:destination="@id/one2OneChatFragment2" />
+    </fragment>
+    <fragment
+        android:id="@+id/one2OneChatFragment2"
+        android:name="com.technorizen.healthcare.fragments.One2OneChatFragment"
+        android:label="One2OneChatFragment" />
+    <fragment
+        android:id="@+id/rehiredShiftsFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.RehiredShiftsFragment"
+        android:label="RehiredShiftsFragment" />
+    <fragment
+        android:id="@+id/workerPendingRecruitmentShiftFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerPendingRecruitmentShiftFragment"
+        android:label="WorkerPendingRecruitmentShiftFragment" />
+    <fragment
+        android:id="@+id/workerInvoiceSummaryFragment"
+        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerInvoiceSummaryFragment"
+        android:label="WorkerInvoiceSummaryFragment" />
 
 </navigation>

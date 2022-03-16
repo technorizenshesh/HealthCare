@@ -13,10 +13,8 @@
         android:layout_centerInParent="true"
         android:background="@null"
         android:orientation="vertical"
-
         android:padding="8dp">
         <!--style="@android:style/Widget.Holo.Light.ProgressBar.Large.Inverse"-->
-
 
         <com.mrtyvz.archedimageprogress.ArchedImageProgressBar
             android:id="@+id/progressBar"
@@ -26,6 +24,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="8dp"
+            android:scaleX="-1"
             android:layout_gravity="center_horizontal"
             />
    <!--

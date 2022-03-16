@@ -15,7 +15,7 @@
             android:textColor="@color/black"
             android:layout_centerVertical="true"
             android:layout_centerHorizontal="true"
-            android:text="INSTANT PAY"
+            android:text="@string/instant_pay1"
             android:textAllCaps="true"
             android:layout_gravity="center_horizontal"
             android:layout_marginTop="@dimen/_20sdp"
@@ -43,9 +43,10 @@
                 >
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchInstant"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Enable Instant Pay"
+                    android:text="@string/enable_instant_pay"
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_12sdp"
@@ -54,10 +55,23 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     />
 
-
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save"
+            android:background="@drawable/button_bg"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/_60sdp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:textAllCaps="false"
+            />
 
     </LinearLayout>
 </layout>

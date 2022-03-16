@@ -1,16 +1,42 @@
 package com.technorizen.healthcare.fragments;
 
+import android.app.DatePickerDialog;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.DatePicker;
 
+import com.google.android.gms.common.AccountPicker;
 import com.technorizen.healthcare.R;
+import com.technorizen.healthcare.adapters.PaymentHistoryAdapter;
 import com.technorizen.healthcare.databinding.FragmentPaymentHistoryBinding;
+import com.technorizen.healthcare.models.SuccessResGetCardDetails;
+import com.technorizen.healthcare.models.SuccessResGetTransactionHistory;
+import com.technorizen.healthcare.retrofit.ApiClient;
+import com.technorizen.healthcare.retrofit.HealthInterface;
+import com.technorizen.healthcare.util.DataManager;
+import com.technorizen.healthcare.util.SharedPreferenceUtility;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.technorizen.healthcare.retrofit.Constant.USER_ID;
+import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -20,6 +46,14 @@ import com.technorizen.healthcare.databinding.FragmentPaymentHistoryBinding;
 public class PaymentHistoryFragment extends Fragment {
 
     FragmentPaymentHistoryBinding binding;
+
+    private int mYear, mMonth, mDay, mHour, mMinute;
+
+    private String strTransactionDate= "";
+    private String strTransactionDate1= "";
+    private HealthInterface apiInterface;
+
+    private ArrayList<SuccessResGetTransactionHistory.Result> paymentList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -68,6 +102,154 @@ public class PaymentHistoryFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_payment_history, container, false);
 
+        apiInterface = ApiClient.getClient().create(HealthInterface.class);
+
+        getPayment();
+
+        binding.etSelectDate.setOnClickListener(v ->
+                {
+                    showDialog();
+                }
+                );
+
         return binding.getRoot();
     }
+
+    public void searchPaymentHistory()
+    {
+        String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id",userId);
+        map.put("transection_date",strTransactionDate1);
+
+
+        Call<SuccessResGetTransactionHistory> call = apiInterface.searchPaymentHistory(map);
+        call.enqueue(new Callback<SuccessResGetTransactionHistory>() {
+            @Override
+            public void onResponse(Call<SuccessResGetTransactionHistory> call, Response<SuccessResGetTransactionHistory> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+
+                    SuccessResGetTransactionHistory data = response.body();
+                    if (data.status.equals("1")) {
+
+                        paymentList.clear();
+
+                        paymentList.addAll(data.getResult());
+
+                        binding.rvPayment.setHasFixedSize(true);
+                        binding.rvPayment.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        binding.rvPayment.setAdapter(new PaymentHistoryAdapter(getActivity(),paymentList));
+
+                    } else {
+                        showToast(getActivity(), data.message);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetTransactionHistory> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
+
+    }
+
+    public void getPayment()
+    {
+        String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id",userId);
+
+        Call<SuccessResGetTransactionHistory> call = apiInterface.getPaymentsHistory(map);
+        call.enqueue(new Callback<SuccessResGetTransactionHistory>() {
+            @Override
+            public void onResponse(Call<SuccessResGetTransactionHistory> call, Response<SuccessResGetTransactionHistory> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+
+                    SuccessResGetTransactionHistory data = response.body();
+                    if (data.status.equals("1")) {
+
+                        paymentList.clear();
+
+                        paymentList.addAll(data.getResult());
+
+                        binding.rvPayment.setHasFixedSize(true);
+                        binding.rvPayment.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        binding.rvPayment.setAdapter(new PaymentHistoryAdapter(getActivity(),paymentList));
+
+                    } else {
+                        showToast(getActivity(), data.message);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetTransactionHistory> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
+
+    }
+
+    private void showDialog()
+    {
+
+        // Get Current Date
+        final Calendar c = Calendar.getInstance();
+        mYear = c.get(Calendar.YEAR);
+        mMonth = c.get(Calendar.MONTH);
+        mDay = c.get(Calendar.DAY_OF_MONTH);
+
+
+        DatePickerDialog datePickerDialog = new DatePickerDialog(getActivity(),
+                new DatePickerDialog.OnDateSetListener() {
+
+                    @Override
+                    public void onDateSet(DatePicker view, int year,
+                                          int monthOfYear, int dayOfMonth) {
+
+                        binding.etSelectDate.setText(dayOfMonth + "-" + (monthOfYear + 1) + "-" + year);
+
+                        strTransactionDate = dayOfMonth + "-" + (monthOfYear + 1) + "-" + year;
+
+                        SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
+
+                        Date date = null;
+                        try {
+                             date = format.parse(strTransactionDate);
+                            System.out.println(date);
+                        } catch (ParseException e) {
+                            e.printStackTrace();
+                        }
+                        strTransactionDate1 = new SimpleDateFormat("dd-MM-yyyy").format(date);
+                        searchPaymentHistory();
+                    }
+                }, mYear, mMonth, mDay);
+        datePickerDialog.show();
+
+    }
+
 }

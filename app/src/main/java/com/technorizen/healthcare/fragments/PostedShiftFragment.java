@@ -5,6 +5,7 @@ import android.os.Bundle;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,7 +16,9 @@ import com.technorizen.healthcare.adapters.PostedShiftsAdapter;
 import com.technorizen.healthcare.adapters.ShiftsAdapter;
 import com.technorizen.healthcare.databinding.FragmentPostedShiftBinding;
 import com.technorizen.healthcare.models.SuccessResDeleteShifts;
+import com.technorizen.healthcare.models.SuccessResGetCurrentSchedule;
 import com.technorizen.healthcare.models.SuccessResGetPost;
+import com.technorizen.healthcare.models.SuccessResUpdateRehireShift;
 import com.technorizen.healthcare.retrofit.ApiClient;
 import com.technorizen.healthcare.retrofit.HealthInterface;
 import com.technorizen.healthcare.util.DataManager;
@@ -24,7 +27,10 @@ import com.technorizen.healthcare.util.SharedPreferenceUtility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -42,8 +48,13 @@ public class PostedShiftFragment extends Fragment implements DeleteShifts {
 
     FragmentPostedShiftBinding binding;
     HealthInterface apiInterface;
+    private boolean shiftShowLess  = false;
 
     private ArrayList<SuccessResGetPost.Result> postedList = new ArrayList<>();
+    private ArrayList<SuccessResGetPost.Result> newPostedList = new ArrayList<>();
+    Timer timer = new Timer();
+
+    private ShiftsAdapter shiftsAdapter;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -94,22 +105,49 @@ public class PostedShiftFragment extends Fragment implements DeleteShifts {
 
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
 
-        getShifts();
+        shiftsAdapter = new ShiftsAdapter(getActivity(),newPostedList,true,PostedShiftFragment.this);
+        shiftsAdapter.addList(newPostedList);
+        binding.rvShifts.setHasFixedSize(true);
+        binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+        binding.rvShifts.setAdapter(shiftsAdapter);
+
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                getShifts(false);
+            }
+        },0,60000);
+
+        getShifts(true);
+
+        binding.srlRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getShifts(true);
+                binding.btnLoadLessShifts.setVisibility(View.GONE);
+                binding.btnLoadMoreShifts.setVisibility(View.GONE);
+                binding.srlRefreshContainer.setRefreshing(false);
+            }
+        });
 
         return binding.getRoot();
     }
 
-
-    public void getShifts()
+    public void getShifts(boolean show)
     {
 
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
 
-        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        if(show)
+        {
+            DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+
+        }
         Map<String, String> map = new HashMap<>();
         map.put("user_id",userId);
 
-        Call<SuccessResGetPost> call = apiInterface.getUserPostedShifts(map);
+        Call<SuccessResGetPost> call = apiInterface.getPostedShifts(map);
         call.enqueue(new Callback<SuccessResGetPost>() {
             @Override
             public void onResponse(Call<SuccessResGetPost> call, Response<SuccessResGetPost> response) {
@@ -123,17 +161,14 @@ public class PostedShiftFragment extends Fragment implements DeleteShifts {
 
                         postedList.clear();
                         postedList.addAll(data.getResult());
-                        binding.rvShifts.setHasFixedSize(true);
-                        binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvShifts.setAdapter(new PostedShiftsAdapter(getActivity(),postedList,PostedShiftFragment.this::onClick));
+                        setShiftList();
 
                     } else {
                         showToast(getActivity(), data.message);
                         postedList.clear();
                         binding.rvShifts.setHasFixedSize(true);
                         binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvShifts.setAdapter(new PostedShiftsAdapter(getActivity(),postedList,PostedShiftFragment.this::onClick));
-
+                        binding.rvShifts.setAdapter(new PostedShiftsAdapter(getActivity(),postedList,PostedShiftFragment.this));
                     }
 
                 } catch (Exception e) {
@@ -153,9 +188,8 @@ public class PostedShiftFragment extends Fragment implements DeleteShifts {
 
     }
 
-
     @Override
-    public void onClick(String shiftsId) {
+    public void onClick(String shiftsId, String onerId, List<SuccessResGetPost.PostshiftTime> postshiftTime,String type) {
 
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
@@ -174,8 +208,9 @@ public class PostedShiftFragment extends Fragment implements DeleteShifts {
                     SuccessResDeleteShifts data = response.body();
                     if (data.status.equals("1")) {
                         showToast(getActivity(), data.message);
+                        shiftShowLess = false;
 
-                        getShifts();
+                        getShifts(true);
 
                     } else {
                         showToast(getActivity(), data.message);
@@ -197,4 +232,195 @@ public class PostedShiftFragment extends Fragment implements DeleteShifts {
             }
         });
     }
+
+    @Override
+    public void rejectSHift(String shiftsId, String userId, List<SuccessResGetPost.PostshiftTime> postshiftTime, String type) {
+
+    }
+
+    @Override
+    public void deleteCurrentShiftsClick(String shiftsId, String userId,SuccessResGetCurrentSchedule.PostshiftTime dateTime) {
+
+    }
+
+    @Override
+    public void shiftConfimation(String shiftIds, String userId, String workerId, String status) {
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("shift_id",shiftIds);
+
+        Call<SuccessResUpdateRehireShift> call = apiInterface.updateRehiredShifts(map);
+        call.enqueue(new Callback<SuccessResUpdateRehireShift>() {
+            @Override
+            public void onResponse(Call<SuccessResUpdateRehireShift> call, Response<SuccessResUpdateRehireShift> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+
+                    SuccessResUpdateRehireShift data = response.body();
+                    if (data.status.equals("1")) {
+                        showToast(getActivity(), data.message);
+                        shiftShowLess = false;
+
+                        getShifts(true);
+
+                    } else {
+                        showToast(getActivity(), data.message);
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResUpdateRehireShift> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
+
+    }
+
+
+    @Override
+    public void userCancelRecruit(String shiftIds,String userId,String workerId,String status) {
+
+    }
+
+    public void setShiftList()
+    {
+/*
+
+        if(postedList.size()>10)
+        {
+
+            ArrayList<SuccessResGetPost.Result> subList = new ArrayList<>(postedList.subList(0,10));
+            binding.rvShifts.setHasFixedSize(true);
+            binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),subList,true,PostedShiftFragment.this));
+            binding.btnLoadMoreShifts.setVisibility(View.VISIBLE);
+
+        }
+        else
+        {
+            binding.rvShifts.setHasFixedSize(true);
+            binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),postedList,true,PostedShiftFragment.this));
+            binding.btnLoadMoreShifts.setVisibility(View.GONE);
+
+        }
+
+        binding.btnLoadMoreShifts.setOnClickListener(v ->
+                {
+
+                    binding.btnLoadMoreShifts.setVisibility(View.GONE);
+                    binding.btnLoadLessShifts.setVisibility(View.VISIBLE);
+
+                    binding.rvShifts.setHasFixedSize(true);
+                    binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),postedList,true,PostedShiftFragment.this));
+
+                }
+        );
+
+        binding.btnLoadLessShifts.setOnClickListener(v ->
+                {
+
+                    binding.btnLoadMoreShifts.setVisibility(View.VISIBLE);
+                    binding.btnLoadLessShifts.setVisibility(View.GONE);
+                    ArrayList<SuccessResGetPost.Result> subList = new ArrayList<>(postedList.subList(0,10));
+                    binding.rvShifts.setHasFixedSize(true);
+                    binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),subList,true,PostedShiftFragment.this));
+
+                }
+        );
+*/
+
+        if(!shiftShowLess)
+        {
+            binding.btnLoadMoreShifts.setVisibility(View.GONE);
+            binding.btnLoadLessShifts.setVisibility(View.GONE);
+        }
+
+        if(postedList.size()>10  && !shiftShowLess)
+        {
+
+            ArrayList<SuccessResGetPost.Result> subList = new ArrayList<>(postedList.subList(0,10));
+
+//            binding.rvShifts.setHasFixedSize(true);
+//            binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+//            binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),subList,true,HomeFragment.this));
+
+            newPostedList = subList;
+            shiftsAdapter.addList(newPostedList);
+            shiftsAdapter.notifyDataSetChanged();
+            binding.btnLoadMoreShifts.setVisibility(View.VISIBLE);
+            binding.btnLoadLessShifts.setVisibility(View.GONE);
+        }
+        else
+        {
+//            binding.rvShifts.setHasFixedSize(true);
+//            binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+//            binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),postedList,true,HomeFragment.this));
+
+            newPostedList = postedList;
+            shiftsAdapter.addList(newPostedList);
+            shiftsAdapter.notifyDataSetChanged();
+            binding.btnLoadMoreShifts.setVisibility(View.GONE);
+
+        }
+
+        binding.btnLoadMoreShifts.setOnClickListener(v ->
+                {
+
+                    binding.btnLoadMoreShifts.setVisibility(View.GONE);
+                    binding.btnLoadLessShifts.setVisibility(View.VISIBLE);
+                    shiftShowLess = true;
+
+//                    binding.rvShifts.setHasFixedSize(true);
+//                    binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                    binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),postedList,true,HomeFragment.this));
+
+                    newPostedList = postedList;
+                    shiftsAdapter.addList(newPostedList);
+                    shiftsAdapter.notifyDataSetChanged();
+
+                }
+        );
+
+        binding.btnLoadLessShifts.setOnClickListener(v ->
+                {
+
+                    shiftShowLess = false;
+
+                    binding.btnLoadMoreShifts.setVisibility(View.VISIBLE);
+                    binding.btnLoadLessShifts.setVisibility(View.GONE);
+                    ArrayList<SuccessResGetPost.Result> subList = new ArrayList<>(postedList.subList(0,10));
+//                    binding.rvShifts.setHasFixedSize(true);
+//                    binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
+//                    binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),subList,true,HomeFragment.this));
+                    newPostedList = subList;
+                    shiftsAdapter.addList(newPostedList);
+                    shiftsAdapter.notifyDataSetChanged();
+
+                }
+        );
+
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        timer.cancel();
+
+    }
+
 }

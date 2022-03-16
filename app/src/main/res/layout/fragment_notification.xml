@@ -44,6 +44,7 @@
                 >
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchPush"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="PUSH NOTIFICATION"
@@ -56,6 +57,7 @@
                     />
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchSms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="SMS"
@@ -67,8 +69,8 @@
                     android:layout_marginHorizontal="@dimen/_10sdp"
                     />
 
-
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchEmail"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="EMAIL"
@@ -83,6 +85,20 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnSave"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/save_changes"
+            android:background="@drawable/button_bg"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:textColor="@color/white"
+            android:layout_marginTop="@dimen/_50sdp"
+            android:fontFamily="@font/montserrat_semibold"
+            android:textSize="@dimen/_12sdp"
+            android:textAllCaps="false"
+            />
 
     </LinearLayout>
 </layout>

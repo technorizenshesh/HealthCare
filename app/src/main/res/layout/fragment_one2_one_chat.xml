@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.SearchFragment"
+        android:orientation="vertical"
+        android:fitsSystemWindows="true"
+        >
+        <RelativeLayout
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_60sdp"
+            android:background="@drawable/bottom_cornor_40"
+            android:visibility="visible"
+            >
+
+            <ImageView
+                android:id="@+id/ivBack"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:src="@drawable/ic_back"
+                android:padding="@dimen/_2sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="@dimen/_10sdp"
+                android:scaleType="centerInside"
+                app:tint="@color/white" />
+            <TextView
+                android:id="@+id/tvtitle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:text="@string/careshifts"
+                android:textSize="@dimen/_16sdp"
+                android:layout_gravity="center"
+                android:layout_centerInParent="true"
+                android:fontFamily="@font/montserrat_bold"/>
+
+            <ImageView
+                android:id="@+id/ivAdminChat"
+                android:layout_width="@dimen/_33sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:src="@drawable/chat"
+                android:layout_gravity="end"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:scaleType="fitXY"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                />
+
+        </RelativeLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_above="@id/rlbottom"
+            android:layout_below="@+id/toolbar"
+            android:id="@+id/rvMessageItem"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            android:id="@+id/rlbottom"
+            android:background="#D8D8D8"
+            android:layout_alignParentBottom="true">
+
+            <EditText
+                android:id="@+id/etChat"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_14sdp"
+                android:fontFamily="@font/montserrat_medium"
+                android:hint="Type you message here |"
+                android:layout_marginLeft="@dimen/_15sdp"
+                android:background="@null"
+                android:textColor="@color/black"
+                android:layout_toLeftOf="@id/ivSendMessage"
+                />
+
+            <ImageView
+                android:id="@+id/ivSendMessage"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center_vertical"
+                android:layout_marginRight="@dimen/_10sdp"
+                android:adjustViewBounds="true"
+                android:clickable="true"
+                android:layout_centerVertical="true"
+                android:scaleType="fitCenter"
+                android:layout_alignParentRight="true"
+                android:src="@drawable/ic_chat_send"
+                app:tint="@color/black" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

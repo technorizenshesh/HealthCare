@@ -62,13 +62,10 @@
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_bold"
                         android:textColor="@color/black"
-                        android:text="Chat With Us"
+                        android:text="@string/chat_with_us"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:textSize="@dimen/_12sdp" />
-
-
-
 
 
                 </LinearLayout>
@@ -92,11 +89,12 @@
 
 
                     <TextView
+                        android:id="@+id/tvEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_bold"
                         android:textColor="@color/black"
-                        android:text="Email us: support@careshifts.net"
+                        android:text="@string/email_us"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="@dimen/_10sdp"
                         android:textSize="@dimen/_12sdp" />
@@ -138,7 +136,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnTwiter"
             android:layout_width="match_parent"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_height="wrap_content"

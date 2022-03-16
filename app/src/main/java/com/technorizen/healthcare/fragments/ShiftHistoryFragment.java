@@ -2,13 +2,37 @@ package com.technorizen.healthcare.fragments;
 
 import android.os.Bundle;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.technorizen.healthcare.R;
+import com.technorizen.healthcare.adapters.ShiftsAdapter;
+import com.technorizen.healthcare.adapters.ShiftsHistoryWorkerAdapter;
+import com.technorizen.healthcare.adapters.ShiftsHistoryWorkerAdapter;
+import com.technorizen.healthcare.databinding.FragmentShiftHistoryBinding;
+import com.technorizen.healthcare.models.SuccessResGetPost;
+import com.technorizen.healthcare.models.SuccessResGetShiftInProgress;
+import com.technorizen.healthcare.retrofit.ApiClient;
+import com.technorizen.healthcare.retrofit.HealthInterface;
+import com.technorizen.healthcare.util.DataManager;
+import com.technorizen.healthcare.util.SharedPreferenceUtility;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.technorizen.healthcare.retrofit.Constant.USER_ID;
+import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,6 +40,12 @@ import com.technorizen.healthcare.R;
  * create an instance of this fragment.
  */
 public class ShiftHistoryFragment extends Fragment {
+
+    FragmentShiftHistoryBinding binding;
+
+    HealthInterface apiInterface;
+
+    private ArrayList<SuccessResGetShiftInProgress.Result> shiftInProgressList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -61,6 +91,113 @@ public class ShiftHistoryFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shift_history, container, false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_shift_history, container, false);
+
+        apiInterface = ApiClient.getClient().create(HealthInterface.class);
+
+        getShiftHistory();
+
+        binding.srlRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+
+                getShiftHistory();
+                binding.srlRefreshContainer.setRefreshing(false);
+            }
+        });
+        return binding.getRoot();
     }
+    public void getShiftHistory()
+    {
+
+        String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id",userId);
+
+        Call<SuccessResGetShiftInProgress> call = apiInterface.getUserShiftsHistory(map);
+        call.enqueue(new Callback<SuccessResGetShiftInProgress>() {
+            @Override
+            public void onResponse(Call<SuccessResGetShiftInProgress> call, Response<SuccessResGetShiftInProgress> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResGetShiftInProgress data = response.body();
+                    if (data.status.equals("1")) {
+                        //      getActivity().getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+                        shiftInProgressList.clear();
+                        shiftInProgressList.addAll(data.getResult());
+                        setShiftList();
+                    } else {
+//                        showToast(getActivity(), data.message);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetShiftInProgress> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
+
+    }
+
+    public void setShiftList()
+    {
+
+        if(shiftInProgressList.size()>10)
+        {
+
+            ArrayList<SuccessResGetShiftInProgress.Result> subList = new ArrayList<>(shiftInProgressList.subList(0,10));
+            binding.rvShiftInProgress.setHasFixedSize(true);
+            binding.rvShiftInProgress.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.rvShiftInProgress.setAdapter(new ShiftsHistoryWorkerAdapter(getActivity(),subList,true,"usershifthistory"));
+            binding.btnLoadMoreShifts.setVisibility(View.VISIBLE);
+
+        }
+        else
+        {
+            binding.rvShiftInProgress.setHasFixedSize(true);
+            binding.rvShiftInProgress.setLayoutManager(new LinearLayoutManager(getActivity()));
+            binding.rvShiftInProgress.setAdapter(new ShiftsHistoryWorkerAdapter(getActivity(),shiftInProgressList,true,"usershifthistory"));
+            binding.btnLoadMoreShifts.setVisibility(View.GONE);
+
+        }
+
+        binding.btnLoadMoreShifts.setOnClickListener(v ->
+                {
+
+                    binding.btnLoadMoreShifts.setVisibility(View.GONE);
+                    binding.btnLoadLessShifts.setVisibility(View.VISIBLE);
+
+                    binding.rvShiftInProgress.setHasFixedSize(true);
+                    binding.rvShiftInProgress.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    binding.rvShiftInProgress.setAdapter(new ShiftsHistoryWorkerAdapter(getActivity(),shiftInProgressList,true,"usershifthistory"));
+
+                }
+        );
+
+        binding.btnLoadLessShifts.setOnClickListener(v ->
+                {
+
+                    binding.btnLoadMoreShifts.setVisibility(View.VISIBLE);
+                    binding.btnLoadLessShifts.setVisibility(View.GONE);
+                    ArrayList<SuccessResGetShiftInProgress.Result> subList = new ArrayList<>(shiftInProgressList.subList(0,10));
+                    binding.rvShiftInProgress.setHasFixedSize(true);
+                    binding.rvShiftInProgress.setLayoutManager(new LinearLayoutManager(getActivity()));
+                    binding.rvShiftInProgress.setAdapter(new ShiftsHistoryWorkerAdapter(getActivity(),subList,true,"usershifthistory"));
+
+                }
+        );
+
+    }
+
+
 }

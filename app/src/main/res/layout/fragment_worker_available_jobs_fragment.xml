@@ -3,6 +3,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".fragments.HomeFragment"
+        android:orientation="vertical"
+        android:background="@color/white"
+        >
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/srlRefreshContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -36,18 +49,20 @@
                     android:textSize="@dimen/_16sdp" />
 
                 <EditText
+                    android:id="@+id/etSearch"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:fontFamily="@font/montserrat_medium"
+                    android:inputType="text"
+                    android:hint="@string/search_by_company_name"
+                    android:imeOptions="actionSearch"
+                    android:drawableRight="@drawable/ic_search_24"
                     android:layout_marginTop="@dimen/_5sdp"
-                    android:hint="Search By Company Name"
-                    android:textColor="@color/black"
-                    android:textColorHint="@color/black"
-                    android:textSize="@dimen/_11sdp"
-                    android:fontFamily="@font/montserrat_semibold"
-                    android:background="@drawable/background_transparent"
                     android:padding="@dimen/_10sdp"
-                    />
+                    android:layout_toRightOf="@+id/img_header"
+                    android:backgroundTint="@color/white"
+                    android:layout_marginHorizontal="@dimen/_10sdp"
+                    android:textSize="@dimen/_12sdp" />
 
                 <View
                     android:layout_width="match_parent"
@@ -60,41 +75,73 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginHorizontal="@dimen/_20sdp"
+                    android:layout_margin="@dimen/_20sdp"
                     android:background="@drawable/light_grey_button_bg"
-                    android:layout_marginTop="@dimen/_20sdp"
-                    android:layout_marginBottom="@dimen/_10sdp"
                     >
 
+
                     <TextView
-                        android:id="@+id/tvSortByDistance"
+                        android:id="@+id/tvSortByTime"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/white"
-                        android:textSize="@dimen/_12sdp"
+                        android:textSize="@dimen/_11sdp"
                         android:layout_weight=".5"
-                        android:text="@string/sort_by_distance"
+                        android:text="@string/sort_by_dates"
                         android:gravity="center"
                         android:padding="@dimen/_8sdp"
                         android:background="@drawable/button_bg"
                         />
 
                     <TextView
-                        android:id="@+id/tvSortByTime"
+                        android:id="@+id/tvSortByDistance"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:textColor="@color/black"
-                        android:textSize="@dimen/_11sdp"
+                        android:textSize="@dimen/_12sdp"
                         android:layout_weight=".5"
-                        android:text="@string/sort_by_dates"
+                        android:text="@string/sort_by_distance"
                         android:gravity="center"
                         android:padding="@dimen/_8sdp"
                         />
-
-
                 </LinearLayout>
 
 
+                <androidx.recyclerview.widget.RecyclerView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/rvShifts"/>
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLoadMoreShifts"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:text="@string/load_more"
+                    android:visibility="gone"
+                    android:textAllCaps="false"
+                    android:background="@drawable/gray_button_bg"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    />
+
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btnLoadLessShifts"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:text="@string/load_less"
+                    android:visibility="gone"
+                    android:textAllCaps="false"
+                    android:background="@drawable/gray_button_bg"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:textSize="@dimen/_11sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:layout_marginVertical="@dimen/_10sdp"
+                    />
+
+<!--
                 <com.google.android.material.card.MaterialCardView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -371,9 +418,12 @@
                             />
                     </LinearLayout>
                 </com.google.android.material.card.MaterialCardView>
+-->
             </LinearLayout>
 
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

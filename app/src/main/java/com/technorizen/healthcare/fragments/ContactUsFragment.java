@@ -1,7 +1,10 @@
 package com.technorizen.healthcare.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
@@ -9,7 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.technorizen.healthcare.R;
+import com.technorizen.healthcare.databinding.FragmentContactUsBinding;
 import com.technorizen.healthcare.models.SuccessResAddAddress;
+import com.technorizen.healthcare.models.SuccessResGetAppInfo;
+import com.technorizen.healthcare.models.SuccessResGetCardDetails;
+import com.technorizen.healthcare.retrofit.ApiClient;
+import com.technorizen.healthcare.retrofit.HealthInterface;
 import com.technorizen.healthcare.util.DataManager;
 import com.technorizen.healthcare.util.SharedPreferenceUtility;
 
@@ -29,6 +37,12 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * create an instance of this fragment.
  */
 public class ContactUsFragment extends Fragment {
+
+    FragmentContactUsBinding binding;
+
+    private HealthInterface apiInterface;
+
+    String twitterLink = "",instagramLink = "",facebookLink = "";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -74,14 +88,102 @@ public class ContactUsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_contact_us, container, false);
+
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_contact_us, container, false);
+
+        apiInterface = ApiClient.getClient().create(HealthInterface.class);
+
+        getAppInfo();
+
+        return binding.getRoot();
     }
 
-/*
+    public void getAppInfo()
+    {
+
+        String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id",userId);
+
+        Call<SuccessResGetAppInfo> call = apiInterface.getAppInfo(map);
+        call.enqueue(new Callback<SuccessResGetAppInfo>() {
+            @Override
+            public void onResponse(Call<SuccessResGetAppInfo> call, Response<SuccessResGetAppInfo> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+
+                    SuccessResGetAppInfo data = response.body();
+                    if (data.status.equals("1")) {
+
+                        binding.tvEmail.setText(getResources().getString(R.string.email_us)+" "+data.getResult().get(0).getEmail());
+
+                        instagramLink = data.getResult().get(0).getInsta();
+                        twitterLink = data.getResult().get(0).getTwitter();
+                        facebookLink = data.getResult().get(0).getFacebook();
+
+                        setAllOnclick();
+
+                    } else {
+                        showToast(getActivity(), data.message);
+
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetAppInfo> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
+
+    }
+
+    public void setAllOnclick()
+    {
+
+       binding.btnINsta.setOnClickListener(v ->
+               {
+                   Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(instagramLink));
+                   getActivity().startActivity(browserIntent);
+               }
+               );
+
+        binding.btnfb.setOnClickListener(v ->
+                {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(instagramLink));
+                    getActivity().startActivity(browserIntent);
+                }
+        );
+        binding.btnINsta.setOnClickListener(v ->
+                {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(facebookLink));
+                    getActivity().startActivity(browserIntent);
+                }
+        );
+
+        binding.btnTwiter.setOnClickListener(v ->
+                {
+                    Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(twitterLink));
+                    getActivity().startActivity(browserIntent);
+                }
+        );
 
 
 
-*/
+
+
+    }
 
 
 }

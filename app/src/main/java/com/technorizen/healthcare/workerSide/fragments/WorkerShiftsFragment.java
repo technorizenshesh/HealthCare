@@ -43,6 +43,7 @@ public class WorkerShiftsFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment WorkerShiftsFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static WorkerShiftsFragment newInstance(String param1, String param2) {
         WorkerShiftsFragment fragment = new WorkerShiftsFragment();
@@ -78,7 +79,6 @@ public class WorkerShiftsFragment extends Fragment {
         binding.tvCurrent.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_workerShiftsFragment_to_workerCurrentScheduleFragment);
-
                 }
         );
 
@@ -92,6 +92,13 @@ public class WorkerShiftsFragment extends Fragment {
         binding.tvShiftHistory.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_workerShiftsFragment_to_workerShiftsHistoryFragment);
+
+                }
+        );
+
+        binding.tvPendingRecruitmentShift.setOnClickListener(v ->
+                {
+                    Navigation.findNavController(v).navigate(R.id.action_workerShiftsFragment_to_workerPendingRecruitmentShiftFragment);
 
                 }
         );

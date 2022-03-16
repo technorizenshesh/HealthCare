@@ -8,8 +8,6 @@
     android:background="@color/white"
     >
 
-
-
     <include
         android:id="@+id/forgot_action"
         layout="@layout/layou_header"/>
@@ -53,7 +51,6 @@
                 android:text="CareShifts"
                 android:layout_gravity="center_horizontal"
                 />
-
 
             <TextView
                 android:layout_width="wrap_content"
@@ -121,11 +118,6 @@
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/_10sdp"
                 android:gravity="center_horizontal">
-
-
-
-
-
 
 
 

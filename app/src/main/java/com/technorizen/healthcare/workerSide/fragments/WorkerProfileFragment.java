@@ -11,6 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
+import com.bumptech.glide.request.RequestOptions;
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.databinding.FragmentWorkerProfileBinding;
 import com.technorizen.healthcare.models.SuccessResGetProfile;
@@ -87,51 +90,36 @@ public class WorkerProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_worker_profile, container, false);
-
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-
         getProfile();
-
         binding.btnEdit.setOnClickListener(v ->
                 {
-
                     Navigation.findNavController(v).navigate(R.id.action_workerProfileFragment_to_workerEditProfileFragment);
-
                 }
         );
-
         return binding.getRoot();
     }
-
 
     public void getProfile()
     {
 
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
-
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("worker_id",userId);
-
         Call<SuccessResGetWorkerProfile> call = apiInterface.getWorkerProfile(map);
         call.enqueue(new Callback<SuccessResGetWorkerProfile>() {
             @Override
             public void onResponse(Call<SuccessResGetWorkerProfile> call, Response<SuccessResGetWorkerProfile> response) {
 
                 DataManager.getInstance().hideProgressMessage();
-
                 try {
-
                     SuccessResGetWorkerProfile data = response.body();
                     if (data.status.equals("1")) {
-
                         userList.clear();
-
                         userList.addAll(data.getResult());
                         setData();
-
                     } else {
                         showToast(getActivity(), data.message);
                     }
@@ -139,52 +127,50 @@ public class WorkerProfileFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
             public void onFailure(Call<SuccessResGetWorkerProfile> call, Throwable t) {
-
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
-
             }
         });
-
     }
 
     public void setData()
     {
 
         SuccessResGetWorkerProfile.Result user = userList.get(0);
+        if(user.getCompany().equalsIgnoreCase(""))
+        {
+            binding.tvName.setText(user.getFirstName()+" "+user.getLastName());
+        }
+        else
+        {
+            binding.tvName.setText(user.getCompany());
+        }
 
-        binding.tvName.setText(user.getFirstName()+" "+user.getLastName());
-
-        binding.tvLocation.setText(user.getStreetNo()+" "+user.getStreetName()+", "+user.getCountryName()+", "+user.getStateName());
-
+        binding.tvLocation.setText(user.getAddress());
         binding.tvEmail.setText(user.getEmail());
         binding.tvPhone.setText("+1"+" "+user.getPhone());
 
         if(user.getAdminApproval().equalsIgnoreCase("Approved"))
         {
-
             binding.tvApprove.setVisibility(View.VISIBLE);
-
         } else
-
         {
             binding.tvApprove.setVisibility(View.GONE);
         }
 
+        binding.tvRating.setText(userList.get(0).getRating());
+        binding.ratingBar.setRating(Float.parseFloat(String.valueOf(userList.get(0).getRating())));
+        RequestOptions requestOptions = new RequestOptions();
+        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
         Glide.with(getActivity())
                 .load(user.getImage())
                 .centerCrop()
+                .apply(requestOptions)
                 .into(binding.ivProfile);
-
         binding.tvJobPosition.setText("("+user.getDesignation()+")");
-
     }
-
-
-
 }

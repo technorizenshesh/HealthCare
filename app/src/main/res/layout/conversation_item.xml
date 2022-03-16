@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+            android:id="@+id/rlParent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_10sdp"
+            >
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/ivProfile"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginRight="@dimen/_15sdp"
+                android:background="@drawable/circle_bg"
+                />
+
+            <TextView
+                android:id="@+id/tvUserName"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_semibold"
+                android:textColor="@color/black"
+                android:textStyle="bold"
+                android:text="Shona"
+                android:layout_marginTop="@dimen/_8sdp"
+                android:layout_toRightOf="@+id/ivProfile"
+                android:textSize="@dimen/_14sdp" />
+            <TextView
+                android:id="@+id/tvMessage"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/montserrat_regular"
+                android:textColor="@color/dark_grey"
+                android:text="hello"
+                android:layout_below="@id/tvUserName"
+                android:layout_toRightOf="@+id/ivProfile"
+                android:textSize="@dimen/_12sdp" />
+
+
+
+        </RelativeLayout>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:background="@color/light_gray"/>
+
+    </LinearLayout>
+</layout>

@@ -12,6 +12,23 @@ import android.view.ViewGroup;
 
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.databinding.FragmentWorkerBillingBinding;
+import com.technorizen.healthcare.models.SuccessResGetProfile;
+import com.technorizen.healthcare.retrofit.ApiClient;
+import com.technorizen.healthcare.retrofit.HealthInterface;
+import com.technorizen.healthcare.util.DataManager;
+import com.technorizen.healthcare.util.SharedPreferenceUtility;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.technorizen.healthcare.retrofit.Constant.USER_ID;
+import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -21,6 +38,7 @@ import com.technorizen.healthcare.databinding.FragmentWorkerBillingBinding;
 public class WorkerBillingFragment extends Fragment {
 
     FragmentWorkerBillingBinding binding;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -69,6 +87,8 @@ public class WorkerBillingFragment extends Fragment {
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_worker_billing, container, false);
 
+
+
         binding.tvInvoices.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_workerBillingFragment_to_workerInvoicesFragment);
@@ -83,7 +103,6 @@ public class WorkerBillingFragment extends Fragment {
                 }
         );
 
-
         binding.tvReport.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_workerBillingFragment_to_reportFragment);
@@ -91,7 +110,16 @@ public class WorkerBillingFragment extends Fragment {
                 }
         );
 
+        binding.tvInvoiceSummary.setOnClickListener(v ->
+                {
+                    Navigation.findNavController(v).navigate(R.id.action_workerBillingFragment_to_workerInvoiceSummaryFragment);
 
+                }
+        );
         return binding.getRoot();
     }
+
+
+
+
 }

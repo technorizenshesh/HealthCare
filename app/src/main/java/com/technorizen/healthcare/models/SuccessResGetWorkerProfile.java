@@ -8,7 +8,6 @@ import java.util.List;
 
 public class SuccessResGetWorkerProfile implements Serializable {
 
-
     @SerializedName("result")
     @Expose
     public List<Result> result = null;
@@ -87,6 +86,15 @@ public class SuccessResGetWorkerProfile implements Serializable {
         @SerializedName("worker_designation")
         @Expose
         public String workerDesignation;
+        @SerializedName("address")
+        @Expose
+        public String address;
+        @SerializedName("lat")
+        @Expose
+        public String lat;
+        @SerializedName("lon")
+        @Expose
+        public String lon;
         @SerializedName("city")
         @Expose
         public String city;
@@ -108,30 +116,84 @@ public class SuccessResGetWorkerProfile implements Serializable {
         @SerializedName("type")
         @Expose
         public String type;
+        @SerializedName("rate")
+        @Expose
+        public String rate;
+        @SerializedName("sms_notification")
+        @Expose
+        public String smsNotification;
+        @SerializedName("psus_notification")
+        @Expose
+        public String psusNotification;
+        @SerializedName("email_notification")
+        @Expose
+        public String emailNotification;
+        @SerializedName("distance")
+        @Expose
+        public String distance;
         @SerializedName("register_id")
         @Expose
         public String registerId;
         @SerializedName("admin_approval")
         @Expose
         public String adminApproval;
+        @SerializedName("approval_date")
+        @Expose
+        public String approvalDate;
         @SerializedName("status")
         @Expose
         public String status;
+        @SerializedName("time_zone")
+        @Expose
+        public String timeZone;
+        @SerializedName("instant_pay")
+        @Expose
+        public String instantPay;
+        @SerializedName("worker_availability")
+        @Expose
+        public String workerAvailability;
+        @SerializedName("wallet_amount")
+        @Expose
+        public String walletAmount;
         @SerializedName("email_code")
         @Expose
         public String emailCode;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
+        @SerializedName("rating")
+        @Expose
+        public String rating;
+        @SerializedName("shifts_worked")
+        @Expose
+        public String shiftsWorked;
+        @SerializedName("total_earning")
+        @Expose
+        public String totalEarning;
+        @SerializedName("cancel_shifts")
+        @Expose
+        public String cancelShifts;
+        @SerializedName("punctual_shifs")
+        @Expose
+        public String punctualShifs;
+        @SerializedName("late_shifts")
+        @Expose
+        public String lateShifts;
+        @SerializedName("no_shows")
+        @Expose
+        public String noShows;
         @SerializedName("designation")
         @Expose
         public String designation;
         @SerializedName("country_name")
         @Expose
-        public String countryName;
+        public Object countryName;
         @SerializedName("state_name")
         @Expose
-        public String stateName;
+        public Object stateName;
+        @SerializedName("curent_date")
+        @Expose
+        public String curentDate;
 
         public String getId() {
             return id;
@@ -245,6 +307,30 @@ public class SuccessResGetWorkerProfile implements Serializable {
             this.workerDesignation = workerDesignation;
         }
 
+        public String getAddress() {
+            return address;
+        }
+
+        public void setAddress(String address) {
+            this.address = address;
+        }
+
+        public String getLat() {
+            return lat;
+        }
+
+        public void setLat(String lat) {
+            this.lat = lat;
+        }
+
+        public String getLon() {
+            return lon;
+        }
+
+        public void setLon(String lon) {
+            this.lon = lon;
+        }
+
         public String getCity() {
             return city;
         }
@@ -301,6 +387,46 @@ public class SuccessResGetWorkerProfile implements Serializable {
             this.type = type;
         }
 
+        public String getRate() {
+            return rate;
+        }
+
+        public void setRate(String rate) {
+            this.rate = rate;
+        }
+
+        public String getSmsNotification() {
+            return smsNotification;
+        }
+
+        public void setSmsNotification(String smsNotification) {
+            this.smsNotification = smsNotification;
+        }
+
+        public String getPsusNotification() {
+            return psusNotification;
+        }
+
+        public void setPsusNotification(String psusNotification) {
+            this.psusNotification = psusNotification;
+        }
+
+        public String getEmailNotification() {
+            return emailNotification;
+        }
+
+        public void setEmailNotification(String emailNotification) {
+            this.emailNotification = emailNotification;
+        }
+
+        public String getDistance() {
+            return distance;
+        }
+
+        public void setDistance(String distance) {
+            this.distance = distance;
+        }
+
         public String getRegisterId() {
             return registerId;
         }
@@ -317,12 +443,52 @@ public class SuccessResGetWorkerProfile implements Serializable {
             this.adminApproval = adminApproval;
         }
 
+        public String getApprovalDate() {
+            return approvalDate;
+        }
+
+        public void setApprovalDate(String approvalDate) {
+            this.approvalDate = approvalDate;
+        }
+
         public String getStatus() {
             return status;
         }
 
         public void setStatus(String status) {
             this.status = status;
+        }
+
+        public String getTimeZone() {
+            return timeZone;
+        }
+
+        public void setTimeZone(String timeZone) {
+            this.timeZone = timeZone;
+        }
+
+        public String getInstantPay() {
+            return instantPay;
+        }
+
+        public void setInstantPay(String instantPay) {
+            this.instantPay = instantPay;
+        }
+
+        public String getWorkerAvailability() {
+            return workerAvailability;
+        }
+
+        public void setWorkerAvailability(String workerAvailability) {
+            this.workerAvailability = workerAvailability;
+        }
+
+        public String getWalletAmount() {
+            return walletAmount;
+        }
+
+        public void setWalletAmount(String walletAmount) {
+            this.walletAmount = walletAmount;
         }
 
         public String getEmailCode() {
@@ -341,6 +507,62 @@ public class SuccessResGetWorkerProfile implements Serializable {
             this.dateTime = dateTime;
         }
 
+        public String getRating() {
+            return rating;
+        }
+
+        public void setRating(String rating) {
+            this.rating = rating;
+        }
+
+        public String getShiftsWorked() {
+            return shiftsWorked;
+        }
+
+        public void setShiftsWorked(String shiftsWorked) {
+            this.shiftsWorked = shiftsWorked;
+        }
+
+        public String getTotalEarning() {
+            return totalEarning;
+        }
+
+        public void setTotalEarning(String totalEarning) {
+            this.totalEarning = totalEarning;
+        }
+
+        public String getCancelShifts() {
+            return cancelShifts;
+        }
+
+        public void setCancelShifts(String cancelShifts) {
+            this.cancelShifts = cancelShifts;
+        }
+
+        public String getPunctualShifs() {
+            return punctualShifs;
+        }
+
+        public void setPunctualShifs(String punctualShifs) {
+            this.punctualShifs = punctualShifs;
+        }
+
+        public String getLateShifts() {
+            return lateShifts;
+        }
+
+        public void setLateShifts(String lateShifts) {
+            this.lateShifts = lateShifts;
+        }
+
+        public String getNoShows() {
+            return noShows;
+        }
+
+        public void setNoShows(String noShows) {
+            this.noShows = noShows;
+        }
+
         public String getDesignation() {
             return designation;
         }
@@ -349,20 +571,28 @@ public class SuccessResGetWorkerProfile implements Serializable {
             this.designation = designation;
         }
 
-        public String getCountryName() {
+        public Object getCountryName() {
             return countryName;
         }
 
-        public void setCountryName(String countryName) {
+        public void setCountryName(Object countryName) {
             this.countryName = countryName;
         }
 
-        public String getStateName() {
+        public Object getStateName() {
             return stateName;
         }
 
-        public void setStateName(String stateName) {
+        public void setStateName(Object stateName) {
             this.stateName = stateName;
+        }
+
+        public String getCurentDate() {
+            return curentDate;
+        }
+
+        public void setCurentDate(String curentDate) {
+            this.curentDate = curentDate;
         }
 
     }

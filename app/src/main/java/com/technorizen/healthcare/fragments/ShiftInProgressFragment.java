@@ -2,23 +2,48 @@ package com.technorizen.healthcare.fragments;
 
 import android.os.Bundle;
 
+import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.technorizen.healthcare.R;
+import com.technorizen.healthcare.adapters.ShiftsInProgressAdapter;
+import com.technorizen.healthcare.adapters.UserShiftsInProgressAdapter;
+import com.technorizen.healthcare.databinding.FragmentShiftInProgressBinding;
+import com.technorizen.healthcare.models.SuccessResGetShiftInProgress;
+import com.technorizen.healthcare.retrofit.ApiClient;
+import com.technorizen.healthcare.retrofit.HealthInterface;
+import com.technorizen.healthcare.util.DataManager;
+import com.technorizen.healthcare.util.SharedPreferenceUtility;
+import com.technorizen.healthcare.util.ShiftCompletedClick;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static com.technorizen.healthcare.retrofit.Constant.USER_ID;
+import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ShiftInProgressFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class ShiftInProgressFragment extends Fragment {
+public class ShiftInProgressFragment extends Fragment implements ShiftCompletedClick {
 
+    FragmentShiftInProgressBinding binding;
+    private HealthInterface apiInterface;
+    private ArrayList<SuccessResGetShiftInProgress.Result> shiftInProgressList = new ArrayList<>();
     // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
 
@@ -38,6 +63,7 @@ public class ShiftInProgressFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ShiftInProgressFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static ShiftInProgressFragment newInstance(String param1, String param2) {
         ShiftInProgressFragment fragment = new ShiftInProgressFragment();
@@ -61,6 +87,58 @@ public class ShiftInProgressFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_shift_in_progress, container, false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_shift_in_progress, container, false);
+        apiInterface = ApiClient.getClient().create(HealthInterface.class);
+        getShiftsInProgress();
+        binding.srlRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getShiftsInProgress();
+                binding.srlRefreshContainer.setRefreshing(false);
+            }
+        });
+        return binding.getRoot();
+    }
+
+    public void getShiftsInProgress()
+    {
+        String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id",userId);
+        Call<SuccessResGetShiftInProgress> call = apiInterface.getUserShiftsInProgress(map);
+        call.enqueue(new Callback<SuccessResGetShiftInProgress>() {
+            @Override
+            public void onResponse(Call<SuccessResGetShiftInProgress> call, Response<SuccessResGetShiftInProgress> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResGetShiftInProgress data = response.body();
+                    if (data.status.equals("1")) {
+                        binding.llProgress.setVisibility(View.VISIBLE);
+                        shiftInProgressList.clear();
+                        shiftInProgressList.addAll(data.getResult());
+                        binding.rvShiftInProgress.setHasFixedSize(true);
+                        binding.rvShiftInProgress.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        binding.rvShiftInProgress.setAdapter(new UserShiftsInProgressAdapter(getActivity(),shiftInProgressList,true,"usershiftInProgress",ShiftInProgressFragment.this::getClick));
+                    } else {
+//                        showToast(getActivity(), data.message);
+                        binding.llProgress.setVisibility(View.GONE);
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetShiftInProgress> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
+    @Override
+    public void getClick() {
+
     }
 }

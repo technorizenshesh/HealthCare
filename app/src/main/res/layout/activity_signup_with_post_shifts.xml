@@ -196,7 +196,6 @@
                         android:hint="@string/company_website"
                         android:textColor="@color/black"
                         android:textColorHint="@color/black"
-                        android:drawableLeft="@drawable/ic_mail"
                         android:inputType="text" />
 
                 </com.google.android.material.textfield.TextInputLayout>
@@ -606,7 +605,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"
-                        android:text="By clicking Signup, you agree to CareShift's terms of Service and Privacy Policy. "
+                        android:text="@string/by_clicking_signup_you_agree_to_careshifts_terms_of_service_and_privacy_policy"
                         android:textSize="@dimen/_12sdp"
                         android:textColor="@color/colorGray"
                         android:paddingStart="@dimen/_5sdp"
@@ -795,7 +794,6 @@
                     android:textAllCaps="false"
                     android:layout_marginBottom="@dimen/_15sdp"
                     />
-
 
             </LinearLayout>
         </androidx.core.widget.NestedScrollView>

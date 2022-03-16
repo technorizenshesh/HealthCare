@@ -89,7 +89,9 @@ public class EditProfileFragment extends Fragment {
     FragmentEditProfileBinding binding;
     HealthInterface apiInterface;
     private List<SuccessResGetStates.Result> myStateList = new LinkedList<>();
-    private static int AUTOCOMPLETE_REQUEST_CODE = 1;
+    private static int AUTOCOMPLETE_REQUEST_CODE = 9;
+
+    String strAccountType ="";
 
     private String selectedStateCode = "";
     private String selectedCountryCode = "";
@@ -189,6 +191,7 @@ public class EditProfileFragment extends Fragment {
                     RelativeLayout rlUs, rlCA;
 
                     rlUs = dialog.findViewById(R.id.rlUS);
+
                     rlUs.setOnClickListener(v1 ->
                             {
 
@@ -221,13 +224,15 @@ public class EditProfileFragment extends Fragment {
                     strCompanyWebsite = binding.etCompanyWebsite.getText().toString().trim();
                     strStreetNumber = "Test";
                     strStreetName = "Test";
-                    strCountry = getCountryCode(binding.spinnerCountry.getSelectedItem().toString());
-                    strState = getStateID(binding.spinnerState.getSelectedItem().toString());
+                //    strCountry = getCountryCode(binding.spinnerCountry.getSelectedItem().toString());
+              //      strState = getStateID(binding.spinnerState.getSelectedItem().toString());
                     strCity = binding.etCity.getText().toString().trim();
                     strZip = binding.etZipCode.getText().toString().trim();
                     strEmail = binding.etEmail.getText().toString().trim();
                     strPhone = binding.etPhone.getText().toString().trim();
                     strClientDesc = binding.etDesc.getText().toString().trim();
+
+                    strAddress = binding.etAddress.getText().toString().trim();
 
                     binding.labelFirst.setError(null);
                     binding.labelLast.setError(null);
@@ -496,14 +501,40 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
     selectedStateCode = user.getState();
     selectedCountryCode = user.getCountry();
 
+    strAccountType = user.getAccountType();
+
+    if (user.getAccountType().equalsIgnoreCase("Company"))
+    {
+
+        binding.labelFirst.setVisibility(View.GONE);
+        binding.labelLast.setVisibility(View.GONE);
+        binding.labelCompanyName.setVisibility(View.VISIBLE);
+        binding.labelCompanyWebsite.setVisibility(View.VISIBLE);
+
+    }else
+    {
+        binding.labelFirst.setVisibility(View.VISIBLE);
+        binding.labelLast.setVisibility(View.VISIBLE);
+        binding.labelCompanyName.setVisibility(View.GONE);
+        binding.labelCompanyWebsite.setVisibility(View.GONE);
+
+    }
+
     Glide.with(getActivity())
             .load(user.getImage())
             .centerCrop()
             .into(binding.ivProfile);
 
+
     int countryPosition = getSpinnerCountryPosition(user.getCountry());
 
     binding.etAddress.setText(user.getPostshiftTime().get(0).getAddress());
+
+    strAddress = user.getPostshiftTime().get(0).getAddress();
+
+    strLat =  user.getPostshiftTime().get(0).getLat();
+
+    strLong =  user.getPostshiftTime().get(0).getLong();
 
     if(user.getCouttryCode().equalsIgnoreCase("CA"))
     {
@@ -576,8 +607,6 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
         return 0;
     }
 
-
-
     private AdapterView.OnItemSelectedListener country_listener = new AdapterView.OnItemSelectedListener() {
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -635,7 +664,6 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
         countryArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerCountry.setAdapter(countryArrayAdapter);
         binding.spinnerCountry.setOnItemSelectedListener(country_listener);
-
         binding.spinnerCountry.setSelection(getSpinnerCountryPosition(selectedCountryCode));
 
     }
@@ -713,7 +741,6 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
@@ -729,6 +756,15 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
 
     private void updateProfile()
     {
+
+//        if(strLat.contains("-"))
+//        {
+//            strLat = strLat.replace("-","");
+//        }
+//        if(strLong.contains("-"))
+//        {
+//            strLong = strLong.replace("-","");
+//        }
 
         String strUserId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
@@ -749,7 +785,7 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
             filePart = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
         }
         RequestBody userId = RequestBody.create(MediaType.parse("text/plain"), strUserId);
-        RequestBody accountType = RequestBody.create(MediaType.parse("text/plain"), "");
+        RequestBody accountType = RequestBody.create(MediaType.parse("text/plain"), strAccountType);
         RequestBody firstName = RequestBody.create(MediaType.parse("text/plain"), strfirstName);
         RequestBody lastName = RequestBody.create(MediaType.parse("text/plain"), strlastName);
         RequestBody company = RequestBody.create(MediaType.parse("text/plain"), strCompanyName);
@@ -813,6 +849,10 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
             return false;
         } else if (strStreetName.equalsIgnoreCase("")) {
             binding.labelStreetName.setError(getString(R.string.enter_street_name));
+            return false;
+        } else if(strAddress.equalsIgnoreCase(""))
+        {
+            Toast.makeText(getActivity(), "Please add address.", Toast.LENGTH_SHORT).show();
             return false;
         } else if (strEmail.equalsIgnoreCase("")) {
             binding.labelEmail.setError(getString(R.string.enter_email));

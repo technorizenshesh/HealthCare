@@ -54,6 +54,7 @@
                 >
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchWeeklySchedule"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/recurring_weekly_schedule"
@@ -69,27 +70,36 @@
 
         </com.google.android.material.card.MaterialCardView>
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/montserrat_regular"
-            android:textColor="@color/colorGray"
-            android:layout_centerVertical="true"
-            android:layout_centerHorizontal="true"
-            android:text="@string/select_the_days_and_timing_of_your_availability"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:layout_marginHorizontal="@dimen/_15sdp"
-            android:textSize="@dimen/_12sdp" />
 
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="fill_parent"
+                android:orientation="vertical"
+                android:id="@+id/llSchedule"
+                >
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_regular"
+                    android:textColor="@color/colorGray"
+                    android:layout_centerVertical="true"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/select_the_days_and_timing_of_your_availability"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginHorizontal="@dimen/_15sdp"
+                    android:textSize="@dimen/_12sdp" />
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginHorizontal="@dimen/_14sdp"
             app:cardElevation="@dimen/_25sdp"
             app:cardCornerRadius="@dimen/_10sdp"
             app:cardMaxElevation="@dimen/_25sdp"
             android:layout_marginTop="@dimen/_20sdp"
             app:strokeColor="@color/black"
+            android:layout_marginBottom="@dimen/_40sdp"
             app:strokeWidth="@dimen/_1sdp"
             android:outlineSpotShadowColor="@color/black"
             android:outlineAmbientShadowColor="@color/black"
@@ -103,6 +113,7 @@
                 >
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchMonday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/monday"
@@ -178,6 +189,7 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     />
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchTuesday"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/tuesday"
@@ -251,8 +263,8 @@
                     android:layout_marginTop="@dimen/_5sdp"
                     />
 
-
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchWed"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/wednesday"
@@ -326,6 +338,7 @@
 
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchThurs"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/thursday"
@@ -398,6 +411,7 @@
                     android:background="@color/extra_light_grey"/>
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchFri"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="FRIDAY"
@@ -471,6 +485,7 @@
 
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchSat"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/saturday"
@@ -544,6 +559,7 @@
 
 
                 <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/switchSun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/sunday"
@@ -618,18 +634,20 @@
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
+            </LinearLayout>
 
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/btnLogin"
+                android:id="@+id/btnSaveChanges"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/save_changes"
                 android:background="@drawable/button_bg"
                 android:layout_marginHorizontal="@dimen/_15sdp"
                 android:textColor="@color/white"
-                android:layout_marginVertical="@dimen/_20sdp"
+                android:layout_marginBottom="@dimen/_20sdp"
                 android:fontFamily="@font/montserrat_semibold"
                 android:textSize="@dimen/_12sdp"
+                android:layout_marginTop="@dimen/_10sdp"
                 android:textAllCaps="false"
                 />
         </LinearLayout>

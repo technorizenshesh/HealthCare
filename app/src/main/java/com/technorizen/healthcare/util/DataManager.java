@@ -29,28 +29,21 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 import ir.alirezabdn.wp7progress.WP10ProgressBar;
 
-
 public class DataManager {
-
-
     private static final DataManager ourInstance = new DataManager();
-
     public static DataManager getInstance() {
             return ourInstance;
         }
-
         private DataManager() {
         }
-
         private Dialog mDialog;
         private boolean isProgressDialogRunning = false;
- //       WP10ProgressBar progressBar;
-      ArchedImageProgressBar progressBar;
-
+        ArchedImageProgressBar progressBar;
         public void showProgressMessage(Activity dialogActivity, String msg) {
             try {
                 if (isProgressDialogRunning) {
@@ -66,10 +59,8 @@ public class DataManager {
                 textView.setText(msg);
                 WindowManager.LayoutParams lp = mDialog.getWindow().getAttributes();
                 lp.dimAmount = 0.8f;
-
                 progressBar = mDialog.findViewById(R.id.progressBar);
-                Bitmap linkedinIcon = BitmapFactory.decodeResource(dialogActivity.getResources(),R.drawable.ic_logo);
-
+                Bitmap linkedinIcon = BitmapFactory.decodeResource(dialogActivity.getResources(),R.drawable.ic_my_logo);
                 progressBar.setProgressImage(linkedinIcon,25.0f);
                 progressBar.setCircleSize(30.0f);
                 progressBar.setArchSize(32.75f);
@@ -78,40 +69,32 @@ public class DataManager {
                 progressBar.setArchLength(210);
                 progressBar.setArchStroke(8.85f);
                 progressBar.setArchSpeed(5);
-                
                 mDialog.getWindow().setAttributes(lp);
                 mDialog.getWindow().addFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
                 mDialog.setCancelable(false);
                 mDialog.setCanceledOnTouchOutside(false);
                 mDialog.show();
-
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         }
-
         public void hideProgressMessage() {
             isProgressDialogRunning = true;
             try {
                 if (mDialog != null) {
                     mDialog.dismiss();
 //                    progressBar.hideProgressBar();
-
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
-
         }
 /*
-
         public SignupModel getUserData(Context context) {
             SignupModel userData = new Gson().fromJson(SessionManager.readString(context, Constant.USER_INFO, ""), SignupModel.class);
             return userData;
         }
 */
-
-
         public static String getRealPathFromURI(Activity activity, Uri contentUri) {
             //TODO: get realpath from uri
             String stringPath = null;
@@ -130,28 +113,26 @@ public class DataManager {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-
             return stringPath;
         }
-
       /*  public static String resizeBase64Image(Bitmap image) {
-
        *//* if(image.getHeight() <= 400 && image.getWidth() <= 400){
             return base64image;
         }*//*
-
             image = Bitmap.createScaledBitmap(image, 150, 150, false);
-
             ByteArrayOutputStream baos = new ByteArrayOutputStream();
             image.compress(Bitmap.CompressFormat.JPEG, 80, baos);
             // byte[] imageAsBytes = Base64.decode(encodedDataString.getBytes(), 0);
-
             byte[] b = baos.toByteArray();
             //System.gc();
             return "data:image/png;base64," + Base64.encodeToString(b, Base64.DEFAULT);
-
         }
 */
+
+
+    public static<T> T[] subArray(T[] array, int beg, int end) {
+        return Arrays.copyOfRange(array, beg, end + 1);
+    }
 
         public static String toBase64(String message) {
             byte[] data;
@@ -162,11 +143,8 @@ public class DataManager {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
-
-
         public static String fromBase64(String message) {
             byte[] data = Base64.decode(message, Base64.DEFAULT);
             try {
@@ -174,10 +152,8 @@ public class DataManager {
             } catch (UnsupportedEncodingException e) {
                 e.printStackTrace();
             }
-
             return null;
         }
-
 
      public static String convertDateToString(long l) {
             String str = "";
@@ -186,34 +162,26 @@ public class DataManager {
             str = dateFormat.format(date);
             return str;
         }
-
   /*
         public static boolean isValidEmail(CharSequence target) {
             return (!TextUtils.isEmpty(target) && Patterns.EMAIL_ADDRESS.matcher(target).matches());
         }
-
-
         public static String getCurrent() {
             SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy  hh:mm aa");
             String currentDateandTime = sdf.format(new Date());
             return currentDateandTime;
         }*/
-
-
     public File saveBitmapToFile(File file){
         try {
-
             // BitmapFactory options to downsize the image
             BitmapFactory.Options o = new BitmapFactory.Options();
             o.inJustDecodeBounds = true;
             o.inSampleSize = 6;
             // factor of downsizing the image
-
             FileInputStream inputStream = new FileInputStream(file);
             //Bitmap selectedBitmap = null;
             BitmapFactory.decodeStream(inputStream, null, o);
             inputStream.close();
-
             // The new size we want to scale to
             final int REQUIRED_SIZE=75;
 
