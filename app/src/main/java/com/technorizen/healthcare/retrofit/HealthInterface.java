@@ -149,6 +149,7 @@ public interface HealthInterface {
     @FormUrlEncoded
     @POST("get_posted_shifts")
     Call<SuccessResGetPost> getUserPostedShifts(@FieldMap Map<String, String> paramHashMap);
+
     @FormUrlEncoded
     @POST("delete_shift")
     Call<SuccessResDeleteShifts> deleteShifts(@FieldMap Map<String, String> paramHashMap);
@@ -223,6 +224,10 @@ public interface HealthInterface {
     Call<SuccessResGetShiftInProgress> getUserShiftsInProgress(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
+    @POST("update_status_completed")
+    Call<SuccessResShiftCompleted> shiftCompleted(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
     @POST("user_completed_shift")
     Call<SuccessResGetShiftInProgress> getUserShiftsHistory(@FieldMap Map<String, String> paramHashMap);
 
@@ -233,10 +238,6 @@ public interface HealthInterface {
     @FormUrlEncoded
     @POST("shift_by_company_name")
     Call<SuccessResGetPost> getShiftsByCompanyName(@FieldMap Map<String, String> paramHashMap);
-
-    @FormUrlEncoded
-    @POST("update_status_completed")
-    Call<SuccessResShiftCompleted> shiftCompleted(@FieldMap Map<String, String> paramHashMap);
 
     @FormUrlEncoded
     @POST("worker_shift_invoice")

@@ -282,8 +282,6 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
 
 
 
-
-
         if(!postedList.get(position).getTotalWorked().equalsIgnoreCase(""))
         {
             int seconds =  Integer.parseInt(postedList.get(position).getTotalWorked());

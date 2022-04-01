@@ -50,7 +50,6 @@ public class ShiftInProgressFragment extends Fragment implements ShiftCompletedC
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
-
     public ShiftInProgressFragment() {
         // Required empty public constructor
     }
@@ -139,6 +138,8 @@ public class ShiftInProgressFragment extends Fragment implements ShiftCompletedC
 
     @Override
     public void getClick() {
+
+        getShiftsInProgress();
 
     }
 }

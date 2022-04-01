@@ -37,6 +37,8 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * Use the {@link WorkerShiftsHistoryFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+
 public class WorkerShiftsHistoryFragment extends Fragment {
 
     FragmentWorkerShiftsHistoryBinding binding;
@@ -63,6 +65,7 @@ public class WorkerShiftsHistoryFragment extends Fragment {
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

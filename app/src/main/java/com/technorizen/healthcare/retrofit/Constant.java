@@ -10,6 +10,7 @@ import java.util.regex.Pattern;
 import static android.content.ContentValues.TAG;
 
 public class Constant {
+
     public static final String BASE_URL = "https://www.app.careshifts.net/webservice/";
     public static final String USER_INFO = "user_info";
     public static String emailPattern = "[a-zA-Z0-9._-]+@[a-z]+\\.+[a-z]+";
@@ -33,7 +34,6 @@ public class Constant {
     public static void showToast(Activity context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }
-
 
     public static float getMinutesDifference(String time1,String time2,String transit)
     {

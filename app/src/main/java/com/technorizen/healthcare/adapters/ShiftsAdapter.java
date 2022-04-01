@@ -58,9 +58,11 @@ public class ShiftsAdapter extends RecyclerView.Adapter<ShiftsAdapter.SelectTime
     private DeleteShifts shifts;
     private boolean showNotes = false;
     public void addList(ArrayList<SuccessResGetPost.Result> postedList)
+
     {
         this.postedList = postedList;
     }
+
     public ShiftsAdapter(Context context, ArrayList<SuccessResGetPost.Result> postedList,boolean from,DeleteShifts shifts)
     {
         this.context = context;
@@ -77,6 +79,7 @@ public class ShiftsAdapter extends RecyclerView.Adapter<ShiftsAdapter.SelectTime
         SelectTimeViewHolder viewHolder = new SelectTimeViewHolder(listItem);
         return viewHolder;
     }
+
     @Override
     public void onBindViewHolder(@NonNull SelectTimeViewHolder holder, int position) {
         monthsList = new LinkedList<>();
@@ -657,6 +660,7 @@ public class ShiftsAdapter extends RecyclerView.Adapter<ShiftsAdapter.SelectTime
         Date date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss z").parse(inputDate);
         return new SimpleDateFormat("dd.MM.yyyy HH:mm:ss").format(date);
     }
+
     public static String getTime24Difference(String time1,String time2,String transit)
     {
         long myTime1=0;

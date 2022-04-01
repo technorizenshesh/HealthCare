@@ -454,7 +454,6 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
             }
         }
 
-
         ivChat.setOnClickListener(v ->
                 {
                     if(fromWhere.equalsIgnoreCase("userhome"))
@@ -467,7 +466,6 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
 //                        Navigation.findNavController(v).navigate(R.id.action_nav_home_to_one2OneChatFragment,bundle);
 
                         fullScreenDialog(postedList.get(position).getWorkerId());
-
 
                     }else if(fromWhere.equalsIgnoreCase("userCurrent"))
                     {

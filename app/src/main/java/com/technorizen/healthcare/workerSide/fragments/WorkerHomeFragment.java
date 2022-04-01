@@ -127,7 +127,6 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 public class WorkerHomeFragment extends Fragment implements DeleteShifts, RecruitmentShiftConfirmationInterface {
 
     private int seconds = 0;
-
     public  Date endDate = null;
     Runnable runnable;
     long displayTim = 0;
@@ -1214,7 +1213,6 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                 startActivity(intent);
             }
     );
-
     binding.tvWorkerName.setText(shiftInProgress.getShiftsdetail().get(0).getWorkerName());
     binding.tvWorkerDesignation.setText("( "+shiftInProgress.getShiftsdetail().get(0).getWorkerDesignation()+" )");
     binding.ivChat.setOnClickListener(v ->
@@ -1222,7 +1220,6 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                 fullScreenDialog(shiftInProgress.getUserId());
             }
             );
-
     Glide.with(getActivity())
             .load(shiftInProgress.getShiftsdetail().get(0).getWorkerImage())
             .centerCrop()
@@ -1277,7 +1274,6 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
         if(getTimeTodayOrNot(shift24hrStartTime,shift24HrEndTime))
         {
 
-
             Log.d(ContentValues.TAG, "runTimer: "+"Today");
             SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa");
             String dateString = shiftDate+" "+shiftStartTime;
@@ -1286,12 +1282,11 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
 //            Calendar calendar = Calendar.getInstance();
 //            calendar.setTime(date1);
 //            startTim = calendar.getTimeInMillis();
-
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-            SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa");
 
+            SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa");
             String newTIme = shiftEndTime;
             String[] splitStr = newTIme.split("\\s+");
             shiftEndTime = splitStr[0]+":00 "+splitStr[1];
@@ -1322,7 +1317,13 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
 //                    if (startTim <= currentTim) {
                         if (date1.compareTo(date3) <= 0) {
                             displayTim = date3.getTime() - date1.getTime();
+
+                            updateTime = true;
+
                         } else {
+
+                            updateTime = false;
+
                             displayTim = date1.getTime() - date3.getTime();
                         }
 
@@ -1352,7 +1353,9 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                         long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
                         totalSeconds = diffInSec;
                         handler.removeCallbacks(runnable);
-                        shiftCompleted();
+//                        shiftCompleted();
+                        getShiftsInProgress();
+
                     }
                 }
             };
@@ -1477,17 +1480,23 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                 e.printStackTrace();
             }
 
-            SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
+            SimpleDateFormat sdf2 = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa");
+
+            String newTIme = shiftEndTime;
+            String[] splitStr = newTIme.split("\\s+");
+            shiftEndTime = splitStr[0]+":00 "+splitStr[1];
+
             String dateString2 = shiftDate+" "+shiftEndTime;
 
             try {
                 date2 = sdf2.parse(dateString2);
                 Calendar calendar2 = Calendar.getInstance();
                 calendar2.setTime(date2);
-
+                calendar2.add(Calendar.DATE, 1);
+                date2 = calendar2.getTime();
                 endTim = calendar2.getTimeInMillis();
                 newEndTime = endTim;
-                endTim = 1440 * 60 * 1000+endTim;
+//                endTim = 1440 * 60 * 1000+endTim;
 
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -1500,46 +1509,74 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                     handler.postDelayed(runnable, 1000);
                     long currentTim = 0;
                     try {
-                        Date date3 = new Date();
+                        date3 = new Date();
                         Calendar calendar3 = Calendar.getInstance();
                         calendar3.setTime(date3);
                         currentTim = calendar3.getTimeInMillis();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if(displayTim<endTim)
-                    {
-                        if(currentTim<newEndTime)
-                        {
-                            currentTim = currentTim + 1440 * 60 * 1000;
-                        }
 
-                        if (startTim <= currentTim) {
+//                    if(displayTim<endTim)
+//                    {
+//                        if(currentTim<newEndTime)
+//                        {
+//                            currentTim = currentTim + 1440 * 60 * 1000;
+//                        }
+//
+//                        if (startTim <= currentTim) {
+//
+//                            if(endTim<currentTim)
+//                            {
+//                                updateTime = true;
+//                                updatTimeInShiftsInProgress();
+//                                Calendar calendar2 = Calendar.getInstance();
+//                                calendar2.setTime(date2);
+//                                date2 = calendar2.getTime();
+//                                long difference = date2.getTime() - date1.getTime();
+//                                long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
+//                                totalSeconds = diffInSec;
+//                                handler.removeCallbacks(runnable);
+//                                shiftCompleted();
+//                            }
+//                            updateTime = true;
+//                            displayTim = currentTim - startTim;
+//                        } else {
+//                            updateTime = false;
+//                            displayTim = startTim - currentTim;
+//                        }
+//                        totalSeconds = displayTim / 1000;
+//                        long difference = date1.getTime() - date2.getTime();
+//                        long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
+//                        Log.d(TAG, "run: "+diffInSec);
+//                        int currentSecond = (int) totalSeconds % 60;
+//                        long totalMinutes = totalSeconds / 60;
+//                        int currentMinute = (int) totalMinutes % 60;
+//                        long totalHours = totalMinutes / 60;
+//                        int currentHour = (int) totalHours % 12;
+//                        String time
+//                                = String
+//                                .format(Locale.getDefault(),
+//                                        "%02d:%02d:%02d", currentHour,
+//                                        currentMinute, currentSecond);
+//                        binding.btnClock.setText(time);
+//
+//                    }
 
-                            if(endTim<currentTim)
-                            {
-                                updateTime = true;
-                                updatTimeInShiftsInProgress();
-                                Calendar calendar2 = Calendar.getInstance();
-                                calendar2.setTime(date2);
-                                calendar2.add(Calendar.DATE, 1);
-                                date2 = calendar2.getTime();
-                                long difference = date2.getTime() - date1.getTime();
-                                long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
-                                totalSeconds = diffInSec;
-                                handler.removeCallbacks(runnable);
-                                shiftCompleted();
-                            }
+                    if (date2.compareTo(date3)==1) {
+//                    if (startTim <= currentTim) {
+                        if (date1.compareTo(date3) <= 0) {
                             updateTime = true;
-                            displayTim = currentTim - startTim;
+                            displayTim = date3.getTime() - date1.getTime();
                         } else {
                             updateTime = false;
-                            displayTim = startTim - currentTim;
+                            displayTim = date1.getTime() - date3.getTime();
                         }
+
                         totalSeconds = displayTim / 1000;
                         long difference = date1.getTime() - date2.getTime();
                         long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
-                        Log.d(TAG, "run: "+diffInSec);
+                        Log.d(ContentValues.TAG, "run: "+diffInSec);
                         int currentSecond = (int) totalSeconds % 60;
                         long totalMinutes = totalSeconds / 60;
                         int currentMinute = (int) totalMinutes % 60;
@@ -1550,22 +1587,23 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                                 .format(Locale.getDefault(),
                                         "%02d:%02d:%02d", currentHour,
                                         currentMinute, currentSecond);
+
+                        Log.d(LoginAct.TAG, "run: "+time);
+
                         binding.btnClock.setText(time);
 
                     }
                     else
                     {
                         updateTime = true;
-                        updatTimeInShiftsInProgress();
-                        Calendar calendar2 = Calendar.getInstance();
-                        calendar2.setTime(date2);
-                        calendar2.add(Calendar.DATE, 1);
-                        date2 = calendar2.getTime();
                         long difference = date2.getTime() - date1.getTime();
                         long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
                         totalSeconds = diffInSec;
                         handler.removeCallbacks(runnable);
-                        shiftCompleted();
+//                        shiftCompleted();
+
+                        getShiftsInProgress();
+
                     }
 
 //                    if (endTim > currentTim) {

@@ -91,6 +91,7 @@ public class UserShiftsInProgressAdapter extends RecyclerView.Adapter<UserShifts
     long displayTim = 0;
     private ShiftCompletedClick shiftCompletedClick;
     public UserShiftsInProgressAdapter(Context context, ArrayList<SuccessResGetShiftInProgress.Result> postedList, boolean from, String fromWhere,ShiftCompletedClick shiftCompletedClick)
+
     {
         this.context = context;
         this.postedList = postedList;
@@ -98,6 +99,7 @@ public class UserShiftsInProgressAdapter extends RecyclerView.Adapter<UserShifts
         this.fromWhere = fromWhere;
         this.shiftCompletedClick = shiftCompletedClick;
     }
+
     @NonNull
     @Override
     public SelectTimeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -373,7 +375,7 @@ public class UserShiftsInProgressAdapter extends RecyclerView.Adapter<UserShifts
                                     "%02d:%02d:%02d", currentHour,
                                     currentMinute, currentSecond);
                     btnClock.setText(time);
-//                    shiftCompletedClick.getClick();
+                    shiftCompletedClick.getClick();
                 }
             }
         };
@@ -391,20 +393,20 @@ public class UserShiftsInProgressAdapter extends RecyclerView.Adapter<UserShifts
             } catch (ParseException e) {
                 e.printStackTrace();
             }
-
-            SimpleDateFormat sdf21 = new SimpleDateFormat("MM/dd/yyyy hh:mm aa");
-            String dateString21 = postedList.get(position).getShiftDate()+" "+postedList.get(position).getEndTime();
-
+            SimpleDateFormat sdf21 = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aa");
+            String newShiftEndTime21 = postedList.get(position).getEndTime();
+            String newTIme21 = newShiftEndTime21;
+            String[] splitStr21 = newTIme21.split("\\s+");
+            String timeMy = splitStr21[0]+":00 "+splitStr21[1];
+            String dateString21 = postedList.get(position).getShiftDate()+" "+timeMy;
             try {
                 date2 = sdf21.parse(dateString21);
                 Calendar calendar2 = Calendar.getInstance();
                 calendar2.setTime(date2);
-
-//                calendar2.add(Calendar.DATE, 1);
-
+                calendar2.add(Calendar.DATE, 1);
+                date2 = calendar2.getTime();
                 endTim = calendar2.getTimeInMillis();
                 newEndTime = endTim;
-                endTim = 1440 * 60 * 1000+endTim;
 
             } catch (ParseException e) {
                 e.printStackTrace();
@@ -418,52 +420,80 @@ public class UserShiftsInProgressAdapter extends RecyclerView.Adapter<UserShifts
                     holder.handler.postDelayed(holder.runnable, 1000);
                     long currentTim = 0;
                     try {
-                        Date date3 = new Date();//sdf3.parse(dateString2);
+                        date3 = new Date();//sdf3.parse(dateString2);
                         Calendar calendar3 = Calendar.getInstance();
                         calendar3.setTime(date3);
                         currentTim = calendar3.getTimeInMillis();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    if(displayTim<endTim)
-                    {
-                        if(currentTim<newEndTime)
-                        {
-                            currentTim = currentTim + 1440 * 60 * 1000;
-                        }
 
-                        if (startTim <= currentTim) {
 
-                            if(endTim<currentTim)
-                            {
-                                Calendar calendar2 = Calendar.getInstance();
-                                calendar2.setTime(date2);
-                                calendar2.add(Calendar.DATE, 1);
-                                date2 = calendar2.getTime();
-                                long difference = date2.getTime() - date1.getTime();
-                                long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
-                                totalSeconds = diffInSec;
-                                holder.handler.removeCallbacks(holder.runnable);
+//                    if(displayTim<endTim)
+//                    {
+//                        if(currentTim<newEndTime)
+//                        {
+//                            currentTim = currentTim + 1440 * 60 * 1000;
+//                        }
+//
+//                        if (startTim <= currentTim) {
+//
+//                            if(endTim<currentTim)
+//                            {
+//                                Calendar calendar2 = Calendar.getInstance();
+//                                calendar2.setTime(date2);
+//                                calendar2.add(Calendar.DATE, 1);
+//                                date2 = calendar2.getTime();
+//                                long difference = date2.getTime() - date1.getTime();
+//                                long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
+//                                totalSeconds = diffInSec;
+//                                holder.handler.removeCallbacks(holder.runnable);
+//
+//                                int currentSecond = (int) totalSeconds % 60;
+//                                long totalMinutes = totalSeconds / 60;
+//                                int currentMinute = (int) totalMinutes % 60;
+//                                long totalHours = totalMinutes / 60;
+//                                int currentHour = (int) totalHours % 12;
+//
+//                                String time
+//                                        = String
+//                                        .format(Locale.getDefault(),
+//                                                "%02d:%02d:%02d", currentHour,
+//                                                currentMinute, currentSecond);
+//                                btnClock.setText(time);
+//
+//                            }
+//                            displayTim = currentTim - startTim;
+//                        } else {
+//                            displayTim = startTim - currentTim;
+//                        }
+//
+//                        totalSeconds = displayTim / 1000;
+//                        long difference = date1.getTime() - date2.getTime();
+//                        long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
+//                        Log.d(TAG, "run: "+diffInSec);
+//                        int currentSecond = (int) totalSeconds % 60;
+//                        long totalMinutes = totalSeconds / 60;
+//                        int currentMinute = (int) totalMinutes % 60;
+//                        long totalHours = totalMinutes / 60;
+//                        int currentHour = (int) totalHours % 12;
+//                        String time
+//                                = String
+//                                .format(Locale.getDefault(),
+//                                        "%02d:%02d:%02d", currentHour,
+//                                        currentMinute, currentSecond);
+//
+//                        btnClock.setText(time);
+//
+//                    }
 
-                                int currentSecond = (int) totalSeconds % 60;
-                                long totalMinutes = totalSeconds / 60;
-                                int currentMinute = (int) totalMinutes % 60;
-                                long totalHours = totalMinutes / 60;
-                                int currentHour = (int) totalHours % 12;
-
-                                String time
-                                        = String
-                                        .format(Locale.getDefault(),
-                                                "%02d:%02d:%02d", currentHour,
-                                                currentMinute, currentSecond);
-                                btnClock.setText(time);
-
-                            }
-                            displayTim = currentTim - startTim;
+                    if (date2.compareTo(date3)==1) {
+//                    if (startTim <= currentTim) {
+                        if (date1.compareTo(date3) <= 0) {
+                            displayTim = date3.getTime() - date1.getTime();
                         } else {
-                            displayTim = startTim - currentTim;
+                            displayTim = date1.getTime() - date3.getTime();
                         }
-
                         totalSeconds = displayTim / 1000;
                         long difference = date1.getTime() - date2.getTime();
                         long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
@@ -478,15 +508,13 @@ public class UserShiftsInProgressAdapter extends RecyclerView.Adapter<UserShifts
                                 .format(Locale.getDefault(),
                                         "%02d:%02d:%02d", currentHour,
                                         currentMinute, currentSecond);
-
                         btnClock.setText(time);
-
                     }
+
                     else
                     {
                         Calendar calendar2 = Calendar.getInstance();
                         calendar2.setTime(date2);
-                        calendar2.add(Calendar.DATE, 1);
                         date2 = calendar2.getTime();
                         long difference = date2.getTime() - date1.getTime();
                         long diffInSec = TimeUnit.MILLISECONDS.toSeconds(difference);
@@ -504,6 +532,7 @@ public class UserShiftsInProgressAdapter extends RecyclerView.Adapter<UserShifts
                                         "%02d:%02d:%02d", currentHour,
                                         currentMinute, currentSecond);
                         btnClock.setText(time);
+                        shiftCompletedClick.getClick();
 
                      }
 

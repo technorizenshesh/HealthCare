@@ -524,8 +524,8 @@ public class SuccessResGetShiftInProgress implements Serializable {
         public void setPostshiftTime(List<PostshiftTime> postshiftTime) {
             this.postshiftTime = postshiftTime;
         }
-
     }
+
     public class Shiftsdetail {
 
         @SerializedName("id")

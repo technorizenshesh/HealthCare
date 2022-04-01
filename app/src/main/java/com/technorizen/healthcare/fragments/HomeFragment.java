@@ -108,9 +108,11 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     public HomeFragment() {
         // Required empty public constructor
     }
+
     // TODO: Rename and change types and number of parameters
     public static HomeFragment newInstance(String param1, String param2) {
         HomeFragment fragment = new HomeFragment();
@@ -469,9 +471,7 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
 
                         binding.tvCurrentSchedule.setVisibility(View.GONE);
                         binding.btnLoadMore.setVisibility(View.GONE);
-
                         binding.rvCurrentShifts.setVisibility(View.GONE);
-
                         postedList.clear();
                         binding.rvCurrentShifts.setHasFixedSize(true);
                         binding.rvCurrentShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
