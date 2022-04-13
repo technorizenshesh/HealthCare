@@ -187,6 +187,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
     public WorkerHomeFragment() {
         // Required empty public constructor
     }
@@ -214,6 +215,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
+
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_worker_home, container, false);
         gpsTracker = new GPSTracker(getActivity());
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
@@ -338,6 +340,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
 
     public void getWorkerShifts(String sortBy,boolean show)
     {
+
         if (show)
         {
             DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
@@ -1317,7 +1320,6 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
 //                    if (startTim <= currentTim) {
                         if (date1.compareTo(date3) <= 0) {
                             displayTim = date3.getTime() - date1.getTime();
-
                             updateTime = true;
 
                         } else {

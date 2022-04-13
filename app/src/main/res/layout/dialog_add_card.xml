@@ -78,6 +78,16 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_15sdp"
                 />
+
+            <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/defaultCheckBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Use as default card"
+                android:buttonTint="@color/blue"
+                android:layout_marginHorizontal="@dimen/_15sdp"
+                />
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnAdd"
                 android:layout_width="match_parent"

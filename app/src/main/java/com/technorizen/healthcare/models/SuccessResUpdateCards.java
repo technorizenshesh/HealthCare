@@ -4,8 +4,9 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class SuccessResAddCardDetails implements Serializable {
+public class SuccessResUpdateCards implements Serializable {
 
     @SerializedName("result")
     @Expose
@@ -41,6 +42,7 @@ public class SuccessResAddCardDetails implements Serializable {
         this.status = status;
     }
 
+
     public class Result {
 
         @SerializedName("id")
@@ -70,6 +72,9 @@ public class SuccessResAddCardDetails implements Serializable {
         @SerializedName("status")
         @Expose
         public String status;
+        @SerializedName("set_default")
+        @Expose
+        public String setDefault;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
@@ -146,6 +151,14 @@ public class SuccessResAddCardDetails implements Serializable {
             this.status = status;
         }
 
+        public String getSetDefault() {
+            return setDefault;
+        }
+
+        public void setSetDefault(String setDefault) {
+            this.setDefault = setDefault;
+        }
+
         public String getDateTime() {
             return dateTime;
         }
@@ -155,6 +168,7 @@ public class SuccessResAddCardDetails implements Serializable {
         }
 
     }
-    
+
+
 }
 

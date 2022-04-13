@@ -72,9 +72,16 @@ dependencies {
     //Google Map
     implementation 'com.google.android.gms:play-services-maps:17.0.1'
     //Places api
+
+    implementation 'com.github.maxpilotto:credit-card-view:8.0.0'
+
+
     implementation 'com.google.android.libraries.places:places:2.5.0'
     implementation 'com.braintreepayments:card-form:5.2.0'
     compile 'com.github.sharish:CreditCardView:v1.0.4'
+
+
+
 }
 apply plugin: 'com.android.application'
 // Add the following line:

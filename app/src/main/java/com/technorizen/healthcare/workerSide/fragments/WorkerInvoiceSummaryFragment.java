@@ -42,6 +42,7 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  */
 
 public class WorkerInvoiceSummaryFragment extends Fragment {
+
     FragmentWorkerInvoiceSummaryBinding binding;
     private HealthInterface apiInterface;
     private ArrayList<SuccessResInvoiceSummaryUser.Result> invoiceSummaryList = new ArrayList<>();

@@ -46,12 +46,12 @@ public class HomeActivity extends AppCompatActivity {
     NavigationView myNav;
     private NavController navController;
     RelativeLayout rlHome,rlProfile,rlPostShifts,rlShifts,rlBIlling,rlWallet,rlHiredWorker,rlFaq,rlContactus,rlSetting,rlPrivacy;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         drawer = findViewById(R.id.drawer);
-
         rlHome = findViewById(R.id.rlHome);
         rlProfile = findViewById(R.id.rl_user);
         rlPostShifts = findViewById(R.id.rlPostShifts);
@@ -107,7 +107,6 @@ public class HomeActivity extends AppCompatActivity {
         );
 
         intent =  getIntent().getExtras();
-
         if(intent!=null)
         {
             String key = intent.getString("key");
@@ -158,7 +157,6 @@ public class HomeActivity extends AppCompatActivity {
             navController.navigate(R.id.shiftsFragment);
             drawer.closeDrawer(GravityCompat.START);
         });
-
         rlPostShifts.setOnClickListener(v -> {
             ivConversation.setVisibility(View.VISIBLE);
             ivBack.setVisibility(View.VISIBLE);
@@ -166,7 +164,6 @@ public class HomeActivity extends AppCompatActivity {
             navController.navigate(R.id.postShiftsFragment);
             drawer.closeDrawer(GravityCompat.START);
         });
-
         rlBIlling.setOnClickListener(v -> {
             ivConversation.setVisibility(View.VISIBLE);
             ivBack.setVisibility(View.VISIBLE);
@@ -174,7 +171,6 @@ public class HomeActivity extends AppCompatActivity {
             navController.navigate(R.id.billingFragment);
             drawer.closeDrawer(GravityCompat.START);
         });
-
         rlWallet.setOnClickListener(v -> {
             ivConversation.setVisibility(View.VISIBLE);
             ivBack.setVisibility(View.VISIBLE);

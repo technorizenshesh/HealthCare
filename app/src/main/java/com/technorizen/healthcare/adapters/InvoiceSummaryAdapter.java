@@ -127,7 +127,7 @@ public class InvoiceSummaryAdapter extends RecyclerView.Adapter<InvoiceSummaryAd
         if(!summaryList.get(position).getInvoiceAmount().equalsIgnoreCase("0"))
         {
             tvFinalAmount.setText("$ "+summaryList.get(position).getFinalTotal());
-            tvInvoiceAmount.setText("$ "+summaryList.get(position).getInvoiceAmount());
+            tvInvoiceAmount.setText("$ "+summaryList.get(position).getTotalAmount());
             tvPayStatus.setText(summaryList.get(position).getPayStatus());
             llInvoiceLayout.setVisibility(View.VISIBLE);
             rvTableItem.setVisibility(View.VISIBLE);

@@ -87,6 +87,7 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentShiftConfirmationInterface, ShiftCompletedClick {
 
+
     FragmentHomeBinding binding;
     HealthInterface apiInterface;
     private boolean showLess = false;
@@ -122,6 +123,7 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
         fragment.setArguments(args);
         return fragment;
     }
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +132,7 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -318,7 +321,6 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
     @Override
     public void rejectSHift(String shiftsId, String userId, List<SuccessResGetPost.PostshiftTime> postshiftTime, String type) {
     }
-
     @Override
     public void deleteCurrentShiftsClick(String shiftsId, String userId,SuccessResGetCurrentSchedule.PostshiftTime dateTime) {
         String cancellationChanrge = "";
@@ -572,6 +574,7 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
 
     public void getShiftsInProgress()
     {
+
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
         Map<String, String> map = new HashMap<>();
         map.put("user_id",userId);

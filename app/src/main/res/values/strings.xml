@@ -60,6 +60,7 @@
     <string name="sort_by_dates">Sort By Dates</string>
     <string name="approved">APPROVED</string>
     <string name="upload">Upload</string>
+    <string name="update">Update</string>
     <string name="uploaded">Uploaded</string>
     <string name="not_uploaded">Not Uploaded</string>
     <string name="please_click_here_for_check">Please click <u>here</u> for check</string>
@@ -257,6 +258,9 @@
     <string name="cancellation_charges_no">No Show/Cancellation Charges:</string>
     <string name="no_show_charges">No Show Charges:</string>
     <string name="transit_number">Transit Number:</string>
+    <string name="enter_cvv">Enter cvv</string>
+    <string name="submit">Submit</string>
+    <string name="enter_your_cvv">Enter your cvv</string>
     <string-array name="states_canada">
         <item>Province / State</item>
         <item>  Alberta</item>
@@ -326,4 +330,6 @@
         <item>Wisconsin</item>
         <item>Wyoming</item>
     </string-array>
+
+
 </resources>

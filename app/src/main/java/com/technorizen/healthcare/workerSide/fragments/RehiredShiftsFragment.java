@@ -101,12 +101,10 @@ public class RehiredShiftsFragment extends Fragment implements DeleteShifts {
         return binding.getRoot();
     }
 
-
     public void getWorkerShifts()
     {
 
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
-
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("worker_id",userId);

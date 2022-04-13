@@ -71,6 +71,9 @@ public class SuccessResGetCardDetails implements Serializable {
         @SerializedName("status")
         @Expose
         public String status;
+        @SerializedName("set_default")
+        @Expose
+        public String setDefault;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
@@ -145,6 +148,14 @@ public class SuccessResGetCardDetails implements Serializable {
 
         public void setStatus(String status) {
             this.status = status;
+        }
+
+        public String getSetDefault() {
+            return setDefault;
+        }
+
+        public void setSetDefault(String setDefault) {
+            this.setDefault = setDefault;
         }
 
         public String getDateTime() {

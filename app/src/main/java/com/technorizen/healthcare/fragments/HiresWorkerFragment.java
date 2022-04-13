@@ -44,9 +44,7 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 public class HiresWorkerFragment extends Fragment implements BlockAddRatingInterface {
 
     FragmentHiresWorkerBinding binding;
-
     HealthInterface apiInterface;
-
     private ArrayList<SuccessResGetHiredWorker.Result> hiredWorkerList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
@@ -93,13 +91,9 @@ public class HiresWorkerFragment extends Fragment implements BlockAddRatingInter
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_hires_worker, container, false);
-
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-
         getHiredWoker();
-
         return binding.getRoot();
     }
 
@@ -107,7 +101,6 @@ public class HiresWorkerFragment extends Fragment implements BlockAddRatingInter
     {
 
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
-
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("user_id",userId);

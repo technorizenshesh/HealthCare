@@ -9,6 +9,7 @@ import com.technorizen.healthcare.models.SuccessResAddGetWorkerAvail;
 import com.technorizen.healthcare.models.SuccessResAddRating;
 import com.technorizen.healthcare.models.SuccessResAddReference;
 import com.technorizen.healthcare.models.SuccessResBlockUnblock;
+import com.technorizen.healthcare.models.SuccessResDeleteCard;
 import com.technorizen.healthcare.models.SuccessResDeleteCurrentSchedule;
 import com.technorizen.healthcare.models.SuccessResDeleteShifts;
 import com.technorizen.healthcare.models.SuccessResEditShift;
@@ -42,6 +43,7 @@ import com.technorizen.healthcare.models.SuccessResShiftCompleted;
 import com.technorizen.healthcare.models.SuccessResSignIn;
 import com.technorizen.healthcare.models.SuccessResSignup;
 import com.technorizen.healthcare.models.SuccessResStripePayment;
+import com.technorizen.healthcare.models.SuccessResUpdateCards;
 import com.technorizen.healthcare.models.SuccessResUpdateInstantPay;
 import com.technorizen.healthcare.models.SuccessResUpdateProfile;
 import com.technorizen.healthcare.models.SuccessResUpdateRate;
@@ -433,6 +435,17 @@ public interface HealthInterface {
     @FormUrlEncoded
     @POST("user_shift_invoice")
     Call<SuccessResGetInvoices> getInvoiceURL(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("delete_user_card")
+    Call<ResponseBody> deleteCard(@FieldMap Map<String, String> paramHashMap);
+
+    @FormUrlEncoded
+    @POST("set_default_card")
+    Call<SuccessResUpdateCards> updateCard(@FieldMap Map<String, String> paramHashMap);
+
+
+
 
 /*
 

@@ -65,6 +65,7 @@ public class WorkerNotificationFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment WorkerNotificationFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static WorkerNotificationFragment newInstance(String param1, String param2) {
         WorkerNotificationFragment fragment = new WorkerNotificationFragment();
@@ -128,7 +129,6 @@ public class WorkerNotificationFragment extends Fragment {
                         selectedPush = data.getResult().get(0).getPsusNotification();
                         selectedms = data.getResult().get(0).getSmsNotification();
                         selectedMail = data.getResult().get(0).getEmailNotification();
-
                         setNotifications();
 
                     } else {
@@ -138,18 +138,14 @@ public class WorkerNotificationFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
             public void onFailure(Call<SuccessResGetWorkerProfile> call, Throwable t) {
-
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
-
             }
         });
-
     }
 
     public void updateNotifications()
@@ -162,7 +158,6 @@ public class WorkerNotificationFragment extends Fragment {
         else
         {
             push = "0";
-
         }
 
 

@@ -31,6 +31,7 @@ public class Constant {
         Matcher matcher = pattern.matcher(target);
         return matcher.matches();
     }
+
     public static void showToast(Activity context, String msg) {
         Toast.makeText(context, msg, Toast.LENGTH_LONG).show();
     }

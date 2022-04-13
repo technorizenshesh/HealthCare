@@ -81,9 +81,19 @@ public class HiredWorkerAdapter extends RecyclerView.Adapter<HiredWorkerAdapter.
         if(hiredWorkers.get(position).getUserApproval().equalsIgnoreCase("Unblocked"))
         {
             btnBlockUnblock.setText(R.string.block);
+            btnRehire.setOnClickListener(v ->
+                    {
+                        Bundle bundle = new Bundle();
+                        bundle.putString("name",hiredWorkers.get(position).getFirstName() +" " +hiredWorkers.get(position).getLastName());
+                        bundle.putString("id",hiredWorkers.get(position).getWorkerId());
+                        bundle.putString("designation",hiredWorkers.get(position).getDesignation());
+                        Navigation.findNavController(v).navigate(R.id.action_hiresWorkerFragment_to_postShiftsFragment,bundle);
+                    }
+            );
         }else
         {
             btnBlockUnblock.setText(R.string.unblock);
+            btnRehire.setClickable(false);
         }
            btnBlockUnblock.setOnClickListener(v ->
                 {
@@ -94,11 +104,21 @@ public class HiredWorkerAdapter extends RecyclerView.Adapter<HiredWorkerAdapter.
                     {
                         newStatus = "Blocked";
                         newButtonText = "Unblock";
+                        btnRehire.setClickable(false);
                     }
                     else
                     {
                         newStatus = "Unblocked";
                         newButtonText = "Block";
+                        btnRehire.setOnClickListener(v1 ->
+                                {
+                                    Bundle bundle = new Bundle();
+                                    bundle.putString("name",hiredWorkers.get(position).getFirstName() +" " +hiredWorkers.get(position).getLastName());
+                                    bundle.putString("id",hiredWorkers.get(position).getWorkerId());
+                                    bundle.putString("designation",hiredWorkers.get(position).getDesignation());
+                                    Navigation.findNavController(v1).navigate(R.id.action_hiresWorkerFragment_to_postShiftsFragment,bundle);
+                                }
+                        );
                     }
                     btnBlockUnblock.setText(newButtonText);
                     blockAddRatingInterface.block(hiredWorkers.get(position).getWorkerId(),newStatus);
@@ -108,16 +128,6 @@ public class HiredWorkerAdapter extends RecyclerView.Adapter<HiredWorkerAdapter.
         btnAddRating.setOnClickListener(v ->
                 {
                     showImageSelection(hiredWorkers.get(position).getAvgRating(),hiredWorkers.get(position).getWorkerId());
-                }
-                );
-
-        btnRehire.setOnClickListener(v ->
-                {
-                    Bundle bundle = new Bundle();
-                    bundle.putString("name",hiredWorkers.get(position).getFirstName() +" " +hiredWorkers.get(position).getLastName());
-                    bundle.putString("id",hiredWorkers.get(position).getWorkerId());
-                    bundle.putString("designation",hiredWorkers.get(position).getDesignation());
-                    Navigation.findNavController(v).navigate(R.id.action_hiresWorkerFragment_to_postShiftsFragment,bundle);
                 }
                 );
 

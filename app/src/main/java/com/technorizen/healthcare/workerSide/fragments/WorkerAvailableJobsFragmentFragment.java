@@ -420,9 +420,7 @@ public class WorkerAvailableJobsFragmentFragment extends Fragment implements Del
         {
             strEndTime = strEndTime.substring(0, strEndTime.length() - 1);
         }
-
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
-
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("shift_id",shiftsId);
@@ -500,17 +498,12 @@ public class WorkerAvailableJobsFragmentFragment extends Fragment implements Del
                 DataManager.getInstance().hideProgressMessage();
 
                 try {
-
                     SuccessResGetPost data = response.body();
                     if (data.status.equals("1")) {
-
                         binding.etSearch.clearFocus();
-
                         postedList.clear();
                         removeDataPostedList.clear();
-
                         removeDataPostedList.addAll(data.getResult());
-
                         getWorkerAccepted("",true);
 
 //                        for (SuccessResGetPost.Result result:removeDataPostedList)
