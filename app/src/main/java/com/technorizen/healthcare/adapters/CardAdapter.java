@@ -26,6 +26,7 @@ import java.util.List;
 /**
  * Created by Ravindra Birla on 10,June,2021
  */
+
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CategoryViewHolder> {
 
     private Context context;
@@ -83,7 +84,6 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CategoryViewHo
                             .setNegativeButton(android.R.string.no, null)
                             .setIcon(R.drawable.ic_noti)
                             .show();
-
                 }
                 );
         if(cardList.get(position).getSetDefault().equalsIgnoreCase("1"))
