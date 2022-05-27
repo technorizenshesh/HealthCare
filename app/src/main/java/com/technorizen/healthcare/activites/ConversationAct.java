@@ -35,6 +35,8 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 public class ConversationAct extends AppCompatActivity {
 
+    static boolean active = false;
+
     ActivityConversationBinding binding;
 
     private HealthInterface apiInterface;
@@ -50,13 +52,8 @@ public class ConversationAct extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         binding = DataBindingUtil.setContentView(this,R.layout.activity_conversation);
-
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-
-        apiInterface = ApiClient.getClient().create(HealthInterface.class);
-
         binding.ivBack.setOnClickListener(v ->
                 {
                     finish();
@@ -64,7 +61,6 @@ public class ConversationAct extends AppCompatActivity {
                 );
 
         String userId = SharedPreferenceUtility.getInstance(this).getString(USER_ID);
-
         chatAdapter = new ChatAdapter(this,chatList,userId);
         binding.rvMessageItem.setHasFixedSize(true);
         binding.rvMessageItem.setLayoutManager(new LinearLayoutManager(this));
@@ -84,13 +80,11 @@ public class ConversationAct extends AppCompatActivity {
         binding.ivSendMessage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 strChatMessage = binding.etChat.getText().toString();
                 if(!strChatMessage.equals(""))
                 {
                     insertChat();
                 }
-
             }
         });
     }
@@ -107,7 +101,6 @@ public class ConversationAct extends AppCompatActivity {
     }
 
     private boolean isLastVisible() {
-
         if (chatList != null && chatList.size() != 0) {
             LinearLayoutManager layoutManager = ((LinearLayoutManager) binding.rvMessageItem.getLayoutManager());
             int pos = layoutManager.findLastCompletelyVisibleItemPosition();
@@ -121,10 +114,10 @@ public class ConversationAct extends AppCompatActivity {
 
         String userId = SharedPreferenceUtility.getInstance(ConversationAct.this).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(ConversationAct.this, getString(R.string.please_wait));
-
+        Log.d("datatest",userId);
         Map<String,String> map = new HashMap<>();
-        map.put("sender_id",userId);
-        map.put("receiver_id","1");
+        map.put("sender_id","1");
+        map.put("receiver_id",userId);
 
         Call<SuccessResGetChat> call = apiInterface.getAdminChat(map);
         call.enqueue(new Callback<SuccessResGetChat>() {
@@ -136,26 +129,19 @@ public class ConversationAct extends AppCompatActivity {
                     SuccessResGetChat data = response.body();
                     Log.e("data",data.status);
                     if (data.status.equals("1")) {
-
                         String dataResponse = new Gson().toJson(response.body());
-
                         chatList.clear();
                         chatList.addAll(data.getResult());
                         binding.rvMessageItem.setLayoutManager(new LinearLayoutManager(ConversationAct.this));
                         binding.rvMessageItem.setAdapter(chatAdapter);
                         binding.rvMessageItem.scrollToPosition(chatList.size()-1);
-
                     } else if (data.status.equals("0")) {
-
                         showToast(ConversationAct.this, data.message);
-
                     }
-
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
-
             @Override
             public void onFailure(Call<SuccessResGetChat> call, Throwable t) {
                 call.cancel();
@@ -164,38 +150,31 @@ public class ConversationAct extends AppCompatActivity {
         });
     }
 
-
     public void insertChat() {
         binding.etChat.setText("");
         String userId = SharedPreferenceUtility.getInstance(ConversationAct.this).getString(USER_ID);
-
         DataManager.getInstance().showProgressMessage(this, getString(R.string.please_wait));
         Map<String,String> map = new HashMap<>();
         map.put("sender_id",userId);
         map.put("receiver_id","1");
         map.put("chat_message",strChatMessage);
+        map.put("sender_type","User");
 
         Call<SuccessResInsertChat> call = apiInterface.insertAdminChat(map);
         call.enqueue(new Callback<SuccessResInsertChat>() {
             @Override
             public void onResponse(Call<SuccessResInsertChat> call, Response<SuccessResInsertChat> response) {
-
                 DataManager.getInstance().hideProgressMessage();
                 try {
                     SuccessResInsertChat data = response.body();
                     Log.e("data",data.status);
                     String dataResponse = new Gson().toJson(response.body());
                     if (data.status.equals("1")) {
-
                         getChat();
-
 //                        SessionManager.writeString(RegisterAct.this, Constant.driver_id,data.result.id);
 //                        App.showToast(RegisterAct.this, data.message, Toast.LENGTH_SHORT);
-
                     } else if (data.status.equals("0")) {
-
                         showToast(ConversationAct.this, data.message);
-
                     }
 
                 } catch (Exception e) {
@@ -211,5 +190,16 @@ public class ConversationAct extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onStart() {
+        super.onStart();
+        active = true;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        active = false;
+    }
 
 }

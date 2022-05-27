@@ -3,9 +3,12 @@ package com.technorizen.healthcare.workerSide.fragments;
 import android.Manifest;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.BroadcastReceiver;
 import android.content.ContentValues;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -18,6 +21,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -51,6 +55,7 @@ import com.technorizen.healthcare.SplashAct;
 import com.technorizen.healthcare.activites.ConversationAct;
 import com.technorizen.healthcare.activites.HomeActivity;
 import com.technorizen.healthcare.activites.LoginAct;
+import com.technorizen.healthcare.activites.One2OneChatAct;
 import com.technorizen.healthcare.adapters.ChatAdapter;
 import com.technorizen.healthcare.adapters.ConfirmRecruitmentAdapter;
 import com.technorizen.healthcare.adapters.CurrentScheduleShiftsAdapter;
@@ -126,6 +131,7 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 public class WorkerHomeFragment extends Fragment implements DeleteShifts, RecruitmentShiftConfirmationInterface {
 
+    LocalBroadcastManager lbm;
     private int seconds = 0;
     public  Date endDate = null;
     Runnable runnable;
@@ -221,6 +227,11 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
         sort = "Date";
         getLocation();
+
+        lbm = LocalBroadcastManager.getInstance(getActivity());
+        lbm.registerReceiver(receiver, new IntentFilter("filter_string_1"));
+
+
         shiftsAdapter = new ShiftsAdapter(getActivity(),newPostedList,false, WorkerHomeFragment.this);
         shiftsAdapter.addList(newPostedList);
         binding.rvShifts.setHasFixedSize(true);
@@ -241,6 +252,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                 return false;
             }
         });
+
           timershifts.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -249,6 +261,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                 getCurrentShifts(false);
             }
         },0,60000);
+
         binding.tvSortByDistance.setOnClickListener(v ->
                 {
                     shiftShowLess = false;
@@ -323,9 +336,24 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
         return binding.getRoot();
     }
 
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null) {
+//                String str = intent.getStringExtra("key");
+//                getUnseenNotificationCount();
+                // get all your data from intent and do what you want
+                getShiftsInProgress();
+                getCurrentShifts(false);
+                getRecruitmentPendingShifts();
+            }
+        }
+    };
+
     @Override
     public void onPause()
     {
+
         super.onPause();
         timer.cancel();
         PowerManager powerManager = (PowerManager) getActivity().getSystemService(POWER_SERVICE);
@@ -423,9 +451,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
         {
             myType = "Accepted_By_Worker";
         }
-
         strTimeId = ""; strShiftDate=""; strStartTime=""; strEndTime="";
-
         for (SuccessResGetPost.PostshiftTime postshiftTime1:postshiftTime)
         {
             strTimeId = strTimeId + postshiftTime1.getId()+",";
@@ -501,11 +527,8 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
 
     @Override
     public void rejectSHift(String shiftsId, String onerId, List<SuccessResGetPost.PostshiftTime> postshiftTime, String type) {
-
         String myType = "Rehire_Rejected";
-
         String strTimeId = "",strShiftDate="",strStartTime="",strEndTime="";
-
         for (SuccessResGetPost.PostshiftTime postshiftTime1:postshiftTime)
         {
             strTimeId = strTimeId + postshiftTime1.getId()+",";
@@ -680,6 +703,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
         {
             DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         }
+
         Map<String, String> map = new HashMap<>();
         map.put("worker_id",userId);
         Call<SuccessResGetWorkerProfile> call = apiInterface.getWorkerProfile(map);
@@ -728,14 +752,11 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
         binding.ratingBar.setRating(Float.parseFloat(String.valueOf(userList.get(0).getRating())));
         binding.tvFromToDate.setText(userList.get(0).getApprovalDate()+" - "+userList.get(0).getCurentDate());
         Log.d(TAG, "setUserDetails: ");
-        RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
         Glide.with(getActivity())
                 .load(userList.get(0).getImage())
-                .centerCrop()
-                .apply(requestOptions)
                 .into(binding.ivWorkerProfile);
     }
+
     public void getCurrentShifts(boolean show)
     {
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
@@ -756,26 +777,28 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                         binding.rvCurrentShifts.setVisibility(View.VISIBLE);
                         currentScheduleList.clear();
                         currentScheduleList.addAll(data.getResult());
-                        Collections.sort(currentScheduleList, new Comparator<SuccessResGetCurrentSchedule.Result>(){
-                            public int compare(SuccessResGetCurrentSchedule.Result obj1, SuccessResGetCurrentSchedule.Result obj2) {
-                                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-                                String  dtDate1 = obj1.getPostshiftTime().get(0).getShiftDate()+" 8:20";
-                                String  dtDate2 = obj2.getPostshiftTime().get(0).getShiftDate()+" 8:20";
-                                Date  date1 = null;
-                                Date  date2 = null;
-                                try {
-                                    date1 = format.parse(dtDate1);
-                                    date2 = format.parse(dtDate2);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-                                return date1.compareTo(date2); // To compare string values
-                                // return Integer.valueOf(obj1.empId).compareTo(Integer.valueOf(obj2.empId)); // To compare integer values
-                                // ## Descending order
-                                // return obj2.firstName.compareToIgnoreCase(obj1.firstName); // To compare string values
-                                // return Integer.valueOf(obj2.empId).compareTo(Integer.valueOf(obj1.empId)); // To compare integer values
-                            }
-                        });
+
+//                        Collections.sort(currentScheduleList, new Comparator<SuccessResGetCurrentSchedule.Result>(){
+//                            public int compare(SuccessResGetCurrentSchedule.Result obj1, SuccessResGetCurrentSchedule.Result obj2) {
+//                                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+//                                String  dtDate1 = obj1.getPostshiftTime().get(0).getShiftDate()+" 8:20";
+//                                String  dtDate2 = obj2.getPostshiftTime().get(0).getShiftDate()+" 8:20";
+//                                Date  date1 = null;
+//                                Date  date2 = null;
+//                                try {
+//                                    date1 = format.parse(dtDate1);
+//                                    date2 = format.parse(dtDate2);
+//                                } catch (ParseException e) {
+//                                    e.printStackTrace();
+//                                }
+//                                return date1.compareTo(date2); // To compare string values
+//                                // return Integer.valueOf(obj1.empId).compareTo(Integer.valueOf(obj2.empId)); // To compare integer values
+//                                // ## Descending order
+//                                // return obj2.firstName.compareToIgnoreCase(obj1.firstName); // To compare string values
+//                                // return Integer.valueOf(obj2.empId).compareTo(Integer.valueOf(obj1.empId)); // To compare integer values
+//                            }
+//                        });
+
                         setCurrentScheduleList();
                     } else {
                         binding.tvCurrentSchedule.setVisibility(View.GONE);
@@ -1004,6 +1027,16 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
     List<String> listEndTime = new LinkedList<>();
     List<SuccessResGetShiftInProgress.PostshiftTime> postshiftTimeList =  new LinkedList<>();
     postshiftTimeList = shiftInProgress.getPostshiftTime();
+
+    if(!shiftInProgress.getTotalUnseenMessage().equalsIgnoreCase("0"))
+    {
+        binding.tvWorkerMsg.setVisibility(View.VISIBLE);
+        binding.tvWorkerMsg.setText(shiftInProgress.getTotalUnseenMessage());
+    }else
+    {
+        binding.tvWorkerMsg.setVisibility(View.GONE);
+    }
+
     if(shiftInProgress.getShiftsdetail().get(0).getNoVacancies().equalsIgnoreCase("1"))
     {
         binding.tvID.setVisibility(View.GONE);
@@ -1182,11 +1215,10 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
     }
 
     RequestOptions requestOptions = new RequestOptions();
-    requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
+    requestOptions = requestOptions.transforms( new RoundedCorners(15));
 
     Glide.with(getActivity())
             .load(shiftInProgress.getShiftsdetail().get(0).getUserImage())
-            .centerCrop()
             .apply(requestOptions)
             .into(binding.ivProfile);
 
@@ -1207,6 +1239,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                 }
             }
     );
+
     binding.tvLocation.setOnClickListener(v ->
             {
                 String lat = shiftInProgress.getShiftsdetail().get(0).getLocationLat();
@@ -1216,11 +1249,13 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                 startActivity(intent);
             }
     );
+
     binding.tvWorkerName.setText(shiftInProgress.getShiftsdetail().get(0).getWorkerName());
     binding.tvWorkerDesignation.setText("( "+shiftInProgress.getShiftsdetail().get(0).getWorkerDesignation()+" )");
-    binding.ivChat.setOnClickListener(v ->
+    binding.rlChat.setOnClickListener(v ->
             {
-                fullScreenDialog(shiftInProgress.getUserId());
+//                fullScreenDialog(shiftInProgress.getUserId());
+                getActivity().startActivity(new Intent(getActivity(), One2OneChatAct.class).putExtra("id",shiftInProgress.getUserId()));
             }
             );
     Glide.with(getActivity())
@@ -2102,9 +2137,9 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
         rvMessageItem = dialog.findViewById(R.id.rvMessageItem);
 
         ivBack.setOnClickListener(v -> {
+            timer.cancel();
             dialog.dismiss();
         });
-
 
         String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
 
@@ -2112,7 +2147,6 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
         rvMessageItem.setHasFixedSize(true);
         rvMessageItem.setLayoutManager(new LinearLayoutManager(getActivity()));
         rvMessageItem.setAdapter(chatAdapter);
-
         getChat();
 
        Timer timer = new Timer();
@@ -2134,12 +2168,9 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                 {
                     insertChat();
                 }
-
             }
         });
-
         dialog.show();
-
     }
 
     private boolean isLastVisible() {
@@ -2510,6 +2541,7 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
     public void onDestroy() {
         super.onDestroy();
         timershifts.cancel();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
     }
 
     public void getWorkerAccepted(String sortBy,boolean show)

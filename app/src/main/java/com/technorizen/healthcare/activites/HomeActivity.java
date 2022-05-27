@@ -6,13 +6,17 @@ import androidx.appcompat.widget.Toolbar;
 import androidx.core.view.GravityCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.NavController;
 import androidx.navigation.NavDestination;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -26,13 +30,27 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.snackbar.Snackbar;
+import com.google.gson.Gson;
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.databinding.ActivityHomeBinding;
 import com.technorizen.healthcare.fragments.HomeFragment;
+import com.technorizen.healthcare.models.SuccessResGetUnseenMessageCount;
+import com.technorizen.healthcare.retrofit.ApiClient;
 import com.technorizen.healthcare.retrofit.Constant;
+import com.technorizen.healthcare.retrofit.HealthInterface;
+import com.technorizen.healthcare.util.DataManager;
+import com.technorizen.healthcare.util.NetworkAvailablity;
 import com.technorizen.healthcare.util.SharedPreferenceUtility;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 import static com.technorizen.healthcare.activites.LoginAct.TAG;
+import static com.technorizen.healthcare.retrofit.Constant.USER_ID;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -40,17 +58,25 @@ public class HomeActivity extends AppCompatActivity {
     private Bundle intent;
     private DrawerLayout drawer;
     private ImageView ivHamNom;
-    private TextView tvTitleHeader;
+    private TextView tvTitleHeader,tvMessageCount;
     AppCompatButton logout;
     public static ImageView ivBack,ivMenu,ivConversation;
     NavigationView myNav;
     private NavController navController;
     RelativeLayout rlHome,rlProfile,rlPostShifts,rlShifts,rlBIlling,rlWallet,rlHiredWorker,rlFaq,rlContactus,rlSetting,rlPrivacy;
-
+    public boolean approved = false;
+    private HealthInterface apiInterface;
+    public void setApproved(boolean approved)
+    {
+        this.approved = approved;
+    }
+    LocalBroadcastManager lbm;
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+        apiInterface = ApiClient.getClient().create(HealthInterface.class);
         drawer = findViewById(R.id.drawer);
         rlHome = findViewById(R.id.rlHome);
         rlProfile = findViewById(R.id.rl_user);
@@ -70,11 +96,15 @@ public class HomeActivity extends AppCompatActivity {
         tvTitleHeader = findViewById(R.id.tvtitle);
         ivBack = findViewById(R.id.img_header);
         ivConversation = findViewById(R.id.ivConversation);
+        tvMessageCount= findViewById(R.id.tvMessageCount);
+
         NavigationView navigationView = findViewById(R.id.nav_view);
+
         mAppBarConfiguration = new AppBarConfiguration.Builder(
                 R.id.nav_home, R.id.nav_profile, R.id.nav_edit_profile)
                 .setDrawerLayout(drawer)
                 .build();
+
         navController = Navigation.findNavController(this, R.id.nav_host_fragment);
         NavigationUI.setupWithNavController(navigationView, navController);
         setUpNavigationDrawer();
@@ -110,14 +140,39 @@ public class HomeActivity extends AppCompatActivity {
         if(intent!=null)
         {
             String key = intent.getString("key");
+
             if (key.equalsIgnoreCase("chat")){
+
                 Bundle bundle = new Bundle();
                 String sendId =intent.getString("senderId");
-                bundle.putString("senderId",sendId);
-                navController.navigateUp();
-                navController.navigate(R.id.one2OneChatFragment,bundle);
-                ivBack.setVisibility(View.VISIBLE);
-                ivMenu.setVisibility(View.GONE);
+//                bundle.putString("senderId",sendId);
+//                navController.navigateUp();
+//                navController.navigate(R.id.one2OneChatFragment,bundle);
+//                ivBack.setVisibility(View.VISIBLE);
+//                ivMenu.setVisibility(View.GONE);
+
+                Intent intent1 = new Intent("filter_string_1");
+                LocalBroadcastManager.getInstance(this).sendBroadcast(intent1);
+
+               startActivity(new Intent(HomeActivity.this, One2OneChatAct.class).putExtra("id",sendId));
+
+
+
+            }else  if (key.equalsIgnoreCase("adminmessage")){
+
+                HomeActivity.this.startActivity(new Intent(HomeActivity.this,ConversationAct.class));
+
+            }
+            else  if (key.equalsIgnoreCase("login")){
+                String sendId =intent.getString("admin");
+                if(sendId.equalsIgnoreCase("Approved"))
+                {
+                    approved = true;
+                }
+                else
+                {
+                    approved = false;
+                }
             }
         }
 
@@ -128,6 +183,32 @@ public class HomeActivity extends AppCompatActivity {
                     else drawer.openDrawer(GravityCompat.START);
                 }
         );
+
+        lbm = LocalBroadcastManager.getInstance(this);
+        lbm.registerReceiver(receiver, new IntentFilter("filter_string"));
+
+        if (NetworkAvailablity.getInstance(this).checkNetworkStatus()) {
+            getUnseenNotificationCount();
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null) {
+                String str = intent.getStringExtra("key");
+                getUnseenNotificationCount();
+                // get all your data from intent and do what you want
+            }
+        }
+    };
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(receiver);
     }
 
     private void setUpNavigationDrawer() {
@@ -157,12 +238,20 @@ public class HomeActivity extends AppCompatActivity {
             navController.navigate(R.id.shiftsFragment);
             drawer.closeDrawer(GravityCompat.START);
         });
+
         rlPostShifts.setOnClickListener(v -> {
-            ivConversation.setVisibility(View.VISIBLE);
-            ivBack.setVisibility(View.VISIBLE);
-            ivMenu.setVisibility(View.GONE);
-            navController.navigate(R.id.postShiftsFragment);
-            drawer.closeDrawer(GravityCompat.START);
+            if(approved)
+            {
+                ivConversation.setVisibility(View.VISIBLE);
+                ivBack.setVisibility(View.VISIBLE);
+                ivMenu.setVisibility(View.GONE);
+                navController.navigate(R.id.postShiftsFragment);
+                drawer.closeDrawer(GravityCompat.START);
+            }
+            else
+            {
+                Toast.makeText(HomeActivity.this,"Please wait for admin approval.",Toast.LENGTH_SHORT).show();
+            }
         });
         rlBIlling.setOnClickListener(v -> {
             ivConversation.setVisibility(View.VISIBLE);
@@ -229,6 +318,16 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        if (NetworkAvailablity.getInstance(this).checkNetworkStatus()) {
+            getUnseenNotificationCount();
+        } else {
+            Toast.makeText(this, getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    @Override
     public boolean onSupportNavigateUp() {
 
         Toast.makeText(this,"Hello",Toast.LENGTH_SHORT).show();
@@ -262,4 +361,61 @@ public class HomeActivity extends AppCompatActivity {
         }
 
     }
+
+    public  void getUnseenNotificationCount()
+    {
+
+        String userId = SharedPreferenceUtility.getInstance(HomeActivity.this).getString(USER_ID);
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+
+        Call<SuccessResGetUnseenMessageCount> call = apiInterface.getUnseenMessage(map);
+
+        call.enqueue(new Callback<SuccessResGetUnseenMessageCount>() {
+            @Override
+            public void onResponse(Call<SuccessResGetUnseenMessageCount> call, Response<SuccessResGetUnseenMessageCount> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+                    SuccessResGetUnseenMessageCount data = response.body();
+                    Log.e("data",data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+
+                        int unseenNoti = Integer.parseInt(data.getResult().getTotalUnseenMessage());
+
+                        if(unseenNoti!=0)
+                        {
+
+                            tvMessageCount.setVisibility(View.VISIBLE);
+                            tvMessageCount.setText(unseenNoti+"");
+
+                        }
+                        else
+                        {
+
+                            tvMessageCount.setVisibility(View.GONE);
+
+                        }
+
+                    } else if (data.status.equals("0")) {
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetUnseenMessageCount> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+
+    }
+    
+    
 }

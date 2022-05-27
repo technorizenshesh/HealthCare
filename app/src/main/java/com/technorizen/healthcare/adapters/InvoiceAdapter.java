@@ -41,10 +41,6 @@ import java.util.Locale;
 
 import static com.technorizen.healthcare.retrofit.Constant.USER_ID;
 
-/**
- * Created by Ravindra Birla on 05,August,2021
- */
-
 public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.SelectTimeViewHolder> {
 
     private Context context;
@@ -58,6 +54,7 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.SelectTi
         this.invoicesList = invoicesList;
         this.downloadInvoice = downloadInvoice;
     }
+    
     @NonNull
     @Override
     public SelectTimeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -96,6 +93,9 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.SelectTi
         TextView tvTransit = holder.itemView.findViewById(R.id.tvTransit);
         TextView tvTotalHours = holder.itemView.findViewById(R.id.tvTotalHours);
         TextView tvNoShowCharge = holder.itemView.findViewById(R.id.tvNoShowCharge);
+
+        TextView tvUnpaidBreak = holder.itemView.findViewById(R.id.tvUnpaidBreak);
+
         TextView tvInvoiceTotal = holder.itemView.findViewById(R.id.tvInvoiceTotal);
         TextView tvPayStatus = holder.itemView.findViewById(R.id.tvPayStatus);
         MaterialCardView cv = holder.itemView.findViewById(R.id.cv);
@@ -110,14 +110,17 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.SelectTi
                     context.startActivity(defaultBrowser);
                 }
                 );
+
         String strCompany = "";
         if(invoicesList.get(position).getShiftsdetail().get(0).getAccountType().equalsIgnoreCase("Individual"))
         {
-            strCompany = invoicesList.get(position).getShiftsdetail().get(0).getUserName();
+            strCompany = invoicesList.get(position).getShiftsdetail().get(0).getUserName()
+                    +", "+invoicesList.get(position).getShiftsdetail().get(0).getShiftLocation();
         }
         else
         {
-            strCompany = invoicesList.get(position).getShiftsdetail().get(0).getCompany();
+            strCompany = invoicesList.get(position).getShiftsdetail().get(0).getCompany()
+                    +", "+invoicesList.get(position).getShiftsdetail().get(0).getShiftLocation();
         }
 
         String text = "For a shift done by "+invoicesList.get(position).getShiftsdetail().get(0).getWorkerName()  +
@@ -140,7 +143,6 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.SelectTi
         tvShiftAmount.setText("$ "+invoicesList.get(position).getTotalAmount()+"");
         tvLateCancelationFees.setText("$ "+invoicesList.get(position).getWorkerNoShowCancelCharge());
         tvNoShowCharge.setText("$ "+invoicesList.get(position).getWorkerNoShowCancelCharge());
-//        tvTotalHours.setText(invoicesList.get(position).getHoursPurchased());
 
         Double d1 = Double.parseDouble(invoicesList.get(position).getHoursPurchased());
         if(d1 < 2.0)
@@ -160,6 +162,17 @@ public class InvoiceAdapter extends RecyclerView.Adapter<InvoiceAdapter.SelectTi
         {
             tvTransit.setText(invoicesList.get(position).getShiftsdetail().get(0).getTransitAllowance()+" Hour");
         }
+
+
+        if(invoicesList.get(position).getShiftsdetail().get(0).getUnpaidBreak().equalsIgnoreCase("None"))
+        {
+            tvUnpaidBreak.setText(invoicesList.get(position).getShiftsdetail().get(0).getUnpaidBreak());
+        }
+        else
+        {
+            tvUnpaidBreak.setText(invoicesList.get(position).getShiftsdetail().get(0).getUnpaidBreak()+" Minutes");
+        }
+
         tvInvoiceTotal.setText("$ "+invoicesList.get(position).getWorkerPaidAmout()+"");
         tvPayStatus.setText(invoicesList.get(position).getPayementStatus());
         if(invoicesList.get(position).getWorkerPaidAmout().contains("-"))

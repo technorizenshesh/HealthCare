@@ -14,9 +14,13 @@ import android.view.WindowManager;
 
 import com.technorizen.healthcare.activites.HomeActivity;
 import com.technorizen.healthcare.activites.LoginAct;
+import com.technorizen.healthcare.models.CertnRequestModel;
 import com.technorizen.healthcare.retrofit.Constant;
 import com.technorizen.healthcare.util.SharedPreferenceUtility;
 import com.technorizen.healthcare.workerSide.WorkerHomeAct;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.technorizen.healthcare.activites.LoginAct.TAG;
 import static com.technorizen.healthcare.retrofit.Constant.USER_TYPE;
@@ -25,6 +29,12 @@ public class SplashAct extends AppCompatActivity {
 
     private static final int SPLASH_TIME_OUT = 3000;
     private boolean isUserLoggedIn;
+    private CertnRequestModel certnRequestModel;
+    private CertnRequestModel.Information information;
+    private CertnRequestModel.Address address;
+    private CertnRequestModel.Conviction conviction;
+    private ArrayList<CertnRequestModel.Address> addresses;
+    private ArrayList<CertnRequestModel.Conviction> convictionList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,9 +56,23 @@ public class SplashAct extends AppCompatActivity {
             String form1 = String.format("%.2f", 3.1);
             Log.d(TAG, "onCreate: Not a number "+form1);
         }
+
+        certnRequestModel = new CertnRequestModel();
+        information = new CertnRequestModel.Information();
+        address = new CertnRequestModel.Address();
+        conviction = new CertnRequestModel.Conviction();
+        address.setAddress("SH 549 Agar Road");
+        address.setCity("Victoria");
+        address.setCountry("CA");
+        address.setProvinceState("BC");
+        information.setRcmpConsentGiven(true);
+        certnRequestModel.setRequestEnhancedCriminalRecordCheck(true);
+        certnRequestModel.setRequestEnhancedIdentityVerification(true);
     }
 
-    //innorussell@gmail.com
+    //innorussell@gmail.com 123
+    //iudemba9@gmail.com 123456
+
     private void finds() {
         new Handler().postDelayed(new Runnable() {
             @Override

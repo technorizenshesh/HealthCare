@@ -661,7 +661,7 @@ public class WorkerEditProfileFragment extends Fragment {
                         myCountriesList.addAll(data.getResult());
                         setCountrySpinner();
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                     }
 
                 } catch (Exception e) {
@@ -701,7 +701,6 @@ public class WorkerEditProfileFragment extends Fragment {
                         myStateList.addAll(data.getResult());
                         setStatesSpinner();
                     } else {
-                        showToast(getActivity(), data.message);
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -880,7 +879,7 @@ public class WorkerEditProfileFragment extends Fragment {
                         setUserDetails(userList);
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                     }
 
                 } catch (Exception e) {

@@ -35,6 +35,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.activites.ConversationAct;
+import com.technorizen.healthcare.activites.One2OneChatAct;
 import com.technorizen.healthcare.models.SuccessResGetChat;
 import com.technorizen.healthcare.models.SuccessResGetShiftInProgress;
 import com.technorizen.healthcare.models.SuccessResInsertChat;
@@ -63,7 +64,6 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHistoryWorkerAdapter.SelectTimeViewHolder> {
 
-
     ArrayAdapter ad;
     private Context context;
     private  ArrayList<SuccessResGetShiftInProgress.Result> postedList;
@@ -71,7 +71,6 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
     private boolean from;
     private boolean showNotes = false;
     private String fromWhere;
-
 
     public ShiftsHistoryWorkerAdapter(Context context, ArrayList<SuccessResGetShiftInProgress.Result> postedList, boolean from, String fromWhere)
     {
@@ -92,6 +91,12 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
 
     @Override
     public void onBindViewHolder(@NonNull SelectTimeViewHolder holder, int position) {
+
+        RelativeLayout rlChat;
+
+        rlChat = holder.itemView.findViewById(R.id.rlChat);
+        TextView tvWorkerMsg = holder.itemView.findViewById(R.id.tvWorkerMsg);
+
         List<String> dates = new LinkedList<>();
         List<String> listStartTime = new LinkedList<>();
         List<String> listEndTime = new LinkedList<>();
@@ -123,13 +128,12 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
         ImageView ivChat = holder.itemView.findViewById(R.id.ivChat);
         AppCompatButton btnClock = holder.itemView.findViewById(R.id.btnClock);
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(16));
+        requestOptions = requestOptions.transforms( new RoundedCorners(15));
         ImageView ivProfile = holder.itemView.findViewById(R.id.ivProfile);
         ImageView ivWorkerProfile = holder.itemView.findViewById(R.id.ivWorker);
         RelativeLayout rlShiftsNote = holder.itemView.findViewById(R.id.rlShiftsNotes);
         AppCompatButton btnCancellation = holder.itemView.findViewById(R.id.btnCancellation);
         AppCompatButton btnUserCancellation = holder.itemView.findViewById(R.id.btnUserCancellationCharge);
-
 
         if(postedList.get(position).getStatus().equalsIgnoreCase("Timeover"))
         {
@@ -140,13 +144,20 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
             btnCancellation.setText("Cancellation/No Show Charge: $ "+postshiftTimeList.get(0).getNoShowCancelCharge());
         }
 
+        if(!postedList.get(position).getTotalUnseenMessage().equalsIgnoreCase("0"))
+        {
+            tvWorkerMsg.setVisibility(View.VISIBLE);
+            tvWorkerMsg.setText(postedList.get(position).getTotalUnseenMessage());
+        }else
+        {
+            tvWorkerMsg.setVisibility(View.GONE);
+        }
+
         btnUserCancellation.setText("Cancellation Charge: $ "+postshiftTimeList.get(0).getNoShowCancelCharge());
         if(postedList.get(position).getShiftsdetail().get(0).getDayType().equalsIgnoreCase("Single"))
-
         {
             tvShiftNumber.setText(postedList.get(position).getShiftNo());
         }
-
         else
         {
             tvShiftNumber.setText(postedList.get(position).getShiftSubNo());
@@ -174,6 +185,7 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
         {
             date = date.substring(0, date.length() - 1);
         }
+
         tvTime.setVisibility(View.VISIBLE);
         tvMultipleTime.setVisibility(View.GONE);
         String startTime = postshiftTimeList.get(0).getStartTime();
@@ -233,7 +245,6 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
         }
         Glide.with(context)
                 .load(postedList.get(position).getShiftsdetail().get(0).getUserImage())
-                 .centerCrop()
                 .apply(requestOptions)
                 .into(ivProfile);
         rlShiftsNote.setOnClickListener(v ->
@@ -280,8 +291,6 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
             btnUserCancellation.setVisibility(View.GONE);
         }
 
-
-
         if(!postedList.get(position).getTotalWorked().equalsIgnoreCase(""))
         {
             int seconds =  Integer.parseInt(postedList.get(position).getTotalWorked());
@@ -293,6 +302,7 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
                     .format(Locale.getDefault(),
                             "%02d:%02d:%02d", hours,
                             minutes, secs);
+
             if(postshiftTimeList.get(0).getNoShowCancelCharge().equalsIgnoreCase("0"))
             {
                 btnClock.setText(time21);
@@ -326,7 +336,6 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
                 params.setMargins(25, 0, 25, 100);
                 cv.setLayoutParams(params);
             }
-
             if(position == 0)
             {
                 LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
@@ -338,40 +347,45 @@ public class ShiftsHistoryWorkerAdapter extends RecyclerView.Adapter<ShiftsHisto
             }
         }
 
-        ivChat.setOnClickListener(v ->
+        rlChat.setOnClickListener(v ->
                 {
 
                     if(fromWhere.equalsIgnoreCase("userhome"))
                     {
-
-                        fullScreenDialog(postedList.get(position).getWorkerId());
-
+//                        fullScreenDialog(postedList.get(position).getWorkerId());
+                        context.startActivity(new Intent(context, One2OneChatAct.class).putExtra("id",postedList.get(position).getWorkerId()));
                     }else  if(fromWhere.equalsIgnoreCase("usershifthistory"))
                     {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
-                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
-                        bundle.putString("id",postedList.get(position).getWorkerId());
-                        Navigation.findNavController(v).navigate(R.id.action_shiftHistoryFragment_to_one2OneChatFragment,bundle);
+                        context.startActivity(new Intent(context, One2OneChatAct.class).putExtra("id",postedList.get(position).getWorkerId()));
+
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
+//                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
+//                        bundle.putString("senderId",postedList.get(position).getWorkerId());
+//                        Navigation.findNavController(v).navigate(R.id.action_shiftHistoryFragment_to_one2OneChatFragment,bundle);
 
                     }else  if(fromWhere.equalsIgnoreCase("workerHistory"))
                     {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
-                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
-                        bundle.putString("id",postedList.get(position).getUserId());
-                        Navigation.findNavController(v).navigate(R.id.action_workerShiftsHistoryFragment_to_one2OneChatFragment2,bundle);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
+//                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
+//                        bundle.putString("senderId",postedList.get(position).getUserId());
+//                        Navigation.findNavController(v).navigate(R.id.action_workerShiftsHistoryFragment_to_one2OneChatFragment2,bundle);
+
+                        context.startActivity(new Intent(context, One2OneChatAct.class).putExtra("id",postedList.get(position).getUserId()));
 
                     }else  if(fromWhere.equalsIgnoreCase("usershiftInProgress"))
                     {
 
-                        Bundle bundle = new Bundle();
-                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
-                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
-                        bundle.putString("id",postedList.get(position).getWorkerId());
-                        Navigation.findNavController(v).navigate(R.id.action_shiftInProgressFragment_to_one2OneChatFragment,bundle);
+                        context.startActivity(new Intent(context, One2OneChatAct.class).putExtra("id",postedList.get(position).getUserId()));
+
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
+//                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
+//                        bundle.putString("senderId",postedList.get(position).getWorkerId());
+//                        Navigation.findNavController(v).navigate(R.id.action_shiftInProgressFragment_to_one2OneChatFragment,bundle);
 
                     }
                 }

@@ -21,9 +21,12 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.os.Environment;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.technorizen.healthcare.R;
@@ -38,6 +41,7 @@ import com.technorizen.healthcare.util.DataManager;
 import com.technorizen.healthcare.util.DownloadInvoice;
 import com.technorizen.healthcare.util.DownloadTask;
 import com.technorizen.healthcare.util.SharedPreferenceUtility;
+import com.technorizen.healthcare.workerSide.fragments.WorkerInvoicesFragment;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -63,6 +67,7 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * Use the {@link InvoicesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class InvoicesFragment extends Fragment implements DownloadInvoice {
 
     FragmentInvoicesBinding binding;
@@ -96,6 +101,7 @@ public class InvoicesFragment extends Fragment implements DownloadInvoice {
     public InvoicesFragment() {
         // Required empty public constructor
     }
+
     /**
      * Use this factory method to create a new instance of
      * this fragment using the provided parameters.
@@ -104,6 +110,7 @@ public class InvoicesFragment extends Fragment implements DownloadInvoice {
      * @param param2 Parameter 2.
      * @return A new instance of fragment InvoicesFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static InvoicesFragment newInstance(String param1, String param2) {
         InvoicesFragment fragment = new InvoicesFragment();
@@ -129,53 +136,114 @@ public class InvoicesFragment extends Fragment implements DownloadInvoice {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_invoices, container, false);
 
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
+
         getShifts();
 
         getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
 
-        binding.btnPayUnpaidInvoice.setOnClickListener(v ->
-                {
-                    Navigation.findNavController(v).navigate(R.id.action_invoicesFragment_to_payInvoicesFragment);
+//        binding.btnPayUnpaidInvoice.setOnClickListener(v ->
+//                {
+//                    Navigation.findNavController(v).navigate(R.id.action_invoicesFragment_to_payInvoicesFragment);
+//                }
+//                );
+
+
+        binding.etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_SEARCH) {
+                    searchInvoice(binding.etSearch.getText().toString());
+                    return true;
                 }
-                );
-        binding.tvAll.setOnClickListener(v ->
-                {
-                    type  = "All";
-                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.button_bg));
-                    binding.tvAll.setTextColor(getResources().getColor(R.color.white));
-                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
-                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
-                    getShifts();
-                }
-        );
-        binding.tvUnpaid.setOnClickListener(v ->
-                {
-                    type  = "Unpaid";
-                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
-                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.white));
-                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
-                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
-                    getShifts();
-                }
-        );
-        binding.tvPaid.setOnClickListener(v ->
-                {
-                    type  = "Paid";
-                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
-                    binding.tvPaid.setTextColor(getResources().getColor(R.color.white));
-                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
-                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
-                    getShifts();
-                }
-        );
+                return false;
+            }
+        });
+
+//
+//        binding.tvAll.setOnClickListener(v ->
+//                {
+//                    type  = "All";
+//                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.button_bg));
+//                    binding.tvAll.setTextColor(getResources().getColor(R.color.white));
+//                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
+//                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
+//                    getShifts();
+//                }
+//        );
+//
+//        binding.tvUnpaid.setOnClickListener(v ->
+//                {
+//                    type  = "Unpaid";
+//                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
+//                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.white));
+//                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
+//                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
+//                    getShifts();
+//                }
+//        );
+//        binding.tvPaid.setOnClickListener(v ->
+//                {
+//                    type  = "Paid";
+//                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
+//                    binding.tvPaid.setTextColor(getResources().getColor(R.color.white));
+//                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
+//                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
+//                    getShifts();
+//                }
+//        );
         return binding.getRoot();
     }
+
+
+    public void searchInvoice(String title)
+    {
+        String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id",userId);
+        map.put("type",type);
+        map.put("invoice_no",title);
+        Call<SuccessResGetInvoices> call = apiInterface.searchUserInvoice(map);
+        call.enqueue(new Callback<SuccessResGetInvoices>() {
+            @Override
+            public void onResponse(Call<SuccessResGetInvoices> call, Response<SuccessResGetInvoices> response) {
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    SuccessResGetInvoices data = response.body();
+                    if (data.status.equals("1")) {
+                        binding.etSearch.clearFocus();
+                        invoicesList.clear();
+                        invoicesList.addAll(data.getResult());
+                        binding.rvInvoices.setHasFixedSize(true);
+                        binding.rvInvoices.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        binding.rvInvoices.setAdapter(new InvoiceUserAdapter(getActivity(),invoicesList,InvoicesFragment.this::donwloadInvoice));
+                    } else {
+                        showToast(getActivity(), data.message);
+                        binding.etSearch.clearFocus();
+                        invoicesList.clear();
+                        invoicesList.addAll(data.getResult());
+                        binding.rvInvoices.setHasFixedSize(true);
+                        binding.rvInvoices.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        binding.rvInvoices.setAdapter(new InvoiceUserAdapter(getActivity(),invoicesList,InvoicesFragment.this::donwloadInvoice));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<SuccessResGetInvoices> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
 
     public void getShifts()
     {

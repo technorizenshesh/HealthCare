@@ -41,7 +41,6 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 public class LoginAct extends AppCompatActivity {
 
-
     private ActivityLoginBinding binding;
     HealthInterface apiInterface;
     public static String TAG = "LoginActivity";
@@ -121,7 +120,7 @@ public class LoginAct extends AppCompatActivity {
                         if(data.getResult().getType().equalsIgnoreCase("User"))
                         {
                             SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_TYPE,"User");
-                            startActivity(new Intent(LoginAct.this, HomeActivity.class));
+                            startActivity(new Intent(LoginAct.this, HomeActivity.class).putExtra("key","login").putExtra("admin",data.getResult().getAdminApproval()));
                         } else
                         {
                             SharedPreferenceUtility.getInstance(LoginAct.this).putString(Constant.USER_TYPE,"");

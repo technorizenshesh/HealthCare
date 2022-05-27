@@ -4,6 +4,8 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.databinding.DataBindingUtil;
@@ -16,19 +18,18 @@ import com.technorizen.healthcare.models.SuccessResGetChat;
 import java.util.LinkedList;
 import java.util.List;
 
-
 /**
  * Created by Ravindra Birla on 18,March,2021
  */
+
 public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder> {
 
-    AdapterChatBinding binding;
-
+   AdapterChatBinding binding;
    private Context context;
    private List<SuccessResGetChat.Result> chatList = new LinkedList<>();
    String myId;
 
- public ChatAdapter(Context context, List<SuccessResGetChat.Result> chatList, String myId)
+   public ChatAdapter(Context context, List<SuccessResGetChat.Result> chatList, String myId)
  {
      this.context = context;
      this.chatList = chatList;
@@ -38,29 +39,37 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ChatViewHolder
     @NonNull
     @Override
     public ChatViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-
         binding = DataBindingUtil.inflate(LayoutInflater.from(context), R.layout.adapter_chat, parent, false);
         return new ChatViewHolder(binding);
-
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatViewHolder holder, int position) {
 
-     if(myId.equalsIgnoreCase(chatList.get(position).getSenderId()))
+        RelativeLayout chatLeftMsgLayout = holder.itemView.findViewById(R.id.chat_left_msg_layout);
+        RelativeLayout chatRightMsgLayout = holder.itemView.findViewById(R.id.chat_right_msg_layout);
+
+        TextView tvTimeRight = holder.itemView.findViewById(R.id.tv_time_right);
+        TextView chatRightMsgTextView = holder.itemView.findViewById(R.id.chat_right_msg_text_view);
+
+        TextView tvTimeLeft = holder.itemView.findViewById(R.id.tv_time_left);
+        TextView chatLeftMsgTextView = holder.itemView.findViewById(R.id.chat_left_msg_text_view);
+
+        if(myId.equalsIgnoreCase(chatList.get(position).getSenderId()))
      {
-         binding.chatLeftMsgLayout.setVisibility(View.GONE);
-         binding.chatRightMsgLayout.setVisibility(View.VISIBLE);
-         binding.tvTimeRight.setText(chatList.get(position).getTimeAgo());
-         binding.chatRightMsgTextView.setText(chatList.get(position).getChatMessage());
+        chatLeftMsgLayout.setVisibility(View.GONE);
+        chatRightMsgLayout.setVisibility(View.VISIBLE);
+        tvTimeRight.setText(chatList.get(position).getTimeAgo());
+        chatRightMsgTextView.setText(chatList.get(position).getChatMessage());
      }
      else
      {
-         binding.chatLeftMsgLayout.setVisibility(View.VISIBLE);
-         binding.chatRightMsgLayout.setVisibility(View.GONE);
-         binding.tvTimeLeft.setText(chatList.get(position).getTimeAgo());
-         binding.chatLeftMsgTextView.setText(chatList.get(position).getChatMessage());
+        chatLeftMsgLayout.setVisibility(View.VISIBLE);
+        chatRightMsgLayout.setVisibility(View.GONE);
+        tvTimeLeft.setText(chatList.get(position).getTimeAgo());
+        chatLeftMsgTextView.setText(chatList.get(position).getChatMessage());
      }
+
     }
 
     @Override

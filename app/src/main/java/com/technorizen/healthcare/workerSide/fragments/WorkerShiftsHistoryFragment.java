@@ -1,9 +1,14 @@
 package com.technorizen.healthcare.workerSide.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -40,6 +45,9 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 
 public class WorkerShiftsHistoryFragment extends Fragment {
+
+
+    LocalBroadcastManager lbm;
 
     FragmentWorkerShiftsHistoryBinding binding;
     HealthInterface apiInterface;
@@ -94,8 +102,34 @@ public class WorkerShiftsHistoryFragment extends Fragment {
                 binding.srlRefreshContainer.setRefreshing(false);
             }
         });
+
+        lbm = LocalBroadcastManager.getInstance(getActivity());
+        lbm.registerReceiver(receiver, new IntentFilter("filter_string_1"));
+
         return binding.getRoot();
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null) {
+//                String str = intent.getStringExtra("key");
+//                getUnseenNotificationCount();
+                // get all your data from intent and do what you want
+                getShiftHistory();
+            }
+        }
+    };
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+
+    }
+
+
     public void getShiftHistory()
     {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));

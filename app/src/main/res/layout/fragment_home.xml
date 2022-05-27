@@ -9,13 +9,11 @@
     android:orientation="vertical"
     android:background="#F6F5F5"
     >
-
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/srlRefreshContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -51,22 +49,22 @@
             android:padding="@dimen/_10sdp">
             <RelativeLayout
                 android:id="@+id/rlProfile"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_90sdp"
-                android:background="@drawable/gray_bg_5"
-                android:padding="@dimen/_1sdp"
-                android:layout_marginRight="@dimen/_8sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_marginRight="@dimen/_5sdp"
                 >
             <ImageView
                 android:id="@+id/ivProfile"
-                android:layout_width="@dimen/_70sdp"
-                android:layout_height="@dimen/_90sdp"
+                android:layout_width="@dimen/_80sdp"
+                android:background="@drawable/image_border"
+                android:scaleType="fitXY"
+                android:layout_height="@dimen/_80sdp"
                 />
             </RelativeLayout>
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="@dimen/_8sdp"
+                android:layout_marginLeft="@dimen/_5sdp"
                 android:orientation="vertical">
                 <TextView
                     android:id="@+id/tv_Company"
@@ -155,6 +153,7 @@
                 android:visibility="gone"
                 android:layout_height="match_parent"
                 android:id="@+id/rvCurrentShifts"/>
+
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLoadMore"
                 android:layout_width="match_parent"

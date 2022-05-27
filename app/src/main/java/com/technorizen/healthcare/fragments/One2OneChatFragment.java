@@ -79,6 +79,7 @@ public class One2OneChatFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment One2OneChatFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static One2OneChatFragment newInstance(String param1, String param2) {
         One2OneChatFragment fragment = new One2OneChatFragment();

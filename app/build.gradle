@@ -5,9 +5,16 @@ plugins {
 android {
     compileSdkVersion 30
     buildToolsVersion "30.0.3"
+    lintOptions {
+        checkReleaseBuilds false
+        // Or, if you prefer, you can continue to check for errors in release builds,
+        // but continue the build even when errors are found:
+        abortOnError false
+    }
     defaultConfig {
         applicationId "com.technorizen.healthcare"
         minSdkVersion 23
+        compileSdk 31
         targetSdkVersion 30
         versionCode 1
         versionName "1.0"
@@ -29,8 +36,13 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
     repositories {
         maven { url 'https://jitpack.io' }
+    }
+
+    configurations.all {
+        resolutionStrategy { force 'androidx.core:core-ktx:1.6.0' }
     }
 }
 
@@ -75,12 +87,15 @@ dependencies {
 
     implementation 'com.github.maxpilotto:credit-card-view:8.0.0'
 
-
     implementation 'com.google.android.libraries.places:places:2.5.0'
     implementation 'com.braintreepayments:card-form:5.2.0'
     compile 'com.github.sharish:CreditCardView:v1.0.4'
 
+    //Stripe
+//    implementation 'com.stripe:stripe-android:15.2.0'
+    implementation 'com.stripe:stripe-android:20.2.2'
 
+    implementation 'com.theartofdev.edmodo:android-image-cropper:2.8.+'
 
 }
 apply plugin: 'com.android.application'

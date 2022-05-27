@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.CenterCrop;
+import com.bumptech.glide.load.resource.bitmap.CenterInside;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.technorizen.healthcare.R;
@@ -168,12 +169,11 @@ public class ProfileFragment extends Fragment {
 
         binding.tvClientDesc.setText(getString(R.string.client_descriptionCol)+" "+user.getDescription());
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
+        requestOptions = requestOptions.transforms( new RoundedCorners(15));
 
         Glide
                 .with(getActivity())
                 .load(user.getImage())
-                .centerCrop()
                 .apply(requestOptions)
                 .into(binding.ivProfile);
     }

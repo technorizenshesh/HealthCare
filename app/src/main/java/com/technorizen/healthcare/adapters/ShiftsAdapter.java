@@ -58,7 +58,6 @@ public class ShiftsAdapter extends RecyclerView.Adapter<ShiftsAdapter.SelectTime
     private DeleteShifts shifts;
     private boolean showNotes = false;
     public void addList(ArrayList<SuccessResGetPost.Result> postedList)
-
     {
         this.postedList = postedList;
     }
@@ -229,17 +228,6 @@ public class ShiftsAdapter extends RecyclerView.Adapter<ShiftsAdapter.SelectTime
                 text = context.getString(R.string.time_col)+" "+startTime+" - "+endTime+"("+totalHours+" hrs)";
             }
 
-
-//            Double d = Double.parseDouble(postshiftTimeList.get(0).getTotalHours());
-//            if(d < 2.0)
-//            {
-//               text  = context.getString(R.string.time_col)+" "+startTime+" - "+endTime+"("+postshiftTimeList.get(0).getTotalHours()+" hr)";
-//            }
-//            else
-//            {
-//                text = context.getString(R.string.time_col)+" "+startTime+" - "+endTime+"("+postshiftTimeList.get(0).getTotalHours()+" hrs)";
-//            }
-
             tvTime.setText(text);
         }
         else
@@ -325,7 +313,6 @@ public class ShiftsAdapter extends RecyclerView.Adapter<ShiftsAdapter.SelectTime
         }
 
         String pay = " $" + postshiftTimeList.get(0).getPayamount() +" @ $"+postedList.get(position).getHourlyRate()+"/hr";
-
         hrRate.setText(context.getString(R.string.pay_col)+pay);
         tvCovid.setText(context.getString(R.string.covid_19_negative)+postedList.get(position).getCovidStatus());
         tvLocation.setText(postedList.get(position).getShiftLocation());
@@ -342,10 +329,9 @@ public class ShiftsAdapter extends RecyclerView.Adapter<ShiftsAdapter.SelectTime
             tvCompanyName.setText(postedList.get(position).getUserName());
         }
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
+        requestOptions = requestOptions.transforms( new RoundedCorners(15));
         Glide.with(context)
                 .load(postedList.get(position).getUserImage())
-                 .centerCrop()
                 .apply(requestOptions)
                 .into(ivProfile);
 
@@ -625,6 +611,7 @@ public class ShiftsAdapter extends RecyclerView.Adapter<ShiftsAdapter.SelectTime
         }
         return false;
     }
+
     public void showShiftsNotes(String notes) {
         final Dialog dialog = new Dialog(context);
         dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);

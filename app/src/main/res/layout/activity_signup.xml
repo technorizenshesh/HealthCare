@@ -62,11 +62,9 @@
                     android:layout_marginBottom="@dimen/_15sdp"
                     />
 
-
             </LinearLayout>
 
         </com.google.android.material.card.MaterialCardView>
-
 
         <RelativeLayout
             android:id="@+id/rlbottom"

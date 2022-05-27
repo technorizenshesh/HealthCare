@@ -31,15 +31,16 @@
                 android:paddingBottom="@dimen/_5sdp"
                 >
                 <RelativeLayout
-                    android:layout_width="@dimen/_70sdp"
+                    android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:background="@drawable/gray_bg_5"
-                    android:padding="@dimen/_1sdp"
                     >
-                <ImageView
-                    android:id="@+id/ivProfile"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_80sdp"/>
+
+                    <ImageView
+                        android:id="@+id/ivProfile"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:background="@drawable/image_border"
+                        android:scaleType="fitXY" />
                 </RelativeLayout>
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -184,13 +185,34 @@
                             android:textSize="@dimen/_10sdp"
                             android:layout_centerVertical="true"
                             />
-                        <ImageView
-                            android:id="@+id/ivChat"
-                            android:layout_width="@dimen/_20sdp"
+
+                        <RelativeLayout
+                            android:id="@+id/rlChat"
+                            android:layout_width="@dimen/_24sdp"
                             android:layout_height="@dimen/_20sdp"
-                            android:src="@drawable/ic_chat"
                             android:layout_alignParentRight="true"
-                            />
+                            >
+                            <ImageView
+                                android:id="@+id/ivChat"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:src="@drawable/ic_chat"
+                                />
+
+                            <TextView
+                                android:visibility="gone"
+                                android:id="@+id/tvWorkerMsg"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentRight="true"
+                                android:background="@drawable/circle_red"
+                                android:fontFamily="@font/montserrat_semibold"
+                                android:gravity="center"
+                                android:text="1"
+                                android:textColor="@color/white"
+                                android:textSize="@dimen/_8sdp" />
+
+                        </RelativeLayout>
                     </RelativeLayout>
 
                     <TextView
@@ -261,17 +283,17 @@
                 android:layout_marginBottom="@dimen/_5sdp"
                 >
                 <RelativeLayout
-                    android:layout_width="@dimen/_70sdp"
+                    android:layout_width="@dimen/_80sdp"
                     android:layout_height="@dimen/_80sdp"
-                    android:background="@drawable/gray_bg_5"
-                    android:padding="@dimen/_1sdp"
+
                     >
 
-                <ImageView
-                    android:id="@+id/ivWorker"
-                    android:layout_width="@dimen/_70sdp"
-                    android:layout_height="@dimen/_80sdp"
-                    />
+                    <ImageView
+                        android:id="@+id/ivWorker"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:background="@drawable/image_border"
+                        android:scaleType="fitXY" />
                 </RelativeLayout>
                 <LinearLayout
                     android:layout_width="match_parent"

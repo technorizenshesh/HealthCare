@@ -40,16 +40,13 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * Use the {@link DistanceFilterFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class DistanceFilterFragment extends Fragment {
 
     FragmentDistanceFilterBinding binding;
-
     HealthInterface apiInterface;
-
-
     private String strDistance = "";
     private String strMyDistance = "";
-
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -72,6 +69,7 @@ public class DistanceFilterFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment DistanceFilterFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static DistanceFilterFragment newInstance(String param1, String param2) {
         DistanceFilterFragment fragment = new DistanceFilterFragment();
@@ -108,11 +106,9 @@ public class DistanceFilterFragment extends Fragment {
                     List<Float> val = binding.slider.getValues();
                     float f = val.get(0);
                     strDistance = String.valueOf(f);
-
                     if (strDistance.equalsIgnoreCase(""))
                     {
                         Toast.makeText(getActivity(),"Please enter distance.",Toast.LENGTH_SHORT).show();
-
                     }else
                     {
                         updateDistance();

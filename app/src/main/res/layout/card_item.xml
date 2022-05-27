@@ -14,14 +14,14 @@
             android:layout_height="@dimen/_150sdp"
             >
             <com.maxpilotto.creditcardview.CreditCardView
+                android:theme="@style/MyCardStyle"
                 android:id="@+id/card1"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_150sdp"
                 app:cardCvv="123"
                 app:cardExpiry="1234"
                 app:cardHolder="John Doe"
-                app:cardNumberFormat="auto"
-                app:cardNumber="5201284799337668"
+                app:cardNumber="XXX6364734638"
                 app:cardHolderLabel="Holder"
                 app:cardExpiryLabel="Expiry"/>
 

@@ -1,6 +1,7 @@
 package com.technorizen.healthcare.fragments;
 
 import android.app.Dialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
@@ -20,6 +21,8 @@ import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.braintreepayments.cardform.OnCardFormSubmitListener;
@@ -29,6 +32,7 @@ import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.gson.Gson;
 import com.maxpilotto.creditcardview.models.Brand;
 import com.technorizen.healthcare.R;
+import com.technorizen.healthcare.activites.ConversationAct;
 import com.technorizen.healthcare.adapters.CardAdapter;
 import com.technorizen.healthcare.databinding.FragmentAddCreditCardBinding;
 import com.technorizen.healthcare.models.SuccessResAddCardDetails;
@@ -36,6 +40,7 @@ import com.technorizen.healthcare.models.SuccessResDeleteCard;
 import com.technorizen.healthcare.models.SuccessResGetCardDetails;
 import com.technorizen.healthcare.models.SuccessResGetProfile;
 import com.technorizen.healthcare.models.SuccessResGetToken;
+import com.technorizen.healthcare.models.SuccessResGetUnseenMessageCount;
 import com.technorizen.healthcare.models.SuccessResStripePayment;
 import com.technorizen.healthcare.models.SuccessResUpdateCards;
 import com.technorizen.healthcare.retrofit.ApiClient;
@@ -195,12 +200,75 @@ public class AddCreditCardFragment extends Fragment implements CardInterface {
         return binding.getRoot();
     }
 
+    TextView tvMessageCount;
+
+    public  void getUnseenNotificationCount()
+    {
+
+        String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+
+        Call<SuccessResGetUnseenMessageCount> call = apiInterface.getUnseenMessage(map);
+
+        call.enqueue(new Callback<SuccessResGetUnseenMessageCount>() {
+            @Override
+            public void onResponse(Call<SuccessResGetUnseenMessageCount> call, Response<SuccessResGetUnseenMessageCount> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+                    SuccessResGetUnseenMessageCount data = response.body();
+                    Log.e("data",data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+
+                        int unseenNoti = Integer.parseInt(data.getResult().getTotalUnseenMessage());
+
+                        if(unseenNoti!=0)
+                        {
+
+                            tvMessageCount.setVisibility(View.VISIBLE);
+                            tvMessageCount.setText(unseenNoti+"");
+
+                        }
+                        else
+                        {
+
+                            tvMessageCount.setVisibility(View.GONE);
+
+                        }
+
+                    } else if (data.status.equals("0")) {
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetUnseenMessageCount> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+
+    }
+
     private void fullScreenDialog() {
         dialog = new Dialog(getActivity(), WindowManager.LayoutParams.MATCH_PARENT);
         dialog.setContentView(R.layout.dialog_add_card);
         AppCompatButton btnAdd =  dialog.findViewById(R.id.btnAdd);
         MaterialCheckBox checkBox = dialog.findViewById(R.id.defaultCheckBox);
         ImageView ivBack;
+
+        tvMessageCount = dialog.findViewById(R.id.tvMessageCount);
+
+        RelativeLayout rlChat = dialog.findViewById(R.id.rlChat);
+
+
         ivBack = dialog.findViewById(R.id.ivBack);
         CardForm cardForm = dialog.findViewById(R.id.card_form);
         cardForm.cardRequired(true)
@@ -244,6 +312,14 @@ public class AddCreditCardFragment extends Fragment implements CardInterface {
                 }
             }
         });
+
+        rlChat.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), ConversationAct.class));
+                }
+        );
+
+        getUnseenNotificationCount();
 
         btnAdd.setOnClickListener(v ->
                 {

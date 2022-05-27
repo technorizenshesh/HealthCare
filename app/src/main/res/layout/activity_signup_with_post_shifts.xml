@@ -600,7 +600,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
                     >
-                    <com.google.android.material.radiobutton.MaterialRadioButton
+                    <TextView
                         android:id="@+id/loggedInRadio"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

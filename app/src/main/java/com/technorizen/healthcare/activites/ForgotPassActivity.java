@@ -36,9 +36,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding= ActivityForgotPassBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-
         binding.forgotAction.imgHeader.setOnClickListener(v -> {
             onBackPressed();
             finish();
@@ -48,9 +46,7 @@ public class ForgotPassActivity extends AppCompatActivity {
 
         binding.btnSend.setOnClickListener(v ->
                 {
-
                     strEmail = binding.etEmail.getText().toString().trim();
-
                     if(isValid())
                     {
 

@@ -51,6 +51,7 @@
                     android:fontFamily="@font/montserrat_semibold"
                     android:textColor="@color/black"
                     android:padding="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:layout_marginTop="@dimen/_5sdp"
                     android:text="Payment History"
                     android:textSize="@dimen/_13sdp" />

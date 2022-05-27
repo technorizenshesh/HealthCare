@@ -107,15 +107,18 @@ public class ConfirmRecruitmentAdapter extends RecyclerView.Adapter<ConfirmRecru
     @Override
     public void onBindViewHolder(@NonNull SelectTimeViewHolder holder, int position) {
 
-        showNotes = false;
+        RelativeLayout rlChat;
 
+        rlChat = holder.itemView.findViewById(R.id.rlChat);
+
+        showNotes = false;
         List<String> dates = new LinkedList<>();
         List<String> listStartTime = new LinkedList<>();
         List<String> listEndTime = new LinkedList<>();
 
         List<SuccessResGetCurrentSchedule.PostshiftTime> postshiftTimeList =  new LinkedList<>();
-
         postshiftTimeList = postedList.get(position).getPostshiftTime();
+        TextView tvWorkerMsg = holder.itemView.findViewById(R.id.tvWorkerMsg);
 
         TextView tvCompanyName = holder.itemView.findViewById(R.id.tvCompanyName);
         TextView tvJobPosition = holder.itemView.findViewById(R.id.jobPosition);
@@ -147,14 +150,22 @@ public class ConfirmRecruitmentAdapter extends RecyclerView.Adapter<ConfirmRecru
 
         tvShiftNumber.setText(postedList.get(position).getShiftNo());
 
-
         AppCompatButton btnCancel = holder.itemView.findViewById(R.id.btnCancel);
         AppCompatButton btnRecruit = holder.itemView.findViewById(R.id.btnRecruit);
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
+        requestOptions = requestOptions.transforms( new RoundedCorners(13));
 
-        ivChat.setVisibility(View.GONE);
+        rlChat.setVisibility(View.GONE);
+
+        if(!postedList.get(position).getTotalUnseenMessage().equalsIgnoreCase("0"))
+        {
+            tvWorkerMsg.setVisibility(View.VISIBLE);
+            tvWorkerMsg.setText(postedList.get(position).getTotalUnseenMessage());
+        }else
+        {
+            tvWorkerMsg.setVisibility(View.GONE);
+        }
 
         if(from)
         {
@@ -459,7 +470,6 @@ public class ConfirmRecruitmentAdapter extends RecyclerView.Adapter<ConfirmRecru
 
         Glide.with(context)
                 .load(postedList.get(position).getShiftsdetail().get(0).getUserImage())
-                 .centerCrop()
                 .apply(requestOptions)
                 .into(ivProfile);
 
@@ -510,7 +520,6 @@ public class ConfirmRecruitmentAdapter extends RecyclerView.Adapter<ConfirmRecru
 
         Glide.with(context)
                 .load(postedList.get(position).getShiftsdetail().get(0).getWorkerImage())
-                .centerCrop()
                 .apply(requestOptions)
                 .into(ivWorkerProfile);
 

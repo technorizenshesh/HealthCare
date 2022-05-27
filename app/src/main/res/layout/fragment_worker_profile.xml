@@ -62,16 +62,16 @@
                            <RelativeLayout
                                android:id="@+id/rlProfile"
                                android:layout_width="@dimen/_60sdp"
-                               android:layout_height="@dimen/_90sdp"
-                               android:background="@drawable/gray_bg_5"
-                               android:padding="@dimen/_1sdp"
+                               android:layout_height="@dimen/_60sdp"
                                android:layout_marginRight="@dimen/_8sdp"
                                >
-                    <ImageView
-                        android:id="@+id/ivProfile"
-                        android:layout_width="@dimen/_60sdp"
-                        android:layout_height="@dimen/_90sdp"
-                        android:background="@drawable/gray_bg_5"/>
+
+                               <ImageView
+                                   android:id="@+id/ivProfile"
+                                   android:layout_width="@dimen/_60sdp"
+                                   android:layout_height="@dimen/_90sdp"
+                                   android:background="@drawable/image_border"
+                                   android:scaleType="fitXY" />
                     </RelativeLayout>
 
                         <TextView

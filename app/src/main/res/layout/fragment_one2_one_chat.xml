@@ -9,47 +9,65 @@
         android:orientation="vertical"
         android:fitsSystemWindows="true"
         >
+
         <RelativeLayout
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_60sdp"
             android:background="@drawable/bottom_cornor_40"
-            android:visibility="visible"
-            >
+            android:visibility="visible">
 
             <ImageView
                 android:id="@+id/ivBack"
                 android:layout_width="@dimen/_30sdp"
                 android:layout_height="@dimen/_20sdp"
-                android:src="@drawable/ic_back"
-                android:padding="@dimen/_2sdp"
                 android:layout_centerVertical="true"
                 android:layout_marginLeft="@dimen/_10sdp"
+                android:padding="@dimen/_2sdp"
                 android:scaleType="centerInside"
+                android:src="@drawable/ic_back"
                 app:tint="@color/white" />
+
             <TextView
                 android:id="@+id/tvtitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:text="@string/careshifts"
-                android:textSize="@dimen/_16sdp"
-                android:layout_gravity="center"
                 android:layout_centerInParent="true"
-                android:fontFamily="@font/montserrat_bold"/>
+                android:layout_gravity="center"
+                android:fontFamily="@font/montserrat_bold"
+                android:text="@string/careshifts"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp" />
 
-            <ImageView
-                android:id="@+id/ivAdminChat"
-                android:layout_width="@dimen/_33sdp"
-                android:layout_height="@dimen/_25sdp"
-                android:src="@drawable/chat"
-                android:layout_gravity="end"
-                android:layout_marginRight="@dimen/_15sdp"
-                android:scaleType="fitXY"
+            <RelativeLayout
+                android:layout_width="@dimen/_37sdp"
+                android:layout_height="@dimen/_30sdp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
-                />
+                android:layout_marginRight="@dimen/_15sdp">
 
+                <ImageView
+                    android:id="@+id/ivAdminChat"
+                    android:layout_width="@dimen/_33sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/chat" />
+
+                <TextView
+                    android:id="@+id/tvMessageCount"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/circle_red"
+                    android:fontFamily="@font/montserrat_semibold"
+                    android:gravity="center"
+                    android:paddingHorizontal="@dimen/_3sdp"
+                    android:text="12"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/_9sdp"
+                    android:visibility="gone" />
+
+            </RelativeLayout>
         </RelativeLayout>
 
         <androidx.recyclerview.widget.RecyclerView

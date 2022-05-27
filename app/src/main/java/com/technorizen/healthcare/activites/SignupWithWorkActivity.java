@@ -112,7 +112,6 @@ public class SignupWithWorkActivity extends AppCompatActivity {
                     Intent intent = new Autocomplete.IntentBuilder(AutocompleteActivityMode.FULLSCREEN, fields)
                             .build(SignupWithWorkActivity.this);
                     startActivityForResult(intent, AUTOCOMPLETE_REQUEST_CODE);
-
                 }
         );
 

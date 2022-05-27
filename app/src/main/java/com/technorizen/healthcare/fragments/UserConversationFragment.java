@@ -81,6 +81,7 @@ public class UserConversationFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment UserConversationFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static UserConversationFragment newInstance(String param1, String param2) {
         UserConversationFragment fragment = new UserConversationFragment();
@@ -117,7 +118,6 @@ public class UserConversationFragment extends Fragment {
             name = bundle.getString("name");
             id = bundle.getString("id");
             image = bundle.getString("image");
-
         }
 
         String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);

@@ -37,12 +37,14 @@ public class InvoiceUserAdapter extends RecyclerView.Adapter<InvoiceUserAdapter.
     private DownloadInvoice downloadInvoice;
     private  ArrayList<SuccessResGetInvoices.Result> invoicesList ;
     private boolean showNotes = false;
+
     public InvoiceUserAdapter(Context context, ArrayList<SuccessResGetInvoices.Result> invoicesList,DownloadInvoice downloadInvoice)
     {
         this.context = context;
         this.invoicesList = invoicesList;
         this.downloadInvoice=downloadInvoice;
     }
+
     @NonNull
     @Override
     public SelectTimeViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -85,15 +87,29 @@ public class InvoiceUserAdapter extends RecyclerView.Adapter<InvoiceUserAdapter.
         TextView tvAdminFees = holder.itemView.findViewById(R.id.tvAdminFees);
         TextView tvHst = holder.itemView.findViewById(R.id.tvHst);
         MaterialCardView cv = holder.itemView.findViewById(R.id.cv);
+
+        TextView tvUnpaidBreak = holder.itemView.findViewById(R.id.tvUnpaidBreak);
+
         AppCompatButton btnDownload = holder.itemView.findViewById(R.id.btnDownload);
         String strCompany = "";
         if(invoicesList.get(position).getShiftsdetail().get(0).getAccountType().equalsIgnoreCase("Individual"))
         {
-            strCompany = invoicesList.get(position).getShiftsdetail().get(0).getUserName();
+            strCompany = invoicesList.get(position).getShiftsdetail().get(0).getUserName()
+                    +", "+invoicesList.get(position).getShiftsdetail().get(0).getShiftLocation();
         }
         else
         {
-            strCompany = invoicesList.get(position).getShiftsdetail().get(0).getCompany();
+            strCompany = invoicesList.get(position).getShiftsdetail().get(0).getCompany()
+                    +", "+invoicesList.get(position).getShiftsdetail().get(0).getShiftLocation();
+        }
+
+        if(invoicesList.get(position).getShiftsdetail().get(0).getUnpaidBreak().equalsIgnoreCase("None"))
+        {
+            tvUnpaidBreak.setText(invoicesList.get(position).getShiftsdetail().get(0).getUnpaidBreak());
+        }
+        else
+        {
+            tvUnpaidBreak.setText(invoicesList.get(position).getShiftsdetail().get(0).getUnpaidBreak()+" Minutes");
         }
 
         String text = "For a shift done by "+invoicesList.get(position).getShiftsdetail().get(0).getWorkerName()  +

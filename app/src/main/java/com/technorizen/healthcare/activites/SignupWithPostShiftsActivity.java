@@ -32,6 +32,7 @@ import com.google.android.libraries.places.widget.AutocompleteActivity;
 import com.google.android.libraries.places.widget.model.AutocompleteActivityMode;
 import com.google.gson.Gson;
 import com.technorizen.healthcare.R;
+
 import com.technorizen.healthcare.databinding.ActivitySignupWithPostShiftsBinding;
 import com.technorizen.healthcare.models.SuccessResGetCountries;
 import com.technorizen.healthcare.models.SuccessResGetStates;
@@ -248,18 +249,7 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
                 }
         );
 
-        binding.loggedInRadio.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (!binding.loggedInRadio.isSelected()) {
-                    binding.loggedInRadio.setChecked(true);
-                    binding.loggedInRadio.setSelected(true);
-                } else {
-                    binding.loggedInRadio.setChecked(false);
-                    binding.loggedInRadio.setSelected(false);
-                }
-            }
-        });
+
     }
 
     @Override

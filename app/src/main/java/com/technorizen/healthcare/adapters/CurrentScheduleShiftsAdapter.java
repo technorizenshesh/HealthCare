@@ -37,9 +37,12 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.gson.Gson;
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.activites.ConversationAct;
+import com.technorizen.healthcare.activites.HomeActivity;
+import com.technorizen.healthcare.activites.One2OneChatAct;
 import com.technorizen.healthcare.models.SuccessResGetChat;
 import com.technorizen.healthcare.models.SuccessResGetCurrentSchedule;
 import com.technorizen.healthcare.models.SuccessResGetPost;
+import com.technorizen.healthcare.models.SuccessResGetUnseenMessageCount;
 import com.technorizen.healthcare.models.SuccessResInsertChat;
 import com.technorizen.healthcare.retrofit.ApiClient;
 import com.technorizen.healthcare.retrofit.HealthInterface;
@@ -108,12 +111,17 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
     @Override
     public void onBindViewHolder(@NonNull SelectTimeViewHolder holder, int position) {
 
+        RelativeLayout rlChat;
+
+        rlChat = holder.itemView.findViewById(R.id.rlChat);
+
         showNotes = false;
         List<String> dates = new LinkedList<>();
         List<String> listStartTime = new LinkedList<>();
         List<String> listEndTime = new LinkedList<>();
         List<SuccessResGetCurrentSchedule.PostshiftTime> postshiftTimeList =  new LinkedList<>();
         postshiftTimeList = postedList.get(position).getPostshiftTime();
+        TextView tvWorkerMsg = holder.itemView.findViewById(R.id.tvWorkerMsg);
         TextView tvCompanyName = holder.itemView.findViewById(R.id.tvCompanyName);
         TextView tvJobPosition = holder.itemView.findViewById(R.id.jobPosition);
         TextView tvDuty = holder.itemView.findViewById(R.id.tvDuty);
@@ -153,6 +161,15 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
         ImageView ivWorkerProfile = holder.itemView.findViewById(R.id.ivWorker);
         RelativeLayout rlShiftsNote = holder.itemView.findViewById(R.id.rlShiftsNotes);
 
+        if(!postedList.get(position).getTotalUnseenMessage().equalsIgnoreCase("0"))
+        {
+            tvWorkerMsg.setVisibility(View.VISIBLE);
+            tvWorkerMsg.setText(postedList.get(position).getTotalUnseenMessage());
+        }else
+        {
+            tvWorkerMsg.setVisibility(View.GONE);
+        }
+
         if(postedList.get(position).getShiftsdetail().get(0).getNoVacancies().equalsIgnoreCase("1"))
         {
             tvID.setVisibility(View.GONE);
@@ -169,7 +186,6 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
             btnDelete.setVisibility(View.VISIBLE);
             btnAccept.setVisibility(View.GONE);
         }else
-
         {
             btnDelete.setVisibility(View.GONE);
             btnAccept.setVisibility(View.VISIBLE);
@@ -186,10 +202,8 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
         }
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
-
+        requestOptions = requestOptions.transforms(new RoundedCorners(15));
         tvDistance.setText(context.getString(R.string.distance)+postedList.get(position).getShiftsdetail().get(0).getDistance()+" "+context.getString(R.string.miles));
-
         String date ="";
         String time ="";
 
@@ -304,9 +318,10 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
 
         Glide.with(context)
                 .load(postedList.get(position).getShiftsdetail().get(0).getUserImage())
-                 .centerCrop()
                 .apply(requestOptions)
                 .into(ivProfile);
+
+
         rlShiftsNote.setOnClickListener(v ->
                 {
                     // showShiftsNotes(postedList.get(position).getShiftNotes());
@@ -413,7 +428,6 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
 
         Glide.with(context)
                 .load(postedList.get(position).getShiftsdetail().get(0).getWorkerImage())
-                .centerCrop()
                 .apply(requestOptions)
                 .into(ivWorkerProfile);
 
@@ -454,7 +468,7 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
             }
         }
 
-        ivChat.setOnClickListener(v ->
+        rlChat.setOnClickListener(v ->
                 {
                     if(fromWhere.equalsIgnoreCase("userhome"))
                     {
@@ -465,35 +479,40 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
 //                        bundle.putString("id",postedList.get(position).getWorkerId());
 //                        Navigation.findNavController(v).navigate(R.id.action_nav_home_to_one2OneChatFragment,bundle);
 
-                        fullScreenDialog(postedList.get(position).getWorkerId());
+//                        fullScreenDialog(postedList.get(position).getWorkerId());
+
+                        context.startActivity(new Intent(context, One2OneChatAct.class).putExtra("id",postedList.get(position).getWorkerId()));
 
                     }else if(fromWhere.equalsIgnoreCase("userCurrent"))
                     {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
-                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
-                        bundle.putString("id",postedList.get(position).getWorkerId());
-                        Navigation.findNavController(v).navigate(R.id.action_currentScheduleFragment_to_one2OneChatFragment,bundle);
+//                        Bundle bundle = new Bundle();
+//                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
+//                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
+//                        bundle.putString("id",postedList.get(position).getWorkerId());
+//                        Navigation.findNavController(v).navigate(R.id.action_currentScheduleFragment_to_one2OneChatFragment,bundle);
+
+                        context.startActivity(new Intent(context, One2OneChatAct.class).putExtra("id",postedList.get(position).getWorkerId()));
+
 
                     }else if(fromWhere.equalsIgnoreCase("workerhome"))
+                    {
+
+//                        fullScreenDialog(postedList.get(position).getUserId());
+
+                        context.startActivity(new Intent(context, One2OneChatAct.class).putExtra("id",postedList.get(position).getUserId()));
+
+                    }else if(fromWhere.equalsIgnoreCase("workercurrent"))
                     {
 //                        Bundle bundle = new Bundle();
 //                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
 //                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
 //                        bundle.putString("id",postedList.get(position).getUserId());
-//                        Navigation.findNavController(v).navigate(R.id.action_nav_home_to_one2OneChatFragment2,bundle);
-//
-                        fullScreenDialog(postedList.get(position).getUserId());
+//                        Navigation.findNavController(v).navigate(R.id.action_workerCurrentScheduleFragment_to_one2OneChatFragment2,bundle);
 
-                    }else if(fromWhere.equalsIgnoreCase("workercurrent"))
-                    {
-                        Bundle bundle = new Bundle();
-                        bundle.putString("name",postedList.get(position).getShiftsdetail().get(0).getWorkerName());
-                        bundle.putString("image",postedList.get(position).getShiftsdetail().get(0).getWorkerImage());
-                        bundle.putString("id",postedList.get(position).getUserId());
-                        Navigation.findNavController(v).navigate(R.id.action_workerCurrentScheduleFragment_to_one2OneChatFragment2,bundle);
+                        context.startActivity(new Intent(context, One2OneChatAct.class).putExtra("id",postedList.get(position).getUserId()));
+
+
                     }
-
                 }
                 );
 
@@ -509,6 +528,8 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
     private String name = "",id = "", image ="",strChatMessage = "";
 
     List<SuccessResGetChat.Result> chatList = new LinkedList<>();
+
+    TextView tvMessageCount;
 
     public void fullScreenDialog(String myId)
     {
@@ -529,6 +550,8 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
 
         rvMessageItem = dialog.findViewById(R.id.rvMessageItem);
 
+        tvMessageCount = dialog.findViewById(R.id.tvMessageCount);
+
         ivBack.setOnClickListener(v -> {
             dialog.dismiss();
         });
@@ -537,11 +560,10 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
 
         ivAdminChat.setOnClickListener(v ->
                 {
-
                     context.startActivity(new Intent(context, ConversationAct.class));
-
                 }
         );
+
         String userId = SharedPreferenceUtility.getInstance(context).getString(USER_ID);
 
         chatAdapter = new ChatAdapter(context,chatList,userId);
@@ -549,7 +571,7 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
         rvMessageItem.setLayoutManager(new LinearLayoutManager(context));
         rvMessageItem.setAdapter(chatAdapter);
         DataManager.getInstance().showProgressMessage((Activity) context, context.getString(R.string.please_wait));
-
+        getUnseenNotificationCount();
         getChat();
 
        Timer timer = new Timer();
@@ -576,6 +598,61 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
         });
 
         dialog.show();
+
+    }
+
+    public  void getUnseenNotificationCount()
+    {
+
+        String userId = SharedPreferenceUtility.getInstance(context).getString(USER_ID);
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+
+        Call<SuccessResGetUnseenMessageCount> call = apiInterface.getUnseenMessage(map);
+
+        call.enqueue(new Callback<SuccessResGetUnseenMessageCount>() {
+            @Override
+            public void onResponse(Call<SuccessResGetUnseenMessageCount> call, Response<SuccessResGetUnseenMessageCount> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+                    SuccessResGetUnseenMessageCount data = response.body();
+                    Log.e("data",data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+
+                        int unseenNoti = Integer.parseInt(data.getResult().getTotalUnseenMessage());
+
+                        if(unseenNoti!=0)
+                        {
+
+                            tvMessageCount.setVisibility(View.VISIBLE);
+                            tvMessageCount.setText(unseenNoti+"");
+
+                        }
+                        else
+                        {
+
+                            tvMessageCount.setVisibility(View.GONE);
+
+                        }
+
+                    } else if (data.status.equals("0")) {
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetUnseenMessageCount> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
 
     }
 
@@ -693,9 +770,6 @@ public class CurrentScheduleShiftsAdapter extends RecyclerView.Adapter<CurrentSc
             }
         });
     }
-
-
-
 
 
     public void showImageSelection(List<String> dates,List<String> startTimeList,List<String> endTimeList) {

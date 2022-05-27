@@ -1,9 +1,14 @@
 package com.technorizen.healthcare.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -23,6 +28,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.google.gson.Gson;
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.activites.HomeActivity;
+import com.technorizen.healthcare.activites.MainActivity;
 import com.technorizen.healthcare.activites.SignupWithPostShiftsActivity;
 import com.technorizen.healthcare.adapters.ConfirmRecruitmentAdapter;
 import com.technorizen.healthcare.adapters.CurrentScheduleShiftsAdapter;
@@ -87,7 +93,9 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
 
 public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentShiftConfirmationInterface, ShiftCompletedClick {
 
+    LocalBroadcastManager lbm;
 
+    HomeActivity mainActivity;
     FragmentHomeBinding binding;
     HealthInterface apiInterface;
     private boolean showLess = false;
@@ -102,8 +110,7 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
     private List<SuccessResGetProfile.Result> userList = new LinkedList<>();
     private ArrayList<SuccessResGetCurrentSchedule.Result> currentScheduleList = new ArrayList<>();
     private ArrayList<SuccessResGetShiftInProgress.Result> shiftInProgressList = new ArrayList<>();
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     // TODO: Rename and change types of parameters
@@ -166,13 +173,13 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }
-
         binding.srlRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
            @Override
            public void onRefresh() {
                binding.btnLoadMore.setVisibility(View.GONE);
                binding.btnLoadLess.setVisibility(View.GONE);
                if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+                   getProfile();
                    shiftShowLess = false;
                    showLess = false;
                    getShiftsInProgress();
@@ -185,8 +192,26 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
                binding.srlRefreshContainer.setRefreshing(false);
            }
        });
+
+        lbm = LocalBroadcastManager.getInstance(getActivity());
+        lbm.registerReceiver(receiver, new IntentFilter("filter_string_1"));
+
         return binding.getRoot();
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null) {
+//                String str = intent.getStringExtra("key");
+//                getUnseenNotificationCount();
+                // get all your data from intent and do what you want
+                getShiftsInProgress();
+                getCurrentShifts();
+                getRecruitmentPendingShifts();
+            }
+        }
+    };
 
     public void getProfile()
     {
@@ -202,6 +227,7 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
                 try {
                     SuccessResGetProfile data = response.body();
                     if (data.status.equals("1")) {
+                        userList.clear();
                         userList.addAll(data.getResult());
                         setData();
                     } else {
@@ -222,6 +248,9 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
     public void onDestroy() {
         super.onDestroy();
         timer.cancel();
+
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+
     }
     public void setData()
     {
@@ -238,17 +267,28 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
         binding.tvHoursPurchased.setText(getActivity().getString(R.string.hours_purchased)+user.getPurchasedHour());
         binding.tvHiredCount.setText(getActivity().getString(R.string.hired_counts_0)+user.getHiredCount());
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
+        requestOptions = requestOptions.transforms( new RoundedCorners(15));
+
         Glide
                 .with(getActivity())
                 .load(user.getImage())
-                .centerCrop()
                 .apply(requestOptions)
                 .into(binding.ivProfile);
+
+        if(user.getAdminApproval().equalsIgnoreCase("Approved"))
+        {
+            mainActivity = (HomeActivity) getActivity();
+            mainActivity.approved = true;
+        }
+        else
+        {
+            mainActivity = (HomeActivity) getActivity();
+            mainActivity.approved = false;
+        }
+
     }
     public void getShifts(boolean val)
     {
-
         if(val)
         {
             DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
@@ -264,14 +304,15 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
                 try {
                     SuccessResGetPost data = response.body();
                     if (data.status.equals("1")) {
+
                         postedList.clear();
                         postedList.addAll(data.getResult());
                         setShiftList();
+
                     } else {
                         postedList.clear();
                         newPostedList.clear();
                         shiftsAdapter.notifyDataSetChanged();
-
 //                        binding.rvShifts.setHasFixedSize(true);
 //                        binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
 //                        binding.rvShifts.setAdapter(new ShiftsAdapter(getActivity(),postedList,true,HomeFragment.this));
@@ -447,25 +488,26 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
                         binding.rvCurrentShifts.setVisibility(View.VISIBLE);
                         currentScheduleList.clear();
                         currentScheduleList.addAll(data.getResult());
-                        Collections.sort(currentScheduleList, new Comparator<SuccessResGetCurrentSchedule.Result>(){
-                            public int compare(SuccessResGetCurrentSchedule.Result obj1, SuccessResGetCurrentSchedule.Result obj2) {
 
-                                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
-                                String  dtDate1 = obj1.getPostshiftTime().get(0).getShiftDate()+" 8:20";
-                                String  dtDate2 = obj2.getPostshiftTime().get(0).getShiftDate()+" 8:20";
-                                Date  date1 = null;
-                                Date  date2 = null;
-                                try {
-                                    date1 = format.parse(dtDate1);
-                                    date2 = format.parse(dtDate2);
-                                } catch (ParseException e) {
-                                    e.printStackTrace();
-                                }
-
-                                return date1.compareTo(date2);
-
-                            }
-                        });
+//                        Collections.sort(currentScheduleList, new Comparator<SuccessResGetCurrentSchedule.Result>(){
+//                            public int compare(SuccessResGetCurrentSchedule.Result obj1, SuccessResGetCurrentSchedule.Result obj2) {
+//
+//                                SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+//                                String  dtDate1 = obj1.getPostshiftTime().get(0).getShiftDate()+" 8:20";
+//                                String  dtDate2 = obj2.getPostshiftTime().get(0).getShiftDate()+" 8:20";
+//                                Date  date1 = null;
+//                                Date  date2 = null;
+//                                try {
+//                                    date1 = format.parse(dtDate1);
+//                                    date2 = format.parse(dtDate2);
+//                                } catch (ParseException e) {
+//                                    e.printStackTrace();
+//                                }
+//
+//                                return date1.compareTo(date2);
+//
+//                            }
+//                        });
 
                         setCurrentScheduleList();
 
@@ -544,11 +586,9 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
 //                    binding.rvCurrentShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
 //                    binding.rvCurrentShifts.setAdapter(new CurrentScheduleShiftsAdapter(getActivity(),currentScheduleList,true, HomeFragment.this,"userhome"));
 //                    binding.btnLoadMore.setVisibility(View.GONE);
-
                     newCurrentScheduleList = currentScheduleList;
                     currentScheduleShiftsAdapter.addList(newCurrentScheduleList);
                     currentScheduleShiftsAdapter.notifyDataSetChanged();
-
                 }
                 );
 
@@ -592,7 +632,7 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
                         shiftInProgressList.addAll(data.getResult());
                         binding.rvShiftInProgress.setHasFixedSize(true);
                         binding.rvShiftInProgress.setLayoutManager(new LinearLayoutManager(getActivity()));
-                        binding.rvShiftInProgress.setAdapter(new UserShiftsInProgressAdapter(getActivity(),shiftInProgressList,true,"workershiftInProgress",HomeFragment.this::getClick));
+                        binding.rvShiftInProgress.setAdapter(new UserShiftsInProgressAdapter(getActivity(),shiftInProgressList,true,"userhome",HomeFragment.this::getClick));
                     } else {
                         binding.tvShiftInProgress.setVisibility(View.GONE);
                         binding.rvShiftInProgress.setVisibility(View.GONE);
@@ -600,15 +640,12 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override
             public void onFailure(Call<SuccessResGetShiftInProgress> call, Throwable t) {
-
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
-
             }
         });
     }
@@ -751,6 +788,7 @@ public class HomeFragment extends Fragment implements DeleteShifts, RecruitmentS
     @Override
     public void onResume() {
         super.onResume();
+        getProfile();
         getShifts(true);
         getShiftsInProgress();
     }

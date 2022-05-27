@@ -43,7 +43,6 @@ public class WorkerProfileFragment extends Fragment {
 
     FragmentWorkerProfileBinding binding;
     HealthInterface apiInterface;
-
     private ArrayList<SuccessResGetWorkerProfile.Result> userList = new ArrayList<>();
 
     // TODO: Rename parameter arguments, choose names that match
@@ -67,6 +66,7 @@ public class WorkerProfileFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment WorkerProfileFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static WorkerProfileFragment newInstance(String param1, String param2) {
         WorkerProfileFragment fragment = new WorkerProfileFragment();
@@ -165,10 +165,9 @@ public class WorkerProfileFragment extends Fragment {
         binding.tvRating.setText(userList.get(0).getRating());
         binding.ratingBar.setRating(Float.parseFloat(String.valueOf(userList.get(0).getRating())));
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
+        requestOptions = requestOptions.transforms( new RoundedCorners(13));
         Glide.with(getActivity())
                 .load(user.getImage())
-                .centerCrop()
                 .apply(requestOptions)
                 .into(binding.ivProfile);
         binding.tvJobPosition.setText("("+user.getDesignation()+")");

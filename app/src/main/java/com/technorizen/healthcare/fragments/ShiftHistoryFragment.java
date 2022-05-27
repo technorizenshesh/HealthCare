@@ -1,9 +1,14 @@
 package com.technorizen.healthcare.fragments;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
@@ -43,6 +48,8 @@ public class ShiftHistoryFragment extends Fragment {
 
     FragmentShiftHistoryBinding binding;
 
+    LocalBroadcastManager lbm;
+
     HealthInterface apiInterface;
 
     private ArrayList<SuccessResGetShiftInProgress.Result> shiftInProgressList = new ArrayList<>();
@@ -68,6 +75,7 @@ public class ShiftHistoryFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ShiftHistoryFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static ShiftHistoryFragment newInstance(String param1, String param2) {
         ShiftHistoryFragment fragment = new ShiftHistoryFragment();
@@ -105,8 +113,33 @@ public class ShiftHistoryFragment extends Fragment {
                 binding.srlRefreshContainer.setRefreshing(false);
             }
         });
+
+        lbm = LocalBroadcastManager.getInstance(getActivity());
+        lbm.registerReceiver(receiver, new IntentFilter("filter_string_1"));
+
         return binding.getRoot();
     }
+
+    private BroadcastReceiver receiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            if (intent != null) {
+//                String str = intent.getStringExtra("key");
+//                getUnseenNotificationCount();
+                // get all your data from intent and do what you want
+              getShiftHistory();
+            }
+        }
+    };
+
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        LocalBroadcastManager.getInstance(getActivity()).unregisterReceiver(receiver);
+
+    }
+
     public void getShiftHistory()
     {
 
@@ -146,21 +179,16 @@ public class ShiftHistoryFragment extends Fragment {
 
             }
         });
-
     }
-
     public void setShiftList()
     {
-
         if(shiftInProgressList.size()>10)
         {
-
             ArrayList<SuccessResGetShiftInProgress.Result> subList = new ArrayList<>(shiftInProgressList.subList(0,10));
             binding.rvShiftInProgress.setHasFixedSize(true);
             binding.rvShiftInProgress.setLayoutManager(new LinearLayoutManager(getActivity()));
             binding.rvShiftInProgress.setAdapter(new ShiftsHistoryWorkerAdapter(getActivity(),subList,true,"usershifthistory"));
             binding.btnLoadMoreShifts.setVisibility(View.VISIBLE);
-
         }
         else
         {

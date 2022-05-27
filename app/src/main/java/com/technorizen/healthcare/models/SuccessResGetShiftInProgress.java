@@ -8,7 +8,6 @@ import java.util.List;
 
 public class SuccessResGetShiftInProgress implements Serializable {
 
-
     @SerializedName("result")
     @Expose
     public List<Result> result = null;
@@ -42,7 +41,6 @@ public class SuccessResGetShiftInProgress implements Serializable {
     public void setStatus(String status) {
         this.status = status;
     }
-
 
     public class PostshiftTime {
 
@@ -93,7 +91,7 @@ public class SuccessResGetShiftInProgress implements Serializable {
         public String totalHours;
         @SerializedName("payamount")
         @Expose
-        public Double payamount;
+        public String payamount;
         @SerializedName("no_show_cancel_charge")
         @Expose
         public String noShowCancelCharge;
@@ -218,11 +216,11 @@ public class SuccessResGetShiftInProgress implements Serializable {
             this.totalHours = totalHours;
         }
 
-        public Double getPayamount() {
+        public String getPayamount() {
             return payamount;
         }
 
-        public void setPayamount(Double payamount) {
+        public void setPayamount(String payamount) {
             this.payamount = payamount;
         }
 
@@ -235,7 +233,7 @@ public class SuccessResGetShiftInProgress implements Serializable {
         }
 
     }
-    
+
     public class Result {
 
         @SerializedName("id")
@@ -310,6 +308,9 @@ public class SuccessResGetShiftInProgress implements Serializable {
         @SerializedName("sid")
         @Expose
         public String sid;
+        @SerializedName("total_unseen_message")
+        @Expose
+        public String totalUnseenMessage;
         @SerializedName("shiftsdetail")
         @Expose
         public List<Shiftsdetail> shiftsdetail = null;
@@ -509,6 +510,14 @@ public class SuccessResGetShiftInProgress implements Serializable {
             this.sid = sid;
         }
 
+        public String getTotalUnseenMessage() {
+            return totalUnseenMessage;
+        }
+
+        public void setTotalUnseenMessage(String totalUnseenMessage) {
+            this.totalUnseenMessage = totalUnseenMessage;
+        }
+
         public List<Shiftsdetail> getShiftsdetail() {
             return shiftsdetail;
         }
@@ -524,6 +533,7 @@ public class SuccessResGetShiftInProgress implements Serializable {
         public void setPostshiftTime(List<PostshiftTime> postshiftTime) {
             this.postshiftTime = postshiftTime;
         }
+
     }
 
     public class Shiftsdetail {
@@ -893,6 +903,6 @@ public class SuccessResGetShiftInProgress implements Serializable {
         }
 
     }
-    
+
 }
 

@@ -43,6 +43,7 @@ public class ShiftsFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment ShiftsFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static ShiftsFragment newInstance(String param1, String param2) {
         ShiftsFragment fragment = new ShiftsFragment();
@@ -79,7 +80,6 @@ public class ShiftsFragment extends Fragment {
         binding.tvCurrent.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_shiftsFragment_to_currentScheduleFragment);
-
                 }
         );
 

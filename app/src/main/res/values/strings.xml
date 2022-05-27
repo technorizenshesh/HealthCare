@@ -63,7 +63,7 @@
     <string name="update">Update</string>
     <string name="uploaded">Uploaded</string>
     <string name="not_uploaded">Not Uploaded</string>
-    <string name="please_click_here_for_check">Please click <u>here</u> for check</string>
+    <string name="please_click_here_for_check"><u>Click  for Criminal Records Check and to Verify ID </u></string>
     <string name="vulnerable_sector_check">Vulnerable Sector Check</string>
     <string name="current_flu_vaccination">Current Flu Vaccination</string>
     <string name="other_vaccinations">Other Vaccinations</string>
@@ -162,7 +162,7 @@
     <string name="password_mismatched">Please make sure your password match.</string>
     <string name="enter_new_password">Please enter new password.</string>
     <string name="your_new_password">Your New Password</string>
-    <string name="check_your_email_and_click_on_the_n_confirmation_link_to_continue">Check your email and click on the\n confirmation link to continue</string>
+    <string name="check_your_email_and_click_on_the_n_confirmation_link_to_continue">Check your inbox or spam and click on the\n confirmation link to continue</string>
     <string name="select_job_position">Select Job Position</string>
     <string name="select_shifts_location">Select Location</string>
     <string name="apartment_name">Apartment Name</string>
@@ -182,7 +182,8 @@
     <string name="load_less">Show Less</string>
     <string name="clock_in">Clock In</string>
     <string name="shifts_history">Shifts History</string>
-    <string name="search_by_company_name">Search By Company Name</string>
+    <string name="search_by_company_name">Search By Invoice Number</string>
+    <string name="search_by_company_name1">Search By Company Name</string>
     <string name="invoice_no">Invoice No:\u0020</string>
     <string name="uploaded_1">Uploaded</string>
     <string name="add_a_new_credit_card">ADD A NEW CREDIT CARD</string>
@@ -261,6 +262,7 @@
     <string name="enter_cvv">Enter cvv</string>
     <string name="submit">Submit</string>
     <string name="enter_your_cvv">Enter your cvv</string>
+    <string name="continue1">Continue</string>
     <string-array name="states_canada">
         <item>Province / State</item>
         <item>  Alberta</item>

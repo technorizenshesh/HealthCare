@@ -35,13 +35,12 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * Use the {@link BillingFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class BillingFragment extends Fragment {
 
     FragmentBillingBinding binding;
     private HealthInterface apiInterface;
-
     private List<SuccessResGetProfile.Result> userList = new LinkedList<>();
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -63,6 +62,7 @@ public class BillingFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment BillingFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static BillingFragment newInstance(String param1, String param2) {
         BillingFragment fragment = new BillingFragment();
@@ -102,21 +102,18 @@ public class BillingFragment extends Fragment {
                     Navigation.findNavController(v).navigate(R.id.action_billingFragment_to_invoicesFragment);
                 }
         );
-
         binding.tvAddCard.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_billingFragment_to_addCreditCardFragment);
 
                 }
         );
-
         binding.tvAccount.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_billingFragment_to_accountStatementFragment);
 
                 }
         );
-
         return binding.getRoot();
     }
 

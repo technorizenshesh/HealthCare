@@ -1,12 +1,18 @@
 package com.technorizen.healthcare.workerSide.fragments;
 
 import android.Manifest;
+import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
@@ -18,15 +24,34 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 
+import com.braintreepayments.cardform.OnCardFormSubmitListener;
+import com.braintreepayments.cardform.view.CardForm;
 import com.bumptech.glide.Glide;
+import com.google.android.material.checkbox.MaterialCheckBox;
 import com.google.gson.Gson;
+//
+//import com.stripe.android.ApiResultCallback;
+//import com.stripe.android.Stripe;
+//import com.stripe.android.model.Card;
+//import com.stripe.android.model.Token;
+//
+
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.SplashAct;
+import com.technorizen.healthcare.activites.ConversationAct;
 import com.technorizen.healthcare.activites.HomeActivity;
 import com.technorizen.healthcare.activites.LoginAct;
 import com.technorizen.healthcare.databinding.FragmentDocumentBinding;
 import com.technorizen.healthcare.models.SuccessResGetDocuments;
+import com.technorizen.healthcare.models.SuccessResGetToken;
+import com.technorizen.healthcare.models.SuccessResGetUnseenMessageCount;
 import com.technorizen.healthcare.models.SuccessResGetWorkerProfile;
 import com.technorizen.healthcare.models.SuccessResUploadDocument;
 import com.technorizen.healthcare.retrofit.ApiClient;
@@ -35,14 +60,19 @@ import com.technorizen.healthcare.util.DataManager;
 import com.technorizen.healthcare.util.SharedPreferenceUtility;
 import com.technorizen.healthcare.workerSide.WorkerHomeAct;
 
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONObject;
+
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
+import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -58,15 +88,15 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * Use the {@link DocumentFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class DocumentFragment extends Fragment {
 
     FragmentDocumentBinding binding;
     private static final int MY_PERMISSION_CONSTANT = 5;
-
     private SuccessResGetDocuments.Result documents ;
-
     private String status = "";
-
+    String cardNo ="",expirationDate="",cvv = "",cardType = "",holderName="",expirationMonth = "",expirationYear = "";
+    private Dialog dialog;
     public int gov =  101;
     public int degree =  102;
     public int professional =  103;
@@ -82,11 +112,8 @@ public class DocumentFragment extends Fragment {
     public int n95 =  113;
     public int cpi =  114;
     public int additional =  115;
-
     HealthInterface apiInterface;
-
     RequestBody attachmentEmpty = RequestBody.create(MediaType.parse("text/plain"), "");
-
     MultipartBody.Part filePartGovId = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
     MultipartBody.Part filePartDegree = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
     MultipartBody.Part filePartProfessionalLicences = MultipartBody.Part.createFormData("attachment", "", attachmentEmpty);
@@ -124,6 +151,7 @@ public class DocumentFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment DocumentFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static DocumentFragment newInstance(String param1, String param2) {
         DocumentFragment fragment = new DocumentFragment();
@@ -176,6 +204,12 @@ public class DocumentFragment extends Fragment {
 //            }
 //            intent.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
 //        }
+
+        binding.tvCLickHere.setOnClickListener(v ->
+                {
+               showImageSelection();
+                }
+                );
 
         binding.tvGovPhoto.setOnClickListener(v ->
                 {
@@ -463,7 +497,6 @@ public class DocumentFragment extends Fragment {
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
                 filPartVulnerable = MultipartBody.Part.createFormData("vulnerable", file.getName(), RequestBody.create(MediaType.parse("vulnerable/*"), file));
                 addDocuments("vulnerable",filPartVulnerable);
-
             }
 
             else if(requestCode == currentFlu)
@@ -472,7 +505,6 @@ public class DocumentFragment extends Fragment {
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
                 filPartCurrentFlu = MultipartBody.Part.createFormData("c_flu", file.getName(), RequestBody.create(MediaType.parse("c_flu/*"), file));
                 addDocuments("c_flu",filPartCurrentFlu);
-
             }
 
             else if(requestCode == othervaccine)
@@ -481,7 +513,6 @@ public class DocumentFragment extends Fragment {
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
                 filPartOtherVaccine = MultipartBody.Part.createFormData("other_vaccination", file.getName(), RequestBody.create(MediaType.parse("other_vaccination/*"), file));
                 addDocuments("other_vaccination",filPartOtherVaccine);
-
             }
 
             else if(requestCode == n95)
@@ -512,9 +543,7 @@ public class DocumentFragment extends Fragment {
 
             }
 
-
         }
-
 
     }
 
@@ -548,9 +577,7 @@ public class DocumentFragment extends Fragment {
                     ActivityCompat.shouldShowRequestPermissionRationale(getActivity(),
                             Manifest.permission.WRITE_EXTERNAL_STORAGE)
 
-
             ) {
-
 
                 requestPermissions(
                         new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -576,9 +603,7 @@ public class DocumentFragment extends Fragment {
 
     public void getGovPhotoIDDocuments(String type)
     {
-
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
-
         Map<String, String> map = new HashMap<>();
         map.put("worker_id",userId);
         map.put("type",type);
@@ -587,22 +612,14 @@ public class DocumentFragment extends Fragment {
         call.enqueue(new Callback<SuccessResGetDocuments>() {
             @Override
             public void onResponse(Call<SuccessResGetDocuments> call, Response<SuccessResGetDocuments> response) {
-
                 DataManager.getInstance().hideProgressMessage();
-
                 try {
-
                     SuccessResGetDocuments data = response.body();
                     if (data.status.equals("1")) {
-
                         documentsList = new ArrayList<>();
-
                         documentsList.addAll(data.getResult());
-
                         documents = data.getResult().get(0);
-
                         status = type;
-
                         setDocumentsButtons();
 
                     } else {
@@ -612,32 +629,25 @@ public class DocumentFragment extends Fragment {
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
-
             @Override
             public void onFailure(Call<SuccessResGetDocuments> call, Throwable t) {
-
                 call.cancel();
                 DataManager.getInstance().hideProgressMessage();
-
             }
         });
-
     }
 
     public void setDocumentsButtons()
     {
 
         if(status.equalsIgnoreCase("gove_phot_id"))
-
         {
             binding.tvGovPhotoNotUploaded.setVisibility(View.GONE);
             binding.tvGovPhotoUploaded.setVisibility(View.VISIBLE);
             binding.tvGovPhotoUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
         }
         else  if(status.equalsIgnoreCase("degree"))
-
         {
             binding.tvDegreeNotUploaded.setVisibility(View.GONE);
             binding.tvDegreeUploaded.setVisibility(View.VISIBLE);
@@ -667,97 +677,452 @@ public class DocumentFragment extends Fragment {
             binding.tvCurrentCovidUploaded.setVisibility(View.VISIBLE);
             binding.tvCurrentCovidUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
         }else  if(status.equalsIgnoreCase("covid_vaccination"))
-
         {
             binding.tvCovidVaccineNotUploaded.setVisibility(View.GONE);
             binding.tvCovidVaccineUploaded.setVisibility(View.VISIBLE);
             binding.tvCovidVaccineUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
         }else  if(status.equalsIgnoreCase("immunization_record"))
-
         {
             binding.tvImmuneNotUploaded.setVisibility(View.GONE);
             binding.tvImmuneUploaded.setVisibility(View.VISIBLE);
             binding.tvImmuneUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
         }else  if(status.equalsIgnoreCase("tb_sceeenig"))
-
         {
             binding.tvTBNotUploaded.setVisibility(View.GONE);
             binding.tvTBUploaded.setVisibility(View.VISIBLE);
             binding.tvTBUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
-        }
-
-/*
-
-        if(documents.getTbSceeenigStatus().equalsIgnoreCase("1"))
-        {
-
-        }else
-        {
-            binding.tvTBNotUploaded.setVisibility(View.VISIBLE);
-            binding.tvTBUploaded.setVisibility(View.GONE);
-        }
-
-        if(documents.getVulnerableStatus().equalsIgnoreCase("1"))
+        }else  if(status.equalsIgnoreCase("vulnerable"))
         {
             binding.tvVulnerableNotUploaded.setVisibility(View.GONE);
             binding.tvVulnerableUploaded.setVisibility(View.VISIBLE);
-        }else
-        {
-            binding.tvVulnerableNotUploaded.setVisibility(View.VISIBLE);
-            binding.tvVulnerableUploaded.setVisibility(View.GONE);
-        }
-
-        if(documents.getcFluStatus().equalsIgnoreCase("1"))
+            binding.tvVulnerableUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
+        }else  if(status.equalsIgnoreCase("c_flu"))
         {
             binding.tvCurrentFlueNotUploaded.setVisibility(View.GONE);
             binding.tvCurrentFlueUploaded.setVisibility(View.VISIBLE);
-        }else
-        {
-            binding.tvCurrentFlueNotUploaded.setVisibility(View.VISIBLE);
-            binding.tvCurrentFlueUploaded.setVisibility(View.GONE);
-        }
-
-        if(documents.getOtherVaccinationStatus().equalsIgnoreCase("1"))
+            binding.tvCurrentFlueUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
+        }else  if(status.equalsIgnoreCase("other_vaccination"))
         {
             binding.tvOtherVaccinationNotUploaded.setVisibility(View.GONE);
             binding.tvOtherVaccinationUploaded.setVisibility(View.VISIBLE);
-        }else
-        {
-            binding.tvOtherVaccinationNotUploaded.setVisibility(View.VISIBLE);
-            binding.tvOtherVaccinationUploaded.setVisibility(View.GONE);
-        }
-        if(documents.getN95MaskStatus().equalsIgnoreCase("1"))
+            binding.tvOtherVaccinationUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
+        }else  if(status.equalsIgnoreCase("n95_mask"))
         {
             binding.tvN95MaskNotUploaded.setVisibility(View.GONE);
             binding.tvN95MaskUploaded.setVisibility(View.VISIBLE);
-        }else
-        {
-            binding.tvN95MaskNotUploaded.setVisibility(View.VISIBLE);
-            binding.tvN95MaskUploaded.setVisibility(View.GONE);
-        }
-
-//             "additional_document_status": "0"
-        if(documents.getCpiStatus().equalsIgnoreCase("1"))
+            binding.tvN95MaskUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
+        }else  if(status.equalsIgnoreCase("cpi"))
         {
             binding.tvCpiNotUploaded.setVisibility(View.GONE);
             binding.tvCpiUploaded.setVisibility(View.VISIBLE);
-        }else
-        {
-            binding.tvCpiNotUploaded.setVisibility(View.VISIBLE);
-            binding.tvCpiUploaded.setVisibility(View.GONE);
-        }
-
-        if(documents.getAdditionalDocumentStatus().equalsIgnoreCase("1"))
+            binding.tvCpiUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
+        }else  if(status.equalsIgnoreCase("additional_document"))
         {
             binding.tvAdditionalDocNotUploaded.setVisibility(View.GONE);
             binding.tvAdditionalDocUploaded.setVisibility(View.VISIBLE);
-        }else
-        {
-            binding.tvAdditionalDocNotUploaded.setVisibility(View.VISIBLE);
-            binding.tvAdditionalDocUploaded.setVisibility(View.GONE);
-        }*/
+            binding.tvAdditionalDocUploaded.setText(getString(R.string.uploaded)+"("+documentsList.size()+")");
+        }
+    }
+
+    public void showImageSelection() {
+
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
+        dialog.setContentView(R.layout.dialog_redirect_to_certn);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+        ImageView ivCancel = dialog.findViewById(R.id.cancel);
+        AppCompatButton btnRedirect = dialog.findViewById(R.id.btnShiftAccepted);
+        AppCompatButton btnCncel = dialog.findViewById(R.id.btnReject);
+
+        ivCancel.setOnClickListener(v ->
+                {
+                    dialog.dismiss();
+                }
+        );
+
+        btnCncel.setOnClickListener(v ->
+                {
+                    dialog.dismiss();
+                }
+                );
+
+        btnRedirect.setOnClickListener(v ->
+                {
+                    fullScreenDialog();
+                    dialog.dismiss();
+                }
+                );
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
+
+    TextView tvMessageCount;
+
+    private void fullScreenDialog() {
+
+        dialog = new Dialog(getActivity(), WindowManager.LayoutParams.MATCH_PARENT);
+        dialog.setContentView(R.layout.dialog_add_card);
+        AppCompatButton btnAdd =  dialog.findViewById(R.id.btnAdd);
+
+        MaterialCheckBox checkBox = dialog.findViewById(R.id.defaultCheckBox);
+
+        tvMessageCount = dialog.findViewById(R.id.tvMessageCount);
+
+        RelativeLayout rlChat = dialog.findViewById(R.id.rlChat);
+
+        ImageView ivBack;
+        TextView tvMessage = dialog.findViewById(R.id.tvMessage);
+        ivBack = dialog.findViewById(R.id.ivBack);
+        CardForm cardForm = dialog.findViewById(R.id.card_form);
+        cardForm.cardRequired(true)
+                .maskCardNumber(true)
+                .expirationRequired(true)
+                .postalCodeRequired(false)
+                .mobileNumberRequired(false)
+                .cvvRequired(true)
+                .saveCardCheckBoxChecked(false)
+                .saveCardCheckBoxVisible(false)
+                .cardholderName(CardForm.FIELD_REQUIRED)
+                .mobileNumberExplanation("Make sure SMS is enabled for this mobile number")
+                .actionLabel("Purchase")
+                .setup((AppCompatActivity) getActivity());
+
+        rlChat.setOnClickListener(v ->
+                {
+                    startActivity(new Intent(getActivity(), ConversationAct.class));
+                }
+                );
+
+        getUnseenNotificationCount();
+
+        tvMessage.setVisibility(View.VISIBLE);
+
+        checkBox.setVisibility(View.GONE);
+
+        btnAdd.setText(getString(R.string.pay));
+
+        cardForm.setOnCardFormSubmitListener(new OnCardFormSubmitListener() {
+            @Override
+            public void onCardFormSubmit() {
+                cardNo = cardForm.getCardNumber();
+                expirationDate = cardForm.getExpirationMonth()+"/"+cardForm.getExpirationYear();
+                expirationMonth = cardForm.getExpirationMonth();
+                expirationYear = cardForm.getExpirationYear();
+                cvv =  cardForm.getCvv();
+                cardType = "";
+                holderName = cardForm.getCardholderName();
+                if(cardForm.isValid())
+                {
+//                  clickOnPayNow();
+
+
+                    getToken();
+//                    DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+//                    new Handler().postDelayed(new Runnable() {
+//                        @Override
+//                        public void run() {
+//                            paymentSuccess();
+//                            dialog.dismiss();
+//                            DataManager.getInstance().hideProgressMessage();
+//                        }
+//                    },5000);
+
+                }else
+                {
+                    cardForm.validate();
+                }
+            }
+        });
+
+        btnAdd.setOnClickListener(v ->
+                {
+                    cardNo = cardForm.getCardNumber();
+                    expirationDate = cardForm.getExpirationDateEditText().getText().toString();
+                    cardType = "";
+                    expirationMonth = cardForm.getExpirationMonth();
+                    holderName = cardForm.getCardholderName();
+                    expirationYear = cardForm.getExpirationYear();
+                    cvv = cardForm.getCvv();
+                    if(cardForm.isValid())
+                    {
+
+                        getToken();
+
+//                        clickOnPayNow();
+//                        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+//
+//                        new Handler().postDelayed(new Runnable() {
+//                            @Override
+//                            public void run() {
+//                                paymentSuccess();
+//                                dialog.dismiss();
+//                                DataManager.getInstance().hideProgressMessage();
+//                            }
+//                        },5000);
+
+
+                    }else
+                    {
+                        cardForm.validate();
+                    }
+                }
+        );
+        ivBack.setOnClickListener(v ->
+                {
+                    dialog.dismiss();
+                }
+        );
+        dialog.show();
+    }
+
+    public  void getUnseenNotificationCount()
+    {
+
+        String userId = SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        Map<String,String> map = new HashMap<>();
+        map.put("user_id",userId);
+
+        Call<SuccessResGetUnseenMessageCount> call = apiInterface.getUnseenMessage(map);
+
+        call.enqueue(new Callback<SuccessResGetUnseenMessageCount>() {
+            @Override
+            public void onResponse(Call<SuccessResGetUnseenMessageCount> call, Response<SuccessResGetUnseenMessageCount> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+                    SuccessResGetUnseenMessageCount data = response.body();
+                    Log.e("data",data.status);
+                    if (data.status.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+
+                        int unseenNoti = Integer.parseInt(data.getResult().getTotalUnseenMessage());
+
+                        if(unseenNoti!=0)
+                        {
+
+                            tvMessageCount.setVisibility(View.VISIBLE);
+                            tvMessageCount.setText(unseenNoti+"");
+
+                        }
+                        else
+                        {
+
+                            tvMessageCount.setVisibility(View.GONE);
+
+                        }
+
+                    } else if (data.status.equals("0")) {
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetUnseenMessageCount> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
 
     }
 
+
+    private String token = "";
+
+    public void getToken()
+    {
+
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("card_number",cardNo);
+        map.put("expiry_year",expirationYear);
+        map.put("expiry_month",expirationMonth);
+        map.put("cvc_code",cvv);
+
+        Call<SuccessResGetToken> call = apiInterface.getToken(map);
+        call.enqueue(new Callback<SuccessResGetToken>() {
+            @Override
+            public void onResponse(Call<SuccessResGetToken> call, Response<SuccessResGetToken> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+
+                    SuccessResGetToken data = response.body();
+                    if (data.status == 1) {
+
+                        Log.d(TAG, "onResponse: "+token);
+
+                        token = data.getResult().getId();
+
+                        if(token==null)
+                        {
+                            showToast(getActivity(),"Invalid card details.");
+                        }
+                        else
+                        {
+                            callPaymentApi(token);
+                        }
+
+                    } else {
+                        showToast(getActivity(), data.message);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetToken> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
+    }
+
+    private void clickOnPayNow() {
+
+//        Card.Builder card = new Card.Builder(cardNo,
+//                Integer.parseInt(expirationMonth),
+//                Integer.parseInt(expirationYear),
+//                cvv);
+//
+//        if (!card.build().validateCard()) {
+//            cardNo = "";
+//            expirationDate = "";
+//            cvv = "";
+//            showToast(getActivity(),"Please Enter valid card details.");
+//            return;
+//        }
+//
+//        Stripe stripe = new Stripe(getActivity(), "pk_test_51Jl1kpIzhVsEreKHYKdvN0fLZUv3xQaOjf4W73C3qvTAMexMXcbJP5SwioNPbeeh6o2cP2ygdUrlV8oBfH2VAH9f000YseP4ES");
+//
+//        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+//        stripe.createCardToken(
+//                card.build(), new ApiResultCallback<Token>() {
+//                    @Override
+//                    public void onSuccess(@NotNull Token token) {
+//                        DataManager.getInstance().hideProgressMessage();
+//                        callPaymentApi(token.getId());
+//                    }
+//
+//                    @Override
+//                    public void onError(@NotNull Exception e) {
+//                        showToast(getActivity(),e.getMessage());
+//                        DataManager.getInstance().hideProgressMessage();
+//                    }
+//                });
+    }
+
+    private void callPaymentApi(String token)
+    {
+
+        Random rand = new Random();
+        int maxNumber = 10000;
+        int randomNumber = rand.nextInt(maxNumber) + 1;
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        String userId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
+        Map<String, String> map = new HashMap<>();
+        map.put("worker_id", userId);
+        map.put("request_id", randomNumber+"");
+        map.put("amount", "56.5");
+        map.put("currency", "USD");
+        map.put("token", token);
+
+        Call<ResponseBody> call = apiInterface.workerPayment(map);
+        call.enqueue(new Callback<ResponseBody>() {
+            @Override
+            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+                try {
+                    JSONObject jsonObject = new JSONObject(response.body().string());
+
+                    String data = jsonObject.getString("status");
+
+                    String message = jsonObject.getString("message");
+
+                    if (data.equals("1")) {
+                        String dataResponse = new Gson().toJson(response.body());
+                        Log.e("MapMap", "EDIT PROFILE RESPONSE" + dataResponse);
+                        dialog.dismiss();
+                        paymentSuccess();
+//                        getActivity().onBackPressed();
+                    } else if (data.equals("0")) {
+                        showToast(getActivity(), message);
+                    }else if (data.equals("2")) {
+                        showToast(getActivity(), jsonObject.getString("result"));
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<ResponseBody> call, Throwable t) {
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+            }
+        });
+    }
+
+    public void paymentSuccess() {
+
+        final Dialog dialog = new Dialog(getActivity());
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
+        dialog.setContentView(R.layout.dialog_success);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        Window window = dialog.getWindow();
+        lp.copyFrom(window.getAttributes());
+        //This makes the dialog take up the full width
+        lp.width = WindowManager.LayoutParams.WRAP_CONTENT;
+        lp.height = WindowManager.LayoutParams.WRAP_CONTENT;
+        window.setAttributes(lp);
+
+        dialog.setCanceledOnTouchOutside(false);
+
+        AppCompatButton appCompatButton = dialog.findViewById(R.id.btnLogin);
+
+        ImageView ivCancel = dialog.findViewById(R.id.cancel);
+
+        ivCancel.setOnClickListener(v ->
+                {
+                    dialog.dismiss();
+                }
+        );
+
+        appCompatButton.setOnClickListener(v ->
+                {
+
+                    String url = "https://lime.certn.co/browse/packages/87dfca5a-25b8-4ede-ae53-1a193209c9e9";
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
+                );
+
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        dialog.show();
+    }
 
 }

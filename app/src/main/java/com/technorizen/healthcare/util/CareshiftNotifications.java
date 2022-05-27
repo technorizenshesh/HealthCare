@@ -13,10 +13,12 @@ import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
 import androidx.core.app.NotificationCompat;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.technorizen.healthcare.R;
+import com.technorizen.healthcare.activites.ConversationAct;
 import com.technorizen.healthcare.activites.HomeActivity;
 import com.technorizen.healthcare.workerSide.WorkerHomeAct;
 
@@ -163,6 +165,39 @@ public class CareshiftNotifications extends FirebaseMessagingService {
                 intent = new Intent(this, WorkerHomeAct.class);
                 intent.putExtra("key","chat");
                 intent.putExtra("senderId",senderId);
+            }
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }else  if(key.equalsIgnoreCase("adminmessage"))
+        {
+            String type = jsonObject.getString("type");
+
+            String senderId = jsonObject.getString("sender_id");
+
+            if(type.equalsIgnoreCase("User"))
+            {
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("key","adminmessage");
+                intent.putExtra("senderId",senderId);
+
+                if(Util.appInForeground(this))
+                {
+                    Intent intent1 = new Intent("filter_string");
+                    intent.putExtra("key", "My Data");
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent1);
+                }
+            }
+            else
+            {
+                intent = new Intent(this, WorkerHomeAct.class);
+                intent.putExtra("key","adminmessage");
+                intent.putExtra("senderId",senderId);
+                if(Util.appInForeground(this))
+                {
+                    Intent intent1 = new Intent("filter_string");
+                    intent.putExtra("key", "My Data");
+                    LocalBroadcastManager.getInstance(this).sendBroadcast(intent1);
+                }
+
             }
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }

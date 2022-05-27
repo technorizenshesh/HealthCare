@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
-import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.view.LayoutInflater;
@@ -47,6 +46,8 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * Use the {@link AccountStatementFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+
 public class AccountStatementFragment extends Fragment {
 
     FragmentAccountStatementBinding binding;
@@ -54,6 +55,8 @@ public class AccountStatementFragment extends Fragment {
     private HealthInterface apiInterface;
 
     private SuccessResAccountDetails.Result accountDetail ;
+
+    private String type = "All";
 
     private List<SuccessResGetProfile.Result> userList = new LinkedList<>();
 
@@ -84,6 +87,7 @@ public class AccountStatementFragment extends Fragment {
      * @param param2 Parameter 2.
      * @return A new instance of fragment AccountStatementFragment.
      */
+
     // TODO: Rename and change types and number of parameters
     public static AccountStatementFragment newInstance(String param1, String param2) {
         AccountStatementFragment fragment = new AccountStatementFragment();
@@ -106,11 +110,50 @@ public class AccountStatementFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_account_statement, container, false);
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
+
+        binding.tvAll.setOnClickListener(v ->
+                {
+                    type  = "All";
+                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.button_bg));
+                    binding.tvAll.setTextColor(getResources().getColor(R.color.white));
+                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
+                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
+                    getInvoiceSummary();
+                }
+        );
+
+        binding.tvUnpaid.setOnClickListener(v ->
+                {
+                    type  = "Unpaid";
+                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
+                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.white));
+                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
+                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
+                    getInvoiceSummary();
+                }
+        );
+        binding.tvPaid.setOnClickListener(v ->
+                {
+                    type  = "Paid";
+                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
+                    binding.tvPaid.setTextColor(getResources().getColor(R.color.white));
+                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
+                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
+                    getInvoiceSummary();
+                }
+        );
+
+
         if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
-            getAccountDetails();
+            getInvoiceSummary();
         } else {
             Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
         }
@@ -123,6 +166,7 @@ public class AccountStatementFragment extends Fragment {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("user_id",userId);
+        map.put("type",type);
         Call<SuccessResInvoiceSummaryUser> call = apiInterface.getInvoiceSummary(map);
         call.enqueue(new Callback<SuccessResInvoiceSummaryUser>() {
             @Override
@@ -138,6 +182,10 @@ public class AccountStatementFragment extends Fragment {
                         binding.rvPayment.setAdapter(new InvoiceSummaryAdapter(getActivity(),invoiceSummaryList,accountDetail));
                     } else {
                         showToast(getActivity(), data.message);
+                        invoiceSummaryList.clear();
+                        binding.rvPayment.setHasFixedSize(true);
+                        binding.rvPayment.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        binding.rvPayment.setAdapter(new InvoiceSummaryAdapter(getActivity(),invoiceSummaryList,accountDetail));
                     }
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -152,47 +200,47 @@ public class AccountStatementFragment extends Fragment {
         });
     }
 
-    public void getAccountDetails()
-    {
-        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
-        Map<String, String> map = new HashMap<>();
-
-        Call<SuccessResAccountDetails> call = apiInterface.getAccountDetail(map);
-        call.enqueue(new Callback<SuccessResAccountDetails>() {
-            @Override
-            public void onResponse(Call<SuccessResAccountDetails> call, Response<SuccessResAccountDetails> response) {
-
-                DataManager.getInstance().hideProgressMessage();
-
-                try {
-
-                    SuccessResAccountDetails data = response.body();
-                    if (data.status.equals("1")) {
-
-                        accountDetail = data.getResult().get(0);
-
-                        getInvoiceSummary();
-
-                    } else {
-                        getInvoiceSummary();
-                    }
-
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            }
-
-            @Override
-            public void onFailure(Call<SuccessResAccountDetails> call, Throwable t) {
-
-                call.cancel();
-                DataManager.getInstance().hideProgressMessage();
-
-            }
-        });
-
-    }
+//    public void getAccountDetails()
+//    {
+//        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+//        Map<String, String> map = new HashMap<>();
+//
+//        Call<SuccessResAccountDetails> call = apiInterface.getAccountDetail(map);
+//        call.enqueue(new Callback<SuccessResAccountDetails>() {
+//            @Override
+//            public void onResponse(Call<SuccessResAccountDetails> call, Response<SuccessResAccountDetails> response) {
+//
+//                DataManager.getInstance().hideProgressMessage();
+//
+//                try {
+//
+//                    SuccessResAccountDetails data = response.body();
+//                    if (data.status.equals("1")) {
+//
+//                        accountDetail = data.getResult().get(0);
+//
+//                        getInvoiceSummary();
+//
+//                    } else {
+//                        getInvoiceSummary();
+//                    }
+//
+//                } catch (Exception e) {
+//                    e.printStackTrace();
+//                }
+//
+//            }
+//
+//            @Override
+//            public void onFailure(Call<SuccessResAccountDetails> call, Throwable t) {
+//
+//                call.cancel();
+//                DataManager.getInstance().hideProgressMessage();
+//
+//            }
+//        });
+//
+//    }
 
 
 

@@ -61,6 +61,7 @@
                                 android:id="@+id/ivProfile"
                                 android:layout_width="@dimen/_90sdp"
                                 android:layout_height="@dimen/_100sdp"
+                                android:scaleType="fitXY"
                                 android:background="@drawable/gray_bg_5"/>
                             <ImageView
                                 android:id="@+id/ivCamera"

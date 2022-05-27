@@ -17,21 +17,27 @@ public class SuccessResGetCurrentSchedule implements Serializable {
     @SerializedName("status")
     @Expose
     public String status;
+
     public List<Result> getResult() {
         return result;
     }
+
     public void setResult(List<Result> result) {
         this.result = result;
     }
+
     public String getMessage() {
         return message;
     }
+
     public void setMessage(String message) {
         this.message = message;
     }
+
     public String getStatus() {
         return status;
     }
+
     public void setStatus(String status) {
         this.status = status;
     }
@@ -39,55 +45,55 @@ public class SuccessResGetCurrentSchedule implements Serializable {
 
         @SerializedName("id")
         @Expose
-        private String id;
+        public String id;
         @SerializedName("shift_id")
         @Expose
-        private String shiftId;
+        public String shiftId;
         @SerializedName("user_id")
         @Expose
-        private String userId;
+        public String userId;
         @SerializedName("shift_date")
         @Expose
-        private String shiftDate;
+        public String shiftDate;
         @SerializedName("start_time")
         @Expose
-        private String startTime;
+        public String startTime;
         @SerializedName("end_time")
         @Expose
-        private String endTime;
+        public String endTime;
         @SerializedName("date_time")
         @Expose
-        private String dateTime;
+        public String dateTime;
         @SerializedName("time_status")
         @Expose
-        private String timeStatus;
+        public String timeStatus;
         @SerializedName("shift_date_new")
         @Expose
-        private String shiftDateNew;
+        public String shiftDateNew;
         @SerializedName("start_time_new")
         @Expose
-        private String startTimeNew;
+        public String startTimeNew;
         @SerializedName("end_time_new")
         @Expose
-        private String endTimeNew;
+        public String endTimeNew;
         @SerializedName("clock_in")
         @Expose
-        private String clockIn;
+        public String clockIn;
         @SerializedName("new_date")
         @Expose
-        private String newDate;
+        public String newDate;
         @SerializedName("new_month")
         @Expose
-        private String newMonth;
+        public String newMonth;
         @SerializedName("new_date_single")
         @Expose
-        private String newDateSingle;
+        public String newDateSingle;
         @SerializedName("total_hours")
         @Expose
-        private String totalHours;
+        public String totalHours;
         @SerializedName("payamount")
         @Expose
-        private Double payamount;
+        public String payamount;
 
         public String getId() {
             return id;
@@ -217,11 +223,11 @@ public class SuccessResGetCurrentSchedule implements Serializable {
             this.totalHours = totalHours;
         }
 
-        public Double getPayamount() {
+        public String getPayamount() {
             return payamount;
         }
 
-        public void setPayamount(Double payamount) {
+        public void setPayamount(String payamount) {
             this.payamount = payamount;
         }
 
@@ -265,15 +271,45 @@ public class SuccessResGetCurrentSchedule implements Serializable {
         @SerializedName("status")
         @Expose
         public String status;
+        @SerializedName("clock_in_time")
+        @Expose
+        public String clockInTime;
+        @SerializedName("on_time")
+        @Expose
+        public String onTime;
         @SerializedName("total_worked")
         @Expose
         public String totalWorked;
         @SerializedName("date_time")
         @Expose
         public String dateTime;
+        @SerializedName("shift_date_new")
+        @Expose
+        public String shiftDateNew;
+        @SerializedName("start_time_new")
+        @Expose
+        public String startTimeNew;
+        @SerializedName("end_time_new")
+        @Expose
+        public String endTimeNew;
+        @SerializedName("cancellation_charges")
+        @Expose
+        public String cancellationCharges;
+        @SerializedName("no_shows_charge")
+        @Expose
+        public String noShowsCharge;
+        @SerializedName("cancel_charge")
+        @Expose
+        public String cancelCharge;
+        @SerializedName("time_status")
+        @Expose
+        public String timeStatus;
         @SerializedName("sid")
         @Expose
         public String sid;
+        @SerializedName("total_unseen_message")
+        @Expose
+        public String totalUnseenMessage;
         @SerializedName("shiftsdetail")
         @Expose
         public List<Shiftsdetail> shiftsdetail = null;
@@ -377,6 +413,22 @@ public class SuccessResGetCurrentSchedule implements Serializable {
             this.status = status;
         }
 
+        public String getClockInTime() {
+            return clockInTime;
+        }
+
+        public void setClockInTime(String clockInTime) {
+            this.clockInTime = clockInTime;
+        }
+
+        public String getOnTime() {
+            return onTime;
+        }
+
+        public void setOnTime(String onTime) {
+            this.onTime = onTime;
+        }
+
         public String getTotalWorked() {
             return totalWorked;
         }
@@ -393,12 +445,76 @@ public class SuccessResGetCurrentSchedule implements Serializable {
             this.dateTime = dateTime;
         }
 
+        public String getShiftDateNew() {
+            return shiftDateNew;
+        }
+
+        public void setShiftDateNew(String shiftDateNew) {
+            this.shiftDateNew = shiftDateNew;
+        }
+
+        public String getStartTimeNew() {
+            return startTimeNew;
+        }
+
+        public void setStartTimeNew(String startTimeNew) {
+            this.startTimeNew = startTimeNew;
+        }
+
+        public String getEndTimeNew() {
+            return endTimeNew;
+        }
+
+        public void setEndTimeNew(String endTimeNew) {
+            this.endTimeNew = endTimeNew;
+        }
+
+        public String getCancellationCharges() {
+            return cancellationCharges;
+        }
+
+        public void setCancellationCharges(String cancellationCharges) {
+            this.cancellationCharges = cancellationCharges;
+        }
+
+        public String getNoShowsCharge() {
+            return noShowsCharge;
+        }
+
+        public void setNoShowsCharge(String noShowsCharge) {
+            this.noShowsCharge = noShowsCharge;
+        }
+
+        public String getCancelCharge() {
+            return cancelCharge;
+        }
+
+        public void setCancelCharge(String cancelCharge) {
+            this.cancelCharge = cancelCharge;
+        }
+
+        public String getTimeStatus() {
+            return timeStatus;
+        }
+
+        public void setTimeStatus(String timeStatus) {
+            this.timeStatus = timeStatus;
+        }
+
         public String getSid() {
             return sid;
         }
 
         public void setSid(String sid) {
             this.sid = sid;
+        }
+
+        public String getTotalUnseenMessage() {
+            return totalUnseenMessage;
+        }
+
+        public void setTotalUnseenMessage(String totalUnseenMessage) {
+            this.totalUnseenMessage = totalUnseenMessage;
         }
 
         public List<Shiftsdetail> getShiftsdetail() {
@@ -427,9 +543,15 @@ public class SuccessResGetCurrentSchedule implements Serializable {
         @SerializedName("shift_no")
         @Expose
         public String shiftNo;
+        @SerializedName("shift_no_new")
+        @Expose
+        public String shiftNoNew;
         @SerializedName("user_id")
         @Expose
         public String userId;
+        @SerializedName("worker_id")
+        @Expose
+        public String workerId;
         @SerializedName("job_position")
         @Expose
         public String jobPosition;
@@ -475,6 +597,9 @@ public class SuccessResGetCurrentSchedule implements Serializable {
         @SerializedName("status")
         @Expose
         public String status;
+        @SerializedName("status_new")
+        @Expose
+        public String statusNew;
         @SerializedName("type")
         @Expose
         public String type;
@@ -528,12 +653,28 @@ public class SuccessResGetCurrentSchedule implements Serializable {
             this.shiftNo = shiftNo;
         }
 
+        public String getShiftNoNew() {
+            return shiftNoNew;
+        }
+
+        public void setShiftNoNew(String shiftNoNew) {
+            this.shiftNoNew = shiftNoNew;
+        }
+
         public String getUserId() {
             return userId;
         }
 
         public void setUserId(String userId) {
             this.userId = userId;
+        }
+
+        public String getWorkerId() {
+            return workerId;
+        }
+
+        public void setWorkerId(String workerId) {
+            this.workerId = workerId;
         }
 
         public String getJobPosition() {
@@ -656,6 +797,14 @@ public class SuccessResGetCurrentSchedule implements Serializable {
             this.status = status;
         }
 
+        public String getStatusNew() {
+            return statusNew;
+        }
+
+        public void setStatusNew(String statusNew) {
+            this.statusNew = statusNew;
+        }
+
         public String getType() {
             return type;
         }
@@ -753,6 +902,7 @@ public class SuccessResGetCurrentSchedule implements Serializable {
         }
 
     }
+    
 
 }
 

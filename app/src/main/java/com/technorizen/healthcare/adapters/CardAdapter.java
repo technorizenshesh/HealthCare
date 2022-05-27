@@ -14,6 +14,7 @@ import androidx.appcompat.widget.AppCompatButton;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.maxpilotto.creditcardview.CreditCardView;
+import com.maxpilotto.creditcardview.models.Brand;
 import com.maxpilotto.creditcardview.models.CreditCard;
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.databinding.CardItemBinding;
@@ -22,10 +23,6 @@ import com.technorizen.healthcare.util.CardInterface;
 
 import java.text.ParseException;
 import java.util.List;
-
-/**
- * Created by Ravindra Birla on 10,June,2021
- */
 
 public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CategoryViewHolder> {
 
@@ -86,6 +83,9 @@ public class CardAdapter extends RecyclerView.Adapter<CardAdapter.CategoryViewHo
                             .show();
                 }
                 );
+
+        llParent.setStyle(Brand.GENERIC,R.style.MyCardStyle);
+
         if(cardList.get(position).getSetDefault().equalsIgnoreCase("1"))
         {
             cardInterface.cardSelectdPosition(position);

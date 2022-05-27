@@ -279,8 +279,6 @@
                         />
                 </RelativeLayout>
 
-
-
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/labelCity"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
@@ -309,8 +307,6 @@
                         android:textColorHint="@color/black"
                         android:inputType="text" />
                 </com.google.android.material.textfield.TextInputLayout>
-
-
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/labelZipCode"
@@ -356,7 +352,6 @@
                      app:hintEnabled="true"
                      app:hintTextColor="@color/colorGray"
                      app:passwordToggleEnabled="false">
-
                      <com.google.android.material.textfield.TextInputEditText
                          android:layout_width="match_parent"
                          android:layout_height="wrap_content"
@@ -520,7 +515,7 @@
                     android:orientation="horizontal"
                     android:layout_marginTop="@dimen/_10sdp"
                     >
-                    <com.google.android.material.radiobutton.MaterialRadioButton
+                    <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="@dimen/_5sdp"

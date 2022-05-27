@@ -37,6 +37,7 @@ import com.google.gson.Gson;
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.activites.ConversationAct;
 import com.technorizen.healthcare.activites.LoginAct;
+import com.technorizen.healthcare.activites.One2OneChatAct;
 import com.technorizen.healthcare.adapters.ChatAdapter;
 import com.technorizen.healthcare.adapters.ShowDateTimeAdapter;
 import com.technorizen.healthcare.databinding.FragmentWorkerShiftsInProgressBinding;
@@ -84,6 +85,8 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * create an instance of this fragment.
  */
 public class WorkerShiftsInProgressFragment extends Fragment {
+
+
     private String shift24hrStartTime = "";
     private String shiftID = "";
     private String strUnpaidBreak = "";
@@ -253,6 +256,9 @@ public class WorkerShiftsInProgressFragment extends Fragment {
 
     public void setShiftInProgress()
     {
+
+
+
         showNotes = false;
         List<String> dates = new LinkedList<>();
         List<String> listStartTime = new LinkedList<>();
@@ -266,11 +272,12 @@ public class WorkerShiftsInProgressFragment extends Fragment {
         String date ="";
         String time ="";
 
-        binding.ivChat.setOnClickListener(v ->
+        binding.rlChat.setOnClickListener(v ->
                 {
-                    fullScreenDialog(shiftInProgress.getUserId());
+//                fullScreenDialog(shiftInProgress.getUserId());
+                    getActivity().startActivity(new Intent(getActivity(), One2OneChatAct.class).putExtra("id",shiftInProgress.getUserId()));
                 }
-                );
+        );
         for (SuccessResGetShiftInProgress.PostshiftTime dateTime:postshiftTimeList)
         {
             date = date+ dateTime.getNewDate()+",";
@@ -392,11 +399,10 @@ public class WorkerShiftsInProgressFragment extends Fragment {
         }
 
         RequestOptions requestOptions = new RequestOptions();
-        requestOptions = requestOptions.transforms(new CenterCrop(), new RoundedCorners(13));
+        requestOptions = requestOptions.transforms( new RoundedCorners(13));
 
         Glide.with(getActivity())
                 .load(shiftInProgress.getShiftsdetail().get(0).getUserImage())
-                .centerCrop()
                 .apply(requestOptions)
                 .into(binding.ivProfile);
 
@@ -446,7 +452,6 @@ public class WorkerShiftsInProgressFragment extends Fragment {
 
         Glide.with(getActivity())
                 .load(shiftInProgress.getShiftsdetail().get(0).getWorkerImage())
-                .centerCrop()
                 .apply(requestOptions)
                 .into(binding.ivWorker);
 

@@ -2,8 +2,10 @@ package com.technorizen.healthcare.fragments;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -55,7 +57,9 @@ import com.technorizen.healthcare.retrofit.HealthInterface;
 import com.technorizen.healthcare.util.DataManager;
 import com.technorizen.healthcare.util.NetworkAvailablity;
 import com.technorizen.healthcare.util.SharedPreferenceUtility;
+import com.theartofdev.edmodo.cropper.CropImage;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -438,7 +442,6 @@ public class EditProfileFragment extends Fragment {
         dialog.getWindow().getAttributes().windowAnimations = android.R.style.Widget_Material_ListPopupWindow;
         dialog.setContentView(R.layout.dialog_show_image_selection);
 
-
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         Window window = dialog.getWindow();
         lp.copyFrom(window.getAttributes());
@@ -476,8 +479,6 @@ public class EditProfileFragment extends Fragment {
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
     }
-
-
 
 public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
 
@@ -522,7 +523,7 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
 
     Glide.with(getActivity())
             .load(user.getImage())
-            .centerCrop()
+//            .centerCrop()
             .into(binding.ivProfile);
 
 
@@ -603,7 +604,6 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
 
             i++;
         }
-
         return 0;
     }
 
@@ -611,13 +611,9 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
         @Override
         public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
             if (position > 0) {
-
                 String countryCode = getCountryCode(binding.spinnerCountry.getSelectedItem().toString());
-
                 getState(countryCode);
-
             }
-
         }
 
         @Override
@@ -626,14 +622,10 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
         }
     };
 
-
     public void setStatesSpinner()
     {
-
         List<String> tempStates = new LinkedList<>();
-
         tempStates.add("Province / State");
-
         for (SuccessResGetStates.Result state:myStateList)
         {
             tempStates.add(state.getName());
@@ -642,9 +634,7 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
         stateArrayAdapter = new ArrayAdapter<String>(getActivity(), android.R.layout.simple_spinner_dropdown_item, tempStates);
         stateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         binding.spinnerState.setAdapter(stateArrayAdapter);
-
         int position = getSpinnerStatePosition(selectedStateCode);
-
         binding.spinnerState.setSelection(position);
 
     }
@@ -665,7 +655,6 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
         binding.spinnerCountry.setAdapter(countryArrayAdapter);
         binding.spinnerCountry.setOnItemSelectedListener(country_listener);
         binding.spinnerCountry.setSelection(getSpinnerCountryPosition(selectedCountryCode));
-
     }
 
 
@@ -691,7 +680,7 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
                         setCountrySpinner();
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                     }
 
                 } catch (Exception e) {
@@ -735,7 +724,7 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
                         setStatesSpinner();
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                     }
 
                 } catch (Exception e) {
@@ -757,14 +746,6 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
     private void updateProfile()
     {
 
-//        if(strLat.contains("-"))
-//        {
-//            strLat = strLat.replace("-","");
-//        }
-//        if(strLong.contains("-"))
-//        {
-//            strLong = strLong.replace("-","");
-//        }
 
         String strUserId = SharedPreferenceUtility.getInstance(getContext()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
@@ -895,7 +876,7 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
                         setUserDetails(transactionList);
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                     }
 
                 } catch (Exception e) {
@@ -914,7 +895,6 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
         });
 
     }
-
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
@@ -950,7 +930,6 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
                 Status status = Autocomplete.getStatusFromIntent(data);
                 Log.i(LoginAct.TAG, status.getStatusMessage());
 
-
             } else if (resultCode == RESULT_CANCELED) {
                 // The user canceled the operation.
             }
@@ -966,11 +945,29 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
                         .centerCrop()
                         .into(binding.ivProfile);
 
+//                CropImage.activity(data.getData())
+//                        .start(getContext(), this);
+
             } else if (requestCode == REQUEST_CAMERA) {
                 Glide.with(getActivity())
                         .load(str_image_path)
                         .centerCrop()
                         .into(binding.ivProfile);
+
+//                CropImage.activity(data.getData())
+//                        .start(getContext(), this);
+
+            }
+        }
+
+        if (requestCode == CropImage.CROP_IMAGE_ACTIVITY_REQUEST_CODE) {
+            CropImage.ActivityResult result = CropImage.getActivityResult(data);
+            if (resultCode == RESULT_OK) {
+                Uri resultUri = result.getUri();
+
+            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
+                Exception error = result.getError();
+                showToast(getActivity(),error+"");
 
             }
         }
@@ -978,6 +975,13 @@ public void setUserDetails(ArrayList<SuccessResGetProfile.Result> userList)
         super.onActivityResult(requestCode, resultCode, data);
     }
 
+
+    public Uri getImageUri(Context inContext, Bitmap inImage) {
+        ByteArrayOutputStream bytes = new ByteArrayOutputStream();
+        inImage.compress(Bitmap.CompressFormat.JPEG, 100, bytes);
+        String path = MediaStore.Images.Media.insertImage(inContext.getContentResolver(), inImage, "Title", null);
+        return Uri.parse(path);
+    }
 
 
 }

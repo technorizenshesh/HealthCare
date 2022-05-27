@@ -59,6 +59,7 @@ import static com.technorizen.healthcare.retrofit.Constant.showToast;
  * Use the {@link WorkerInvoicesFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class WorkerInvoicesFragment extends Fragment implements DownloadInvoice {
 
     FragmentWorkerInvoicesBinding binding;
@@ -124,6 +125,7 @@ public class WorkerInvoicesFragment extends Fragment implements DownloadInvoice 
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
         getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
         getShifts();
+
         binding.etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
@@ -134,44 +136,45 @@ public class WorkerInvoicesFragment extends Fragment implements DownloadInvoice 
                 return false;
             }
         });
-        binding.tvAll.setOnClickListener(v ->
-                {
-                    type  = "All";
-                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.button_bg));
-                    binding.tvAll.setTextColor(getResources().getColor(R.color.white));
-                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
-                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
-                    getShifts();
-                }
-                );
 
-        binding.tvUnpaid.setOnClickListener(v ->
-                {
-                    type  = "Unpaid";
-                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
-                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.white));
-                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
-                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
-                    getShifts();
-                }
-        );
-
-        binding.tvPaid.setOnClickListener(v ->
-                {
-                    type  = "Paid";
-                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
-                    binding.tvPaid.setTextColor(getResources().getColor(R.color.white));
-                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
-                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
-                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
-                    getShifts();
-                }
-        );
+//        binding.tvAll.setOnClickListener(v ->
+//                {
+//                    type  = "All";
+//                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.button_bg));
+//                    binding.tvAll.setTextColor(getResources().getColor(R.color.white));
+//                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
+//                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
+//                    getShifts();
+//                }
+//                );
+//
+//        binding.tvUnpaid.setOnClickListener(v ->
+//                {
+//                    type  = "Unpaid";
+//                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
+//                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.white));
+//                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
+//                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
+//                    getShifts();
+//                }
+//        );
+//
+//        binding.tvPaid.setOnClickListener(v ->
+//                {
+//                    type  = "Paid";
+//                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
+//                    binding.tvPaid.setTextColor(getResources().getColor(R.color.white));
+//                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
+//                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+//                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
+//                    getShifts();
+//                }
+//        );
         return binding.getRoot();
     }
     public void getShifts()
@@ -219,7 +222,7 @@ public class WorkerInvoicesFragment extends Fragment implements DownloadInvoice 
         Map<String, String> map = new HashMap<>();
         map.put("worker_id",userId);
         map.put("type",type);
-        map.put("company",title);
+        map.put("invoice_no",title);
         Call<SuccessResGetInvoices> call = apiInterface.searchInvoice(map);
         call.enqueue(new Callback<SuccessResGetInvoices>() {
             @Override

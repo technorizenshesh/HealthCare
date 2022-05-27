@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.technorizen.healthcare.R;
 import com.technorizen.healthcare.adapters.InvoiceSummaryAdapter;
@@ -20,6 +21,7 @@ import com.technorizen.healthcare.models.SuccessResInvoiceSummaryUser;
 import com.technorizen.healthcare.retrofit.ApiClient;
 import com.technorizen.healthcare.retrofit.HealthInterface;
 import com.technorizen.healthcare.util.DataManager;
+import com.technorizen.healthcare.util.NetworkAvailablity;
 import com.technorizen.healthcare.util.SharedPreferenceUtility;
 
 import java.util.ArrayList;
@@ -52,6 +54,9 @@ public class WorkerInvoiceSummaryFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private String type = "All";
+
     public WorkerInvoiceSummaryFragment() {
     }
     // TODO: Rename and change types and number of parameters
@@ -76,15 +81,59 @@ public class WorkerInvoiceSummaryFragment extends Fragment {
                              Bundle savedInstanceState) {
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_worker_invoice_summary, container, false);
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-        getInvoiceSummary();
+
+        binding.tvAll.setOnClickListener(v ->
+                {
+                    type  = "All";
+                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.button_bg));
+                    binding.tvAll.setTextColor(getResources().getColor(R.color.white));
+                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
+                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
+                    getInvoiceSummary();
+                }
+        );
+
+        binding.tvUnpaid.setOnClickListener(v ->
+                {
+                    type  = "Unpaid";
+                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
+                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.white));
+                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
+                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvPaid.setTextColor(getResources().getColor(R.color.black));
+                    getInvoiceSummary();
+                }
+        );
+        binding.tvPaid.setOnClickListener(v ->
+                {
+                    type  = "Paid";
+                    binding.tvPaid.setBackground(getResources().getDrawable(R.drawable.button_bg));
+                    binding.tvPaid.setTextColor(getResources().getColor(R.color.white));
+                    binding.tvAll.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvAll.setTextColor(getResources().getColor(R.color.black));
+                    binding.tvUnpaid.setBackground(getResources().getDrawable(R.drawable.light_grey_button_bg));
+                    binding.tvUnpaid.setTextColor(getResources().getColor(R.color.black));
+                    getInvoiceSummary();
+                }
+        );
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+            getInvoiceSummary();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
         return binding.getRoot();
     }
+
     public void getInvoiceSummary()
     {
         String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("worker_id",userId);
+        map.put("type",type);
         Call<SuccessResInvoiceSummaryUser> call = apiInterface.getWorkerInvoiceSummary(map);
         call.enqueue(new Callback<SuccessResInvoiceSummaryUser>() {
             @Override
@@ -100,6 +149,12 @@ public class WorkerInvoiceSummaryFragment extends Fragment {
                         binding.rvPayment.setAdapter(new InvoiceSummaryWorkerAdapter(getActivity(),invoiceSummaryList));
                     } else {
                         showToast(getActivity(), data.message);
+
+                        invoiceSummaryList.clear();
+                        binding.rvPayment.setHasFixedSize(true);
+                        binding.rvPayment.setLayoutManager(new LinearLayoutManager(getActivity()));
+                        binding.rvPayment.setAdapter(new InvoiceSummaryWorkerAdapter(getActivity(),invoiceSummaryList));
+
                     }
                 } catch (Exception e) {
                     e.printStackTrace();

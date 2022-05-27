@@ -142,6 +142,7 @@ public class CurrentScheduleFragment extends Fragment implements DeleteShifts {
                 binding.srlRefreshContainer.setRefreshing(false);
             }
         });
+
         return binding.getRoot();
     }
 
@@ -180,7 +181,6 @@ public class CurrentScheduleFragment extends Fragment implements DeleteShifts {
                         binding.rvShifts.setHasFixedSize(true);
                         binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));
                         binding.rvShifts.setAdapter(new CurrentScheduleShiftsAdapter(getActivity(),currentScheduleList,true,CurrentScheduleFragment.this,"userCurrent"));
-
                     }
 
                 } catch (Exception e) {

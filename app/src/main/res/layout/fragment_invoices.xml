@@ -8,17 +8,6 @@
         android:orientation="vertical"
         tools:context=".fragments.PaymentHistoryFragment">
 
-        <androidx.core.widget.NestedScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fillViewport="true"
-            >
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                >
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -30,66 +19,41 @@
             android:layout_marginTop="@dimen/_20sdp"
             android:textSize="@dimen/_16sdp" />
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnPayUnpaidInvoice"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/pay_unpaid_invoices"
-            android:background="@drawable/button_bg"
-            android:layout_marginTop="@dimen/_20sdp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/montserrat_semibold"
-            android:textSize="@dimen/_12sdp"
-            android:layout_marginHorizontal="@dimen/_20sdp"
-            android:layout_marginBottom="@dimen/_15sdp"
-            android:visibility="gone"
-            />
 
-        <LinearLayout
+        <EditText
+            android:id="@+id/etSearch"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_horizontal"
-            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="@font/montserrat_medium"
+            android:inputType="text"
+            android:hint="@string/search_by_company_name"
+            android:imeOptions="actionSearch"
+            android:drawableRight="@drawable/ic_search_24"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:padding="@dimen/_10sdp"
+            android:layout_toRightOf="@+id/img_header"
+            android:backgroundTint="@color/white"
+            android:layout_marginHorizontal="@dimen/_10sdp"
+            android:textSize="@dimen/_12sdp" />
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            android:layout_marginHorizontal="@dimen/_15sdp"
+            android:background="#C4C4C4"/>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
             >
 
-            <TextView
-                android:id="@+id/tvAll"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_20sdp"
-                android:text="All"
-                android:textSize="@dimen/_12sdp"
-                android:textColor="@color/white"
-                android:background="@drawable/button_bg"
-                android:layout_marginRight="@dimen/_10sdp"
-                />
-            <TextView
-                android:id="@+id/tvUnpaid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_20sdp"
-                android:text="Unpaid"
-                android:textColor="@color/black"
-                android:background="@drawable/light_grey_button_bg"
-                android:textSize="@dimen/_12sdp"
-                android:layout_marginRight="@dimen/_10sdp"
-                />
-            <TextView
-                android:id="@+id/tvPaid"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingVertical="@dimen/_10sdp"
-                android:paddingHorizontal="@dimen/_20sdp"
-                android:text="Paid"
-                android:textColor="@color/black"
-                android:background="@drawable/light_grey_button_bg"
-                android:textSize="@dimen/_12sdp"
-                />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                >
 
-        </LinearLayout>
+
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
