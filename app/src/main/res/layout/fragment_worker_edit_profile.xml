@@ -108,6 +108,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/first_name"
+                            android:editable="false"
+                            android:focusable="false"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
                             android:inputType="text" />
@@ -136,6 +138,8 @@
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:hint="@string/last_name"
+                            android:editable="false"
+                            android:focusable="false"
                             android:textColor="@color/black"
                             android:textColorHint="@color/black"
                             android:inputType="text" />
@@ -178,18 +182,18 @@
                         android:background="@drawable/et_bg"
                         android:layout_marginTop="@dimen/_15sdp"
                         >
+
                         <EditText
                             android:id="@+id/etAddress"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
+                            android:background="@android:color/transparent"
                             android:editable="false"
                             android:hint="Add Address"
-                            android:textColor="@color/black"
                             android:padding="@dimen/_15sdp"
+                            android:textColor="@color/black"
                             android:textColorHint="@color/black"
-                            android:textSize="@dimen/_13sdp"
-                            android:background="@android:color/transparent"
-                            />
+                            android:textSize="@dimen/_13sdp" />
                     </RelativeLayout>
 
                     <com.google.android.material.textfield.TextInputLayout

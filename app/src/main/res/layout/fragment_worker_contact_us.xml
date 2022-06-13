@@ -45,6 +45,7 @@
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
                     android:padding="@dimen/_10sdp"
+                    android:visibility="gone"
                     android:background="@drawable/blue_bg_5"
                     >
 
@@ -92,6 +93,7 @@
 
 
                     <TextView
+                        android:id="@+id/tvEmail"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:fontFamily="@font/montserrat_bold"
@@ -138,7 +140,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnLogin"
+            android:id="@+id/btnTwiter"
             android:layout_width="match_parent"
             android:layout_marginRight="@dimen/_15sdp"
             android:layout_height="wrap_content"

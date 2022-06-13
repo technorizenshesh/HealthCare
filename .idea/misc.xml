@@ -3,17 +3,36 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_conversation.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_home.xml" value="0.21" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_login.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_main2.xml" value="0.14427083333333332" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_one2_one_chat.xml" value="0.4083333333333333" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_payment.xml" value="0.14427083333333332" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_signup_with_post_shifts.xml" value="0.25" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_signup_with_work.xml" value="0.25" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/activity_worker_home.xml" value="0.25" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/adapter_chat.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/current_schedule_item.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/date_picker_dialog.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/dialog_add_amount.xml" value="0.14" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/dialog_add_card.xml" value="0.17" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/dialog_redirect_to_certn.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/dialog_show_image_selection.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/dialog_success.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/dialog_upload_user_document.xml" value="0.2" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/drawer_header.xml" value="0.33" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_add_credit_card.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_contact_us.xml" value="0.21" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_current_schedule.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_document.xml" value="0.17391304347826086" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_edit_profile.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_one2_one_chat.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_privacy_and_legacy.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_shift_history.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_worker_available_jobs_fragment.xml" value="0.18" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_worker_contact_us.xml" value="0.14427083333333332" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_worker_edit_profile.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_worker_home.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_worker_profile.xml" value="0.17391304347826086" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/fragment_worker_shifts.xml" value="0.20416666666666666" />
@@ -21,7 +40,14 @@
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/invoice_item.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/invoice_user_item.xml" value="0.25" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/shift_in_progress_item.xml" value="0.2" />
+        <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/worker_drawer_header.xml" value="0.33" />
         <entry key="..\:/Users/techno444/Downloads/HealthCare/app/src/main/res/layout/worker_shift_history_item.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/techno444/Downloads/healthcarekeystore/HealthCare/app/src/main/res/layout/activity_signup_with_post_shifts.xml" value="0.17391304347826086" />
+        <entry key="..\:/Users/techno444/Downloads/healthcarekeystore/HealthCare/app/src/main/res/layout/activity_signup_with_work.xml" value="0.20427305888483585" />
+        <entry key="..\:/Users/techno444/Downloads/healthcarekeystore/HealthCare/app/src/main/res/layout/current_schedule_item.xml" value="0.1" />
+        <entry key="..\:/Users/techno444/Downloads/healthcarekeystore/HealthCare/app/src/main/res/layout/fragment_contact_us.xml" value="0.1118659420289855" />
+        <entry key="..\:/Users/techno444/Downloads/healthcarekeystore/HealthCare/app/src/main/res/layout/fragment_worker_contact_us.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/techno444/Downloads/healthcarekeystore/HealthCare/app/src/main/res/layout/shifts_item.xml" value="0.1118659420289855" />
       </map>
     </option>
   </component>

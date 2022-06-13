@@ -140,9 +140,7 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:orientation="vertical"
-                                    android:gravity="center"
                                     >
-
 
                                 <TextView
                                     android:id="@+id/tvFromToDate"
@@ -163,7 +161,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_8sdp"
-                                    android:gravity="center"
                                     >
                                     <TextView
                                         android:layout_width="wrap_content"
@@ -196,7 +193,6 @@
                                     android:layout_width="match_parent"
                                     android:layout_height="wrap_content"
                                     android:layout_marginTop="@dimen/_5sdp"
-                                    android:gravity="center"
                                     >
                                     <TextView
                                         android:layout_width="wrap_content"

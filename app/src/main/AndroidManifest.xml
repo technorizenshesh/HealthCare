@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.technorizen.healthcare">
+    package="com.shifts.healthcare">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -23,28 +23,31 @@
         android:theme="@style/Theme.HealthCare"
         android:usesCleartextTraffic="true">
         <activity
-            android:name=".activites.PaymentSuccessAct"
+            android:name="com.shifts.healthcare.activites.PaymentAct"
             android:exported="false" />
-        <activity android:name=".activites.WorkerUserChat" />
-        <activity android:name=".activites.One2OneChatAct" />
-        <activity android:name=".activites.ConversationAct" />
-        <activity android:name=".activites.AddAddressAct" />
-        <activity android:name=".activites.MainActivity" />
-        <activity android:name=".activites.RegisterSuccessAct" />
-        <activity android:name=".activites.ForgotPassActivity" />
-        <activity android:name=".workerSide.WorkerHomeAct" />
-        <activity android:name=".activites.SignupWithWorkActivity" />
-        <activity android:name=".activites.SignupWithPostShiftsActivity" />
-        <activity android:name=".activites.HomeActivity" />
         <activity
-            android:name=".activites.SignupAct"
+            android:name="com.shifts.healthcare.activites.PaymentSuccessAct"
+            android:exported="false" />
+        <activity android:name="com.shifts.healthcare.activites.WorkerUserChat" />
+        <activity android:name="com.shifts.healthcare.activites.One2OneChatAct" />
+        <activity android:name="com.shifts.healthcare.activites.ConversationAct" />
+        <activity android:name="com.shifts.healthcare.activites.AddAddressAct" />
+        <activity android:name="com.shifts.healthcare.activites.MainActivity" />
+        <activity android:name="com.shifts.healthcare.activites.RegisterSuccessAct" />
+        <activity android:name="com.shifts.healthcare.activites.ForgotPassActivity" />
+        <activity android:name="com.shifts.healthcare.workerSide.WorkerHomeAct" />
+        <activity android:name="com.shifts.healthcare.activites.SignupWithWorkActivity" />
+        <activity android:name="com.shifts.healthcare.activites.SignupWithPostShiftsActivity" />
+        <activity android:name="com.shifts.healthcare.activites.HomeActivity" />
+        <activity
+            android:name="com.shifts.healthcare.activites.SignupAct"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
         <activity
-            android:name=".activites.LoginAct"
+            android:name="com.shifts.healthcare.activites.LoginAct"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustPan" />
-        <activity android:name=".SplashAct">
+        <activity android:name="com.shifts.healthcare.SplashAct">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -70,7 +73,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.technorizen.healthcare.provider"
+            android:authorities="com.shifts.healthcare.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -79,7 +82,7 @@
         </provider>
 
         <service
-            android:name=".util.CareshiftNotifications"
+            android:name="com.shifts.healthcare.util.CareshiftNotifications"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

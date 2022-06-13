@@ -7,17 +7,17 @@
 
     <fragment
         android:id="@+id/nav_worker_home"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerHomeFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerHomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
     </fragment>
     <fragment
         android:id="@+id/documentFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.DocumentFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.DocumentFragment"
         android:label="DocumentFragment" />
     <fragment
         android:id="@+id/workerProfileFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerProfileFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerProfileFragment"
         android:label="WorkerProfileFragment" >
         <action
             android:id="@+id/action_workerProfileFragment_to_workerEditProfileFragment"
@@ -25,11 +25,11 @@
     </fragment>
     <fragment
         android:id="@+id/addNewReferenceFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.AddNewReferenceFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.AddNewReferenceFragment"
         android:label="AddNewReferenceFragment" />
     <fragment
         android:id="@+id/referenceFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.ReferenceFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.ReferenceFragment"
         android:label="ReferenceFragment" >
         <action
             android:id="@+id/action_referenceFragment_to_addNewReferenceFragment"
@@ -37,7 +37,7 @@
     </fragment>
     <fragment
         android:id="@+id/workerShiftsHistoryFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsHistoryFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerShiftsHistoryFragment"
         android:label="fragment_worker_shifts_history"
         tools:layout="@layout/fragment_worker_shifts_history" >
         <action
@@ -46,17 +46,17 @@
     </fragment>
     <fragment
         android:id="@+id/workerShiftsInProgressFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsInProgressFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerShiftsInProgressFragment"
         android:label="fragment_worker_shifts_in_progress"
         tools:layout="@layout/fragment_worker_shifts_in_progress" />
     <fragment
         android:id="@+id/workerAvailableJobsFragmentFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerAvailableJobsFragmentFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerAvailableJobsFragmentFragment"
         android:label="fragment_worker_available_jobs_fragment"
         tools:layout="@layout/fragment_worker_available_jobs_fragment" />
     <fragment
         android:id="@+id/workerCurrentScheduleFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerCurrentScheduleFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerCurrentScheduleFragment"
         android:label="fragment_worker_current_schedule"
         tools:layout="@layout/fragment_worker_current_schedule" >
         <action
@@ -65,7 +65,7 @@
     </fragment>
     <fragment
         android:id="@+id/workerShiftsFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerShiftsFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerShiftsFragment"
         android:label="WorkerShiftsFragment" >
         <action
             android:id="@+id/action_workerShiftsFragment_to_workerAvailableJobsFragmentFragment"
@@ -88,7 +88,7 @@
     </fragment>
     <fragment
         android:id="@+id/workerBillingFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerBillingFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerBillingFragment"
         android:label="WorkerBillingFragment" >
         <action
             android:id="@+id/action_workerBillingFragment_to_workerInstantPayFragment"
@@ -105,23 +105,23 @@
     </fragment>
     <fragment
         android:id="@+id/reportFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.ReportFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.ReportFragment"
         android:label="ReportFragment" />
     <fragment
         android:id="@+id/workerInstantPayFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerInstantPayFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerInstantPayFragment"
         android:label="WorkerInstantPayFragment" />
     <fragment
         android:id="@+id/workerInvoicesFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerInvoicesFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerInvoicesFragment"
         android:label="WorkerInvoicesFragment" />
     <fragment
         android:id="@+id/workerContactUsFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerContactUsFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerContactUsFragment"
         android:label="WorkerContactUsFragment" />
     <fragment
         android:id="@+id/workerSettingsFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerSettingsFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerSettingsFragment"
         android:label="WorkerSettingsFragment" >
         <action
             android:id="@+id/action_workerSettingsFragment_to_setAvailabilityFragment"
@@ -141,43 +141,43 @@
     </fragment>
     <fragment
         android:id="@+id/setAvailabilityFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.SetAvailabilityFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.SetAvailabilityFragment"
         android:label="SetAvailabilityFragment" />
     <fragment
         android:id="@+id/distanceFilterFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.DistanceFilterFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.DistanceFilterFragment"
         android:label="DistanceFilterFragment" />
     <fragment
         android:id="@+id/workerFaqFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerFaqFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerFaqFragment"
         android:label="WorkerFaqFragment" />
     <fragment
         android:id="@+id/workerPrivacyAndLegalFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerPrivacyAndLegalFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerPrivacyAndLegalFragment"
         android:label="WorkerPrivacyAndLegalFragment" />
     <fragment
         android:id="@+id/setRateFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.SetRateFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.SetRateFragment"
         android:label="SetRateFragment" />
     <fragment
         android:id="@+id/workerChangePasswordFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerChangePasswordFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerChangePasswordFragment"
         android:label="WorkerChangePasswordFragment" />
     <fragment
         android:id="@+id/workerNotificationFragment"
-        android:name="com.technorizen.healthcare.fragments.WorkerNotificationFragment"
+        android:name="com.shifts.healthcare.fragments.WorkerNotificationFragment"
         android:label="WorkerNotificationFragment" />
     <fragment
         android:id="@+id/workerEditProfileFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerEditProfileFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerEditProfileFragment"
         android:label="WorkerEditProfileFragment" />
     <fragment
         android:id="@+id/searchShiftFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.SearchShiftFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.SearchShiftFragment"
         android:label="SearchShiftFragment" />
     <fragment
         android:id="@+id/userConversationFragment2"
-        android:name="com.technorizen.healthcare.fragments.UserConversationFragment"
+        android:name="com.shifts.healthcare.fragments.UserConversationFragment"
         android:label="UserConversationFragment" >
         <action
             android:id="@+id/action_userConversationFragment2_to_one2OneChatFragment2"
@@ -185,19 +185,19 @@
     </fragment>
     <fragment
         android:id="@+id/one2OneChatFragment2"
-        android:name="com.technorizen.healthcare.fragments.One2OneChatFragment"
+        android:name="com.shifts.healthcare.fragments.One2OneChatFragment"
         android:label="One2OneChatFragment" />
     <fragment
         android:id="@+id/rehiredShiftsFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.RehiredShiftsFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.RehiredShiftsFragment"
         android:label="RehiredShiftsFragment" />
     <fragment
         android:id="@+id/workerPendingRecruitmentShiftFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerPendingRecruitmentShiftFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerPendingRecruitmentShiftFragment"
         android:label="WorkerPendingRecruitmentShiftFragment" />
     <fragment
         android:id="@+id/workerInvoiceSummaryFragment"
-        android:name="com.technorizen.healthcare.workerSide.fragments.WorkerInvoiceSummaryFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.WorkerInvoiceSummaryFragment"
         android:label="WorkerInvoiceSummaryFragment" />
 
 </navigation>

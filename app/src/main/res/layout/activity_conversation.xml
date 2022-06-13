@@ -48,6 +48,23 @@
             android:layout_below="@+id/toolbar"
             android:id="@+id/rvMessageItem"/>
 
+        <TextView
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:id="@+id/tvCenterText"
+            android:textColor="@color/black"
+            android:layout_centerHorizontal="true"
+            android:text="Hello"
+            android:paddingHorizontal="@dimen/_10sdp"
+            android:background="@drawable/gray_button_bg"
+            android:paddingVertical="@dimen/_5sdp"
+            android:layout_below="@+id/toolbar"
+            android:layout_marginTop="@dimen/_20sdp"
+            />
+
+
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"

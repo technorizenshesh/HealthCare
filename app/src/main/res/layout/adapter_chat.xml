@@ -13,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:padding="15dp"
-        android:visibility="gone" />
+        android:text="Hello Date Time"
+        />
 
     <RelativeLayout
         android:id="@+id/chat_left_msg_layout"

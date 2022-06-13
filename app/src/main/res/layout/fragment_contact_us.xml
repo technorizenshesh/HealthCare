@@ -44,6 +44,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
+                    android:visibility="gone"
                     android:padding="@dimen/_10sdp"
                     android:background="@drawable/blue_bg_5"
                     >
@@ -103,34 +104,34 @@
                 </LinearLayout>
 
 
-<!--
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:padding="@dimen/_10sdp"
-                    android:background="@drawable/blue_bg_5"
-                    android:layout_marginTop="@dimen/_10sdp"
-                    >
+                <!--
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:orientation="horizontal"
+                                    android:padding="@dimen/_10sdp"
+                                    android:background="@drawable/blue_bg_5"
+                                    android:layout_marginTop="@dimen/_10sdp"
+                                    >
 
-                    <ImageView
-                        android:layout_width="@dimen/_20sdp"
-                        android:layout_height="@dimen/_20sdp"
-                        android:background="@drawable/circle_blue_bg"/>
+                                    <ImageView
+                                        android:layout_width="@dimen/_20sdp"
+                                        android:layout_height="@dimen/_20sdp"
+                                        android:background="@drawable/circle_blue_bg"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:fontFamily="@font/montserrat_bold"
-                        android:textColor="@color/black"
-                        android:text="Call us: +1 647 803 91391"
-                        android:layout_gravity="center_vertical"
-                        android:layout_marginLeft="@dimen/_10sdp"
-                        android:textSize="@dimen/_12sdp" />
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/montserrat_bold"
+                                        android:textColor="@color/black"
+                                        android:text="Call us: +1 647 803 91391"
+                                        android:layout_gravity="center_vertical"
+                                        android:layout_marginLeft="@dimen/_10sdp"
+                                        android:textSize="@dimen/_12sdp" />
 
 
-                </LinearLayout>
--->
+                                </LinearLayout>
+                -->
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

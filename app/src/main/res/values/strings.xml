@@ -250,7 +250,16 @@
     <string name="pay_string"> Please, include Summary Invoice number that starts with "IS.... " in the comment section during payment. </string>
     <string name="post_shifts">POST SHIFTS</string>
     <string name="post_rehire_shifts">POST REHIRE SHIFTS</string>
-    <string name="by_clicking_signup_you_agree_to_careshifts_terms_of_service_and_privacy_policy">By clicking Signup, you agree to CareShifts\' Terms of Service and Privacy Policy.</string>
+    <string name="by_clicking_signup_you_agree_to_careshifts_terms_of_service_and_privacy_policy">By clicking Signup, you agree to CareShifts\'</string>
+
+
+<!--
+    <string name="by_clicking_signup_you_agree_to_careshifts_terms_of_service_and_privacy_policy">By clicking Signup, you agree to CareShifts\' <b><i>Terms of Service</i></b> and <b><i>Privacy Policy<i/></b>.</string>
+-->
+
+
+    <string name="terms_of_service_and_privacy_policy"> Terms of Service</string>
+    <string name="privacy_policy"> Privacy Policy.</string>
     <string name="total_invoice_amount">Total Invoice Amount:</string>
     <string name="no_show_charge">No Show Charge:\u0020 Null</string>
     <string name="shift_cancellation_charge">Cancellation Charge:\u0020 Null</string>

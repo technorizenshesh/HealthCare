@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/nav_home"
-        android:name="com.technorizen.healthcare.fragments.HomeFragment"
+        android:name="com.shifts.healthcare.fragments.HomeFragment"
         android:label="@string/menu_home"
         tools:layout="@layout/fragment_home" >
         <action
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/nav_profile"
-        android:name="com.technorizen.healthcare.fragments.ProfileFragment"
+        android:name="com.shifts.healthcare.fragments.ProfileFragment"
         android:label="Profile"
         tools:layout="@layout/fragment_gallery" >
         <action
@@ -30,12 +30,12 @@
 
     <fragment
         android:id="@+id/nav_edit_profile"
-        android:name="com.technorizen.healthcare.fragments.EditProfileFragment"
+        android:name="com.shifts.healthcare.fragments.EditProfileFragment"
         android:label="@string/menu_slideshow"
         tools:layout="@layout/fragment_slideshow" />
     <fragment
         android:id="@+id/billingFragment"
-        android:name="com.technorizen.healthcare.fragments.BillingFragment"
+        android:name="com.shifts.healthcare.fragments.BillingFragment"
         android:label="BillingFragment" >
         <action
             android:id="@+id/action_billingFragment_to_accountStatementFragment"
@@ -52,7 +52,7 @@
     </fragment>
     <fragment
         android:id="@+id/postShiftsFragment"
-        android:name="com.technorizen.healthcare.fragments.PostShiftsFragment"
+        android:name="com.shifts.healthcare.fragments.PostShiftsFragment"
         android:label="PostShiftsFragment" >
         <action
             android:id="@+id/action_postShiftsFragment_to_confirmPostShiftsFragment"
@@ -66,7 +66,7 @@
     </fragment>
     <fragment
         android:id="@+id/shiftsFragment"
-        android:name="com.technorizen.healthcare.fragments.ShiftsFragment"
+        android:name="com.shifts.healthcare.fragments.ShiftsFragment"
         android:label="ShiftsFragment" >
         <action
             android:id="@+id/action_shiftsFragment_to_currentScheduleFragment"
@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/currentScheduleFragment"
-        android:name="com.technorizen.healthcare.fragments.CurrentScheduleFragment"
+        android:name="com.shifts.healthcare.fragments.CurrentScheduleFragment"
         android:label="CurrentScheduleFragment" >
         <action
             android:id="@+id/action_currentScheduleFragment_to_one2OneChatFragment"
@@ -98,11 +98,11 @@
     </fragment>
     <fragment
         android:id="@+id/postedShiftFragment"
-        android:name="com.technorizen.healthcare.fragments.PostedShiftFragment"
+        android:name="com.shifts.healthcare.fragments.PostedShiftFragment"
         android:label="PostedShiftFragment" />
     <fragment
         android:id="@+id/shiftHistoryFragment"
-        android:name="com.technorizen.healthcare.fragments.ShiftHistoryFragment"
+        android:name="com.shifts.healthcare.fragments.ShiftHistoryFragment"
         android:label="ShiftHistoryFragment" >
         <action
             android:id="@+id/action_shiftHistoryFragment_to_one2OneChatFragment"
@@ -110,7 +110,7 @@
     </fragment>
     <fragment
         android:id="@+id/shiftInProgressFragment"
-        android:name="com.technorizen.healthcare.fragments.ShiftInProgressFragment"
+        android:name="com.shifts.healthcare.fragments.ShiftInProgressFragment"
         android:label="ShiftInProgressFragment" >
         <action
             android:id="@+id/action_shiftInProgressFragment_to_one2OneChatFragment"
@@ -118,7 +118,7 @@
     </fragment>
     <fragment
         android:id="@+id/accountStatementFragment"
-        android:name="com.technorizen.healthcare.fragments.AccountStatementFragment"
+        android:name="com.shifts.healthcare.fragments.AccountStatementFragment"
         android:label="AccountStatementFragment" >
         <action
             android:id="@+id/action_accountStatementFragment_to_payInvoicesFragment"
@@ -126,11 +126,11 @@
     </fragment>
     <fragment
         android:id="@+id/addCreditCardFragment"
-        android:name="com.technorizen.healthcare.fragments.AddCreditCardFragment"
+        android:name="com.shifts.healthcare.fragments.AddCreditCardFragment"
         android:label="AddCreditCardFragment" />
     <fragment
         android:id="@+id/invoicesFragment"
-        android:name="com.technorizen.healthcare.fragments.InvoicesFragment"
+        android:name="com.shifts.healthcare.fragments.InvoicesFragment"
         android:label="InvoicesFragment" >
         <action
             android:id="@+id/action_invoicesFragment_to_payInvoicesFragment"
@@ -138,11 +138,11 @@
     </fragment>
     <fragment
         android:id="@+id/paymentHistoryFragment"
-        android:name="com.technorizen.healthcare.fragments.PaymentHistoryFragment"
+        android:name="com.shifts.healthcare.fragments.PaymentHistoryFragment"
         android:label="PaymentHistoryFragment" />
     <fragment
         android:id="@+id/walletFragment"
-        android:name="com.technorizen.healthcare.fragments.WalletFragment"
+        android:name="com.shifts.healthcare.fragments.WalletFragment"
         android:label="WalletFragment" >
         <action
             android:id="@+id/action_walletFragment_to_addCreditCardFragment"
@@ -150,7 +150,7 @@
     </fragment>
     <fragment
         android:id="@+id/hiresWorkerFragment"
-        android:name="com.technorizen.healthcare.fragments.HiresWorkerFragment"
+        android:name="com.shifts.healthcare.fragments.HiresWorkerFragment"
         android:label="fragment_hires_worker"
         tools:layout="@layout/fragment_hires_worker" >
         <action
@@ -159,17 +159,17 @@
     </fragment>
     <fragment
         android:id="@+id/FAQSFragment"
-        android:name="com.technorizen.healthcare.fragments.FAQSFragment"
+        android:name="com.shifts.healthcare.fragments.FAQSFragment"
         android:label="fragment_f_a_q_s"
         tools:layout="@layout/fragment_f_a_q_s" />
     <fragment
         android:id="@+id/contactUsFragment"
-        android:name="com.technorizen.healthcare.fragments.ContactUsFragment"
+        android:name="com.shifts.healthcare.fragments.ContactUsFragment"
         android:label="fragment_contact_us"
         tools:layout="@layout/fragment_contact_us" />
     <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.technorizen.healthcare.fragments.SettingsFragment"
+        android:name="com.shifts.healthcare.fragments.SettingsFragment"
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
@@ -181,31 +181,31 @@
     </fragment>
     <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.technorizen.healthcare.fragments.ChangePasswordFragment"
+        android:name="com.shifts.healthcare.fragments.ChangePasswordFragment"
         android:label="ChangePasswordFragment" />
     <fragment
         android:id="@+id/notificationFragment"
-        android:name="com.technorizen.healthcare.fragments.NotificationFragment"
+        android:name="com.shifts.healthcare.fragments.NotificationFragment"
         android:label="NotificationFragment" />
     <fragment
         android:id="@+id/privacyAndLegacyFragment"
-        android:name="com.technorizen.healthcare.fragments.PrivacyAndLegacyFragment"
+        android:name="com.shifts.healthcare.fragments.PrivacyAndLegacyFragment"
         android:label="PrivacyAndLegacyFragment" />
     <fragment
         android:id="@+id/confirmPostRequitmentShiftsFragment"
-        android:name="com.technorizen.healthcare.fragments.ConfirmPostRequitmentShiftsFragment"
+        android:name="com.shifts.healthcare.fragments.ConfirmPostRequitmentShiftsFragment"
         android:label="ConfirmPostRequitmentShiftsFragment" />
     <fragment
         android:id="@+id/confirmPostShiftsFragment"
-        android:name="com.technorizen.healthcare.fragments.ConfirmPostShiftsFragment"
+        android:name="com.shifts.healthcare.fragments.ConfirmPostShiftsFragment"
         android:label="ConfirmPostShiftsFragment" />
     <fragment
         android:id="@+id/currentLocationFragment"
-        android:name="com.technorizen.healthcare.fragments.CurrentLocationFragment"
+        android:name="com.shifts.healthcare.fragments.CurrentLocationFragment"
         android:label="CurrentLocationFragment" />
     <fragment
         android:id="@+id/payInvoicesFragment"
-        android:name="com.technorizen.healthcare.fragments.PayInvoicesFragment"
+        android:name="com.shifts.healthcare.fragments.PayInvoicesFragment"
         android:label="PayInvoicesFragment" >
         <action
             android:id="@+id/action_payInvoicesFragment_to_addCreditCardFragment"
@@ -213,7 +213,7 @@
     </fragment>
     <fragment
         android:id="@+id/userConversationFragment"
-        android:name="com.technorizen.healthcare.fragments.UserConversationFragment"
+        android:name="com.shifts.healthcare.fragments.UserConversationFragment"
         android:label="UserConversationFragment" >
         <action
             android:id="@+id/action_userConversationFragment_to_one2OneChatFragment"
@@ -221,22 +221,22 @@
     </fragment>
     <fragment
         android:id="@+id/one2OneChatFragment"
-        android:name="com.technorizen.healthcare.fragments.One2OneChatFragment"
+        android:name="com.shifts.healthcare.fragments.One2OneChatFragment"
         android:label="One2OneChatFragment" />
     <fragment
         android:id="@+id/confirmRecruitmentFragment"
-        android:name="com.technorizen.healthcare.fragments.ConfirmRecruitmentFragment"
+        android:name="com.shifts.healthcare.fragments.ConfirmRecruitmentFragment"
         android:label="ConfirmRecruitmentFragment" />
     <fragment
         android:id="@+id/rehiredShiftsFragment2"
-        android:name="com.technorizen.healthcare.workerSide.fragments.RehiredShiftsFragment"
+        android:name="com.shifts.healthcare.workerSide.fragments.RehiredShiftsFragment"
         android:label="RehiredShiftsFragment" />
     <fragment
         android:id="@+id/cancelledRehireShiftsFragment"
-        android:name="com.technorizen.healthcare.fragments.CancelledRehireShiftsFragment"
+        android:name="com.shifts.healthcare.fragments.CancelledRehireShiftsFragment"
         android:label="CancelledRehireShiftsFragment" />
     <fragment
         android:id="@+id/confirmEditRecruitmentShiftsFragment"
-        android:name="com.technorizen.healthcare.fragments.ConfirmEditRecruitmentShiftsFragment"
+        android:name="com.shifts.healthcare.fragments.ConfirmEditRecruitmentShiftsFragment"
         android:label="ConfirmEditRecruitmentShiftsFragment" />
 </navigation>

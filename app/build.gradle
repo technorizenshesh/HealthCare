@@ -12,7 +12,7 @@ android {
         abortOnError false
     }
     defaultConfig {
-        applicationId "com.technorizen.healthcare"
+        applicationId "com.shifts.healthcare"
         minSdkVersion 23
         compileSdk 31
         targetSdkVersion 30

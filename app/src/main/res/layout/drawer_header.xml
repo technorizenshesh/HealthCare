@@ -106,6 +106,36 @@
                     </RelativeLayout>
 
                     <RelativeLayout
+                        android:id="@+id/rlGovDocumentID"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_marginTop="@dimen/_8sdp"
+                        android:padding="@dimen/_5sdp"
+                        >
+
+                        <ImageView
+                            android:id="@+id/ivPostShifts1"
+                            android:layout_width="@dimen/_18sdp"
+                            android:layout_height="@dimen/_18sdp"
+                            android:layout_centerVertical="true"
+                            android:src="@drawable/ic_doc" />
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="@dimen/_10sdp"
+                            android:layout_toRightOf="@+id/ivPostShifts1"
+                            android:fontFamily="@font/montserrat_medium"
+                            android:text="Upload Gov't ID"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_13sdp" />
+
+                    </RelativeLayout>
+
+
+                    <RelativeLayout
                         android:id="@+id/rlPostShifts"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

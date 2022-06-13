@@ -1,41 +1,41 @@
 {
   "project_info": {
-    "project_number": "31578384728",
-    "project_id": "healthcare-b8fae",
-    "storage_bucket": "healthcare-b8fae.appspot.com"
+    "project_number": "601263481875",
+    "project_id": "careshifts-5421f",
+    "storage_bucket": "careshifts-5421f.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:31578384728:android:319af5bda28ddaf3615d2d",
+        "mobilesdk_app_id": "1:601263481875:android:c481e0650f8de82d190be6",
         "android_client_info": {
-          "package_name": "com.technorizen.healthcare"
+          "package_name": "com.shifts.healthcare"
         }
       },
       "oauth_client": [
         {
-          "client_id": "31578384728-a56dr504plbcicefv76bbk6olckngfcm.apps.googleusercontent.com",
+          "client_id": "601263481875-8v9js1gmr28a8d7voupmv8enj2r4m5po.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.technorizen.healthcare",
-            "certificate_hash": "be053cf6e79e8a61ba7f5be6681e8978782d7b5e"
+            "package_name": "com.shifts.healthcare",
+            "certificate_hash": "6190513275cab95d19dfc589af64305d6b3dcf0f"
           }
         },
         {
-          "client_id": "31578384728-d3sd2ltn2uf64knh58jf95paqgbr76de.apps.googleusercontent.com",
+          "client_id": "601263481875-1gjon90q6lne58vsvl49tsclog92cpja.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyClSVSrZnGCCrxavdVhQNzICcQ8Ubi9i0c"
+          "current_key": "AIzaSyDPtZ9q35Dsfe7uc3r8AmsXWi3eoLYZ7xs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "31578384728-d3sd2ltn2uf64knh58jf95paqgbr76de.apps.googleusercontent.com",
+              "client_id": "601263481875-1gjon90q6lne58vsvl49tsclog92cpja.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
