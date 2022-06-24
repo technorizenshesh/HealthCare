@@ -47,7 +47,7 @@ public class SetAvailabilityFragment extends Fragment {
     private String strMonday = "0", strMondayStart="",strMondayEnd="",strTues = "0", strTuesStart="",strTuesEnd="",
             strWed = "0", strWedStart="",strWedEnd="",strThus = "0", strThusStart="",strThusEnd="",
             strFri = "0", strFriStart="",strFriEnd="",strSat = "0", strSatStart="",strSatEnd="",
-            strSun = "0", strSunStart="",strSunEnd="";
+            strSun = "0", strSunStart="",strSunEnd="",strRecurringschedule="";
 
 
     String[] start = {"12:00 AM","12:15 AM","12:30 AM","12:45 AM","01:00 AM",
@@ -164,15 +164,117 @@ public class SetAvailabilityFragment extends Fragment {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if(isChecked)
                 {
-                    binding.llSchedule.setVisibility(View.VISIBLE);
 
-                    binding.btnSaveChanges.setVisibility(View.VISIBLE);
+                    strRecurringschedule="1";
+
+                    binding.switchMonday.setClickable(true);
+                    binding.spinnerMonStartTime.setEnabled(true);
+                    binding.spinnerMonStartTime.setClickable(true);
+                    binding.spinnerMonEndTime.setEnabled(true);
+                    binding.spinnerMonEndTime.setClickable(true);
+
+
+
+                    binding.switchTuesday.setClickable(true);
+                    binding.spinnerTueEndTime.setEnabled(true);
+                    binding.spinnerTueEndTime.setClickable(true);
+                    binding.spinnerTueStartTime.setEnabled(true);
+                    binding.spinnerTueStartTime.setClickable(true);
+
+                    binding.switchWed.setClickable(true);
+                    binding.spinnerWedStartTime.setEnabled(true);
+                    binding.spinnerWedStartTime.setClickable(true);
+                    binding.spinnerWedEndTime.setEnabled(true);
+                    binding.spinnerWedEndTime.setClickable(true);
+
+                    binding.switchThurs.setClickable(true);
+                    binding.spinnerThusEndTime.setEnabled(true);
+                    binding.spinnerThusEndTime.setClickable(true);
+                    binding.spinnerThusStartTime.setEnabled(true);
+                    binding.spinnerThusStartTime.setClickable(true);
+
+                    binding.switchFri.setClickable(true);
+                    binding.spinnerFriStartTime.setEnabled(true);
+                    binding.spinnerFriStartTime.setClickable(true);
+                    binding.spinnerFriEndTime.setEnabled(true);
+                    binding.spinnerFriEndTime.setClickable(true);
+
+                    binding.switchSat.setClickable(true);
+                    binding.spinnerSatStartTime.setEnabled(true);
+                    binding.spinnerSatStartTime.setClickable(true);
+                    binding.spinnerSatEndTime.setEnabled(true);
+                    binding.spinnerSatEndTime.setClickable(true);
+
+                    binding.switchSun.setClickable(true);
+                    binding.spinnerSunStartTime.setEnabled(true);
+                    binding.spinnerSunStartTime.setClickable(true);
+                    binding.spinnerSunEndTime.setEnabled(true);
+                    binding.spinnerSunEndTime.setClickable(true);
 
                 }
                 else
                 {
-                    binding.llSchedule.setVisibility(View.GONE);
-                    binding.btnSaveChanges.setVisibility(View.GONE);
+
+                    strRecurringschedule="0";
+
+                    binding.switchMonday.setChecked(true);
+//                    binding.switchMonday.setClickable(false);
+//                    binding.spinnerMonStartTime.setEnabled(false);
+//                    binding.spinnerMonStartTime.setClickable(false);
+//                    binding.spinnerMonEndTime.setEnabled(false);
+//                    binding.spinnerMonEndTime.setClickable(false);
+
+                    binding.switchTuesday.setChecked(true);
+//                    binding.switchTuesday.setClickable(false);
+//                    binding.spinnerTueEndTime.setEnabled(false);
+//                    binding.spinnerTueEndTime.setClickable(false);
+//                    binding.spinnerTueStartTime.setEnabled(false);
+//                    binding.spinnerTueStartTime.setClickable(false);
+
+                    binding.switchWed.setChecked(true);
+//                    binding.switchWed.setClickable(false);
+//                    binding.spinnerWedStartTime.setEnabled(false);
+//                    binding.spinnerWedStartTime.setClickable(false);
+//                    binding.spinnerWedEndTime.setEnabled(false);
+//                    binding.spinnerWedEndTime.setClickable(false);
+
+
+                    binding.switchThurs.setChecked(true);
+//                    binding.switchThurs.setClickable(false);
+//                    binding.spinnerThusEndTime.setEnabled(false);
+//                    binding.spinnerThusEndTime.setClickable(false);
+//                    binding.spinnerThusStartTime.setEnabled(false);
+//                    binding.spinnerThusStartTime.setClickable(false);
+
+
+                    binding.switchFri.setChecked(true);
+//                    binding.switchFri.setClickable(false);
+//                    binding.spinnerFriStartTime.setEnabled(false);
+//                    binding.spinnerFriStartTime.setClickable(false);
+//                    binding.spinnerFriEndTime.setEnabled(false);
+//                    binding.spinnerFriEndTime.setClickable(false);
+
+                    binding.switchSat.setChecked(true);
+//                    binding.switchSat.setClickable(false);
+//                    binding.spinnerSatStartTime.setEnabled(false);
+//                    binding.spinnerSatStartTime.setClickable(false);
+//                    binding.spinnerSatEndTime.setEnabled(false);
+//                    binding.spinnerSatEndTime.setClickable(false);
+
+                    binding.switchSun.setChecked(true);
+//                    binding.switchSun.setClickable(false);
+//                    binding.spinnerSunStartTime.setEnabled(false);
+//                    binding.spinnerSunStartTime.setClickable(false);
+//                    binding.spinnerSunEndTime.setEnabled(false);
+//                    binding.spinnerSunEndTime.setClickable(false);
+
+
+                    setDefaultSpinner();
+
+
+
+//                    binding.llSchedule.setVisibility(View.GONE);
+//                    binding.btnSaveChanges.setVisibility(View.GONE);
                 }
             }
         });
@@ -342,7 +444,7 @@ public class SetAvailabilityFragment extends Fragment {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
         Map<String, String> map = new HashMap<>();
         map.put("worker_id",userId);
-        map.put("worker_availability","1");
+        map.put("worker_availability",strRecurringschedule);
         map.put("monday_from",strMondayStart);
         map.put("monday_to",strMondayEnd);
         map.put("monday",strMonday);
@@ -646,7 +748,6 @@ public class SetAvailabilityFragment extends Fragment {
         });
 
 
-
         ad = new ArrayAdapter(
                 getActivity(),
                 android.R.layout.simple_spinner_item,
@@ -669,7 +770,6 @@ public class SetAvailabilityFragment extends Fragment {
 
             }
         });
-
 
         ad = new ArrayAdapter(
                 getActivity(),
@@ -694,8 +794,6 @@ public class SetAvailabilityFragment extends Fragment {
             }
         });
 
-
-
         ad = new ArrayAdapter(
                 getActivity(),
                 android.R.layout.simple_spinner_item,
@@ -718,7 +816,6 @@ public class SetAvailabilityFragment extends Fragment {
 
             }
         });
-
 
         ad = new ArrayAdapter(
                 getActivity(),
@@ -743,7 +840,191 @@ public class SetAvailabilityFragment extends Fragment {
             }
         });
 
-     getWorkerAvail();
+        getWorkerAvail();
+    }
+
+
+    public void setDefaultSpinner()
+    {
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                start);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerMonStartTime.setAdapter(ad);
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                end);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerMonEndTime.setAdapter(ad);
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                start);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerTueStartTime.setAdapter(ad);
+
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                end);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerTueEndTime.setAdapter(ad);
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                start);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerWedStartTime.setAdapter(ad);
+
+
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                end);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerWedEndTime.setAdapter(ad);
+
+
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                start);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerThusStartTime.setAdapter(ad);
+
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                end);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerThusEndTime.setAdapter(ad);
+
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                start);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerFriStartTime.setAdapter(ad);
+
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                end);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerFriEndTime.setAdapter(ad);
+
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                start);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerSatStartTime.setAdapter(ad);
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                end);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerSatEndTime.setAdapter(ad);
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                start);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerSunStartTime.setAdapter(ad);
+
+
+
+        ad = new ArrayAdapter(
+                getActivity(),
+                android.R.layout.simple_spinner_item,
+                end);
+
+        ad.setDropDownViewResource(
+                android.R.layout
+                        .simple_spinner_dropdown_item);
+
+        binding.spinnerSunEndTime.setAdapter(ad);
+
+
+
     }
 
     public void getWorkerAvail()
@@ -773,7 +1054,7 @@ public class SetAvailabilityFragment extends Fragment {
                         setAvailability();
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                     }
 
                 } catch (Exception e) {
@@ -790,22 +1071,11 @@ public class SetAvailabilityFragment extends Fragment {
 
             }
         });
-
     }
 
     public void setAvailability()
     {
 
-        if(workerAvailabilty.getWorkerAvailability().equalsIgnoreCase("1"))
-        {
-
-            binding.switchWeeklySchedule.setChecked(true);
-
-        }
-        else
-        {
-            binding.switchWeeklySchedule.setChecked(false);
-        }
 
         if(workerAvailabilty.getMonday().equalsIgnoreCase("1"))
         {
@@ -924,6 +1194,18 @@ public class SetAvailabilityFragment extends Fragment {
 
         binding.spinnerSunStartTime.setSelection(getTimePosition(workerAvailabilty.getSundayForm()));
         binding.spinnerSunEndTime.setSelection(getTimePosition(workerAvailabilty.getSundayTo()));
+
+
+        if(workerAvailabilty.getWorkerAvailability().equalsIgnoreCase("1"))
+        {
+
+            binding.switchWeeklySchedule.setChecked(true);
+
+        }
+        else
+        {
+            binding.switchWeeklySchedule.setChecked(false);
+        }
 
 
     }

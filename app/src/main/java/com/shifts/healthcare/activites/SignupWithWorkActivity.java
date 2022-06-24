@@ -85,7 +85,7 @@ public class SignupWithWorkActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this,R.layout.activity_signup_with_work);
 
-        Places.initialize(getApplicationContext(), "AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk");
+        Places.initialize(getApplicationContext(), getString(R.string.api_key1));
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(this);

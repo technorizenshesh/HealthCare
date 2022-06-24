@@ -46,8 +46,10 @@ import com.shifts.healthcare.adapters.ShowDateTimeAdapter;
 import com.shifts.healthcare.databinding.FragmentPostShiftsBinding;
 import com.shifts.healthcare.models.SuccessResAddAddress;
 import com.shifts.healthcare.models.SuccessResGetAddress;
+import com.shifts.healthcare.models.SuccessResGetAdminFees;
 import com.shifts.healthcare.models.SuccessResGetHrRate;
 import com.shifts.healthcare.models.SuccessResGetJobPositions;
+import com.shifts.healthcare.models.SuccessResGetProfile;
 import com.shifts.healthcare.models.SuccessResSignIn;
 import com.shifts.healthcare.retrofit.ApiClient;
 import com.shifts.healthcare.retrofit.Constant;
@@ -276,7 +278,7 @@ public class PostShiftsFragment extends Fragment implements StartTimeAndTimeInte
             binding.tvShift.setText(getString(R.string.post_rehire_shifts));
         }
 
-        Places.initialize(getActivity().getApplicationContext(), "AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk");
+        Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key1));
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getActivity());
@@ -689,8 +691,56 @@ public class PostShiftsFragment extends Fragment implements StartTimeAndTimeInte
             getAddress();
         }
 
+        getAdminFees();
+
         return binding.getRoot();
     }
+
+
+    public void getAdminFees()
+    {
+
+        String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id",userId);
+        Call<SuccessResGetAdminFees> call = apiInterface.getAdminFees(map);
+        call.enqueue(new Callback<SuccessResGetAdminFees>() {
+            @Override
+            public void onResponse(Call<SuccessResGetAdminFees> call, Response<SuccessResGetAdminFees> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+
+                    SuccessResGetAdminFees data = response.body();
+
+                    if (data.status.equals("1")) {
+                        String datas = "Please note that "+data.getResult().get(0).getAdminFee()+"% admin fee will be added to the rate.";
+                        binding.tvAdminFees.setText(datas);
+                    } else {
+                        showToast(getActivity(), data.message);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetAdminFees> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
+
+    }
+
+
+
 
     private void setSpinner() {
 
@@ -938,23 +988,6 @@ public class PostShiftsFragment extends Fragment implements StartTimeAndTimeInte
                 binding.calendarMultipleDate.init(today1, nextYear.getTime())
                         .withSelectedDate(today1).inMode(MULTIPLE);
             }
-
-              /*
-                final Country country = (Country) binding.spinnerCountry.getItemAtPosition(position);
-                Log.d("SpinnerCountry", "onItemSelected: country: "+country.getCountryID());
-                ArrayList<State> tempStates = new ArrayList<>();
-
-                tempStates.add(new State(0, new Country(0, "Choose a Country"), "Choose a State"));
-
-                for (State singleState : states) {
-                    if (singleState.getCountry().getCountryID() == country.getCountryID()) {
-                        tempStates.add(singleState);
-                    }
-                }
-                stateArrayAdapter = new ArrayAdapter<State>(getApplicationContext(), android.R.layout.simple_spinner_dropdown_item, tempStates);
-                stateArrayAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-                binding.spinnerState.setAdapter(stateArrayAdapter);
-    */
 
         }
 
@@ -1209,7 +1242,6 @@ public class PostShiftsFragment extends Fragment implements StartTimeAndTimeInte
                 tvHeader.setText(getResources().getString(R.string.confirm_recruitment_post));
             }
 
-
         }
 
         ivBack.setOnClickListener(v -> {
@@ -1364,124 +1396,6 @@ public class PostShiftsFragment extends Fragment implements StartTimeAndTimeInte
 
     }
 
-  /*  private void fullScreenDialogDate() {
-
-        dialog = new Dialog(getActivity(), WindowManager.LayoutParams.MATCH_PARENT);
-
-        dialog.setContentView(R.layout.fragment_confirm_post_shifts);
-
-        ImageView ivBack = dialog.findViewById(R.id.ivBack);
-
-        TextView singleDate,singleStartDate,singleEndDate;
-
-        LinearLayout llSingleDate;
-
-        RecyclerView rvMultipleDates;
-
-        ivBack.setOnClickListener(v -> {
-            dialog.dismiss();
-        });
-
-        singleDate = dialog.findViewById(R.id.tvDate);
-        singleStartDate = dialog.findViewById(R.id.tvStartTime);
-        singleEndDate = dialog.findViewById(R.id.tvEndTime);
-
-        AppCompatButton btnPost =  dialog.findViewById(R.id.btnPostShift);
-        AppCompatButton btnEdit =  dialog.findViewById(R.id.btnEdit);
-        TextView tvjobPosition,tvVacancies,tvHourlyRate,tvDuty,tvCovid,tvUnpaid,tvTransit,tvShiftsLocation,tvDayType,tvShifstNotes;
-        tvjobPosition = dialog.findViewById(R.id.tvJobPosition);
-        tvVacancies = dialog.findViewById(R.id.tvVacancies);
-        tvHourlyRate = dialog.findViewById(R.id.tvHrlRate);
-        tvDuty = dialog.findViewById(R.id.tvDuty);
-        tvCovid = dialog.findViewById(R.id.tvCovid);
-        tvUnpaid = dialog.findViewById(R.id.tvUnpaid);
-        tvTransit = dialog.findViewById(R.id.tvTransit);
-        tvShiftsLocation = dialog.findViewById(R.id.tvLocation);
-        tvDayType = dialog.findViewById(R.id.tvDayType);
-        tvShifstNotes = dialog.findViewById(R.id.tvShiftsNotes);
-        llSingleDate = dialog.findViewById(R.id.llSingleDate);
-        rvMultipleDates = dialog.findViewById(R.id.rvDate);
-
-        String jobPosition = binding.spinnerJobPosition.getSelectedItem().toString();
-
-        tvjobPosition.setText(jobPosition);
-        tvVacancies.setText(strNoOfVancancies);
-        tvHourlyRate.setText(strHourlyRate);
-        tvDuty.setText(strDuty);
-        tvCovid.setText(strCovid);
-        tvUnpaid.setText(strUnpaid);
-        tvTransit.setText(strTransit);
-        tvShiftsLocation.setText(binding.spinnerAddressEvent.getSelectedItem().toString());
-        tvDayType.setText(strDayType);
-        tvShifstNotes.setText(strShiftsNote);
-
-        if(multipleSelection)
-        {
-
-            if (binding.checkboxMultipledateSelect.isChecked())
-
-            {
-
-                llSingleDate.setVisibility(View.GONE);
-                rvMultipleDates.setVisibility(View.VISIBLE);
-
-                List<String> dates = new LinkedList<>();
-                List<String> startTimeList = new LinkedList<>();
-                List<String> endTimeList = new LinkedList<>();
-
-                dates.addAll(selectedDates);
-
-                for (String date:selectedDates)
-
-                {
-                    startTimeList.add(startTime.get(date));
-                    endTimeList.add(endTime.get(date));
-                }
-
-                rvMultipleDates.setHasFixedSize(true);
-                rvMultipleDates.setLayoutManager(new LinearLayoutManager(getActivity()));
-                rvMultipleDates.setAdapter(new ShowDateTimeAdapter(getActivity(),dates,startTimeList,endTimeList));
-
-            }
-            else
-            {
-
-                llSingleDate.setVisibility(View.VISIBLE);
-                rvMultipleDates.setVisibility(View.GONE);
-                singleDate.setText(strShiftsDate);
-                singleStartDate.setText(strStartTime);
-                singleEndDate.setText(strEndTIme);
-
-            }
-
-        }
-        else
-        {
-
-            llSingleDate.setVisibility(View.VISIBLE);
-            rvMultipleDates.setVisibility(View.GONE);
-
-            singleDate.setText(strShiftsDate);
-            singleStartDate.setText(strStartTime);
-            singleEndDate.setText(strEndTIme);
-        }
-
-        btnEdit.setOnClickListener(v ->
-                {
-                    dialog.dismiss();
-                }
-        );
-
-        btnPost.setOnClickListener(v ->
-                {
-                    addPost();
-                }
-        );
-        dialog.show();
-
-    }
-
-*/
 
     public void getJobPositions() {
         DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
@@ -1682,26 +1596,6 @@ public class PostShiftsFragment extends Fragment implements StartTimeAndTimeInte
                     strLat = Double.toString(gpsTracker.getLatitude()) ;
                     strLng = Double.toString(gpsTracker.getLongitude()) ;
 
-//
-//                    if (isContinue) {
-//                        if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-//                            // TODO: Consider calling
-//                            //    ActivityCompat#requestPermissions
-//                            // here to request the missing permissions, and then overriding
-//                            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-//                            //                                          int[] grantResults)
-//                            // to handle the case where the user grants the permission. See the documentation
-//                            // for ActivityCompat#requestPermissions for more details.
-//                            return;
-//                        }
-//                        mFusedLocationClient.requestLocationUpdates(locationRequest, locationCallback, null);
-//                    } else {
-//                        Log.e("Latittude====", gpsTracker.getLatitude() + "");
-//
-//                        strLat = Double.toString(gpsTracker.getLatitude()) ;
-//                        strLng = Double.toString(gpsTracker.getLongitude()) ;
-//
-//                    }
                 } else {
                     Toast.makeText(getActivity(), getActivity().getResources().getString(R.string.permisson_denied), Toast.LENGTH_SHORT).show();
                 }
@@ -1887,7 +1781,6 @@ public class PostShiftsFragment extends Fragment implements StartTimeAndTimeInte
         }
 
         totalWorked = totalHoursWorked+"";
-
 
         Log.d(TAG, "setNewTimeDate: Total Hours"+totalHoursWorked);
 

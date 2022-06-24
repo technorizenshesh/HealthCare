@@ -213,6 +213,19 @@ public class CareshiftNotifications extends FirebaseMessagingService {
 
             }
             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        }else if (key.equalsIgnoreCase("invoice")) {
+            String type1 = jsonObject.getString("type");
+
+            if (type1.equalsIgnoreCase("User")) {
+                intent = new Intent(this, HomeActivity.class);
+                intent.putExtra("key", "invoice");
+
+            } else {
+                intent = new Intent(this, WorkerHomeAct.class);
+                intent.putExtra("key", "invoice");
+
+            }
+            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         }
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,

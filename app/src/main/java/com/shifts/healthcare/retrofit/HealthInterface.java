@@ -14,6 +14,7 @@ import com.shifts.healthcare.models.SuccessResDeleteShifts;
 import com.shifts.healthcare.models.SuccessResEditShift;
 import com.shifts.healthcare.models.SuccessResForgetPassword;
 import com.shifts.healthcare.models.SuccessResGetAddress;
+import com.shifts.healthcare.models.SuccessResGetAdminFees;
 import com.shifts.healthcare.models.SuccessResGetAppInfo;
 import com.shifts.healthcare.models.SuccessResGetCardDetails;
 import com.shifts.healthcare.models.SuccessResGetChat;
@@ -86,6 +87,12 @@ public interface HealthInterface {
     @FormUrlEncoded
     @POST("get_profile")
     Call<SuccessResGetProfile> getProfile(@FieldMap Map<String, String> paramHashMap);
+
+
+    @FormUrlEncoded
+    @POST("get_admin_fee_tax")
+    Call<SuccessResGetAdminFees> getAdminFees(@FieldMap Map<String, String> paramHashMap);
+
 
     @Multipart
     @POST("update_profile")

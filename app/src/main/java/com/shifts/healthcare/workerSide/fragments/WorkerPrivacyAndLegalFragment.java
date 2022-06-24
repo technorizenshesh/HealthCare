@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
@@ -18,6 +19,7 @@ import com.shifts.healthcare.models.SuccessResPrivacyPolicy;
 import com.shifts.healthcare.retrofit.ApiClient;
 import com.shifts.healthcare.retrofit.HealthInterface;
 import com.shifts.healthcare.util.DataManager;
+import com.shifts.healthcare.util.NetworkAvailablity;
 import com.shifts.healthcare.util.SharedPreferenceUtility;
 
 import java.util.HashMap;
@@ -92,7 +94,11 @@ public class WorkerPrivacyAndLegalFragment extends Fragment {
 
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
 
-        getPrivacyPolicy();
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+            getPrivacyPolicy();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
 
         binding.tabLay.addTab(binding.tabLay.newTab().setText("Privacy Policy"));
         binding.tabLay.addTab(binding.tabLay.newTab().setText("Terms of Service"));

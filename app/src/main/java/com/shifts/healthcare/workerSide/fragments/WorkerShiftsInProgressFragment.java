@@ -27,6 +27,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -47,6 +48,7 @@ import com.shifts.healthcare.models.SuccessResUpdateShiftInProgressTime;
 import com.shifts.healthcare.retrofit.ApiClient;
 import com.shifts.healthcare.retrofit.HealthInterface;
 import com.shifts.healthcare.util.DataManager;
+import com.shifts.healthcare.util.NetworkAvailablity;
 import com.shifts.healthcare.util.SharedPreferenceUtility;
 
 import java.text.DateFormat;
@@ -166,7 +168,13 @@ public class WorkerShiftsInProgressFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_worker_shifts_in_progress, container, false);
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-        getShiftsInProgress();
+
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+            getShiftsInProgress();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
+
         binding.srlRefreshContainer.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {

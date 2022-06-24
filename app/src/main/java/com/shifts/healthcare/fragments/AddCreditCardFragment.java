@@ -450,7 +450,7 @@ public class AddCreditCardFragment extends Fragment implements CardInterface {
 //                        binding.card5.setCardExpiry(cardDetails.getExpDate()+""+cardDetails.getExpMonth());
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                         binding.card5.setVisibility(View.GONE);
                         binding.btnPay.setVisibility(View.GONE);
                         cardList.clear();

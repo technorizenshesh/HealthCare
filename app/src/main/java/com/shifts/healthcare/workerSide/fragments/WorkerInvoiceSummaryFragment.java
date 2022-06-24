@@ -143,7 +143,7 @@ public class WorkerInvoiceSummaryFragment extends Fragment {
                         binding.rvPayment.setLayoutManager(new LinearLayoutManager(getActivity()));
                         binding.rvPayment.setAdapter(new InvoiceSummaryWorkerAdapter(getActivity(),invoiceSummaryList));
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
 
                         invoiceSummaryList.clear();
                         binding.rvPayment.setHasFixedSize(true);

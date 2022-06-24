@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.shifts.healthcare.R;
 import com.shifts.healthcare.adapters.HiredWorkerAdapter;
@@ -20,6 +21,7 @@ import com.shifts.healthcare.retrofit.ApiClient;
 import com.shifts.healthcare.retrofit.HealthInterface;
 import com.shifts.healthcare.util.BlockAddRatingInterface;
 import com.shifts.healthcare.util.DataManager;
+import com.shifts.healthcare.util.NetworkAvailablity;
 import com.shifts.healthcare.util.SharedPreferenceUtility;
 
 import java.util.ArrayList;
@@ -90,7 +92,13 @@ public class HiresWorkerFragment extends Fragment implements BlockAddRatingInter
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_hires_worker, container, false);
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-        getHiredWoker();
+
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+            getHiredWoker();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
+
         return binding.getRoot();
     }
 
@@ -121,7 +129,7 @@ public class HiresWorkerFragment extends Fragment implements BlockAddRatingInter
                         binding.rvHiredWorker.setAdapter(new HiredWorkerAdapter(getActivity(),hiredWorkerList,HiresWorkerFragment.this));
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                         hiredWorkerList.clear();
                         binding.rvHiredWorker.setHasFixedSize(true);
                         binding.rvHiredWorker.setLayoutManager(new LinearLayoutManager(getActivity()));

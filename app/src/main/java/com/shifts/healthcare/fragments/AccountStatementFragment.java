@@ -147,7 +147,6 @@ public class AccountStatementFragment extends Fragment {
                 }
         );
 
-
         if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
             getInvoiceSummary();
         } else {
@@ -177,7 +176,7 @@ public class AccountStatementFragment extends Fragment {
                         binding.rvPayment.setLayoutManager(new LinearLayoutManager(getActivity()));
                         binding.rvPayment.setAdapter(new InvoiceSummaryAdapter(getActivity(),invoiceSummaryList,accountDetail));
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                         invoiceSummaryList.clear();
                         binding.rvPayment.setHasFixedSize(true);
                         binding.rvPayment.setLayoutManager(new LinearLayoutManager(getActivity()));

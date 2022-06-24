@@ -161,15 +161,22 @@ public class WorkerEditProfileFragment extends Fragment {
 
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
 
-        Places.initialize(getActivity().getApplicationContext(), "AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk");
+        Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key1));
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getActivity());
 
-        getProfile();
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+            getProfile();
 
-        getCountries();
-        getJobPositions();
+            getCountries();
+            getJobPositions();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
+
+
+
         binding.ivCamera.setOnClickListener(v ->
                 {
                     if(checkPermisssionForReadStorage())

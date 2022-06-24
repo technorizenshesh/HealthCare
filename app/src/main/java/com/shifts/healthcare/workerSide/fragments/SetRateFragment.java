@@ -213,7 +213,7 @@ public class SetRateFragment extends Fragment {
                         //     setUserDetails(userList);
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                     }
 
                 } catch (Exception e) {

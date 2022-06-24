@@ -175,6 +175,15 @@ public class HomeActivity extends AppCompatActivity {
                 {
                     approved = false;
                 }
+            }else  if (key.equalsIgnoreCase("invoice")){
+                navController.navigateUp();
+                Bundle bundle = new Bundle();
+                ivBack.setVisibility(View.VISIBLE);
+                ivMenu.setVisibility(View.GONE);
+                ivConversation.setVisibility(View.VISIBLE);
+                navController.navigate(R.id.invoicesFragment,bundle);
+                drawer.closeDrawer(GravityCompat.START);
+
             }
         }
 

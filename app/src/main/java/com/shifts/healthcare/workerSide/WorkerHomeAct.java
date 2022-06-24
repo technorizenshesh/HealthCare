@@ -60,16 +60,13 @@ public class WorkerHomeAct extends AppCompatActivity {
     private NavController navController;
     RelativeLayout rlHome, rlProfile,rlDocument, rlReference, rlShifts, rlBIlling, rlWallet, rlHiredWorker, rlFaq, rlContactus, rlSetting, rlPrivacy;
     LocalBroadcastManager lbm;
-
     private HealthInterface apiInterface;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_worker_home);
-
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-
         drawer = findViewById(R.id.drawer);
         rlHome = findViewById(R.id.rlHome);
         rlProfile = findViewById(R.id.rl_user);
@@ -127,16 +124,20 @@ public class WorkerHomeAct extends AppCompatActivity {
             if (key.equalsIgnoreCase("chat")){
                 Bundle bundle = new Bundle();
                 String sendId =intent.getString("senderId");
-//                bundle.putString("senderId",sendId);
-//                navController.navigateUp();
-//                navController.navigate(R.id.one2OneChatFragment2,bundle);
-//                ivBack.setVisibility(View.VISIBLE);
-//                ivMenu.setVisibility(View.GONE);
 
                 startActivity(new Intent(WorkerHomeAct.this, One2OneChatAct.class).putExtra("id",sendId));
 
             } else  if (key.equalsIgnoreCase("adminmessage")){
                 WorkerHomeAct.this.startActivity(new Intent(WorkerHomeAct.this,ConversationAct.class));
+            }else  if (key.equalsIgnoreCase("invoice")){
+                navController.navigateUp();
+                Bundle bundle = new Bundle();
+                ivBack.setVisibility(View.VISIBLE);
+                ivMenu.setVisibility(View.GONE);
+                ivConversation.setVisibility(View.VISIBLE);
+                navController.navigate(R.id.workerInvoicesFragment,bundle);
+                drawer.closeDrawer(GravityCompat.START);
+
             }
         }
 

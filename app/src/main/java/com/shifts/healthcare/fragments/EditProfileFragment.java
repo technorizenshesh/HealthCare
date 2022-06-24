@@ -162,7 +162,7 @@ public class EditProfileFragment extends Fragment {
         // Inflate the layout for this fragment
 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_edit_profile, container, false);
-        Places.initialize(getActivity().getApplicationContext(), "AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk");
+        Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key1));
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getActivity());

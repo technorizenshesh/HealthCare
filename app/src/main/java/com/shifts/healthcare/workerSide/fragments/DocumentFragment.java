@@ -4,9 +4,11 @@ import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -17,6 +19,7 @@ import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
 
+import android.os.Environment;
 import android.os.Handler;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -28,6 +31,7 @@ import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.braintreepayments.cardform.OnCardFormSubmitListener;
 import com.braintreepayments.cardform.view.CardForm;
@@ -55,6 +59,11 @@ import com.shifts.healthcare.util.SharedPreferenceUtility;
 import org.json.JSONObject;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.nio.channels.FileChannel;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -179,21 +188,21 @@ public class DocumentFragment extends Fragment {
                         "text/plain",
                         "application/pdf"};
 
-//        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
-//        intent.addCategory(Intent.CATEGORY_OPENABLE);
-//
-//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-//            intent.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
-//            if (mimeTypes.length > 0) {
-//                intent.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
-//            }
-//        } else {
-//            String mimeTypesStr = "";
-//            for (String mimeType : mimeTypes) {
-//                mimeTypesStr += mimeType + "|";
-//            }
-//            intent.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
-//        }
+        Intent intent1 = new Intent(Intent.ACTION_GET_CONTENT);
+        intent1.addCategory(Intent.CATEGORY_OPENABLE);
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            intent1.setType(mimeTypes.length == 1 ? mimeTypes[0] : "*/*");
+            if (mimeTypes.length > 0) {
+                intent1.putExtra(Intent.EXTRA_MIME_TYPES, mimeTypes);
+            }
+        } else {
+            String mimeTypesStr = "";
+            for (String mimeType : mimeTypes) {
+                mimeTypesStr += mimeType + "|";
+            }
+            intent1.setType(mimeTypesStr.substring(0,mimeTypesStr.length() - 1));
+        }
 
         binding.tvCLickHere.setOnClickListener(v ->
                 {
@@ -204,11 +213,13 @@ public class DocumentFragment extends Fragment {
         binding.tvGovPhoto.setOnClickListener(v ->
                 {
 
-                //    startActivityForResult(Intent.createChooser(intent,"ChooseFile"), gov);
+//                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
+//                    intent.setType("image/*");
+//                    startActivityForResult(Intent.createChooser(intent, "Select Image"), gov);
 
-                    Intent intent = new Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                    intent.setType("image/*");
-                    startActivityForResult(Intent.createChooser(intent, "Select Image"), gov);
+                    Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+                    intent.setType("file/*");
+                    startActivityForResult(intent, gov);
 
                 }
                 );
@@ -398,23 +409,21 @@ public class DocumentFragment extends Fragment {
 
             if(requestCode == gov)
             {
-
-                String  str_image_path = DataManager.getRealPathFromURI(getActivity(), data.getData());
+                String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
 
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filePartGovId = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
+                filePartDegree = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
 
                 addDocuments("gove_phot_id",filePartGovId);
 
             }
-
 
             else if(requestCode == degree)
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
 
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filePartDegree = MultipartBody.Part.createFormData("degree", file.getName(), RequestBody.create(MediaType.parse("degree/*"), file));
+                filePartDegree = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("degree",filePartDegree);
 
 
@@ -423,26 +432,22 @@ public class DocumentFragment extends Fragment {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
 
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filePartProfessionalLicences = MultipartBody.Part.createFormData("pro_licence", file.getName(), RequestBody.create(MediaType.parse("pro_licence/*"), file));
+                filePartProfessionalLicences = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("pro_licence",filePartProfessionalLicences);
-
-
 
             }else if(requestCode == resume)
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
 
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filePartResume = MultipartBody.Part.createFormData("resume", file.getName(), RequestBody.create(MediaType.parse("resume/*"), file));
+                filePartResume = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("resume",filePartResume);
-
-
 
             }else if(requestCode == firstaid)
              {
             String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
             File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-            filePartFirstAid = MultipartBody.Part.createFormData("firstaid_cpr", file.getName(), RequestBody.create(MediaType.parse("firstaid_cpr/*"), file));
+            filePartFirstAid = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                  addDocuments("firstaid_cpr",filePartFirstAid);
 
              }
@@ -451,7 +456,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filePartCovidResult = MultipartBody.Part.createFormData("covid_result", file.getName(), RequestBody.create(MediaType.parse("covid_result/*"), file));
+                filePartCovidResult = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("covid_result",filePartCovidResult);
 
             }
@@ -459,7 +464,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filePartCovidVaccine = MultipartBody.Part.createFormData("covid_vaccination", file.getName(), RequestBody.create(MediaType.parse("covid_vaccination/*"), file));
+                filePartCovidVaccine = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("covid_vaccination",filePartCovidVaccine);
 
             }
@@ -467,7 +472,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filePartImmune = MultipartBody.Part.createFormData("immunization_record", file.getName(), RequestBody.create(MediaType.parse("immunization_record/*"), file));
+                filePartImmune = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("immunization_record",filePartImmune);
 
             }
@@ -476,7 +481,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filPartTB = MultipartBody.Part.createFormData("tb_sceeenig", file.getName(), RequestBody.create(MediaType.parse("tb_sceeenig/*"), file));
+                filPartTB = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("tb_sceeenig",filPartTB);
 
             }
@@ -485,7 +490,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filPartVulnerable = MultipartBody.Part.createFormData("vulnerable", file.getName(), RequestBody.create(MediaType.parse("vulnerable/*"), file));
+                filPartVulnerable = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("vulnerable",filPartVulnerable);
             }
 
@@ -493,7 +498,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filPartCurrentFlu = MultipartBody.Part.createFormData("c_flu", file.getName(), RequestBody.create(MediaType.parse("c_flu/*"), file));
+                filPartCurrentFlu = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("c_flu",filPartCurrentFlu);
             }
 
@@ -501,7 +506,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filPartOtherVaccine = MultipartBody.Part.createFormData("other_vaccination", file.getName(), RequestBody.create(MediaType.parse("other_vaccination/*"), file));
+                filPartOtherVaccine = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("other_vaccination",filPartOtherVaccine);
             }
 
@@ -509,7 +514,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filPartN95 = MultipartBody.Part.createFormData("n95_mask", file.getName(), RequestBody.create(MediaType.parse("n95_mask/*"), file));
+                filPartN95 = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("n95_mask",filPartN95);
 
             }
@@ -518,7 +523,7 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filPartCPI = MultipartBody.Part.createFormData("cpi", file.getName(), RequestBody.create(MediaType.parse("cpi/*"), file));
+                filPartCPI = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("cpi",filPartCPI);
 
             }
@@ -527,10 +532,8 @@ public class DocumentFragment extends Fragment {
             {
                 String  str_image_path = DataManager.getInstance().getRealPathFromURI(getActivity(), data.getData());
                 File file = DataManager.getInstance().saveBitmapToFile(new File(str_image_path));
-                filPartAdditionalDocument = MultipartBody.Part.createFormData("additional_document", file.getName(), RequestBody.create(MediaType.parse("additional_document/*"), file));
-
+                filPartAdditionalDocument = MultipartBody.Part.createFormData("document", file.getName(), RequestBody.create(MediaType.parse("document/*"), file));
                 addDocuments("additional_document",filPartAdditionalDocument);
-
             }
 
         }
@@ -1113,6 +1116,33 @@ public class DocumentFragment extends Fragment {
 
         dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         dialog.show();
+    }
+
+    private String getPathFromUri(Uri uri) {
+        String[] filePathColumn = { MediaStore.Files.FileColumns.DATA };
+        Cursor cursor = getActivity().getContentResolver().query(uri,filePathColumn, null, null, null);
+        cursor.moveToFirst();
+        int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
+        String Path = cursor.getString(columnIndex);
+        cursor.close();
+        return Path;
+    }
+
+    private void copy(File source, File destination) throws IOException {
+
+        FileChannel in = new FileInputStream(source).getChannel();
+        FileChannel out = new FileOutputStream(destination).getChannel();
+
+        try {
+            in.transferTo(0, in.size(), out);
+        }  catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            if (in != null)
+                in.close();
+            if (out != null)
+                out.close();
+        }
     }
 
 }

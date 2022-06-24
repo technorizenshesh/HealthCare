@@ -13,6 +13,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.shifts.healthcare.R;
 import com.shifts.healthcare.databinding.FragmentWorkerContactUsBinding;
@@ -20,6 +21,7 @@ import com.shifts.healthcare.models.SuccessResGetAppInfo;
 import com.shifts.healthcare.retrofit.ApiClient;
 import com.shifts.healthcare.retrofit.HealthInterface;
 import com.shifts.healthcare.util.DataManager;
+import com.shifts.healthcare.util.NetworkAvailablity;
 import com.shifts.healthcare.util.SharedPreferenceUtility;
 
 import java.util.HashMap;
@@ -35,6 +37,8 @@ import retrofit2.Response;
  * create an instance of this fragment.
  */
 public class WorkerContactUsFragment extends Fragment {
+
+
     FragmentWorkerContactUsBinding binding;
 
     String twitterLink = "https://twitter.com/CareShifts",instagramLink = "https://www.instagram.com/accounts/login/?next=/careshifts1/",facebookLink = "https://www.facebook.com/CareShiftsapp";
@@ -86,9 +90,14 @@ public class WorkerContactUsFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
 
-        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_contact_us, container, false);
+        binding = DataBindingUtil.inflate(inflater,R.layout.fragment_worker_contact_us, container, false);
 
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+            getAppInfo();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
 
         getAppInfo();
 

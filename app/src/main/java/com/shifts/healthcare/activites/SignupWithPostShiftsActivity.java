@@ -92,8 +92,7 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         binding = DataBindingUtil.setContentView(this, R.layout.activity_signup_with_post_shifts);
 
-        Places.initialize(getApplicationContext(), "AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk");
-
+        Places.initialize(getApplicationContext(), getString(R.string.api_key1));
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(this);
 
@@ -376,7 +375,7 @@ public class SignupWithPostShiftsActivity extends AppCompatActivity {
         map.put("register_id","");
         map.put("address",strAddress);
         map.put("lat",strLat);
-        map.put("long",strLong);
+        map.put("lon",strLong);
         map.put("city_new",strCity);
         map.put("state_new",strState);
         map.put("country_new",strCountry);

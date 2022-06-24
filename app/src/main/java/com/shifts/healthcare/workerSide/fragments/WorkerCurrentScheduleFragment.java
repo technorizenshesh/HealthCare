@@ -210,7 +210,7 @@ public class WorkerCurrentScheduleFragment extends Fragment implements DeleteShi
                             setpostedList();
 
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                         postedList.clear();
                         binding.rvShifts.setHasFixedSize(true);
                         binding.rvShifts.setLayoutManager(new LinearLayoutManager(getActivity()));

@@ -49,6 +49,7 @@ import com.shifts.healthcare.models.SuccessResAcceptRejectRecruitment;
 import com.shifts.healthcare.models.SuccessResAddAddress;
 import com.shifts.healthcare.models.SuccessResEditShift;
 import com.shifts.healthcare.models.SuccessResGetAddress;
+import com.shifts.healthcare.models.SuccessResGetAdminFees;
 import com.shifts.healthcare.models.SuccessResGetCurrentSchedule;
 import com.shifts.healthcare.models.SuccessResGetHrRate;
 import com.shifts.healthcare.models.SuccessResGetJobPositions;
@@ -57,6 +58,7 @@ import com.shifts.healthcare.retrofit.Constant;
 import com.shifts.healthcare.retrofit.HealthInterface;
 import com.shifts.healthcare.util.DataManager;
 import com.shifts.healthcare.util.GPSTracker;
+import com.shifts.healthcare.util.NetworkAvailablity;
 import com.shifts.healthcare.util.SharedPreferenceUtility;
 import com.shifts.healthcare.util.StartTimeAndTimeInterface;
 import com.wisnu.datetimerangepickerandroid.CalendarPickerView;
@@ -422,7 +424,7 @@ public class ConfirmEditRecruitmentShiftsFragment extends Fragment implements St
 
         }
 
-        Places.initialize(getActivity().getApplicationContext(), "AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk");
+        Places.initialize(getActivity().getApplicationContext(), getString(R.string.api_key1));
 
         // Create a new PlacesClient instance
         PlacesClient placesClient = Places.createClient(getActivity());
@@ -481,7 +483,6 @@ public class ConfirmEditRecruitmentShiftsFragment extends Fragment implements St
         binding.btnPost.setVisibility(View.GONE);
         binding.btnRehireWorker.setVisibility(View.GONE);
         binding.btnRecruitment.setVisibility(View.GONE);
-
 
         binding.calendarSingleDate.setOnDateSelectedListener(new CalendarPickerView.OnDateSelectedListener() {
              @Override
@@ -564,8 +565,60 @@ public class ConfirmEditRecruitmentShiftsFragment extends Fragment implements St
 
      //   fullScreenDialog("Directshift");
 
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+
+            getAdminFees();
+
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
+
         return binding.getRoot();
     }
+
+    public void getAdminFees()
+    {
+
+        String userId =  SharedPreferenceUtility.getInstance(getActivity()).getString(USER_ID);
+        DataManager.getInstance().showProgressMessage(getActivity(), getString(R.string.please_wait));
+        Map<String, String> map = new HashMap<>();
+        map.put("user_id",userId);
+        Call<SuccessResGetAdminFees> call = apiInterface.getAdminFees(map);
+        call.enqueue(new Callback<SuccessResGetAdminFees>() {
+            @Override
+            public void onResponse(Call<SuccessResGetAdminFees> call, Response<SuccessResGetAdminFees> response) {
+
+                DataManager.getInstance().hideProgressMessage();
+
+                try {
+
+                    SuccessResGetAdminFees data = response.body();
+
+                    if (data.status.equals("1")) {
+                        String datas = "Please note that "+data.getResult().get(0).getAdminFee()+"% admin fee will be added to the rate.";
+                        binding.tvAdminFees.setText(datas);
+                    } else {
+                        showToast(getActivity(), data.message);
+                    }
+
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<SuccessResGetAdminFees> call, Throwable t) {
+
+                call.cancel();
+                DataManager.getInstance().hideProgressMessage();
+
+            }
+        });
+
+    }
+
+
 
     private void setSpinner() {
 

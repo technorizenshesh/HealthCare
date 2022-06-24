@@ -1961,35 +1961,8 @@ public class WorkerHomeFragment extends Fragment implements DeleteShifts, Recrui
                         removeDataPostedList.addAll(data.getResult());
                         getWorkerAccepted("",true);
 
-
-//                        for (SuccessResGetPost.Result result:removeDataPostedList)
-//                        {
-//
-//                            boolean add = true;
-//
-//                            List<SuccessResGetPost.PostshiftTime> postshiftTimeList =  new LinkedList<>();
-//                            postshiftTimeList.addAll(result.getPostshiftTime());
-//
-//                            for (SuccessResGetPost.PostshiftTime postshiftTime: postshiftTimeList)
-//                            {
-//                                if(postshiftTime.getShiftareaccepted().equalsIgnoreCase("Yes"))
-//                                {
-//                                    add =  false;
-//                                    break;
-//                                }
-//                            }
-//
-//                            if(add)
-//                            {
-//                                postedList.add(result);
-//                            }
-//
-//                        }
-//
-//                        setShiftList();
-
                           } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                        postedList.clear();
                        binding.etSearch.clearFocus();
                        shiftsAdapter.notifyDataSetChanged();

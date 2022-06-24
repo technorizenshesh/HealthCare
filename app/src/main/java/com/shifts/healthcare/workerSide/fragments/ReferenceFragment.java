@@ -140,7 +140,9 @@ public class ReferenceFragment extends Fragment {
 //                        App.showToast(RegisterAct.this, data.message, Toast.LENGTH_SHORT);
 
                     } else if (data.status.equals("0")) {
-                        showToast(getActivity(), data.message);
+
+//                        showToast(getActivity(), data.message);
+
                     }
 
                 } catch (Exception e) {

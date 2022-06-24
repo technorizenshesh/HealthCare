@@ -1,6 +1,9 @@
 <resources>
     <string name="app_name">CareShifts</string>
     <string name="default_notification_channel_id">1</string>
+
+    <string name="api_key1">AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk</string>
+
     <string name="api_key">AIzaSyBduv61ywGy3e9mU6NJ_a7GHCf5oSbxT2w</string>
     <string name="places_api_key">AIzaSyA1zVQsDeyYQJbE64CmQVSfzNO-AwFoUNk</string>
     <string name="your_email_address">Your email address</string>

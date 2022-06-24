@@ -34,6 +34,7 @@ import com.shifts.healthcare.retrofit.ApiClient;
 import com.shifts.healthcare.retrofit.HealthInterface;
 import com.shifts.healthcare.util.DataManager;
 import com.shifts.healthcare.util.DownloadInvoice;
+import com.shifts.healthcare.util.NetworkAvailablity;
 import com.shifts.healthcare.util.SharedPreferenceUtility;
 
 import java.io.File;
@@ -120,7 +121,14 @@ public class WorkerInvoicesFragment extends Fragment implements DownloadInvoice 
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_worker_invoices, container, false);
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
         getActivity().registerReceiver(onDownloadComplete,new IntentFilter(DownloadManager.ACTION_DOWNLOAD_COMPLETE));
-        getShifts();
+
+
+
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+            getShifts();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
 
         binding.etSearch.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -194,7 +202,7 @@ public class WorkerInvoicesFragment extends Fragment implements DownloadInvoice 
                         binding.rvInvoices.setLayoutManager(new LinearLayoutManager(getActivity()));
                         binding.rvInvoices.setAdapter(new InvoiceAdapter(getActivity(),invoicesList,WorkerInvoicesFragment.this::donwloadInvoice));
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                         invoicesList.clear();
                         binding.rvInvoices.setHasFixedSize(true);
                         binding.rvInvoices.setLayoutManager(new LinearLayoutManager(getActivity()));
@@ -234,7 +242,7 @@ public class WorkerInvoicesFragment extends Fragment implements DownloadInvoice 
                         binding.rvInvoices.setLayoutManager(new LinearLayoutManager(getActivity()));
                         binding.rvInvoices.setAdapter(new InvoiceAdapter(getActivity(),invoicesList,WorkerInvoicesFragment.this::donwloadInvoice));
                     } else {
-                        showToast(getActivity(), data.message);
+//                        showToast(getActivity(), data.message);
                         binding.etSearch.clearFocus();
                         invoicesList.clear();
                         invoicesList.addAll(data.getResult());

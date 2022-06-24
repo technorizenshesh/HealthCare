@@ -9,6 +9,7 @@ import androidx.navigation.Navigation;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
@@ -19,6 +20,7 @@ import com.shifts.healthcare.models.SuccessResGetWorkerProfile;
 import com.shifts.healthcare.retrofit.ApiClient;
 import com.shifts.healthcare.retrofit.HealthInterface;
 import com.shifts.healthcare.util.DataManager;
+import com.shifts.healthcare.util.NetworkAvailablity;
 import com.shifts.healthcare.util.SharedPreferenceUtility;
 
 import java.util.ArrayList;
@@ -90,7 +92,13 @@ public class WorkerProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater,R.layout.fragment_worker_profile, container, false);
         apiInterface = ApiClient.getClient().create(HealthInterface.class);
-        getProfile();
+
+        if (NetworkAvailablity.getInstance(getActivity()).checkNetworkStatus()) {
+            getProfile();
+        } else {
+            Toast.makeText(getActivity(), getResources().getString(R.string.msg_noInternet), Toast.LENGTH_SHORT).show();
+        }
+
         binding.btnEdit.setOnClickListener(v ->
                 {
                     Navigation.findNavController(v).navigate(R.id.action_workerProfileFragment_to_workerEditProfileFragment);
